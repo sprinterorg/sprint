@@ -6,8 +6,8 @@ import helloHellTemplate from './app/components/hello-hell/hello-hell.component.
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
-    $stateProvider.state('hello', {
-        url: '/hello',
+    $stateProvider.state('hello-world', {
+        url: '/hello-world',
         template: helloTemplate,
         controller: helloCtrl,
         controllerAs: 'helloCtrl'
