@@ -35,6 +35,10 @@ if (isDev) {
       },
         { test: /\.(ttf|otf|eot|svg|woff(2)?)$/, loader: 'url' }]
     },
+      devServer: {
+          port: 9000,
+          historyApiFallback: true,
+      },
     plugins: [
 
       new webpack.ProvidePlugin({
