@@ -1,9 +1,7 @@
 export default class helloHellCtrl{
-
+    /*@ngInject*/
     constructor() {
-      this.name = 'hello-hell';
+      this.name = 'hello-hell-component';
     }
-
-
-  }
+}
 

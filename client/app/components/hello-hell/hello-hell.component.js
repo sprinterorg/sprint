@@ -1,12 +1,17 @@
-// import template from './helloWorld.component.html';
-// import controller from './helloWorld.controller.js';
-// import './helloWorld.component.scss';
-//
-// let helloWorldComponent = {
-//   restrict: 'E',
-//   bindings: {},
-//   template,
-//   controller,
-//   controllerAs: '$ctrl'
-// };
-// export default helloWorldComponent;
+import template from './hello-hell.component.html';
+import controller from './hello-hell.controller';
+import './hello-hell.component.scss';
+
+
+let helloHellComponent = {
+  restrict: 'E',
+  bindings: {
+      someInput: '<',
+      someOutput: '&'
+  },
+  template,
+  controller,
+  controllerAs: 'hellCtrl'
+};
+
+export default helloHellComponent;
