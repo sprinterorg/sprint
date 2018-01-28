@@ -10,7 +10,6 @@ import './components/hello-hell/hello-hell.component.scss';
 
 import routing from '../routes';
 
-angular.module('app', [
-    uiRouter])
+angular.module('app', [uiRouter])
     .component('app', appComponent)
     .config(routing);
