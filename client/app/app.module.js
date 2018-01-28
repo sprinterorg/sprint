@@ -11,12 +11,12 @@ import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services'
 import routing from './routes';
 
+
 angular.module('app', [
     uiRouter,
     ComponentsModule.name,
     ServicesModule.name
 
-    // 'app.components'
 ])
-    .component('app', appComponent)
-    .config(routing);
+  .component('app', appComponent)
+   .config(routing);
