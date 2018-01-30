@@ -1,5 +1,5 @@
 
-export default class taskBoardCtlr{
+export default class taskBoardCtlr {
 
     /*@ngInject*/
     constructor(someService) {

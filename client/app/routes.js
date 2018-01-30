@@ -4,11 +4,9 @@ import helloTemplate from './components/hello-world/hello-world.component.html';
 import hellCtrl from './components/hello-hell/hello-hell.controller';
 import helloHellTemplate from './components/hello-hell/hello-hell.component.html';
 
-// import taskBoardCtlr from './components/task-board/task-board.controller';
-// import taskBoardTemplate from './components/task-board/task-board.component.html';
-
 import taskBoardCtlr from './components/task-boadr/task-board.controller';
 import taskBoardTemplate from './components/task-boadr/task-board.component.html';
+
 
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
