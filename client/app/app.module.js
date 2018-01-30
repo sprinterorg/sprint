@@ -10,9 +10,10 @@ import './components/hello-hell/hello-hell.component.scss';
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services'
 import routing from './routes';
-
+import angFire from 'angularfire';
 
 angular.module('app', [
+    angFire,
     uiRouter,
     ComponentsModule.name,
     ServicesModule.name
@@ -20,3 +21,4 @@ angular.module('app', [
 ])
   .component('app', appComponent)
    .config(routing);
+
