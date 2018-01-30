@@ -1,6 +1,6 @@
 import angular from 'angular';
 import helloHellComponent from '../components/hello-hell/hello-hell.component';
-import TaskBoardComponent from "../components/tasc-boadr/task-board.component";
+import TaskBoardComponent from "../components/task-boadr/task-board.component";
 
 
 const ComponentsModule = angular.module('app-components',[])

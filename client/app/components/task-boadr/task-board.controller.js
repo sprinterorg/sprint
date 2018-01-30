@@ -1,5 +1,5 @@
 
-export default class helloHellCtrl{
+export default class taskBoardCtlr{
 
     /*@ngInject*/
     constructor(someService) {
