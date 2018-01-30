@@ -7,6 +7,8 @@ import appComponent from './app.component';
 
 import './components/hello-world/hello-world.component.scss';
 import './components/hello-hell/hello-hell.component.scss';
+import './components/tasc-boadr/task-board.component.scss';
+
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services'
 import routing from './routes';

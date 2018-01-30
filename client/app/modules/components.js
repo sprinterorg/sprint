@@ -1,8 +1,12 @@
 import angular from 'angular';
 import helloHellComponent from '../components/hello-hell/hello-hell.component';
+import TaskBoardComponent from "../components/tasc-boadr/task-board.component";
 
 
 const ComponentsModule = angular.module('app-components',[])
-    .component('brHelloHell', helloHellComponent);
+    .component('brTaskBoard', TaskBoardComponent)
+    .component('brHelloHell', helloHellComponent)
+
+
 
 export default ComponentsModule;
