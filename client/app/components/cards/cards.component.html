@@ -1,6 +1,6 @@
 <div class="cards-container">
-	<div class='card' ng-repeat="card in cardsCtrl.cards | filter:{list_id: cardsCtrl.listId}">
-		<h4>{{card.title + " " + cardsCtrl.listId}}</h4>
+	<div class='card' ng-repeat="card in cardsCtrl.cards | filter:{list_id:cardsCtrl.listId}:true">
+		<h4>{{card.title}}</h4>
 	</div>
 	<div class="card card--new">
 		<form  class='list__form-wrapper' ng-submit="cardsCtrl.addCard(cardsCtrl.listId)">
