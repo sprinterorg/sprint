@@ -1,14 +1,7 @@
-// import 'bootstrap-css-only';
-// import 'normalize.css';
-import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
-
 import appComponent from './app.component';
-
-import './components/hello-world/hello-world.component.scss';
-import './components/hello-hell/hello-hell.component.scss';
-import './components/task-boadr/task-board.component.scss';
-
+import './components/projects/projects.component.scss';
+import './components/current-sprint/current-sprint.component.scss';
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services'
 import routing from './routes';

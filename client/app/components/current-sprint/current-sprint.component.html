@@ -1,0 +1,18 @@
+<section  class="lists-container">
+    <div class="lists-container__wrapper">
+      <section class="list"
+               ng-repeat="list in SprintCtrl.lists">
+        <div class="list__wrapper">
+        	<h3 class="list__title">{{list.listName + ' ' + list.id}}</h3>
+		</div>
+		<cards-list list-id="list.id"></cards-list>
+		<button ng-if="list.id>2" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
+      </section>
+       <section class="list list--new">
+      		<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
+        		<input type="text" ng-model="SprintCtrl.listName"/>
+      		</form>
+    	</section>
+    </div>
+</section>
+

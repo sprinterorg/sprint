@@ -1,0 +1,16 @@
+.cards-container {
+	max-width: 100%;
+	padding: 5px;
+}
+
+.card {
+	padding: 10px;
+	min-height: 50px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background: rgba(0,255,0,.1);
+	display: flex;
+}
+
+.card h4 {
+}

@@ -1,0 +1,38 @@
+.lists-container {
+  width: 100vw;
+}
+
+.lists-container__wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.list {
+	position: relative;
+	flex-shrink: 0;
+	width: 200px;
+	min-height: 150px;
+	background-color: #ffffff;
+	margin: 10px;
+	padding: 5px;
+}
+
+.list__title {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.list__form-wrapper {
+	margin: 20px;
+}
+
+.list__form-wrapper input {
+	width: 100%;
+}
+
+.list__button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}

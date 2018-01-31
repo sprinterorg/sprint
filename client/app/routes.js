@@ -1,33 +1,22 @@
-import helloCtrl from './components/hello-world/hello-world.controller';
-import helloTemplate from './components/hello-world/hello-world.component.html';
-
-import hellCtrl from './components/hello-hell/hello-hell.controller';
-import helloHellTemplate from './components/hello-hell/hello-hell.component.html';
-
-import taskBoardCtlr from './components/task-boadr/task-board.controller';
-import taskBoardTemplate from './components/task-boadr/task-board.component.html';
-
+import ProjectsCtrl from './components/projects/projects.controller';
+import projectsTemplate from './components/projects/projects.component.html';
+import SprintCtrl from './components/current-sprint/current-sprint.controller';
+import currentSprintTemplate from './components/current-sprint/current-sprint.component.html';
 
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
-    $stateProvider.state('hello-world', {
-        url: '/hello-world',
-        template: helloTemplate,
-        controller: helloCtrl,
-        controllerAs: 'helloCtrl'
+    $stateProvider.state('projects', {
+        url: '/projects',
+        template: projectsTemplate,
+        controller: ProjectsCtrl,
+        controllerAs: 'ProjectsCtrl'
 
     });
-    $stateProvider.state('hello-hell', {
-        url: '/hello-hell',
-        template: helloHellTemplate,
-        controller: hellCtrl,
-        controllerAs: 'hellCtrl'
-    });
-    $stateProvider.state('task-board', {
-        url: '/task-board',
-        template: taskBoardTemplate,
-        controller: taskBoardCtlr,
-        controllerAs: 'taskBoardCtlr'
-    });
+    $stateProvider.state('current-sprint', {
+        url: '/project/:ids',
+        template: currentSprintTemplate,
+        controller: SprintCtrl,
+        controllerAs: 'SprintCtrl'
+  });
 }

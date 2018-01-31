@@ -1,5 +1,4 @@
-
-import angular from 'angular';
+/*import angular from 'angular';*/
 import SomeService from '../services/some-service';
 import FireBase from '../services/firebase-sevice';
 
