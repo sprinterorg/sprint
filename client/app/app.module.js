@@ -1,13 +1,14 @@
 import uiRouter from '@uirouter/angularjs';
+import routing from './config/routes.config';
 import appComponent from './app.component';
-import './components/projects/projects.component.scss';
-import './components/current-sprint/current-sprint.component.scss';
-import ComponentsModule from './modules/components';
-import ServicesModule from './modules/services'
-import routing from './routes';
 import angFire from 'angularfire';
 import angularDragula from 'angularjs-dragula';
-import fbase from './fbase';
+
+import ComponentsModule from './modules/components';
+import ServicesModule from './modules/services'
+
+import './components/projects/projects.component.scss';
+import './components/current-sprint/current-sprint.component.scss';
 
 
 angular.module('app', [
@@ -20,5 +21,3 @@ angular.module('app', [
 ])
   .component('app', appComponent)
    .config(routing)
-    .config(fbase);
-

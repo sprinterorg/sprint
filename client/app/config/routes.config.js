@@ -1,7 +1,8 @@
-import ProjectsCtrl from './components/projects/projects.controller';
-import projectsTemplate from './components/projects/projects.component.html';
-import SprintCtrl from './components/current-sprint/current-sprint.controller';
-import currentSprintTemplate from './components/current-sprint/current-sprint.component.html';
+import ProjectsCtrl from '../components/projects/projects.controller';
+import projectsTemplate from '../components/projects/projects.component.html';
+
+import SprintCtrl from '../components/current-sprint/current-sprint.controller';
+import currentSprintTemplate from '../components/current-sprint/current-sprint.component.html';
 
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');

@@ -58,6 +58,13 @@ class FireService {
 		return cards.$add(data);
 	}
 
+	moveToList(fbCardId, listId, projectId){
+        this.rootRef.child('projects/'+projectId+'/cards').update(
+			{[fbCardId + '/list_id']: listId}
+		);
+	}
+
+
 
 }
 
