@@ -5,8 +5,8 @@
         <div class="list__wrapper">
         	<h3 class="list__title">{{list.listName}}</h3>
 		</div>
-		<cards-list list-id="list.listId"></cards-list>
-		<button ng-if="list.listId>2" class="list__button" ng-click='SprintCtrl.deleteList(list.$id)'>x</button>
+		<cards-list list-id="list.listId" cards="SprintCtrl.cards"></cards-list>
+		<button ng-if="list.listId>2" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
       </section>
        <section class="list list--new">
       		<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">

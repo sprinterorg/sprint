@@ -35,11 +35,15 @@ class FireService {
 
     addList(lists, data) {
     	data.listId = Math.random()*1000000^0;
-    	data.position = lists.length;
+    	data.position = lists[lists.length - 2].position + 1;
     	return lists.$add(data);
 	}
 
-	deleteList(projectId, listId) {
+	deleteList(cardsToUpdate, projectId, listId) {
+		let tempData = {};
+		cardsToUpdate.forEach(item => tempData[item.$id + '/list_id']=1)
+		console.log(tempData)
+		this.rootRef.child('projects/'+projectId+'/cards').update(tempData);
 		this.rootRef.child('projects/'+projectId+'/lists').child(listId).remove();
 	}
 

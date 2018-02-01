@@ -6,7 +6,8 @@ import './cards.component.scss';
 let cardsComponent = {
   restrict: 'E',
   bindings: {
-      listId: '<'
+      listId: '<',
+	  cards: '<',
   },
   template,
   controller,

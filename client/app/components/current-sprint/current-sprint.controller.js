@@ -3,6 +3,7 @@ export default class sprintController {
     constructor(fireBase, $stateParams) {
         this.projectId = $stateParams.project_id;
         this.lists = fireBase.getSprintLists(this.projectId);
+		this.cards = fireBase.getListCards(this.projectId);
         this._fireBase = fireBase;
     }
 
@@ -13,9 +14,10 @@ export default class sprintController {
         });
     }
 
-    deleteList(listId) {
-        this._fireBase.deleteList(this.projectId, listId);
-        
+    deleteList(list) {
+		console.log(this.cards);
+		console.log(this.cards.filter(item => item.list_id === list.listId));
+        this._fireBase.deleteList(this.cards.filter(item => item.list_id === list.listId), this.projectId, list.$id);
     }
 }
 
