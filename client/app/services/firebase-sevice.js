@@ -35,7 +35,7 @@ class FireService {
 
     addList(lists, data) {
     	data.listId = Math.random()*1000000^0;
-    	data.position = lists.length;
+    	data.position = lists[lists.length - 2].position + 1;
     	return lists.$add(data);
 	}
 
