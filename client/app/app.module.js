@@ -6,14 +6,19 @@ import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services'
 import routing from './routes';
 import angFire from 'angularfire';
+import angularDragula from 'angularjs-dragula';
+import fbase from './fbase';
+
 
 angular.module('app', [
     angFire,
     uiRouter,
+    angularDragula(angular),
     ComponentsModule.name,
     ServicesModule.name
 
 ])
   .component('app', appComponent)
-   .config(routing);
+   .config(routing)
+    .config(fbase);
 
