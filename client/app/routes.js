@@ -14,7 +14,7 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
 
     });
     $stateProvider.state('current-sprint', {
-        url: '/project/:ids',
+        url: '/project/:project_id',
         template: currentSprintTemplate,
         controller: SprintCtrl,
         controllerAs: 'SprintCtrl'

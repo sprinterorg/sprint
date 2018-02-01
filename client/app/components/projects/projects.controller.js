@@ -7,9 +7,8 @@ export default class projectsController {
 
         addProject () {
             let self = this;
-            this._fireBase.syncProjects(this.projects, {projectName: this.projectName,
+            this._fireBase.addProject(this.projects, {projectName: this.projectName,
                     managerID: this.managerID}).then(function (rootRef) {
-                    let id = rootRef.key;
                     self.projectName = '';
                     self.managerID = '';
                 });

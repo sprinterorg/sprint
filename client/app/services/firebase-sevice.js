@@ -36,26 +36,36 @@ class FireService {
         let ref = this.rootRef.child('projects');
         return this._$firebaseArray(ref);
     }
-    syncProjects(projects, data){
-    	return projects.$add(data)
+    addProject(projects, data){
+    	data.duration = 14;
+    	data.lists = [
+		    {
+		      listId: 1,
+		      listName: 'To do',
+		      position: 0
+		    },
+		    {
+		      listId: 2,
+		      listName: 'Closed',
+		      position: 100
+		    }
+    	];
+    	return projects.$add(data);
     }
 
-    getSprintLists() {
-    	return this.lists;
+    getSprintLists(projectId) {
+    	let ref = this.rootRef.child('projects/'+projectId+'/lists');
+    	return this._$firebaseArray(ref);
     }
 
-    addList(listName) {
-  		this.lists.splice(this.lists.length-1,0,({
-    		id: Math.random()*1000000^0,
-    		listName: listName
-  		}));
+    addList(lists, data) {
+    	data.listId = Math.random()*1000000^0;
+    	data.position = lists.length;
+    	return lists.$add(data);
 	}
 
-	deleteList(list) {
-		this.lists.forEach((item,index,arr) => {
-			if(item.id == list.id) arr.splice(index, 1);
-		});
-		this.cards.forEach(item => { if(item.list_id === list.id) item.list_id = 1});
+	deleteList(projectId, listId) {
+		this.rootRef.child('projects/'+projectId+'/lists').child(listId).remove();
 	}
 
 	getListCards() {

@@ -6,7 +6,6 @@ export default class CardsController{
     }
 
      addCard(listId) {
-     	// console.log(listId);
         this._fireBase.addCard(listId, this.cardName);
         console.log('firebase', this._fireBase);
         this.cardName = '';
