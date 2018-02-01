@@ -4,28 +4,13 @@ class FireService {
     constructor($firebaseArray) {
     	this._$firebaseArray = $firebaseArray;
     	this.rootRef = firebase.database().ref();
-    	this.cards = [
-    		{
-		      id: 1,
-		      title: 'Fix bug in player',
-		      list_id: 1
-		    },
-		    {
-		      id: 2,
-		      title: 'Add feature with D3',
-		      list_id: 1
-		    },
-		    {
-		      id: 3,
-		      title: 'Learn AngularJS',
-		      list_id: 2
-		    }
-    	]
     }
+
     getProjects() {
         let ref = this.rootRef.child('projects');
         return this._$firebaseArray(ref);
     }
+    
     addProject(projects, data){
     	data.duration = 14;
     	data.lists = [
