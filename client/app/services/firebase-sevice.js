@@ -4,16 +4,6 @@ class FireService {
     constructor($firebaseArray) {
     	this._$firebaseArray = $firebaseArray;
     	this.rootRef = firebase.database().ref();
-    	this.lists = [
-		    {
-		      id: 1,
-		      listName: 'To do'
-		    },
-		    {
-		      id: 2,
-		      listName: 'Closed'
-		    }
-    	],
     	this.cards = [
     		{
 		      id: 1,
@@ -54,7 +44,7 @@ class FireService {
     }
 
     getSprintLists(projectId) {
-    	let ref = this.rootRef.child('projects/'+projectId+'/lists');
+    	let ref = this.rootRef.child('projects/'+projectId+'/lists').orderByChild('position');
     	return this._$firebaseArray(ref);
     }
 
@@ -68,17 +58,15 @@ class FireService {
 		this.rootRef.child('projects/'+projectId+'/lists').child(listId).remove();
 	}
 
-	getListCards() {
-		return this.cards;
+	getListCards(projectId) {
+		let ref = this.rootRef.child('projects/'+projectId+'/cards');
+    	return this._$firebaseArray(ref);
 	}
 
-	addCard(listId, title) {
-  		this.cards.push({
-    		id: Math.random()*1000000^0,
-    		title: title,
-    		list_id: listId
-  		});
-  		console.log(this.cards)
+	addCard(cards, data) {
+		data.id = Math.random()*1000000^0;
+		data.priority = 2;
+		return cards.$add(data);
 	}
 
 

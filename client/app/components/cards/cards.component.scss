@@ -8,9 +8,21 @@
 	min-height: 50px;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	background: rgba(0,255,0,.1);
 	display: flex;
 }
 
-.card h4 {
+.card--bv0 {
+	background: rgba(255,0,0,.1);
+}
+
+.card--bv1 {
+	background: rgba(255,255,0,.1);
+}
+
+.card--bv2 {
+	background: rgba(0,255,0,.1);
+}
+
+.card--bv3 {
+	background: rgba(0,0,255,.1);
 }

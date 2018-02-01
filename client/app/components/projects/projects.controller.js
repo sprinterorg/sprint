@@ -5,13 +5,13 @@ export default class projectsController {
         this._fireBase = fireBase;
     }
 
-        addProject () {
-            let self = this;
-            this._fireBase.addProject(this.projects, {projectName: this.projectName,
-                    managerID: this.managerID}).then(function (rootRef) {
-                    self.projectName = '';
-                    self.managerID = '';
-                });
-            }
+    addProject () {
+        let self = this;
+        this._fireBase.addProject(this.projects, {projectName: this.projectName,
+            managerID: this.managerID}).then(function (rootRef) {
+            self.projectName = '';
+            self.managerID = '';
+        });
     }
+}
 

@@ -9,10 +9,9 @@ export default class sprintController {
     addList() {
         let self = this;
         this._fireBase.addList(this.lists, {listName: this.listName}).then(function (rootRef) {
-            let id = rootRef.key;
             self.listName = '';
         });
-    };
+    }
 
     deleteList(listId) {
         this._fireBase.deleteList(this.projectId, listId);
