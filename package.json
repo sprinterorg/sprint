@@ -58,11 +58,10 @@
     "yargs": "4.7.1"
   },
   "scripts": {
-    "start": "webpack && webpack-dev-server --content-base client/ --hot --inline",
-    "serve": "webpack && webpack-dev-server --content-base client/ --hot --inline",
+    "start": "webpack && webpack-dev-server --content-base src/ --hot --inline",
     "create Component": "gen comp",
     "build": "webpack -p --config ./webpack.config.js --progress",
-    "startContainer": "npm run build && gen copyTo ./client/assets ./dist/assets && http-server ./build",
+    "startContainer": "npm run build && gen copyTo ./src/assets ./dist/assets && http-server ./build",
     "deploy": "node deploy.js"
   },
   "keywords": [
