@@ -5,7 +5,7 @@
     </form>
 
     <div ng-repeat="project in ProjectsCtrl.projects">
-        <a href="/project/{{project.$id}}">{{project.projectName}}</a>
+        <a href="/project/{{project.$id}}">{{project.currentSprint.projectName}}</a>
     </div>
     <pre>{{ProjectsCtrl.projects | json}}</pre>
 

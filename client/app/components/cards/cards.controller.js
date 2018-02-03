@@ -2,7 +2,6 @@ export default class CardsController{
     /*@ngInject*/
     constructor(fireBase, $stateParams, $scope) {
       this.projectId = $stateParams.project_id;
-      this.cards = fireBase.getListCards(this.projectId);
       this._fireBase = fireBase;
       this._scope = $scope;
 

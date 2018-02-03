@@ -1,0 +1,12 @@
+<section  class="user-creation">
+    <form ng-submit="UserCtrl.createUser()">
+      <fieldset>
+        <legend>Create new user</legend>
+        <input type="text" ng-model="UserCtrl.username" placeholder="username"/>
+        <input type="text" ng-model="UserCtrl.email" placeholder="email"/>
+        <input type="text" ng-model="UserCtrl.password" placeholder="password"/>
+      </fieldset>
+      <button type='submit'>Submit</button>
+  </form>
+</section>
+
