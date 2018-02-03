@@ -24,6 +24,15 @@ class FireService {
     		'avatar': data.avatar
     	});
     }
+    getMyProjects(userId) {
+    	let ref = this.rootRef.child('users/'+userId+'/my-projects');
+    	return this._$firebaseArray(ref);
+    }
+
+    /*getMyTasks(userId, projectId) {
+    	let ref = this.rootRef.child('users/'+userId+'/my-projects/'+projectId+'/my-tasks');
+    	return this._$firebaseArray(ref);
+    }*/
 
     getProjects() {
         let ref = this.rootRef.child('projects');
@@ -48,9 +57,13 @@ class FireService {
 		      position: 100
 		    }
     	];
-    	data.currentSprint.duration = 14;
-    	data.currentSprint.sprintNumber = 1;
-    	return projects.$add(data);
+        data.currentSprint.sprintNumber = 1;
+        let self = this;
+    	return projects.$add(data).then( rootRef => {
+    		return self.rootRef.child('users/'+data.currentSprint.managerId+'/my-projects/'+rootRef.key).update({
+    		'projectName': data.currentSprint.projectName
+    		});
+    	});
     }
 
     getSprint(projectId) {
@@ -72,7 +85,6 @@ class FireService {
 	deleteList(cardsToUpdate, projectId, listId) {
 		let tempData = {};
 		cardsToUpdate.forEach(item => tempData[item.$id + '/list_id'] = 3)
-		console.log(tempData)
 		this.rootRef.child('projects/'+projectId+'/cards').update(tempData);
 		this.rootRef.child('projects/'+projectId+'/lists').child(listId).remove();
 	}
@@ -82,10 +94,16 @@ class FireService {
     	return this._$firebaseArray(ref);
 	}
 
-	addCard(cards, data) {
+	addCard(cards, data, userId, projectId) {
 		data.id = Math.random()*1000000^0;
 		data.priority = 2;
-		return cards.$add(data);
+		let self = this;
+		return cards.$add(data).then( rootRef => {
+				return self.rootRef.child('users/'+userId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key).update({
+    		title: data.title,
+    		priority: data.priority
+    		}); 
+		});
 	}
 
 	moveToList(fbCardId, listId, projectId){

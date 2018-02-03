@@ -1,17 +1,20 @@
 export default class projectsController {
     /*@ngInject*/
-    constructor(fireBase) {
+    constructor(fireBase, supportService) {
         this.projects = fireBase.getProjects();
         this._fireBase = fireBase;
+        this.userId = supportService.getCookie('user');
     }
 
     addProject () {
         let self = this;
-        this._fireBase.addProject(this.projects, {currentSprint : { projectName: this.projectName,
-            managerID: this.managerID}}).then(function (rootRef) {
+        this._fireBase.addProject(this.projects, {currentSprint : { 
+            projectName: this.projectName,
+            managerId: this.userId,
+            duration: this.duration
+        }}).then( rootRef => {
             self.projectName = '';
-            self.managerID = '';
+            self.duration = '';
         });
     }
 }
-

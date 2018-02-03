@@ -9,9 +9,8 @@ export default class sprintController {
     }
 
     addList() {
-        console.log(this.currentSprint);
         let self = this;
-        this._fireBase.addList(this.lists, {listName: this.listName}).then(function (rootRef) {
+        this._fireBase.addList(this.lists, {listName: this.listName}).then(rootRef => {
             self.listName = '';
         });
     }
