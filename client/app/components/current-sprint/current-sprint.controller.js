@@ -6,7 +6,7 @@ export default class sprintController {
         this.cards = fireBase.getListCards(this.projectId);
         this._fireBase = fireBase;
         this._scope = $scope;
-        
+
         this._scope.$on('second-bag.drag', (e, el) => {
             console.log('eeeel', this.lists, this.cards);
             // el.removeClass('ex-moved');
