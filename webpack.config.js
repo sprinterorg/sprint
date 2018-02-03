@@ -1,6 +1,6 @@
 var path = require('path'),
     webpack = require("webpack"),
-    libPath = path.join(__dirname, 'client'),
+    libPath = path.join(__dirname, 'src'),
     wwwPath = path.join(__dirname, 'dist'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -49,9 +49,9 @@ if (isDev) {
       // HtmlWebpackPlugin: Simplifies creation of HTML files to serve your webpack bundles : https://www.npmjs.com/package/html-webpack-plugin
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        pkg: pkg,
-        template: path.join(libPath, 'index.ejs'),
-        inject: true
+        // pkg: pkg,
+        template: path.join(libPath, 'index.html'),
+        // inject: true
       }),
 
       // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
@@ -64,7 +64,7 @@ if (isDev) {
 }else{
   module.exports = {
     entry: path.join(libPath, '/app/app.module.js'),
-    context: path.resolve(__dirname, './client'),
+    context: path.resolve(__dirname, './src'),
     output: {
       filename: 'bundle.[hash].js',
       hashDigestLength: 7,
