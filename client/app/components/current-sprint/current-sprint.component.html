@@ -1,11 +1,27 @@
-<section  class="lists-container">
-    <div class="lists-container__wrapper">
+<section  class="lists-container" dragula="'second-bag'">
+    <div class="lists-container__wrapper" >
+		 <!--dragula="second-bag">-->
       <section class="list"
                ng-repeat="list in SprintCtrl.lists">
         <div class="list__wrapper">
         	<h3 class="list__title">{{list.listName}}</h3>
 		</div>
-		<cards-list list-id="list.listId" cards="SprintCtrl.cards"></cards-list>
+		<!--<cards-list-->
+				<!--list-id="list.listId" cards="SprintCtrl.cards"></cards-list>-->
+		<div dragula="'second-bag'">
+		  <div
+				  ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
+				class='card card--bv{{card.priority}}' id="{{card}}">
+
+			  <h4>{{card.title}}</h4>
+
+		  </div>
+			<div class="card card--new card--bv2">
+				<form  class='list__form-wrapper' ng-submit="SprintCtrl.addCard(SprintCtrl.list.listId)">
+					<input type="text" ng-model="SprintCtrl.cardName"/>
+				</form>
+			</div>
+		</div>
 		<button ng-if="list.listId>2" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
       </section>
        <section class="list list--new">

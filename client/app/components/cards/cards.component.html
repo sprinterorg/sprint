@@ -1,12 +1,16 @@
-<div class="cards-container">
-	<div dragula="'second-bag'" ng-repeat="card in cardsCtrl.cards | filter:{list_id:cardsCtrl.listId}:true">
-		<div class='card card--bv{{card.priority}}' id="{{card}}">
-			<h4>{{card.title}}</h4>
-		</div>
+<div  class="cards-container">
+<div  dragula="first-bag">
+	<div
+            ng-repeat="card in cardsCtrl.cards | filter:{list_id:cardsCtrl.listId}:true"
+		  class='card card--bv{{card.priority}}' id="{{card}}">
+
+		<h4>{{card.title}}</h4>
+
 	</div>
 	<div class="card card--new card--bv2">
 		<form  class='list__form-wrapper' ng-submit="cardsCtrl.addCard(cardsCtrl.listId)">
         	<input type="text" ng-model="cardsCtrl.cardName"/>
       	</form>
 	</div>
+</div>
 </div>
