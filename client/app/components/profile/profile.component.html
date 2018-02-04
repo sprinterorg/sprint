@@ -1,0 +1,15 @@
+<section class="profile">
+    <form ng-if="ProfileCtrl.userId" ng-submit="ProfileCtrl.updateProfile()">
+      <fieldset>
+        <legend>Profile data</legend>
+        <input type="text" ng-model="ProfileCtrl.user.username" placeholder="username"/>
+        <input type="text" ng-model="ProfileCtrl.user.password" placeholder="password"/>
+        <input type="text" ng-model="ProfileCtrl.user.email" placeholder="email"/>
+        <input type="text" ng-model="ProfileCtrl.user.avatar" placeholder="avatar"/>
+      </fieldset>
+      <button type='submit'>Update</button>
+  </form>
+  <my-projects></my-projects>
+  <a class="bar" ui-sref="projects">CREATE NEW PROJECT</a>
+  <a ng-if="!ProfileCtrl.userId" class="bar" ui-sref="user">Go to registration</a>
+</section>

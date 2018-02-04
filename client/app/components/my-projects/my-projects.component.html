@@ -1,0 +1,9 @@
+<div class="my-projects">
+	<ul>
+		<li ng-repeat="myProject in MyProjectsCtrl.myProjects">
+		<a href="/project/{{myProject.$id}}">{{myProject.projectName}}</a>
+		<ul>
+			<my-tasks tasks="myProject.myTasks"></my-tasks>
+		</li>
+	</ul>
+</div>

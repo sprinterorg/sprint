@@ -1,11 +1,11 @@
     <form ng-submit='ProjectsCtrl.addProject()'>
         <input type='text' ng-model="ProjectsCtrl.projectName" placeholder='project name'>
-        <input type='text' ng-model="ProjectsCtrl.managerID" placeholder='manager id'>
+        <input type='text' ng-model="ProjectsCtrl.duration" placeholder='duration of the sprint'>
         <button type='submit'>Submit</button>
     </form>
 
     <div ng-repeat="project in ProjectsCtrl.projects">
-        <a href="/project/{{project.$id}}">{{project.projectName}}</a>
+        <a href="/project/{{project.$id}}">{{project.currentSprint.projectName}}</a>
     </div>
     <pre>{{ProjectsCtrl.projects | json}}</pre>
 

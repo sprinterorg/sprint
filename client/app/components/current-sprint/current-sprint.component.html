@@ -7,21 +7,9 @@
         	<h3 class="list__title">{{list.listName}}</h3>
 		</div>
 
-		<div dragula="'first-bag'">
+		<cards-list list-id="list.listId" cards="SprintCtrl.cards"></cards-list>
+		<button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
 
-		  	<div ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
-				class='card card--bv{{card.priority}}' id="{{card}}">
-				<div class="drag-zone"></div>
-			  <h4>{{card.title}}</h4>
-			</div>
-
-	   		<div class="card card--new card--bv2">
-				<form  class='list__form-wrapper' ng-submit="SprintCtrl.addCard(list.listId)">
-					<input type="text" ng-model="SprintCtrl.cardName"/>
-				</form>
-			</div>
-		</div>
-		<button ng-if="list.listId>2" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
       </section>
        <section class="list list--new">
       		<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">

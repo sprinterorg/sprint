@@ -1,10 +1,10 @@
 /*import angular from 'angular';*/
-import SomeService from '../services/some-service';
+import SupportService from '../services/support-service';
 import FireBase from '../services/firebase-sevice';
 
 
 
 const ServicesModule = angular.module('app-services',[])
-    .service('someService', SomeService)
+    .service('supportService', SupportService)
     .service('fireBase', FireBase);
 export default ServicesModule;
