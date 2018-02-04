@@ -10,6 +10,12 @@ import profileTemplate from '../components/profile/profile.component.html';
 import UserCtrl from '../components/user-creation/user-creation.controller';
 import userTemplate from '../components/user-creation/user-creation.component.html';
 
+import ParentCtrl from '../components/parent-route/parrent.controller';
+import parentCtrlTemplate from '../components/parent-route/parent.component.html';
+
+import ChildCtrl from '../components/parent-route/child-route/child.controller';
+import childCtrlTemplate from '../components/parent-route/child-route/child.component.html';
+
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/user');
     $locationProvider.html5Mode(true);
@@ -40,4 +46,17 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         controller: SprintCtrl,
         controllerAs: 'SprintCtrl'
   });
+    $stateProvider.state('parent-component', {
+        url: '/parent',
+        template: parentCtrlTemplate,
+        controller: ParentCtrl,
+        controllerAs: 'ParentCtrl',
+        })
+        .state('child-component', {
+            parent: 'parent-component',
+            url: '/child',
+            template: childCtrlTemplate,
+            controller: ChildCtrl,
+            controllerAs: 'ChildCtrl',
+    });
 }
