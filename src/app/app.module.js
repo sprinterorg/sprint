@@ -2,6 +2,7 @@ import uiRouter from '@uirouter/angularjs';
 import routing from './config/routes.config';
 import appComponent from './app.component';
 import angFire from 'angularfire';
+import firebasecfg from './config/firebase-cfg';
 import angularDragula from 'angularjs-dragula';
 
 import ComponentsModule from './modules/components';
@@ -19,5 +20,7 @@ angular.module('app', [
     ServicesModule.name
 
 ])
-  .component('app', appComponent)
-  .config(routing)
+    .component('app', appComponent)
+    .config(routing)
+    .config(firebasecfg);
+
