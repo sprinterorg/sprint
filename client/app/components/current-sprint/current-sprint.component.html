@@ -1,17 +1,20 @@
 <section  class="lists-container" dragula="'first-bag'">
     <div class="lists-container__wrapper" >
-      <section class="list"
+      	<section class="list"
                ng-repeat="list in SprintCtrl.lists">
 
-        <div class="list__wrapper" id="{{list.listId}}">
-        	<h3 class="list__title">{{list.listName}}</h3>
-			<button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
-		</div>
+		  <div class="list__wrapper" id="{{list.listId}}">
+			  <button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
+			  <div class="title__wrapper">
+				  <h3 class="list__title">{{list.listName}}</h3>
+			  </div>
+		  </div>
 		  <div dragula="'first-bag'" class="drag-scope">
 
-			  <div ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
+			  <div ng-click="SprintCtrl.showFullCard(card)"
+					  ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
 				   class='card card--bv{{card.priority}}' id="{{card}}">
-				  <div class="drag-zone"></div>
+				  <div class="drag-zone">+</div>
 				  <h4>{{card.title}}</h4>
 			  </div>
 		  </div>
@@ -20,13 +23,27 @@
 				  <input type="text" ng-model="SprintCtrl.cardName[list.listId]"/>
 			  </form>
 		  </div>
-
-      </section>
-       <section class="list list--new">
+      	</section>
+       	<section class="list list--new">
       		<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
         		<input type="text" ng-model="SprintCtrl.listName"/>
       		</form>
     	</section>
     </div>
+</section>
+<section ng-class="{'card-content': SprintCtrl.isModalOpen, 'hide-content': !SprintCtrl.isModalOpen }" >
+	<div ng-class="{'card-content__modal': SprintCtrl.isModalOpen}">
+		<div class="card-content__modal__button-wrapper">
+			<button ng-click="SprintCtrl.closeFullCard()">x</button>
+		</div>
+		<div class="card-content__modal__content-wrapper">
+			<h2>{{SprintCtrl.title}}</h2>
+			<p>{{SprintCtrl.cardSuperId}}</p>
+			<p>{{SprintCtrl.cardSimpleId}}</p>
+			<p>{{SprintCtrl.cardListId}}</p>
+			<p>{{SprintCtrl.superPriority}}</p>
+			<p>{{SprintCtrl.priority}}</p>
+		</div>
+	</div>
 </section>
 

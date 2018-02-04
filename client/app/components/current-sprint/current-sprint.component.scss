@@ -1,3 +1,50 @@
+.hide-content{
+	visibility: hidden;
+}
+
+@keyframes show {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+.card-content {
+	position: absolute;
+	box-sizing: border-box;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	transition: all 0.2s;
+
+	&__modal {
+		animation: show 0.3s ease-in;
+		margin-top: 120px;
+		width: 300px;
+		height: 300px;
+		background: whitesmoke;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		&__button-wrapper {
+			width: 100%;
+			height: 30px;
+			display: flex;
+			justify-content: flex-end;
+			button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 30px;
+				height: 100%;
+				background: #4584ff;
+				border: none;
+			}
+		}
+	}
+}
+
 .lists-container {
 	position: relative;
   	width: 100vw;
@@ -6,39 +53,56 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		align-items: flex-start;
-		.list {
-			position: relative;
-			flex-shrink: 0;
-			flex-grow: 0;
-			width: 200px;
-			min-height: 150px;
-			background-color: #ffffff;
-			margin: 10px;
-			padding: 5px;
-			.drag-scope{
-				min-height: 60px;
-				width: 100%;
-			}
-			.card {
-				.drag-zone {
-					display: block;
-					width: 15px;
-					height: 15px;
-					background: black;
-					margin-left: -10px;
-					margin-top: -10px;
-					border-radius: 50%;
-				}
-				padding: 10px;
-				min-height: 50px;
-				margin-top: 5px;
-				margin-bottom: 5px;
+	}
+	.list__wrapper{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		button{
+			position: absolute;
+			width: 30px;
+		}
+		.title__wrapper{
+			width: 100%;
+			display: flex;
+			align-items: center;
+		}
+	}
+	.list {
+		position: relative;
+		flex-shrink: 0;
+		flex-grow: 0;
+		width: 200px;
+		min-height: 150px;
+		background-color: #ffffff;
+		margin: 10px;
+		padding: 5px;
+		.drag-scope{
+			min-height: 20px;
+			width: 100%;
+		}
+		.card {
+			.drag-zone {
 				display: block;
-				h4 {
-				}
-
+				width: 15px;
+				height: 15px;
+				cursor: default;
+				background: cornflowerblue;
+				margin-left: -10px;
+				margin-top: -10px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: bold;
+				color: #fff;
 			}
-
+			padding: 10px;
+			min-height: 50px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			display: block;
+			h4 {
+			}
 
 		}
 	}
@@ -65,25 +129,3 @@
 }
 
 
-//
-//.list__title {
-//	text-transform: uppercase;
-//	text-align: center;
-//}
-//
-//.list__form-wrapper {
-//	margin: 20px;
-//}
-//
-//.list__form-wrapper input {
-//	width: 100%;
-//}
-//
-//.list__button {
-//	position: absolute;
-//	top: 5px;
-//	right: 5px;
-//}
-//.ex{
-//	background: red;
-//}
