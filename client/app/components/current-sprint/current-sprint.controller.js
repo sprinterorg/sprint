@@ -1,39 +1,37 @@
 export default class sprintController {
     /*@ngInject*/
-    constructor(fireBase, $stateParams, $scope) {
+    constructor(fireBase, $stateParams, $scope, supportService) {
         this.projectId = $stateParams.project_id;
         this.currentSprint = fireBase.getSprint(this.projectId)
         this.lists = fireBase.getSprintLists(this.projectId);
         this.cards = fireBase.getListCards(this.projectId);
         this._fireBase = fireBase;
         this._scope = $scope;
+        this.userId = supportService.getCookie('user');
 
         this._scope.$on('second-bag.drag', (e, el) => {
-            console.log('eeeel', this.lists, this.cards);
-            // el.removeClass('ex-moved');
-            // el.addClass('ex');
-            //
-            // var cardObj = JSON.parse(el[0].id)
-            // var indexInList = Array.prototype.indexOf.call(el.parent().parent()[0].children, el.parent()[0])
-            // var cardsInList = el.parent().parent()[0].children
-            // // this._fireBase.moveToList(cardObj.$id, 1, this.projectId)
-        });
 
-        this._scope.$on('second-bag.drop', (e, el) => {
+
             el.addClass('ex-moved');
-            console.log('ex-moved prop')
-            // console.log('moved drop')
+            // var indexInList = Array.prototype.indexOf.call(el.parent().parent()[0].children, el.parent()[0])
         });
 
-        this._scope.$on('second-bag.over', (e, el, container) => {
+        this._scope.$on('first-bag.drop', (e, el) => {
+            el.removeClass('ex-moved');
+
+            var cardId = JSON.parse(el[0].id)
+            var newListId = el.parent().parent()[0].children[0].id
+            console.log('list', newListId, cardId.$id)
+            this._fireBase.moveToList(cardId.$id, Number(newListId) || 1, this.projectId)
+
+        });
+
+        this._scope.$on('first-bag.over', (e, el, container) => {
             container.addClass('ex-over');
-            console.log('over')
         });
 
-        this._scope.$on('second-bag.out', (e, el, container) => {
+        this._scope.$on('first-bag.out', (e, el, container) => {
             container.removeClass('ex-over');
-            console.log('over out')
-            // el.addClass('ex');
         });
     }
 
@@ -49,10 +47,10 @@ export default class sprintController {
     }
 
     addCard(listId) {
-        let self = this;
-        this._fireBase.addCard(this.cards, {title: this.cardName, list_id: listId}).then(function (rootRef) {
+        var temp = this.cardName[listId];
+        this.cardName[listId] = '';
+        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}).then(function (rootRef) {
             /*let id = rootRef.key;*/
-            self.cardName = '';
         });
     };
 }
