@@ -10,6 +10,9 @@ import profileTemplate from '../components/profile/profile.component.html';
 import UserCtrl from '../components/user-creation/user-creation.controller';
 import userTemplate from '../components/user-creation/user-creation.component.html';
 
+import ProjectSettingsCtrl from '../components/project-settings/project-settings.controller';
+import projectSettingsTemplate from '../components/project-settings/project-settings.component.html';
+
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/user');
     $locationProvider.html5Mode(true);
@@ -40,4 +43,11 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         controller: SprintCtrl,
         controllerAs: 'SprintCtrl'
   });
+    $stateProvider.state('project-settings', {
+        url: '/project/settings/:project_id',
+        template: projectSettingsTemplate,
+        controller: ProjectSettingsCtrl,
+        controllerAs: 'ProjectSettingsCtrl'
+  });
+
 }

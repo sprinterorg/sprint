@@ -45,9 +45,8 @@ export default class sprintController {
 
     addCard(listId) {
         var temp = this.cardName[listId];
-        this.cardName[listId] = '';
-        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}).then(function (rootRef) {
-            /*let id = rootRef.key;*/
+        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.userId, this.projectId).then( rootRef  => {
+           this.cardName[listId] = '';
         });
     };
     showFullCard(card){
