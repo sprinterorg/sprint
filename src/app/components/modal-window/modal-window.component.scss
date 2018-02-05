@@ -1,0 +1,32 @@
+.modal_include {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal_overlay {
+  z-index: 1; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+  position: fixed; /* всегдa перекрывaет весь сaйт */
+  background-color: #000; /* чернaя */
+  opacity: 0.8; /* нo немнoгo прoзрaчнa */
+  -moz-opacity: 0.8; /* фикс прозрачности для старых браузеров */
+  filter: alpha(opacity=80);
+  width: 100vw;
+  height: 100vh; /* рaзмерoм вo весь экрaн */
+  top: 0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+  left: 0;
+  cursor: pointer;
+}
+
+.modal_close {
+  z-index: 2;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}

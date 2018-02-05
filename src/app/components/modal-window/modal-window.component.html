@@ -1,0 +1,11 @@
+<!-- change it pls -->
+<!-- is it right to use $ctrl. before each thing? -->
+<div ng-controller="modalWindowController" class="modal_window">
+    <div ng-if="!$ctrl.hide">
+        <div class="modal_overlay"></div>
+        <button ng-click="$ctrl.toHide()" class="modal_close">
+            <i class="fas fa-times"></i>
+        </button>
+        <div ng-transclude="form" class="modal_include"></div>
+    </div>
+</div>

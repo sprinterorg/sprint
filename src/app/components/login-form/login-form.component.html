@@ -1,0 +1,27 @@
+<!-- change it pls -->
+<!-- is it right to use $ctrl. before each thing? -->
+<form class="login_form">
+    <nav>
+        [<a ng-click="$ctrl.changeModeToLogIn()">Log in</a>] |
+        [<a ng-click="$ctrl.changeModeToSignUp()">Sign up</a>]
+    </nav>
+
+    <div>
+        {{$ctrl.user.message}}
+    </div>
+
+    <label for="email_input">EMAIL</label>
+    <input id="email_input" type="text" ng-model="$ctrl.user.email" autocomplete="off" name="email">
+
+    <label for="password_input">PASSWORD</label>
+    <input id="password_input" type="password" ng-model="$ctrl.user.password" autocomplete="off" name="password">
+
+    <div ng-if="state.mode==='signUp'">
+        <label for="repeat_password_input">REPEAT PASSWORD</label>
+        <input id="repeat_password_input" type="password" ng-model="$ctrl.user.repeated_password" autocomplete="off"
+               name="repeat_password">
+    </div>
+    <input type="submit"
+           ng-click="$ctrl.state.mode === 'logIn' ? $ctrl.toLogIn($ctrl.user) : $ctrl.state.mode === 'signUp' ? $ctrl.toSignUp($ctrl.user) : ''"
+           value="{{$ctrl.state.mode === 'logIn' ? 'Log in' : $ctrl.state.mode === 'signUp' ? 'Sign Up' : 'WRONG MODE!'}}">
+</form>
