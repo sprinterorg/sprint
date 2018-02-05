@@ -1,9 +1,10 @@
 <div class="my-projects">
 	<ul>
 		<li ng-repeat="myProject in MyProjectsCtrl.myProjects">
-			<a href="/project/{{myProject.$id}}">{{myProject.projectName}}</a>
+			<a ui-sref="current-sprint({project_id: myProject.$id})">{{myProject.projectName}}</a>
 			<my-tasks tasks="myProject.myTasks"></my-tasks></br>
-			<a href="/project/settings/{{myProject.$id}}">go to {{myProject.projectName}} project settings </a>
+			<a ui-sref="project-settings({project_id: myProject.$id})">go to {{myProject.projectName}} project settings </a>
+
 		</li>
 	</ul>
 </div>
