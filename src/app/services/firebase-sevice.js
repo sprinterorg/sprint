@@ -9,6 +9,7 @@ class FireService {
     }
 
     createUser(data) {
+        data.avatar = 'stub.jpg';
     	return this.rootRef.child('users').push(data);
     }
 
@@ -17,31 +18,41 @@ class FireService {
     	return this._$firebaseObject(ref);
     }
 
-    updateUser(userId, data) {
-    	this.rootRef.child('users/'+userId).update({
-    		'username': data.username,
-    		'password': data.password,
-    		'email': data.email,
-    		'avatar': data.avatar
-    	});
+    getAllUsers() {
+        let ref = this.rootRef.child('users');
+        return this._$firebaseArray(ref);
     }
+
+    getProjectUsers(projectId) {
+        let ref = this.rootRef.child('projects/'+projectId+'/users');
+        return this._$firebaseArray(ref);
+    }
+
+    updateUser(ids, userId, data) {
+        let temp = {
+            ['users/'+userId+'/username']: data.username,
+            ['users/'+userId+'/email']: data.email,
+            ['users/'+userId+'/avatar']: data.avatar
+        };
+        ids.map( item => {
+            temp['projects/'+item+'/users/'+userId] = data;
+        });
+
+    	this.rootRef.update(temp);
+    }
+
     getMyProjects(userId) {
     	let ref = this.rootRef.child('users/'+userId+'/my-projects');
     	return this._$firebaseArray(ref);
     }
-
-    /*getMyTasks(userId, projectId) {
-    	let ref = this.rootRef.child('users/'+userId+'/my-projects/'+projectId+'/my-tasks');
-    	return this._$firebaseArray(ref);
-    }*/
 
     getProjects() {
         let ref = this.rootRef.child('projects');
         return this._$firebaseArray(ref);
     }
    
-    addProject(projects, data){
-    	data.lists = [
+    addProject(projects, projectData, managerData){
+    	projectData.lists = [
     		{
 		      listId: 1,
 		      listName: 'Backlog',
@@ -58,13 +69,36 @@ class FireService {
 		      position: 100
 		    }
     	];
-        data.currentSprint.sprintNumber = 1;
+        projectData.currentSprint.sprintNumber = 1;
+        projectData.currentSprint.background = '';
         let self = this;
-    	return projects.$add(data).then( rootRef => {
-    		return self.rootRef.child('users/'+data.currentSprint.managerId+'/my-projects/'+rootRef.key).update({
-    		'projectName': data.currentSprint.projectName
+    	return projects.$add(projectData).then( rootRef => {
+    		return self.rootRef.update({
+    		['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/projectName']: projectData.currentSprint.projectName,
+            ['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/background'] : projectData.currentSprint.background,
+            ['projects/'+rootRef.key+'/users/'+projectData.currentSprint.managerId]: managerData
     		});
     	});
+    }
+
+    updateProject(ids, projectId, data) {
+        let temp = {
+            ['projects/'+projectId+'/currentSprint/duration']: data.duration,
+            ['projects/'+projectId+'/currentSprint/projectName']: data.projectName,
+            ['projects/'+projectId+'/currentSprint/background']: data.background
+        };
+        ids.map( item => {
+            temp['users/'+item+'/my-projects/'+projectId+'/projectName'] = data.projectName;
+            temp['users/'+item+'/my-projects/'+projectId+'/background'] = data.background
+        });
+        this.rootRef.update(temp);
+    }
+
+    addUserToProject(userId, projectId, userData, projectData) {
+        this.rootRef.update({
+            ['projects/'+projectId+'/users/'+userId]: userData,
+            ['users/'+userId+'/my-projects/'+projectId]: projectData
+        })
     }
 
     getSprint(projectId) {
