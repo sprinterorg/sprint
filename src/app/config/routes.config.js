@@ -25,6 +25,7 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
     });
     $stateProvider.state('profile', {
         url: '/profile',
+        secure: true,
         template: profileTemplate,
         controller: ProfileCtrl,
         controllerAs: 'ProfileCtrl'
@@ -32,6 +33,7 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
     });
     $stateProvider.state('projects', {
         url: '/projects',
+        secure: true,
         template: projectsTemplate,
         controller: ProjectsCtrl,
         controllerAs: 'ProjectsCtrl'
@@ -39,12 +41,14 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
     });
     $stateProvider.state('current-sprint', {
         url: '/project/:project_id',
+        secure: true,
         template: currentSprintTemplate,
         controller: SprintCtrl,
         controllerAs: 'SprintCtrl'
   });
     $stateProvider.state('project-settings', {
         url: '/project/settings/:project_id',
+        secure: true,
         template: projectSettingsTemplate,
         controller: ProjectSettingsCtrl,
         controllerAs: 'ProjectSettingsCtrl'

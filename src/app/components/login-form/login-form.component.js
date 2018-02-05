@@ -5,9 +5,10 @@ import './login-form.component.scss';
 
 let loginFormComponent = {
     restrict: 'E',
-    replace: false,
     template,
-    controller
+    controller,
+    controllerAs:'loginCtrl'
 };
 
 export default loginFormComponent;
+

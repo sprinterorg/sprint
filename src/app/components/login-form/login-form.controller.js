@@ -1,7 +1,6 @@
 export default class loginFormController {
-    /*@ngInject*/
-    constructor() {
-        //help me to inject dependencies here!
+     /*@ngInject*/
+    constructor(firebaseAuthService) {
         this.state = {
             mode: "logIn"
         };
@@ -18,20 +17,3 @@ export default class loginFormController {
         this.state.mode = "signUp";
     };
 }
-
-/*
-app.controller('loginFormController', ['$scope', 'firebaseAuthService', function ($scope, firebaseAuthService) {
-    $scope.state = {
-        mode: "logIn"
-    };
-    $scope.user = firebaseAuthService.user;
-    $scope.changeModeToLogIn = function () {
-        $scope.state.mode = "logIn";
-    };
-    $scope.changeModeToSignUp = function () {
-        $scope.state.mode = "signUp";
-    };
-    $scope.toLogIn = firebaseAuthService.toLogIn;
-    $scope.toSignUp = firebaseAuthService.toSignUp;
-}]);
- */

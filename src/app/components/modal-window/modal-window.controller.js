@@ -1,5 +1,4 @@
 export default class myProjectsComponent {
-    //help me to inject dependencies here!
     constructor() {
         this.hide = false;
     }
@@ -8,11 +7,3 @@ export default class myProjectsComponent {
         this.hide = !this.hide;
     }
 }
-/*
-app.controller('modalWindowController', ['$scope', function ($scope) {
-    $scope.hide = false;
-    $scope.toHide = function () {
-        $scope.hide = !$scope.hide;
-    }
-}]);
-*/

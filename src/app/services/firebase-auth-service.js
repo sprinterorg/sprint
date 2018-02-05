@@ -1,9 +1,8 @@
-import firebase from 'firebase/app';
-
+// var firebase = require('../../../node_modules/firebase/auth');
+//import firebase from 'firebase/app';
+ /*@ngInject*/
 class firebaseAuthService {
-    //help me to inject dependencies here!
-
-    constructor(firebase) {
+    constructor() {
         this.user = {
             email: "",
             password: "",
@@ -14,45 +13,49 @@ class firebaseAuthService {
     };
 
     toSignUp(user) {
-        this.user.message = '';
-        if (this.user.password === this.user.repeated_password) {
+        const self = this;
+        self.user.message = '';
+        if (self.user.password === self.user.repeated_password) {
             firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then(
                 function (response) {
                     console.log('New user ' + response.email + ' has been created' + ' with ' + response.uid + ' id');
-                    this.user.firebase_response = response;
+                    self.user.firebase_response = response;
                 },
                 function (error) {
                     let errorMessage = error.message;
-                    this.user.message = errorMessage;
+                    self.user.message = errorMessage;
                     console.error(errorMessage);
                 });
         }
         else {
-            this.user.message = "Passwords don't match!";
+            self.user.message = "Passwords don't match!";
         }
     };
 
     toLogIn(user) {
-        this.user.message = '';
+        console.log(firebase)
+        const self = this;
+        self.user.message = '';
         firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(
             function (response) {
                 console.log('You are logged in as ' + response.email + ' with ' + response.uid + ' id');
                 console.log(firebase.auth().currentUser);
-                this.user.firebase_response = response;
+                self.user.firebase_response = response;
             },
             function (error) {
                 //let errorCode = error.code;
                 let errorMessage = error.message;
-                this.user.message = errorMessage;
+                self.user.message = errorMessage;
                 console.error(errorMessage);
             });
     };
 
     toSignOut() {
+        const self = this;
         firebase.auth().signOut().then(
             function () {
                 console.log('Sign out successfull.');
-                this.user = {
+                self.user = {
                     email: "",
                     password: "",
                     repeated_password: "",
@@ -62,7 +65,7 @@ class firebaseAuthService {
             }).catch(
             function (error) {
                 let errorMessage = error.message;
-                this.user.message = errorMessage;
+                self.user.message = errorMessage;
                 console.error(errorMessage);
             }
         );
