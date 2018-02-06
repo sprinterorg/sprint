@@ -4,13 +4,13 @@ import './modal-window.component.scss';
 
 let modalWindowComponent = {
     restrict: 'E',
-    bindings: {},
+    bindings: {
+        bool_hide: "="
+    },
     template,
     controller,
-    controllerAs:'modalWindowController',
-    transclude: {
-        form: 'modalForm'
-    }
+    controllerAs: 'modalWindowController',
+    transclude: true
 };
 
-export default  modalWindowComponent;
+export default modalWindowComponent;

@@ -23,4 +23,3 @@ angular.module('app', [
     .component('app', appComponent)
     .config(routing)
     .config(firebasecfg);
-

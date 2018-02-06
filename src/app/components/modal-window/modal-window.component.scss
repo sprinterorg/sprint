@@ -1,6 +1,6 @@
 .modal_include {
   z-index: 2;
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,10 +21,11 @@
   top: 0; /* сверху и слевa 0, oбязaтельные свoйствa! */
   left: 0;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .modal_close {
-  z-index: 2;
+  z-index: 4;
   position: absolute;
   top: 20px;
   right: 20px;

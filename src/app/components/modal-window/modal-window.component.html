@@ -1,9 +1,9 @@
 <div class="modal_window">
-    <div ng-if="!modalWindowController.hide">
+    <div ng-if="!modalWindowController.hide_login_form">
         <div class="modal_overlay"></div>
-        <button ng-click="modalWindowController.toHide()" class="modal_close">
+        <button ng-click="modalWindowController.toHideLoginForm()" class="modal_close">
             <i class="fas fa-times"></i>
         </button>
-        <div ng-transclude="form" class="modal_include"></div>
+        <ng-transclude class="modal_include"></ng-transclude>
     </div>
 </div>

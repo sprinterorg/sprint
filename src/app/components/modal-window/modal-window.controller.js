@@ -1,9 +1,10 @@
 export default class myProjectsComponent {
+    /*@ngInject*/
     constructor() {
-        this.hide = false;
+        this.hide_login_form = false;
     }
 
-    toHide() {
-        this.hide = !this.hide;
+    toHideLoginForm() {
+        this.hide_login_form = !this.hide_login_form;
     }
 }

@@ -1,6 +1,6 @@
-// var firebase = require('../../../node_modules/firebase/auth');
-//import firebase from 'firebase/app';
- /*@ngInject*/
+import firebase from 'firebase/app';
+
+/*@ngInject*/
 class firebaseAuthService {
     constructor() {
         this.user = {
@@ -33,7 +33,6 @@ class firebaseAuthService {
     };
 
     toLogIn(user) {
-        console.log(firebase)
         const self = this;
         self.user.message = '';
         firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(

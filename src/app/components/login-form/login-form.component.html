@@ -1,13 +1,12 @@
 <form class="login_form">
+    <div>
+        {{loginCtrl.user.message}}
+    </div>
+
     <nav>
         [<a ng-click="loginCtrl.changeModeToLogIn()">Log in</a>] |
         [<a ng-click="loginCtrl.changeModeToSignUp()">Sign up</a>]
     </nav>
-
-    <div>
-        {{loginCtrl.user.message}}
-        {{loginCtrl.state.mode}}
-    </div>
 
     <label for="email_input">EMAIL</label>
     <input id="email_input" type="text" ng-model="loginCtrl.user.email" autocomplete="off" name="email">

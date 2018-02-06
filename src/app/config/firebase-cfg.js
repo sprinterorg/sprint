@@ -1,9 +1,10 @@
 import firebase from 'firebase/app';
 import  'firebase/database';
+import 'firebase/auth';
 
 export default /*@ngInject*/ function() {
 
-    var config = {
+    const config = {
     apiKey: "AIzaSyDVS9Dls26xt6Qa46dYP6Qaxx2GqQ5edsc",
     authDomain: "task-tracker-242dc.firebaseapp.com",
     databaseURL: "https://task-tracker-242dc.firebaseio.com",
