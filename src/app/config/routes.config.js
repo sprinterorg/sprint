@@ -19,6 +19,9 @@ import childCtrlTemplate from '../components/parent-route/child-route/child.comp
 import ProjectSettingsCtrl from '../components/project-settings/project-settings.controller';
 import projectSettingsTemplate from '../components/project-settings/project-settings.component.html';
 
+import TicketCtrl from '../components/ticket/ticket.controller';
+import ticketTemplate from '../components/ticket/ticket.component.html';
+
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/user');
     $locationProvider.html5Mode(true);
@@ -67,5 +70,11 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         template: projectSettingsTemplate,
         controller: ProjectSettingsCtrl,
         controllerAs: 'ProjectSettingsCtrl'
+  });
+    $stateProvider.state('ticket', {
+        url: '/ticket/:project_id/:ticket_id',
+        template: ticketTemplate,
+        controller: TicketCtrl,
+        controllerAs: 'TicketCtrl'
   });
 }

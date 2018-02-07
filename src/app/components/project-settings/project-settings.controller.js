@@ -7,13 +7,10 @@ export default class projectSettingsController {
 		this.project = fireBase.getSprint(this.projectId);
 		this.users = fireBase.getAllUsers();
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
-		console.log(this.userId)
     }
 
-    updateProject(){
-        let ids = [];
-        this.users.filter(item => Object.keys(item['my-projects']).filter(item => item === this.projectId).length>0).map(item => ids.push(item.$id));
-        console.log(ids)
+    updateProject() {
+        let ids = Object.keys(this.project.users);
         let self = this;
         this._fireBase.updateProject(ids, this.projectId, {
         	projectName: this.project.projectName,
@@ -22,7 +19,7 @@ export default class projectSettingsController {
         })
     }
 	
-	addUserToProject(){
+	addUserToProject() {
 		let userData = this.users.filter(item => item.$id === this.newUserId)[0];
         this._fireBase.addUserToProject(userData.$id, this.projectId, {
             username: userData.username,
