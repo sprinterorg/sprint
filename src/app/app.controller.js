@@ -1,6 +1,6 @@
 export default class appController {
     /*@ngInject*/
     constructor() {
-        this.some_variable = "kukusiki";
+        this.buttonText = "here is your kukusiki";
     }
 }

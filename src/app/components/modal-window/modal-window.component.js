@@ -5,7 +5,7 @@ import './modal-window.component.scss';
 let modalWindowComponent = {
     restrict: 'E',
     bindings: {
-        some_binding: "<"
+        buttonText: "<"
     },
     template,
     controller,
