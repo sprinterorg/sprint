@@ -13,7 +13,7 @@
   z-index: 1; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
   position: fixed; /* всегдa перекрывaет весь сaйт */
   background-color: #000; /* чернaя */
-  opacity: 0.8; /* нo немнoгo прoзрaчнa */
+  opacity: 0.2; /* нo немнoгo прoзрaчнa */
   -moz-opacity: 0.8; /* фикс прозрачности для старых браузеров */
   filter: alpha(opacity=80);
   width: 100vw;

@@ -1,9 +1,8 @@
-<div class="modal_window">
+<div class="modal_window" ng-if="modalWindowController.showModalWindow">
     <div>
         <div class="modal_overlay"></div>
-        <button class="modal_close">
-            <!--<i class="fas fa-times"></i>-->
-            {{modalWindowController.buttonText}}
+        <button class="modal_close" ng-click="modalWindowController.toHideModalWindow()">
+            <i class="fas fa-times"></i>
         </button>
         <ng-transclude class="modal_include"></ng-transclude>
     </div>

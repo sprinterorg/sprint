@@ -1,7 +1,7 @@
-<modal-window button-text="appController.buttonText">
+<modal-window show-modal-window="appController.showModalWindow">
     <login-form></login-form>
 </modal-window>
-{{appController.buttonText}}
 <a class="bar" ui-sref="profile">go to profile</a>
 <a class="bar" ui-sref="projects">go to projects</a>
+<button ng-click="appController.toShowModalWindow()">Sign in</button>
 <ui-view></ui-view>

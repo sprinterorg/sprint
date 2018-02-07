@@ -3,6 +3,7 @@ export default class modalWindowController {
     constructor() {
     }
 
-    $onInit() {
+    toHideModalWindow() {
+        this.showModalWindow = false;
     }
 }
