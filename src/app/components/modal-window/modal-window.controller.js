@@ -1,10 +1,5 @@
-export default class myProjectsComponent {
+export default class modalWindowController {
     /*@ngInject*/
     constructor() {
-        this.hide_login_form = false;
-    }
-
-    toHideLoginForm() {
-        this.hide_login_form = !this.hide_login_form;
     }
 }

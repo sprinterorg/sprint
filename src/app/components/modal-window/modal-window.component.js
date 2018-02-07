@@ -5,7 +5,7 @@ import './modal-window.component.scss';
 let modalWindowComponent = {
     restrict: 'E',
     bindings: {
-        bool_hide: "="
+        some_binding: "<"
     },
     template,
     controller,

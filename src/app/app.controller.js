@@ -1,9 +1,6 @@
 export default class appController {
     /*@ngInject*/
     constructor() {
-    }
-
-    sayHello() {
-        console.log("hello!");
+        this.some_variable = "kukusiki";
     }
 }
