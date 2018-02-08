@@ -4,7 +4,8 @@ the main repository of sprint project
 ## Build Setup
 
 ``` bash
-git clone git@github.com:sprinterorg/sprint.git
+git clone git@github.com:sprinterorg/sprint.git        //by ssh
+          https://github.com/sprinterorg/sprint.git    //by http
 
 git checkout develop
 
