@@ -5,7 +5,8 @@ import './modal-window.component.scss';
 let modalWindowComponent = {
     restrict: 'E',
     bindings: {
-        showModalWindow: "="
+        hideFunc: "&",
+        showModalWindow: "<"
     },
     template,
     controller,

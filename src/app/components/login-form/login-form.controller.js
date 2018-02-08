@@ -1,12 +1,13 @@
 export default class loginFormController {
-     /*@ngInject*/
+    /*@ngInject*/
     constructor(firebaseAuthService) {
+        this._firebaseAuthService = firebaseAuthService;
         this.state = {
             mode: "logIn"
         };
-        this.user = firebaseAuthService.user;
-        this.toLogIn = firebaseAuthService.toLogIn;
-        this.toSignUp = firebaseAuthService.toSignUp;
+        this.entryEmail = "";
+        this.entryPassword = "";
+        this.entryRepeatPassword = "";
     }
 
     changeModeToLogIn() {
@@ -16,4 +17,16 @@ export default class loginFormController {
     changeModeToSignUp() {
         this.state.mode = "signUp";
     };
+
+    SignUp() {
+        console.log("SignUp");
+        this._firebaseAuthService.toSignUp({email: this.entryEmail, password: this.entryPassword});
+        this.hideFunc ? this.hideFunc() : '';
+    }
+
+    LogIn() {
+        console.log("LogIn");
+        this._firebaseAuthService.toLogIn({email: this.entryEmail, password: this.entryPassword});
+        this.hideFunc ? this.hideFunc() : '';
+    }
 }

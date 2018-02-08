@@ -1,7 +1,17 @@
-<modal-window show-modal-window="appController.showModalWindow">
-    <login-form></login-form>
+<modal-window show-modal-window="appController.showModalWindow" hide-func="appController.toHideModalWindow()">
+    <login-form hide-func="appController.toHideModalWindow()"></login-form>
 </modal-window>
+<!--
 <a class="bar" ui-sref="profile">go to profile</a>
 <a class="bar" ui-sref="projects">go to projects</a>
+-->
+
 <button ng-click="appController.toShowModalWindow()">Sign in</button>
+<hr/>
+routes:
+[
+<button ng-click="appController.toChangeRoute('/profile')">go to profile</button>]|
+[
+<button ng-click="appController.toChangeRoute('/projects')">go to projects</button>]
+
 <ui-view></ui-view>
