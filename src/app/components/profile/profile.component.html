@@ -1,14 +1,46 @@
 <section class="profile">
     <form ng-if="ProfileCtrl.userId" ng-submit="ProfileCtrl.updateUser()">
-      <fieldset>
-        <legend>Profile data</legend>
-        <input type="text" ng-model="ProfileCtrl.user.username" placeholder="username"/>
-        <input type="text" ng-model="ProfileCtrl.user.email" placeholder="email"/>
-        <input type="text" ng-model="ProfileCtrl.user.avatar" placeholder="avatar"/>
-      </fieldset>
-      <button type='submit'>Update</button>
-  </form>
-  <my-projects></my-projects>
-  <a class="bar" ui-sref="projects">CREATE NEW PROJECT</a>
-  <a ng-if="!ProfileCtrl.userId" class="bar" ui-sref="user">Go to registration</a>
+        <fieldset >
+            <legend>Profile data</legend>
+            <div class="inform__block">
+                <div class="inform__block__avatar">
+                    <img src={{ProfileCtrl.user.avatar}} 
+                        class="inform__block__avatar_img">
+                </div>
+
+                <div class="inform__block__username" ng-if='!ProfileCtrl.visible '>
+                    <h2>{{ProfileCtrl.user.username}}</h2>
+                    <h3>{{ProfileCtrl.user.email}}</h3>
+                    <button type='submit' 
+                            class="inform__block__username_submit"
+                            ng-click="ProfileCtrl.changeUserInfirmation()">Edit profile</button>
+                </div>
+
+                <div class="inform__block__username" ng-if='ProfileCtrl.visible'>
+                    <p>
+                        <input type="text" ng-model="ProfileCtrl.user.username" placeholder="Username" class="inform__block__username_input"/>                        
+                    </p>
+                    <p>
+                        <input type="text" ng-model="ProfileCtrl.user.email" placeholder="E-mail" class="inform__block__username_email"/>                        
+                    </p>
+                    <p>
+                        <!-- <input type="text"
+                               ng-model="ProfileCtrl.user.avatar"
+                               placeholder="Avatar"
+                        /> -->
+                        <select ng-model="ProfileCtrl.user.avatar" class="inform__block__username_select">
+                            <option value="https://png.icons8.com/ultraviolet/100/000000/iron-man.png">ironman</option>
+                            <option value="https://png.icons8.com/ultraviolet/100/000000/spiderman-head.png">spiderman</option> 
+                        </select>
+                    </p>
+                    <button type='submit' 
+                            class="inform__block__username_submit"
+                            ng-click="ProfileCtrl.changeUserInfirmation()">Save</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <my-projects></my-projects>
+    <a class="bar" ui-sref="projects">CREATE NEW PROJECT</a>
+    <a ng-if="!ProfileCtrl.userId" class="bar" ui-sref="user">Go to registration</a>
 </section>
