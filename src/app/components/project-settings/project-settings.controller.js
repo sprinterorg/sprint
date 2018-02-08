@@ -31,5 +31,11 @@ export default class projectSettingsController {
         });
         
 	}
+
+    deleteProject() {
+        let ids = [];
+        this.projectUsers.map( user => ids.push(user.$id));
+        this._fireBase.deleteProject(ids, this.projectId) 
+    }
 }
 
