@@ -1,6 +1,7 @@
 export default class appController {
     /*@ngInject*/
-    constructor($location, firebaseAuthService) {
+    constructor($location, firebaseAuthService, supportService) {
+        this._supportService = supportService;
         this.showModalWindow = false;
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
@@ -20,7 +21,7 @@ export default class appController {
     }
 
     toChangeRoute(path) {
-        if (this._firebaseAuthService.user.uid) {
+        if (this._supportService.getCookie("user")) {
             this._location.path(path);
         }
         else {

@@ -27,6 +27,7 @@ class firebaseAuthService {
                     errorCode: "",
                     errorMessage: ""
                 };
+                self._supportService.setUser(self.user.uid);
             },
             function (error) {
                 self.error = {
@@ -53,6 +54,7 @@ class firebaseAuthService {
                     errorCode: "",
                     errorMessage: ""
                 };
+                self._supportService.setUser(self.user.uid);
             },
             function (error) {
                 self.error = {

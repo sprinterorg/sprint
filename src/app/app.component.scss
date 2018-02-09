@@ -1,7 +1,14 @@
 body {
-	background: grey;
-	font-family: 'Open Sans', sans-serif;
+  background: grey;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 5px;
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {

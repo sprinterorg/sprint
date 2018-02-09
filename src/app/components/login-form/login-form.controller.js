@@ -1,7 +1,8 @@
 export default class loginFormController {
     /*@ngInject*/
-    constructor(firebaseAuthService) {
+    constructor(firebaseAuthService, supportService) {
         this._firebaseAuthService = firebaseAuthService;
+        this._supportService=supportService;
         this.state = {
             mode: "logIn"
         };
@@ -20,8 +21,16 @@ export default class loginFormController {
 
     SignUp() {
         console.log("SignUp");
-        this._firebaseAuthService.toSignUp({email: this.entryEmail, password: this.entryPassword});
-        this.hideFunc ? this.hideFunc() : '';
+        if(this.entryPassword === this.entryRepeatPassword ){
+            this._firebaseAuthService.toSignUp({email: this.entryEmail, password: this.entryPassword});
+            this.hideFunc ? this.hideFunc() : '';
+        }
+        else{
+            this._firebaseAuthService.error = {
+                errorCode: "pwdsDstnMtch",
+                errorMessage: "Passwords don't match! Please, try again."
+            };
+        }
     }
 
     LogIn() {
