@@ -4,28 +4,42 @@ export default class userController {
         this._fireBase = fireBase;
         this._supportService = supportService;
         this._$state = $state;
+        this.users = fireBase.getAllUsers();
     }
 
     createUser(){
         let self = this;
         this._fireBase.createUser({
-        	username: this.username,
-        	email: this.email
+            username: this.username,
+            email: this.email
         }).then( rootRef => {
-        	let id = rootRef.key;
-        	self._supportService.setUser(id);
+            let id = rootRef.key;
+            self._supportService.setUser(id);
             self.username = '';
             self.email = '';
             self._$state.go('profile', {
-  				preventResolve: {
-    			value: false,
-    			squash: true
-  			}}, {
-        		location: true,
-        		notify: false,
-        		reload: false
-      		});
+                preventResolve: {
+                value: false,
+                squash: true
+            }}, {
+                location: true,
+                notify: false,
+                reload: false
+            });
         });
+    }
+    
+    login() {
+        this._supportService.setUser(this.userId);
+        this._$state.go('profile', {
+                preventResolve: {
+                value: false,
+                squash: true
+            }}, {
+                location: true,
+                notify: false,
+                reload: false
+            });
     }
 }
 
