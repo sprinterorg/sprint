@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
-class FireService {
 
+class FireService {
     /*@ngInject*/
     constructor($firebaseArray, $firebaseObject) {
     	this._$firebaseArray = $firebaseArray;

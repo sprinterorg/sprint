@@ -1,0 +1,28 @@
+<form class="login_form">
+    {{loginController.tmp}}
+    <div ng-if="loginController._firebaseAuthService.error.errorCode">
+        {{loginController._firebaseAuthService.error.errorMessage}}
+    </div>
+
+    <nav>
+        [<a ng-click="loginController.changeModeToLogIn()">Log in</a>] |
+        [<a ng-click="loginController.changeModeToSignUp()">Sign up</a>]
+    </nav>
+
+    <label for="email_input">E-MAIL</label>
+    <input id="email_input" type="email" ng-model="loginController.entryEmail" autocomplete="on" name="email">
+
+    <label for="password_input">PASSWORD</label>
+    <input id="password_input" type="password" ng-model="loginController.entryPassword" autocomplete="on"
+           name="password">
+
+    <div ng-if="loginController.state.mode === 'signUp'">
+        <label for="repeat_password_input">REPEAT PASSWORD</label>
+        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword"
+               autocomplete="off"
+               name="repeat_password">
+    </div>
+    <input type="submit"
+           ng-click="loginController.state.mode === 'logIn' ? loginController.LogIn() : loginController.state.mode === 'signUp' ? loginController.SignUp() : console.error('Wrong state.mode !')"
+           value="{{loginController.state.mode === 'logIn' ? 'Log in' : loginController.state.mode === 'signUp' ? 'Sign Up' : 'Wrong state.mode !'}}">
+</form>
