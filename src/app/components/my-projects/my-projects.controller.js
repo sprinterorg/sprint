@@ -6,5 +6,8 @@ export default class myProjectsComponent{
         this._fireBase = fireBase;
         this.searchProjects = '';
     }
-}
 
+    isManager(managerId) {
+    	return this.userId === managerId;
+    }
+}

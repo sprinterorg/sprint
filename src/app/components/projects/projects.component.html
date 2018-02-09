@@ -4,7 +4,7 @@
         <button type='submit'>Add project</button>
     </form>
 
-    <div ng-repeat="project in ProjectsCtrl.myProjects">
+    <div ng-repeat="project in ProjectsCtrl.myProjects | filter:{managerId: ProjectsCtrl.userId}:true">
         <a ui-sref="current-sprint({project_id: project.$id})">{{project.projectName}}</a>
     </div>
 

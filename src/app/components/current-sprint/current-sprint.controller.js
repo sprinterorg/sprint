@@ -45,7 +45,7 @@ export default class sprintController {
 
     addCard(listId) {
         var temp = this.cardName[listId];
-        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.userId, this.projectId).then( rootRef  => {
+        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.userId, this.currentSprint.managerId, this.projectId).then( rootRef  => {
            this.cardName[listId] = '';
         });
     };

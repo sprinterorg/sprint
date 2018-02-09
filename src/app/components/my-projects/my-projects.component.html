@@ -4,8 +4,7 @@
 		<li ng-repeat="myProject in MyProjectsCtrl.myProjects | filter: {projectName: MyProjectsCtrl.searchProjects}">
 			<a ui-sref="current-sprint({project_id: myProject.$id})">{{myProject.projectName }}</a>
 			<my-tasks tasks="myProject.myTasks" project-id="myProject.$id"></my-tasks></br>
-			<a ui-sref="project-settings({project_id: myProject.$id})">go to {{myProject.projectName}} project settings </a>
-			<button ng-if="MyProjectsCtrl.isManager(myProject)" ng-click="MyProjectsCtrl.deleteProject(myProject.$id)">Delete project</button>
+			<a ng-if="MyProjectsCtrl.isManager(myProject.managerId)" ui-sref="project-settings({project_id: myProject.$id})">go to {{myProject.projectName}} project settings </a>
 		</li>
 	</ul>
 </div>
