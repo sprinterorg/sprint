@@ -1,0 +1,22 @@
+<section  class="task task-layer">
+    <div class='task__wrapper'>
+		<div class='task__content'>
+			<h1>{{TaskCtrl.task.title}}</h1>
+			<p>{{TaskCtrl.task.priority}}</p>
+			<ul>
+				<li ng-repeat="user in TaskCtrl.executors track by $index">
+				{{TaskCtrl.getUser(user.$id)}}
+				</li>
+			</ul>
+		</div>
+		  <form ng-submit="TaskCtrl.addExecutorsToTask()">
+			<select
+		            ng-model="TaskCtrl.newUserId"
+		            ng-options="user.$id as user.username for user in TaskCtrl.projectUsers">
+		      <option value="-- choose user --"></option>        
+		    </select>
+			<button type='submit'>Add User</button>
+		  </form>
+	</div>
+</section>
+

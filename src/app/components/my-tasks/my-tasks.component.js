@@ -5,7 +5,8 @@ import './my-tasks.component.scss';
 let myTasksComponent = {
   restrict: 'E',
   bindings: {
-      tasks: '<'
+      tasks: '<',
+      projectId: '<'
   },
   template,
   controller,

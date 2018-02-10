@@ -1,5 +1,4 @@
 class SupportService {
-
     /*@ngInject*/
     constructor() {
       this.userId = '';

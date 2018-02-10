@@ -13,15 +13,14 @@ export default class profileController {
     }
 
     updateUser() {
-        let ids = [];
-        this.projects.filter( item => Object.keys(item['users']).filter(item => item === this.userId).length>0).map(item => ids.push(item.$id));
+        let ids = Object.keys(this.user['my-projects']);
         let self = this;
         console.log("updateUser" + this)
         this._fireBase.updateUser(ids, this.userId, {
         	username: this.user.username,
         	email: this.user.email,
         	avatar: this.user.avatar
-        })
+        });
     }
 
     changeUserInfirmation(){

@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
-class FireService {
 
+class FireService {
     /*@ngInject*/
     constructor($firebaseArray, $firebaseObject) {
     	this._$firebaseArray = $firebaseArray;
@@ -24,7 +24,7 @@ class FireService {
     }
 
     getProjectUsers(projectId) {
-        let ref = this.rootRef.child('projects/'+projectId+'/users');
+        let ref = this.rootRef.child('projects/'+projectId+'/currentSprint/users');
         return this._$firebaseArray(ref);
     }
 
@@ -35,7 +35,7 @@ class FireService {
             ['users/'+userId+'/avatar']: data.avatar
         };
         ids.map( item => {
-            temp['projects/'+item+'/users/'+userId] = data;
+            temp['projects/'+item+'/currentSprint/users/'+userId] = data;
         });
 
     	this.rootRef.update(temp);
@@ -76,7 +76,7 @@ class FireService {
     		return self.rootRef.update({
     		['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/projectName']: projectData.currentSprint.projectName,
             ['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/background'] : projectData.currentSprint.background,
-            ['projects/'+rootRef.key+'/users/'+projectData.currentSprint.managerId]: managerData
+            ['projects/'+rootRef.key+'/currentSprint/users/'+projectData.currentSprint.managerId]: managerData
     		});
     	});
     }
@@ -94,10 +94,24 @@ class FireService {
         this.rootRef.update(temp);
     }
 
+    deleteProject(userIds, projectId) {
+        this.rootRef.child('projects').child(projectId).remove();
+        userIds.map(userId => 
+            this.rootRef.child('users/'+userId+'/my-projects').child(projectId).remove()
+        )
+    }
+
     addUserToProject(userId, projectId, userData, projectData) {
         this.rootRef.update({
-            ['projects/'+projectId+'/users/'+userId]: userData,
+            ['projects/'+projectId+'/currentSprint/users/'+userId]: userData,
             ['users/'+userId+'/my-projects/'+projectId]: projectData
+        })
+    }
+
+    addExecutorsToTask(projectId, taskId, newUserId, taskData) {
+        this.rootRef.update({
+            ['users/'+newUserId+'/my-projects/'+projectId+'/myTasks/'+taskId]: taskData,
+            ['projects/'+projectId+'/cards/'+taskId+'/executors/'+newUserId]: newUserId
         })
     }
 
@@ -135,7 +149,7 @@ class FireService {
 		let self = this;
 		return cards.$add(data).then( rootRef => {
 				return self.rootRef.child('users/'+userId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key).update({
-    		title: data.title,
+            title: data.title,
     		priority: data.priority
     		}); 
 		});
@@ -146,6 +160,16 @@ class FireService {
         	[fbCardId + '/list_id']: listId
         });
 	}
+
+    getTask(projectId, taskId) {
+        let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId);
+        return this._$firebaseObject(ref);
+    }
+
+    getTaskExecutors(projectId, taskId) {
+        let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId+'/executors');
+        return this._$firebaseArray(ref);
+    }
 }
 
 export default FireService;

@@ -1,4 +1,19 @@
-<a class="bar" ui-sref="profile">go to profile 
-<a class="bar" ui-sref="projects">go to projects</a>
+
+<modal-window show-modal-window="appController.showModalWindow" hide-func="appController.toHideModalWindow()">
+    <login-form hide-func="appController.toHideModalWindow()"></login-form>
+</modal-window>
+<button ng-click="appController.toShowModalWindow()">Sign in</button>
+<hr/>
+routes:
+[<button ng-click="appController.toChangeRoute('/profile')">go to profile</button>]|
+[<button ng-click="appController.toChangeRoute('/projects')">go to projects</button>]
+
+<a class="bar" ui-sref="user">logout</a>
+<!--This is example how create rote chaining, inline styles will be remove-->
+<br>
+<div>
+  <a class="bar" ui-sref="parent-component" >To parent component with child route</a>
+</div>
+<!--end of the example-->
 <ui-view></ui-view>
 

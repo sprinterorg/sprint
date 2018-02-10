@@ -1,9 +1,10 @@
 export default class projectsController {
     /*@ngInject*/
     constructor(fireBase, supportService) {
-        this.projects = fireBase.getProjects();
-        this._fireBase = fireBase;
         this.userId = supportService.getCookie('user');
+        this.projects = fireBase.getProjects();
+        this.myProjects = fireBase.getMyProjects(this.userId);
+        this._fireBase = fireBase;
         this.manager = fireBase.getUser(this.userId);
     }
 
