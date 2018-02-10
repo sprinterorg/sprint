@@ -1,0 +1,21 @@
+<form class="login_form" ng-submit="loginController.clickHanler()">
+    <nav>
+        [<a ng-click="loginController.changeModeToLogIn()">Log in</a>] |
+        [<a ng-click="loginController.changeModeToSignUp()">Sign up</a>]
+    </nav>
+
+    <label for="email_input">E-MAIL</label>
+    <input id="email_input" type="email" ng-model="loginController.entryEmail" autocomplete="on" name="email">
+
+    <label for="password_input">PASSWORD</label>
+    <input id="password_input" type="password" ng-model="loginController.entryPassword" autocomplete="on"
+           name="password">
+
+    <div ng-if="loginController.mode === 'signUp'">
+        <label for="repeat_password_input">REPEAT PASSWORD</label>
+        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword"
+               autocomplete="off"
+               name="repeat_password">
+    </div>
+    <button>{{loginController.showButtonName()}}</button>
+</form>

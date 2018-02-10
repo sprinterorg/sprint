@@ -1,0 +1,26 @@
+<section class="project-settings">
+    <form ng-submit="ProjectSettingsCtrl.updateProject()">
+      <fieldset>
+        <legend>Project data</legend>
+        <input type="text" ng-model="ProjectSettingsCtrl.project.projectName" placeholder="project name"/>
+        <input type="text" ng-model="ProjectSettingsCtrl.project.duration" placeholder="project duration"/>
+        <input type="text" ng-model="ProjectSettingsCtrl.project.background" placeholder="project background image"/>
+      </fieldset>
+      <button type='submit'>Update</button>
+  </form>
+  <ul>
+    <li ng-repeat="user in ProjectSettingsCtrl.projectUsers">
+      {{user.username}}
+      <button ng-if="!ProjectSettingsCtrl.isManager(user.$id)" ng-click="ProjectSettingsCtrl.deleteUserFromProject(user.$id)">delete</button>
+    </li>
+  </ul>
+  <form ng-submit="ProjectSettingsCtrl.addUserToProject()">
+	<select
+            ng-model="ProjectSettingsCtrl.newUserId"
+            ng-options="user.$id as user.username for user in ProjectSettingsCtrl.users | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true">
+      <option value="-- choose user --"></option>        
+    </select>
+	<button type='submit'>Add User</button>
+  </form>
+  <button ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
+</section>

@@ -1,0 +1,36 @@
+.inform__block{
+  //background-color: green;
+  display: flex;
+  //width: 700px;
+  text-align: center;
+  align-items: center;
+}
+
+.inform__block__avatar{
+  margin: 5%;
+
+}
+
+.inform__block__avatar_img{
+  height: 100px;
+  width: 100px;
+  padding: 5%;
+  border-radius: 100%; /* Радиус скругления */
+  border: 3px solid #5CACEE; /* Параметры рамки */
+  box-shadow: 0 0 7px #666;
+  float: left;
+}
+
+.inform__block__username{
+  width: 50px;
+}
+
+.inform__block__username_input, 
+.inform__block__username_email,
+.inform__block__username_select{
+  width: 200px;
+}
+
+.inform__block__username_submit{
+  width: 100px;
+}
