@@ -6,15 +6,15 @@ class firebaseAuthService {
         this._fireBase = fireBase;
     }
 
-    toSignUp(user) {
+    signUp(user) {
        return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
     }
 
-    toLogIn(user) {
+    logIn(user) {
         return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
     }
 
-    toSignOut() {
+    logOut() {
         return firebase.auth().signOut();
             
     }

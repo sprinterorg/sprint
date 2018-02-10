@@ -8,13 +8,14 @@ export default class appController {
         this.hide = this.toHideModalWindow.bind(this);
         this._$rootScope = $rootScope;
         this._$state = $state;
+        this.mode = 'logIn';
        
     }
 
-    toSignOut() {
+    logOut() {
     	let self = this;
     	this._supportService.setUser('');
-        this._firebaseAuthService.toSignOut().then( () => {
+        this._firebaseAuthService.logOut().then( () => {
         	self._$state.go('landing', {
                 preventResolve: {
                 value: false,
@@ -28,12 +29,12 @@ export default class appController {
  
     }
 
-    toShowModalWindow() {
+    toShowModalWindow(mode) {
         this.showModalWindow = true;
+        this.mode = mode;
     }
 
     toHideModalWindow(booleanReload) {
-    	console.log(booleanReload);
         this.showModalWindow = false;
         if(booleanReload)
         	this._$rootScope.$apply();
