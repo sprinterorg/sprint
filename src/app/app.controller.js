@@ -5,10 +5,12 @@ export default class appController {
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
         this.showModalWindow = false;
+        this.userId=supportService.getCookie('user');
     }
 
     toSignOut() {
         this._firebaseAuthService.toSignOut();
+        this.userId="";
     }
 
     toShowModalWindow() {
