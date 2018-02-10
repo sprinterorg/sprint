@@ -11,6 +11,7 @@
   <ul>
     <li ng-repeat="user in ProjectSettingsCtrl.projectUsers">
       {{user.username}}
+      <button ng-if="!ProjectSettingsCtrl.isManager(user.$id)" ng-click="ProjectSettingsCtrl.deleteUserFromProject(user.$id)">delete</button>
     </li>
   </ul>
   <form ng-submit="ProjectSettingsCtrl.addUserToProject()">

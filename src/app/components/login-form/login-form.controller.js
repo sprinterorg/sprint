@@ -15,11 +15,11 @@ export default class loginFormController {
 
     changeModeToLogIn() {
         this.state.mode = "logIn";
-    };
+    }
 
     changeModeToSignUp() {
         this.state.mode = "signUp";
-    };
+    }
 
     SignUp() {
         console.log("SignUp");
@@ -47,30 +47,6 @@ export default class loginFormController {
         }
     }
 
-
-    /*createUser(){
-        let self = this;
-        this._fireBase.createUser({
-            username: this.username,
-            email: this.email
-        }).then( rootRef => {
-            let id = rootRef.key;
-            self._supportService.setUser(id);
-            self.username = '';
-            self.email = '';
-            self._$state.go('profile', {
-                preventResolve: {
-                value: false,
-                squash: true
-            }}, {
-                location: true,
-                notify: false,
-                reload: false
-            });
-        });
-    }*/
-
-
     LogIn() {
         let self = this;
         console.log("LogIn");
@@ -86,24 +62,8 @@ export default class loginFormController {
                 notify: false,
                 reload: false
             });
-        });
-
-        
+        });       
     }
-
-
-    /*login() {
-        this._supportService.setUser(this.userId);
-        this._$state.go('profile', {
-                preventResolve: {
-                value: false,
-                squash: true
-            }}, {
-                location: true,
-                notify: false,
-                reload: false
-            });
-    }*/
 
     clickHanler() {
         this.state.mode === 'logIn' ? this.LogIn() : this.state.mode === 'signUp' ? this.SignUp() : console.error('Wrong state.mode !');

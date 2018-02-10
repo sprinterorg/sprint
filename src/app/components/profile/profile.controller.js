@@ -3,7 +3,7 @@ import './profile.component.scss';
 export default class profileController {
     /*@ngInject*/
     constructor(fireBase, supportService, $stateParams) {
-        this.userId = supportService.getCookie('user');
+        this.userId = supportService.getUserId();
         this._fireBase = fireBase;
         this.user = fireBase.getUser(this.userId);
         this.projects = fireBase.getProjects();

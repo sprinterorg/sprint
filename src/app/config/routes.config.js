@@ -19,10 +19,23 @@ import projectSettingsTemplate from '../components/project-settings/project-sett
 import TaskCtrl from '../components/task/task.controller';
 import taskTemplate from '../components/task/task.component.html';
 
+import LandingCtrl from '../components/landing/landing.controller';
+import landingTemplate from '../components/landing/landing.component.html';
+
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     
+    $stateProvider.state('landing', {
+        url: '/',
+        secure: true,
+        template: landingTemplate,
+        controller: LandingCtrl,
+        controllerAs: 'LandingCtrl'
+
+    });
+
+
     $stateProvider.state('profile', {
         url: '/profile',
         secure: true,
@@ -68,6 +81,7 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
   });
     $stateProvider.state('task', {
         url: '/task/:project_id/:task_id',
+        secure: true,
         template: taskTemplate,
         controller: TaskCtrl,
         controllerAs: 'TaskCtrl'

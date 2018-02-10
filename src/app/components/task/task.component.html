@@ -6,6 +6,7 @@
 			<ul>
 				<li ng-repeat="user in TaskCtrl.executors track by $index">
 				{{TaskCtrl.getUser(user.$id)}}
+				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
 				</li>
 			</ul>
 		</div>

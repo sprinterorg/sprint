@@ -7,6 +7,7 @@ export default class ticketController {
         this.task = fireBase.getTask(this.projectId, this.taskId);
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
         this.executors = fireBase.getTaskExecutors(this.projectId, this.taskId);
+        this.project = fireBase.getSprint(this.projectId);
     }
 
 	addExecutorsToTask() {
@@ -15,6 +16,10 @@ export default class ticketController {
             title: this.task.title
         }); 
 	}
+
+    deleteExecutorFromTask(userId) {
+        this._fireBase.deleteExecutorFromTask(this.projectId, this.taskId, this.project.managerId, userId);
+    }
 
     getUser(userId) {
         return this.projectUsers.filter(item => item.$id === userId)[0].username;
