@@ -8,8 +8,9 @@
         [<button ng-click="appController.toChangeRoute('/projects')">go to projects</button>]
     </div>
     <div>
-        <button ng-click="appController.toShowModalWindow()">Log in</button>
-        <button ng-click="appController.toShowModalWindow()">Sign up</button>
+        {{appController._supportService.userId}}
+        <button ng-if="appController._supportService.userId==''" ng-click="appController.toShowModalWindow()">Log in</button>
+        <button ng-if="appController._supportService.userId!=''" ng-click="appController.toSignOut()">Sign out</button>
     </div>
 </header>
 <hr/>

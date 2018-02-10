@@ -2,9 +2,13 @@ export default class appController {
     /*@ngInject*/
     constructor($location, firebaseAuthService, supportService) {
         this._supportService = supportService;
-        this.showModalWindow = false;
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
+        this.showModalWindow = false;
+    }
+
+    toSignOut() {
+        this._firebaseAuthService.toSignOut();
     }
 
     toShowModalWindow() {

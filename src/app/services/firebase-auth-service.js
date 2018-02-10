@@ -68,10 +68,10 @@ class firebaseAuthService {
 
     toSignOut() {
         const self = this;
+        self._supportService.setUser("");
         firebase.auth().signOut().then(
             function () {
                 console.log('Sign out is successful!');
-                console.log(response);
                 self.user = {};
                 self.error = {
                     errorCode: "",
