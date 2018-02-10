@@ -7,9 +7,6 @@ import currentSprintTemplate from '../components/current-sprint/current-sprint.c
 import ProfileCtrl from '../components/profile/profile.controller';
 import profileTemplate from '../components/profile/profile.component.html';
 
-import UserCtrl from '../components/user-creation/user-creation.controller';
-import userTemplate from '../components/user-creation/user-creation.component.html';
-
 import ParentCtrl from '../components/parent-route/parrent.controller';
 import parentCtrlTemplate from '../components/parent-route/parent.component.html';
 
@@ -23,15 +20,9 @@ import TaskCtrl from '../components/task/task.controller';
 import taskTemplate from '../components/task/task.component.html';
 
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/user');
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
-    $stateProvider.state('user', {
-        url: '/user',
-        template: userTemplate,
-        controller: UserCtrl,
-        controllerAs: 'UserCtrl'
-
-    });
+    
     $stateProvider.state('profile', {
         url: '/profile',
         secure: true,
