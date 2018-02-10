@@ -3,23 +3,10 @@
 </modal-window>
 <header>
     <div>
-        routes:
-        [<button ng-click="appController.toChangeRoute('/profile')">go to profile</button>]|
-        [<button ng-click="appController.toChangeRoute('/projects')">go to projects</button>]
-    </div>
-    <div>
-        {{appController._supportService.userId}}
         <button ng-if="!appController._supportService.userId" ng-click="appController.toShowModalWindow()">Log in</button>
         <button ng-if="appController._supportService.userId" ng-click="appController.toSignOut()">Sign out</button>
     </div>
 </header>
 <hr/>
-<!--<br>
-<a class="bar" ui-sref="user">logout</a>
-<div>
-  <a class="bar" ui-sref="parent-component" >To parent component with child route</a>
-</div>
--->
-<!--end of the example-->
 <ui-view></ui-view>
 

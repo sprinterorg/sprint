@@ -8,9 +8,11 @@ class FireService {
     	this.rootRef = firebase.database().ref();
     }
 
-    createUser(data) {
+    createUser(userId, data) {
         data.avatar = 'stub.jpg';
-    	return this.rootRef.child('users').push(data);
+    	return this.rootRef.child('users').update({
+            [userId]: data
+        });
     }
 
     getUser(userId) {

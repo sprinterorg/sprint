@@ -1,17 +1,19 @@
 export default class appController {
     /*@ngInject*/
-    constructor($location, firebaseAuthService, supportService) {
+    constructor($location, firebaseAuthService, supportService, $rootScope) {
         this._supportService = supportService;
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
         this.showModalWindow = false;
         this.hide = this.toHideModalWindow.bind(this);
+        this.rootScope = $rootScope;
        
     }
 
     toSignOut() {
     	let self = this;
     	this._supportService.setUser('');
+    	this._location.path('/');
         this._firebaseAuthService.toSignOut().then( () => {
         });
  
@@ -21,19 +23,20 @@ export default class appController {
         this.showModalWindow = true;
     }
 
-    toHideModalWindow() {
-    	console.log('2')
+    toHideModalWindow(booleanReload) {
+    	console.log(booleanReload);
         this.showModalWindow = false;
-        console.log(this.showModalWindow)
+        if(booleanReload)
+        	this.rootScope.$apply();
     }
 
     sendToLogin() {
-        this._location.path("/");
+        this._location.path('/');
         this.toShowModalWindow();
     }
 
     toChangeRoute(path) {
-        if (this._supportService.getCookie("user")) {
+        if (this._supportService.getCookie('user')) {
             this._location.path(path);
         }
         else {
