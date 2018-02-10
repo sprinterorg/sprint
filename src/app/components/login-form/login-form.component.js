@@ -6,7 +6,7 @@ import './login-form.component.scss';
 let loginFormComponent = {
     restrict: 'E',
     bindings: {
-        hideFunc: '&?'
+        hideFunc: '<'
     },
     template,
     controller,

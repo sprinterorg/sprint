@@ -1,5 +1,5 @@
-<modal-window show-modal-window="appController.showModalWindow" hide-func="appController.toHideModalWindow()">
-    <login-form hide-func="appController.toHideModalWindow()"></login-form>
+<modal-window  ng-if="appController.showModalWindow" hide-func="appController.hide">
+    <login-form hide-func="appController.hide"></login-form>
 </modal-window>
 <header>
     <div>
@@ -9,8 +9,8 @@
     </div>
     <div>
         {{appController._supportService.userId}}
-        <button ng-if="appController.userId===''" ng-click="appController.toShowModalWindow()">Log in</button>
-        <button ng-if="appController.userId!==''" ng-click="appController.toSignOut()">Sign out</button>
+        <button ng-if="!appController._supportService.userId" ng-click="appController.toShowModalWindow()">Log in</button>
+        <button ng-if="appController._supportService.userId" ng-click="appController.toSignOut()">Sign out</button>
     </div>
 </header>
 <hr/>

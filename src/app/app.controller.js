@@ -5,12 +5,16 @@ export default class appController {
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
         this.showModalWindow = false;
-        this.userId=supportService.getCookie('user');
+        this.hide = this.toHideModalWindow.bind(this);
+       
     }
 
     toSignOut() {
-        this._firebaseAuthService.toSignOut();
-        this.userId="";
+    	let self = this;
+    	this._supportService.setUser('');
+        this._firebaseAuthService.toSignOut().then( () => {
+        });
+ 
     }
 
     toShowModalWindow() {
@@ -18,7 +22,9 @@ export default class appController {
     }
 
     toHideModalWindow() {
+    	console.log('2')
         this.showModalWindow = false;
+        console.log(this.showModalWindow)
     }
 
     sendToLogin() {

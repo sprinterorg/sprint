@@ -1,9 +1,9 @@
-<form class="login_form">
-    {{loginController.tmp}}
+<form class="login_form" ng-submit="loginController.clickHanler()">
+    <!-- {{loginController.tmp}}
     <div ng-if="loginController._firebaseAuthService.error.errorCode">
         {{loginController._firebaseAuthService.error.errorMessage}}
-    </div>
-
+    </div> -->
+{{loginController.hideFunc}}
     <nav>
         [<a ng-click="loginController.changeModeToLogIn()">Log in</a>] |
         [<a ng-click="loginController.changeModeToSignUp()">Sign up</a>]
@@ -22,7 +22,5 @@
                autocomplete="off"
                name="repeat_password">
     </div>
-    <input type="submit"
-           ng-click="loginController.state.mode === 'logIn' ? loginController.LogIn() : loginController.state.mode === 'signUp' ? loginController.SignUp() : console.error('Wrong state.mode !')"
-           value="{{loginController.state.mode === 'logIn' ? 'Log in' : loginController.state.mode === 'signUp' ? 'Sign Up' : 'Wrong state.mode !'}}">
+    <button>{{loginController.showButtonName()}}</button>
 </form>

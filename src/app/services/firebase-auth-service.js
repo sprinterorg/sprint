@@ -2,23 +2,24 @@ import firebase from 'firebase/app';
 
 class firebaseAuthService {
     /*@ngInject*/
-    constructor(fireBase, supportService) {
+    constructor(fireBase) {
         this._fireBase = fireBase;
-        this._supportService = supportService;
-        this.user = {};
+        /*this._supportService = supportService;*/
+        /*this.user = {};
         this.error = {
             errorCode: "",
             errorMessage: ""
-        };
-    };
+        };*/
+    }
 
     toSignUp(user) {
-        const self = this;
+        /*const self = this;
         self.error = {
             errorCode: "",
             errorMessage: ""
-        };
-        firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then(
+        };*/
+       return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+        /*.then(
             function (response) {
                 console.log('Log in is successful!');
                 self.user = response;
@@ -36,16 +37,16 @@ class firebaseAuthService {
                 };
                 console.error(self.error.errorMessage);
             }
-        );
-    };
+        );*/
+    }
 
     toLogIn(user) {
-        const self = this;
+       /* const self = this;
         self.error = {
             errorCode: "",
             errorMessage: ""
-        };
-        firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(
+        };*/
+        return firebase.auth().signInWithEmailAndPassword(user.email, user.password);/*.then(
             function (response) {
                 console.log('Log in is successful!');
                 self.user = response;
@@ -63,13 +64,13 @@ class firebaseAuthService {
                 };
                 console.error(self.error.errorMessage);
             }
-        );
-    };
+        );*/
+    }
 
     toSignOut() {
-        const self = this;
-        self._supportService.setUser("");
-        firebase.auth().signOut().then(
+        /*const self = this;
+        self._supportService.setUser("");*/
+        return firebase.auth().signOut();/*.then(
             function () {
                 console.log('Sign out is successful!');
                 self.user = {};
@@ -85,8 +86,8 @@ class firebaseAuthService {
                 };
                 console.error(self.error.errorMessage);
             }
-        );
-    };
+        );*/
+    }
 }
 
 export default firebaseAuthService;
