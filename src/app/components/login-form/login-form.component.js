@@ -4,7 +4,8 @@ import controller from './login-form.controller';
 let loginFormComponent = {
     restrict: 'E',
     bindings: {
-        hideFunc: '<'
+        hideFunc: '<',
+        mode: '<'
     },
     template,
     controller,

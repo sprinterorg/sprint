@@ -4,28 +4,24 @@ export default class loginFormController {
         this._firebaseAuthService = firebaseAuthService;
         this._fireBase = fireBase;
         this._supportService = supportService;
-        this.state = {
-            mode: "logIn"
-        };
-        this.entryEmail = "";
-        this.entryPassword = "";
-        this.entryRepeatPassword = "";
+        this.entryEmail = '';
+        this.entryPassword = '';
+        this.entryRepeatPassword = '';
         this._$state = $state;
     }
 
     changeModeToLogIn() {
-        this.state.mode = "logIn";
+        this.mode = 'logIn';
     }
 
     changeModeToSignUp() {
-        this.state.mode = "signUp";
+        this.mode = 'signUp';
     }
 
-    SignUp() {
-        console.log("SignUp");
+    signUp() {
         let self = this;
         if(this.entryPassword === this.entryRepeatPassword ){
-            this._firebaseAuthService.toSignUp({email: this.entryEmail, password: this.entryPassword}).then( response => {
+            this._firebaseAuthService.signUp({email: this.entryEmail, password: this.entryPassword}).then( response => {
                self._supportService.setUser(response.uid);
                self.hideFunc(true);
                self._fireBase.createUser(response.uid, {
@@ -47,10 +43,9 @@ export default class loginFormController {
         }
     }
 
-    LogIn() {
+    logIn() {
         let self = this;
-        console.log("LogIn");
-        this._firebaseAuthService.toLogIn({email: this.entryEmail, password: this.entryPassword}).then( response => {
+        this._firebaseAuthService.logIn({email: this.entryEmail, password: this.entryPassword}).then( response => {
             self._supportService.setUser(response.uid);
             self.hideFunc(true);
             self._$state.go('profile', {
@@ -66,10 +61,10 @@ export default class loginFormController {
     }
 
     clickHanler() {
-        this.state.mode === 'logIn' ? this.LogIn() : this.state.mode === 'signUp' ? this.SignUp() : console.error('Wrong state.mode !');
+        this.mode === 'signUp' ? this.signUp() : this.logIn();
     }
 
     showButtonName() {
-        return this.state.mode === 'logIn' ? 'Log in' : this.state.mode === 'signUp' ? 'Sign Up' : 'Wrong state.mode !';
+        return this.mode === 'signUp' ? 'Sign Up' : 'Log In';
     }
 }

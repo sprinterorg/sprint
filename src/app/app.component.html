@@ -1,10 +1,13 @@
 <modal-window  ng-if="appController.showModalWindow" hide-func="appController.hide">
-    <login-form hide-func="appController.hide"></login-form>
+    <login-form hide-func="appController.hide" mode="appController.mode"></login-form>
 </modal-window>
 <header>
     <div>
-        <button ng-if="!appController._supportService.userId" ng-click="appController.toShowModalWindow()">Log in</button>
-        <button ng-if="appController._supportService.userId" ng-click="appController.toSignOut()">Sign out</button>
+        <nav ng-if="!appController._supportService.userId" class="login-nav">
+            <button ng-click="appController.toShowModalWindow('logIn')">Log In</button>
+            <button ng-click="appController.toShowModalWindow('signUp')">Sign Up</button>
+        </nav>
+        <button ng-if="appController._supportService.userId" ng-click="appController.logOut()">Log Out</button>
     </div>
 </header>
 <hr/>
