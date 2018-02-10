@@ -68,6 +68,7 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
   });
     $stateProvider.state('task', {
         url: '/task/:project_id/:task_id',
+        secure: true,
         template: taskTemplate,
         controller: TaskCtrl,
         controllerAs: 'TaskCtrl'

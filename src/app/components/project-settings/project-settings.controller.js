@@ -1,7 +1,7 @@
 export default class projectSettingsController {
     /*@ngInject*/
     constructor(fireBase, supportService, $stateParams) {
-		this.userId = supportService.getCookie('user');
+		this.userId = supportService.getUserId();
         this.projectId = $stateParams.project_id;
         this._fireBase = fireBase;
 		this.project = fireBase.getSprint(this.projectId);

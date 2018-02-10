@@ -7,7 +7,7 @@ export default class sprintController {
         this.cards = fireBase.getListCards(this.projectId);
         this._fireBase = fireBase;
         this._scope = $scope;
-        this.userId = supportService.getCookie('user');
+        this.userId = supportService.getUserId();
         this.isModalOpen = false;
 
         this._scope.$on('second-bag.drag', (e, el) => {

@@ -13,7 +13,6 @@ export default class appController {
     toSignOut() {
     	let self = this;
     	this._supportService.setUser('');
-    	this._location.path('/');
         this._firebaseAuthService.toSignOut().then( () => {
         });
  
