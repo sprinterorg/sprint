@@ -5,6 +5,7 @@ export default class sprintController {
         this.currentSprint = fireBase.getSprint(this.projectId)
         this.lists = fireBase.getSprintLists(this.projectId);
         this.cards = fireBase.getListCards(this.projectId);
+        this.users = fireBase.getProjectUsers(this.projectId);
         this._fireBase = fireBase;
         this._scope = $scope;
         this.userId = supportService.getUserId();
@@ -15,10 +16,18 @@ export default class sprintController {
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId)
+            // this._fireBase.addUserToCard(card.$id, this.projectId, 'alex');
+            return false;
+        }
+
+        $scope.onUserDrop = (item, card)=>{
+            console.log('user drop', item, card);
+            this._fireBase.addUserToCard(card.$id, this.projectId, item.username);
             return false;
         }
 
         $scope.listDrop = (list, index, lists)=> {
+            console.log('cards', this.cards)
             if(index < 2 || index > 99) return;
 
             for(let i=2; i<=lists.length-2; i++) {
@@ -39,7 +48,7 @@ export default class sprintController {
     }
 
     $onInit(){
-
+        console.log('users', this.users, this.lists, this.cards)
     }
     showBacklog() {
         this.isShown = false;

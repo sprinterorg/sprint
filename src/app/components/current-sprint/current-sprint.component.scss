@@ -7,11 +7,7 @@
 	to {opacity: 1;}
 }
 
-.users__wrapper{
-	width: 200px;
-	height: 200px;
-	background: #4584ff;
-}
+
 
 .card-content {
 	position: absolute;
@@ -55,6 +51,26 @@
 .lists-container {
 	position: relative;
   	width: 100vw;
+	.project-users__wrapper{
+		width: 200px;
+		height: 200px;
+		background: #4584ff;
+		.dndDraggingSource{
+			display: flex !important;
+		}
+		&-user {
+			width: 60px;
+			height: 60px;
+			background: red;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			p{
+				font-size: 10px;
+			}
+		}
+	}
 	.backlog-show-button{
 		position: absolute;
 		left: -30px;
@@ -111,8 +127,29 @@
 					min-height: 50px;
 					margin-top: 5px;
 					margin-bottom: 5px;
-					display: block;
+					display: flex;
+					flex-direction: column;
 					h4 {
+					}
+					&_user-for-card{
+						display: flex;
+						justify-content: flex-end;
+						height: 50px;
+						width: 100%;
+						font-size: 8px;
+						&_avatar{
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							height: 50px;
+							width: 50px;
+							border-radius: 50%;
+							background: red;
+
+						}
+						.dndPlaceholder{
+							display: none !important;
+						}
 					}
 				}
 			}
@@ -127,11 +164,13 @@
 		}
 	}
 
+	.dndDraggingSource{
+		display: none !important;
+	}
+
 }
 
-.dndDraggingSource{
-	display: none !important;
-}
+
 
 .card--bv2 {
 	background: rgba(0,255,0,.1);

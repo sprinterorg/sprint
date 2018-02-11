@@ -26,6 +26,14 @@
 						dnd-type="'item'"
 						dnd-effect-allowed="move">
 						{{card.title}}
+
+						<div class="card_user-for-card"
+							 dnd-list dnd-drop="onUserDrop(item, card)"
+							 dnd-allowed-types="['user']">
+							<div class="card_user-for-card_avatar">
+								{{card.user}}
+							</div>
+						</div>
 					</li>
 				</ul>
 				<div class="card card--new card--bv2">
@@ -41,7 +49,14 @@
 			</form>
 		</div>
 	</div>
-	<div class="users__wrapper">
+	<div class="project-users__wrapper">
+		<div class="project-users__wrapper-user"
+			 dnd-list
+			ng-repeat="user in SprintCtrl.users"
+		 	dnd-type="'user'"
+			dnd-draggable="user">
+			<p>{{user.username}}</p>
+		</div>
 
 	</div>
 </section>

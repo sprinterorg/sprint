@@ -185,6 +185,12 @@ class FireService {
         });
 	}
 
+    addUserToCard(fbCardId, projectId, user){
+        this.rootRef.child('projects/'+projectId+'/cards').update({
+            [fbCardId + '/user']: user
+        });
+    }
+
 	changeListPosition(projectId, listId, indexPos){
         if(indexPos < 2) return;
 
