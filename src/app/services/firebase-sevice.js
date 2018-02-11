@@ -6,6 +6,7 @@ class FireService {
     	this._$firebaseArray = $firebaseArray;
     	this._$firebaseObject = $firebaseObject;
     	this.rootRef = firebase.database().ref();
+        this.storageRef = firebase.storage().ref();
     }
 
     createUser(userId, data) {
@@ -36,11 +37,13 @@ class FireService {
             ['users/'+userId+'/email']: data.email,
             ['users/'+userId+'/avatar']: data.avatar
         };
-        ids.map( item => {
-            temp['projects/'+item+'/currentSprint/users/'+userId] = data;
-        });
-
+        ids.map( item => temp['projects/'+item+'/currentSprint/users/'+userId] = data);
     	this.rootRef.update(temp);
+    }
+
+    uploadAvatar(file){
+       let ref = this.storageRef.child('img/');
+       return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
     }
 
     getMyProjects(userId) {
