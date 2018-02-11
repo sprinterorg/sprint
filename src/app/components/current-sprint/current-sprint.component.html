@@ -1,49 +1,138 @@
-<section  class="lists-container" dragula="'first-bag'">
-    <div class="lists-container__wrapper" >
-      	<section class="list"
-               ng-repeat="list in SprintCtrl.lists">
+<section class="lists-container">
+	<div class="lists-container__wrapper"
+		 dnd-allowed-types="['container']"
+		 dnd-list
+		 dnd-drop="listDrop(item, index, SprintCtrl.lists)">
+		<button class="backlog-show-button"
+				ng-click="SprintCtrl.showBacklog()">
+			BackLog
+		</button>
+		<div ng-repeat="list in SprintCtrl.lists"
+			class="list__wrapper"
+			ng-class="{'backlog' : list.listId == 1}">
+			<div class="list"
+				 dnd-type="'container'"
+				 dnd-disable-if="list.listId < 4"
+				 dnd-draggable='list'>
+				<button ng-if="list.listId == 1" ng-click="SprintCtrl.hideBacklog()">xx</button>
+				<button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
+				{{list.listName}}
+				<ul class="card__wrapper"
+					dnd-allowed-types="['item']"
+					dnd-list
+					dnd-drop="onDrop(list.listId, item)">
+					<li ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
+						class='card card--bv{{card.priority}}'
+						dnd-draggable="card"
+						dnd-type="'item'"
+						dnd-effect-allowed="move">
+						{{card.title}}
 
-		  <div class="list__wrapper" id="{{list.listId}}">
-			  <button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
-			  <div class="title__wrapper">
-				  <h3 class="list__title">{{list.listName}}</h3>
-			  </div>
-		  </div>
-		  <div dragula="'first-bag'" class="drag-scope">
-
-			  <div ng-click="SprintCtrl.showFullCard(card)"
-					  ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
-				   class='card card--bv{{card.priority}}' id="{{card}}">
-				  <div class="drag-zone">+</div>
-				  <h4>{{card.title}}</h4>
-			  </div>
-		  </div>
-		  <div class="card card--new card--bv2">
-			  <form  class='list__form-wrapper' ng-submit="SprintCtrl.addCard(list.listId)">
-				  <input type="text" ng-model="SprintCtrl.cardName[list.listId]"/>
-			  </form>
-		  </div>
-      	</section>
-       	<section class="list list--new">
-      		<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
-        		<input type="text" ng-model="SprintCtrl.listName"/>
-      		</form>
-    	</section>
-    </div>
-</section>
-<section ng-class="{'card-content': SprintCtrl.isModalOpen, 'hide-content': !SprintCtrl.isModalOpen }" >
-	<div ng-class="{'card-content__modal': SprintCtrl.isModalOpen}">
-		<div class="card-content__modal__button-wrapper">
-			<button ng-click="SprintCtrl.closeFullCard()">x</button>
-		</div>
-		<div class="card-content__modal__content-wrapper">
-			<h2>{{SprintCtrl.title}}</h2>
-			<p>{{SprintCtrl.cardSuperId}}</p>
-			<p>{{SprintCtrl.cardSimpleId}}</p>
-			<p>{{SprintCtrl.cardListId}}</p>
-			<p>{{SprintCtrl.superPriority}}</p>
-			<p>{{SprintCtrl.priority}}</p>
+						<div class="card_user-for-card"
+							 dnd-list dnd-drop="onUserDrop(item, card)"
+							 dnd-allowed-types="['user']">
+							<div ng-if="card.user"
+								class="card_user-for-card_avatar">
+								{{card.user}}
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="card card--new card--bv2">
+					<form  class='list__form-wrapper' ng-submit="SprintCtrl.addCard(list.listId)">
+						<input type="text" ng-model="SprintCtrl.cardName[list.listId]"/>
+					</form>
+				</div>
+				<div ng-if="list.listId == 1"
+					 class="list--new">
+					Add List
+					<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
+						<input type="text" ng-model="SprintCtrl.listName"/>
+					</form>
+				</div>
+				<div ng-if="list.listId == 1"
+					class="project-users__wrapper">
+					<div class="project-users__wrapper-user"
+						 ng-repeat="user in SprintCtrl.users"
+						 dnd-type="'user'"
+						 dnd-draggable="user">
+						<p>{{user.username}}</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<section  class="lists-container" dragula="'first-bag'">-->
+    <!--<div class="lists-container__wrapper" >-->
+      	<!--<section class="list"-->
+               <!--ng-repeat="list in SprintCtrl.lists">-->
+
+		  <!--<div class="list__wrapper" id="{{list.listId}}">-->
+			  <!--<button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>-->
+			  <!--<div class="title__wrapper">-->
+				  <!--<h3 class="list__title">{{list.listName}}</h3>-->
+			  <!--</div>-->
+		  <!--</div>-->
+		  <!--<div dragula="'first-bag'" class="drag-scope">-->
+
+			  <!--<div ng-click="SprintCtrl.showFullCard(card)"-->
+					  <!--ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"-->
+				   <!--class='card card&#45;&#45;bv{{card.priority}}' id="{{card}}">-->
+				  <!--<div class="drag-zone">+</div>-->
+				  <!--<h4>{{card.title}}</h4>-->
+			  <!--</div>-->
+		  <!--</div>-->
+		  <!--<div class="card card&#45;&#45;new card&#45;&#45;bv2">-->
+			  <!--<form  class='list__form-wrapper' ng-submit="SprintCtrl.addCard(list.listId)">-->
+				  <!--<input type="text" ng-model="SprintCtrl.cardName[list.listId]"/>-->
+			  <!--</form>-->
+		  <!--</div>-->
+      	<!--</section>-->
+       	<!--<section class="list list&#45;&#45;new">-->
+      		<!--<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">-->
+        		<!--<input type="text" ng-model="SprintCtrl.listName"/>-->
+      		<!--</form>-->
+    	<!--</section>-->
+    <!--</div>-->
+<!--</section>-->
+
+
+
+
+
+
+
+
+
+
+<!--<section ng-class="{'card-content': SprintCtrl.isModalOpen, 'hide-content': !SprintCtrl.isModalOpen }" >-->
+	<!--<div ng-class="{'card-content__modal': SprintCtrl.isModalOpen}">-->
+		<!--<div class="card-content__modal__button-wrapper">-->
+			<!--<button ng-click="SprintCtrl.closeFullCard()">x</button>-->
+		<!--</div>-->
+		<!--<div class="card-content__modal__content-wrapper">-->
+			<!--<h2>{{SprintCtrl.title}}</h2>-->
+			<!--<p>{{SprintCtrl.cardSuperId}}</p>-->
+			<!--<p>{{SprintCtrl.cardSimpleId}}</p>-->
+			<!--<p>{{SprintCtrl.cardListId}}</p>-->
+			<!--<p>{{SprintCtrl.superPriority}}</p>-->
+			<!--<p>{{SprintCtrl.priority}}</p>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</section>-->
 
