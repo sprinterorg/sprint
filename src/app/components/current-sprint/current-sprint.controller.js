@@ -7,7 +7,7 @@ export default class sprintController {
         this.cards = fireBase.getListCards(this.projectId);
         this._fireBase = fireBase;
         this._scope = $scope;
-        this.userId = supportService.getCookie('user');
+        this.userId = supportService.getUserId();
         this.isModalOpen = false;
         this.element = $element;
         this.isShown = true;
@@ -70,7 +70,7 @@ export default class sprintController {
 
     addCard(listId) {
         var temp = this.cardName[listId];
-        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.userId, this.projectId).then( rootRef  => {
+        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.userId, this.currentSprint.managerId, this.projectId).then( rootRef  => {
            this.cardName[listId] = '';
         });
     };

@@ -1,30 +1,50 @@
 export default class appController {
     /*@ngInject*/
-    constructor($location, firebaseAuthService) {
-        this.showModalWindow = false;
+    constructor($location, firebaseAuthService, supportService, $rootScope, $state) {
+        this._supportService = supportService;
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
-    }
-
-    toShowModalWindow() {
-        this.showModalWindow = true;
-    }
-
-    toHideModalWindow() {
         this.showModalWindow = false;
+        this.showSearch = false;
+        this.hide = this.toHideModalWindow.bind(this);
+        this._$rootScope = $rootScope;
+        this._$state = $state;
+        this.mode = 'logIn';
+
+
+        if(!supportService.userId) {
+            this._$state.go('landing');
+        }
     }
 
-    sendToLogin() {
-        this._location.path("/");
-        this.toShowModalWindow();
+    logOut() {
+    	let self = this;
+    	this._supportService.setUser('');
+        this._firebaseAuthService.logOut().then(() => {
+        	self._$state.go('landing', {
+                preventResolve: {
+                value: false,
+                squash: true
+            }}, {
+                location: true,
+                notify: false,
+                reload: false
+            });
+        });
     }
 
-    toChangeRoute(path) {
-        if (this._firebaseAuthService.user.uid) {
-            this._location.path(path);
-        }
-        else {
-            this.sendToLogin();
-        }
+    toShowModalWindow(mode) {
+        this.showModalWindow = true;
+        this.mode = mode;
+    }
+
+    toHideModalWindow(booleanReload) {
+        this.showModalWindow = false;
+        if(booleanReload)
+        	this._$rootScope.$apply();
+    }
+
+    toShowSearch() {
+        this.showSearch = !this.showSearch;
     }
 }

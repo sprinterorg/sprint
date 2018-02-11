@@ -6,9 +6,10 @@
 			<ul>
 				<li ng-repeat="user in TaskCtrl.executors track by $index">
 				{{TaskCtrl.getUser(user.$id)}}
+				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
 				</li>
 			</ul>
-		</div>
+		
 		  <form ng-submit="TaskCtrl.addExecutorsToTask()">
 			<select
 		            ng-model="TaskCtrl.newUserId"
@@ -17,6 +18,16 @@
 		    </select>
 			<button type='submit'>Add User</button>
 		  </form>
+		  {{TaskCtrl.getListName()}}
+		  <form ng-submit="TaskCtrl.moveToList()">
+			<select
+		            ng-model="TaskCtrl.newListId"
+		            ng-options="list.listId as list.listName for list in TaskCtrl.lists">
+		      <option value="-- choose user --"></option>        
+		    </select>
+			<button type='submit'>Move to another list</button>
+		  </form>
+		</div>
 	</div>
 </section>
 
