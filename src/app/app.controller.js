@@ -5,6 +5,7 @@ export default class appController {
         this._location = $location;
         this._firebaseAuthService = firebaseAuthService;
         this.showModalWindow = false;
+        this.showSearch = false;
         this.hide = this.toHideModalWindow.bind(this);
         this._$rootScope = $rootScope;
         this._$state = $state;
@@ -38,5 +39,9 @@ export default class appController {
         this.showModalWindow = false;
         if(booleanReload)
         	this._$rootScope.$apply();
+    }
+
+    toShowSearch() {
+        this.showSearch = !this.showSearch;
     }
 }
