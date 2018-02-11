@@ -15,8 +15,7 @@ export default class sprintController {
 
 
         $scope.onDrop = (list, card)=>{
-            this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId)
-            // this._fireBase.addUserToCard(card.$id, this.projectId, 'alex');
+            this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
             return false;
         }
 
@@ -42,9 +41,6 @@ export default class sprintController {
             return false;
         }
 
-        $scope.moved = (event)=>{
-            console.log('moved', event);
-        }
     }
 
     $onInit(){
@@ -79,8 +75,9 @@ export default class sprintController {
 
     addCard(listId) {
         var temp = this.cardName[listId];
+        this.cardName[listId] = '';
         this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.userId, this.currentSprint.managerId, this.projectId).then( rootRef  => {
-           this.cardName[listId] = '';
+       
         });
     };
     showFullCard(card){

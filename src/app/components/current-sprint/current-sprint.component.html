@@ -4,8 +4,9 @@
 		 dnd-list
 		 dnd-drop="listDrop(item, index, SprintCtrl.lists)">
 		<button class="backlog-show-button"
-				ng-if="SprintCtrl.isShown"
-				ng-click="SprintCtrl.showBacklog()">xx</button>
+				ng-click="SprintCtrl.showBacklog()">
+			BackLog
+		</button>
 		<div ng-repeat="list in SprintCtrl.lists"
 			class="list__wrapper"
 			ng-class="{'backlog' : list.listId == 1}">
@@ -30,7 +31,8 @@
 						<div class="card_user-for-card"
 							 dnd-list dnd-drop="onUserDrop(item, card)"
 							 dnd-allowed-types="['user']">
-							<div class="card_user-for-card_avatar">
+							<div ng-if="card.user"
+								class="card_user-for-card_avatar">
 								{{card.user}}
 							</div>
 						</div>
@@ -41,24 +43,26 @@
 						<input type="text" ng-model="SprintCtrl.cardName[list.listId]"/>
 					</form>
 				</div>
+				<div ng-if="list.listId == 1"
+					 class="list--new">
+					Add List
+					<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
+						<input type="text" ng-model="SprintCtrl.listName"/>
+					</form>
+				</div>
+				<div ng-if="list.listId == 1"
+					class="project-users__wrapper">
+					<div class="project-users__wrapper-user"
+						 ng-repeat="user in SprintCtrl.users"
+						 dnd-type="'user'"
+						 dnd-draggable="user">
+						<p>{{user.username}}</p>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="list list--new">
-			<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
-				<input type="text" ng-model="SprintCtrl.listName"/>
-			</form>
-		</div>
 	</div>
-	<div class="project-users__wrapper">
-		<div class="project-users__wrapper-user"
-			 dnd-list
-			ng-repeat="user in SprintCtrl.users"
-		 	dnd-type="'user'"
-			dnd-draggable="user">
-			<p>{{user.username}}</p>
-		</div>
 
-	</div>
 </section>
 
 
