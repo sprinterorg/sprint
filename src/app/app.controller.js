@@ -10,13 +10,17 @@ export default class appController {
         this._$rootScope = $rootScope;
         this._$state = $state;
         this.mode = 'logIn';
-       
+
+
+        if(!supportService.userId) {
+            this._$state.go('landing');
+        }
     }
 
     logOut() {
     	let self = this;
     	this._supportService.setUser('');
-        this._firebaseAuthService.logOut().then( () => {
+        this._firebaseAuthService.logOut().then(() => {
         	self._$state.go('landing', {
                 preventResolve: {
                 value: false,
@@ -27,7 +31,6 @@ export default class appController {
                 reload: false
             });
         });
- 
     }
 
     toShowModalWindow(mode) {
