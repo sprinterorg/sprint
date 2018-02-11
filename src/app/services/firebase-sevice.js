@@ -61,12 +61,12 @@ class FireService {
 		    {
 		      listId: 2,
 		      listName: 'To do',
-		      position: 0
+		      position: 1
 		    },
 		    {
 		      listId: 3,
 		      listName: 'Closed',
-		      position: 100
+		      position: 1000
 		    }
     	];
         projectData.currentSprint.sprintNumber = 1;
@@ -160,6 +160,14 @@ class FireService {
         	[fbCardId + '/list_id']: listId
         });
 	}
+
+	changeListPosition(projectId, listId, indexPos){
+        if(indexPos < 2) return;
+
+        this.rootRef.child('projects/'+projectId+'/lists').update({
+            [listId + '/position']: indexPos
+        });
+    }
 
     getTask(projectId, taskId) {
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId);

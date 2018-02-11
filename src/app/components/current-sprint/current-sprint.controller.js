@@ -1,6 +1,6 @@
 export default class sprintController {
     /*@ngInject*/
-    constructor(fireBase, $stateParams, $scope, supportService) {
+    constructor($element, fireBase, $stateParams, $scope, supportService) {
         this.projectId = $stateParams.project_id;
         this.currentSprint = fireBase.getSprint(this.projectId)
         this.lists = fireBase.getSprintLists(this.projectId);
@@ -9,27 +9,52 @@ export default class sprintController {
         this._scope = $scope;
         this.userId = supportService.getCookie('user');
         this.isModalOpen = false;
+        this.element = $element;
+        this.isShown = true;
 
-        this._scope.$on('second-bag.drag', (e, el) => {
-            el.addClass('ex-moved');
-            // var indexInList = Array.prototype.indexOf.call(el.parent().parent()[0].children, el.parent()[0])
-        });
 
-        this._scope.$on('first-bag.drop', (e, el) => {
-            el.removeClass('ex-moved');
-            var cardId = JSON.parse(el[0].id)
-            var newListId = el.parent().parent()[0].children[0].id
-            console.log('list', newListId, cardId.$id)
-            this._fireBase.moveToList(cardId.$id, Number(newListId) || 1, this.projectId)
-        });
+        $scope.onDrop = (list, card)=>{
+            this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId)
+            return false;
+        }
 
-        this._scope.$on('first-bag.over', (e, el, container) => {
-            container.addClass('ex-over');
-        });
+        $scope.listDrop = (list, index, lists)=> {
+            if(index < 2 || index > 99) return;
 
-        this._scope.$on('first-bag.out', (e, el, container) => {
-            container.removeClass('ex-over');
-        });
+            for(let i=2; i<=lists.length-2; i++) {
+                if(i < index) {
+                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, i)
+                }
+                else if(i >= index) {
+                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index+i)
+                }
+            }
+            this._fireBase.changeListPosition(this.projectId, list.$id, index)
+            return false;
+        }
+
+        $scope.moved = (event)=>{
+            console.log('moved', event);
+        }
+    }
+
+    $onInit(){
+
+    }
+    showBacklog() {
+        this.isShown = false;
+        let el = document.getElementsByClassName('backlog');
+        el[0].style.left = '-105px';
+        let lists = document.getElementsByClassName('list__wrapper');
+        lists[1].style.marginLeft = '220px';
+    }
+
+    hideBacklog(){
+        this.isShown = true;
+        let el = document.getElementsByClassName('backlog');
+        el[0].style.left = '-400px';
+        let lists = document.getElementsByClassName('list__wrapper');
+        lists[1].style.marginLeft = '0px';
     }
 
     addList() {
@@ -63,4 +88,7 @@ export default class sprintController {
         this.isModalOpen = false;
     }
 }
+
+
+
 

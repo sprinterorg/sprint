@@ -4,6 +4,7 @@ import appComponent from './app.component';
 import angFire from 'angularfire';
 import firebasecfg from './config/firebase-cfg';
 import angularDragula from 'angularjs-dragula';
+import dndLists from 'angular-drag-and-drop-lists';
 
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services'
@@ -16,6 +17,7 @@ angular.module('app', [
     angFire,
     uiRouter,
     angularDragula(angular),
+    'dndLists',
     ComponentsModule.name,
     ServicesModule.name
 
