@@ -4,6 +4,7 @@ import appComponent from './app.component';
 import angFire from 'angularfire';
 import firebasecfg from './config/firebase-cfg';
 import angularDragula from 'angularjs-dragula';
+import fileUpload from 'ng-file-upload';
 
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services';
@@ -24,6 +25,7 @@ angular.module('app', [
     angFire,
     uiRouter,
     angularDragula(angular),
+    fileUpload,
     ComponentsModule.name,
     ServicesModule.name
 
