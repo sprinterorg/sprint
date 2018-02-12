@@ -52,7 +52,7 @@ body {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 2em;
 	text-align: center;
 	margin: 0 0 2em;
 	
@@ -65,10 +65,10 @@ h1 {
 
 .login_form {
 	position: relative;
-	max-width: 40rem;
+	max-width: 40em;
 	background: $body-bg;
 	width: 100%;
-	padding: 5rem;
+	padding: 5em;
 	border-radius: 1px;
 	display:flex;
 	flex-direction:column;
