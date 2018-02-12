@@ -42,10 +42,13 @@ class FireService {
     }
 
     uploadAvatar(file){
-       let ref = this.storageRef.child('img/');
-       return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
+        let bla = Math.random()*1000000^0;
+        console.log('img/'+bla+file.name);
+       let ref = this.storageRef.child('img/'+Math.random()*1000000^0+file.name);
+       
+              return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
     }
-    
+
     getMyProjects(userId) {
     	let ref = this.rootRef.child('users/'+userId+'/my-projects');
     	return this._$firebaseArray(ref);

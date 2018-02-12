@@ -2,13 +2,6 @@ class SupportService {
     /*@ngInject*/
     constructor() {
       this.userId = this.getCookie('user') || '';
-      this.pictures = {
-        ironman: 'https://png.icons8.com/ultraviolet/100/000000/iron-man.png',
-        spiderman: 'https://png.icons8.com/ultraviolet/100/000000/spiderman-head.png'
-      };
-    }
-    getPicture(objKey) {
-      return this.pictures[objKey];
     }
 
     setUser(userId) {
