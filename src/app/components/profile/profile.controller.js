@@ -13,7 +13,9 @@ export default class profileController {
     }
 
     updateUser() {
-        let ids = Object.keys(this.user['my-projects']);
+        let ids = [];
+        if (this.user['my-projects']) ids = Object.keys(this.user['my-projects']);
+        console.log(ids);
         this._fireBase.updateUser(ids, this.userId, {
             username: this.user.username,
             email: this.user.email,
@@ -27,14 +29,15 @@ export default class profileController {
     }
 
     uploadAvatar(file) {
+        let self = this;
         if (file) {
             let exp = /\/(jpg|jpeg|tiff|png)$/i;
             let correctFile = exp.test(file.type);
             if (correctFile) {
                 this._fireBase.uploadAvatar(file)
                     .then(avatar => {
-                        this.user.avatar = avatar;
-                        this.scope.$apply();
+                        self.user.avatar = avatar;
+                        self.scope.$apply();
                     });
             } else {
                 console.log('file format incorrect');
