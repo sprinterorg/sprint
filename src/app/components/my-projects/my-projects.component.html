@@ -6,13 +6,13 @@
 		<input type="text" ng-model="MyProjectsCtrl.searchProjects" placeholder="Search project">
 	</div>
 	<ul>
-		<li ng-repeat="myProject in MyProjectsCtrl.myProjects | filter: {projectName: MyProjectsCtrl.searchProjects}">
+		<li ng-repeat="myProject in MyProjectsCtrl.myProjects | filter: {projectName: MyProjectsCtrl.searchProjects}" ng-click="MyProjectsCtrl.goToSprint(myProject.$id)">
 			<div class="my-projects__background">
 				<img src="{{myProject.background}}">
 			</div>
-			<a class="my-projects__link" ui-sref="current-sprint({project_id: myProject.$id})">{{myProject.projectName }}</a>
+			<p class="my-projects__text">{{myProject.projectName }}</p>
 			<my-tasks class="my-tasks" tasks="myProject.myTasks" project-id="myProject.$id"></my-tasks>
-			<a class="config" ng-if="MyProjectsCtrl.isManager(myProject.managerId)" ui-sref="project-settings({project_id: myProject.$id})">go to {{myProject.projectName}} project settings </a>
+			<a class="config" ng-if="MyProjectsCtrl.isManager(myProject.managerId)" ui-sref="project-settings({project_id: myProject.$id})">go to settings </a>
 		</li>
 	</ul>
 </div>
