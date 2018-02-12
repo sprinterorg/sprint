@@ -45,7 +45,7 @@ class FireService {
        let ref = this.storageRef.child('img/');
        return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
     }
-
+    
     getMyProjects(userId) {
     	let ref = this.rootRef.child('users/'+userId+'/my-projects');
     	return this._$firebaseArray(ref);
@@ -165,14 +165,12 @@ class FireService {
     	return this._$firebaseArray(ref);
 	}
 
-	addCard(cards, data, userId, managerId, projectId) {
+	addCard(cards, data, managerId, projectId) {
 		data.id = Math.random()*1000000^0;
 		data.priority = 2;
 		let self = this;
 		return cards.$add(data).then( rootRef => {
 				return self.rootRef.child('users').update({
-            [userId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/title']: data.title,
-    		[userId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/priority']: data.priority,
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/title']: data.title,
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/priority']: data.priority,
     		}); 
