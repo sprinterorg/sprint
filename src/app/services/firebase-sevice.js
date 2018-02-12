@@ -42,11 +42,9 @@ class FireService {
     }
 
     uploadAvatar(file){
-        let bla = Math.random()*1000000^0;
-        console.log('img/'+bla+file.name);
-       let ref = this.storageRef.child('img/'+Math.random()*1000000^0+file.name);
-       
-              return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
+        let key = Math.random()*1000000^0;
+        let ref = this.storageRef.child('img/'+key+file.name);
+        return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
     }
 
     getMyProjects(userId) {
