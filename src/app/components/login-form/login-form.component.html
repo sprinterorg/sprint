@@ -1,0 +1,37 @@
+<form class="login_form" ng-submit="loginController.clickHanler()" name="login_form" novalidate>
+    {{login_form.email.$valid}}
+    <div class="form__item">
+        <input id="email_input" type="email" ng-model="loginController.entryEmail" class="form__item-field" name="email" required>
+        <label for="email_input" class="control-label">e-mail</label>
+        <span></span>
+    </div>
+
+    <div class="form__item">
+        <input id="password_input" type="password" ng-model="loginController.entryPassword" name="password" required class="form__item-field">
+        <label for="password_input" class="control-label">password</label>
+        <span></span>
+    </div>
+
+    <div ng-show="loginController.mode === 'signUp'" class="form__item">
+        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword" autocomplete="off" class="form__item-field" name="repeat_password" required>
+        <label for="repeat_password_input" class="control-label">repeat password</label>
+        <span></span>
+    </div>
+
+    <button class="button">{{loginController.showButtonName()}}</button>
+
+    <div class="text" ng-show="loginController.mode === 'logIn'">
+        Don't have an account?
+        <span> 
+            Go to
+            <a ng-click="loginController.changeModeToSignUp()">Sign up</a>
+        </span>
+    </div>
+    <div class="text" ng-show="loginController.mode === 'signUp'">
+        Already have an account?<br> 
+        <span>
+            Go to
+            <a ng-click="loginController.changeModeToLogIn()">Log in</a>
+        </span>
+    </div>
+</form>

@@ -1,13 +1,14 @@
 export default class loginFormController {
     /*@ngInject*/
-    constructor(firebaseAuthService, fireBase, supportService, $state) {
+    constructor(firebaseAuthService, fireBase, supportService, $state, $scope) {
         this._firebaseAuthService = firebaseAuthService;
         this._fireBase = fireBase;
         this._supportService = supportService;
-        this.entryEmail = '';
+        this.entryEmail = "";
         this.entryPassword = '';
         this.entryRepeatPassword = '';
         this._$state = $state;
+        console.log($scope);
     }
 
     changeModeToLogIn() {
@@ -57,7 +58,7 @@ export default class loginFormController {
                 notify: false,
                 reload: false
             });
-        });       
+        }); 
     }
 
     clickHanler() {

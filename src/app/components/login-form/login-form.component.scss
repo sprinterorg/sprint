@@ -1,0 +1,211 @@
+.login_form {
+  background: #FFFFFF;
+  padding: 30px 30px 30px 30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  a{
+    color:#3498DB;
+    cursor:pointer;
+  }
+
+  div{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .text{
+    font-size:2rem;
+  }
+  .button{
+    margin: 3vh 0;
+  }
+  .form__item {
+    margin-top: 2.5vh;
+    padding-top: 1.5vh;
+    position: relative;
+  }
+  .form__item .form__item-field,
+  .form__description .form__item-field,
+  .form__item-field ~ label {
+    font-size: 2.2rem;
+  }
+  .form__item-field:focus ~ label,
+  .form__item-field:valid ~ label,
+  .form__item-field ~ label.form__error {
+    font-size: 1.5rem;
+  }
+  .form__item-field ~ label {
+    position: absolute;
+    top: 4vh;
+    left: 5px;
+    transition: top .3s linear, left .3s linear, color .3s linear, font-size .3s linear;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .form__item-field:focus ~ label,
+  .form__item-field:valid ~ label {
+    top: -0.5vh;
+    left: 0;
+    color: rgba(0, 0, 0, 1);
+  }
+  .form__item-field ~ label.form__error {
+    color: red;
+  }
+  .form__item .form__item-field {
+    padding:0 3px;
+    border: none;
+    height: 6vh;
+    outline: 0;
+    outline-offset: 0;
+    box-shadow: none;
+  }
+  .form__item-field ~ span {
+    display: block;
+    height: 2px;
+    background: rgba(0, 0, 0, .2);
+    width:100%;
+  }
+  .form__item-field ~ span:after {
+    content: '';
+    display: block;
+    bottom: 0;
+    background: #000000;
+    width: 0;
+    height: 2px;
+    transition: width .3s linear;
+  }
+  .form__item-field:focus ~ span:after {
+    width: 100%;
+  }
+  .form__contacts {
+    display: flex;
+    justify-content: space-between;
+  }
+  .form__contacts .form__item {
+    width: 45%;
+  }
+  .form__item .form__item-field,
+  .form__contacts .form__item-field,
+  .form__contacts .form__item-field ~ span,
+  .form__contacts .form__item-field ~ label {
+    width: 30vw;
+  }
+  .form__description {
+    position: relative;
+    margin-top: 7vh;
+  }
+  .form__description .form__item-field {
+    padding: 3.5vh 1vw;
+    width: 100%;
+    height: 20vh;
+    border: 2px solid rgba(0, 0, 0, .2);
+    resize: none;
+    border-bottom: none;
+    outline: 0;
+    -webkit-appearance: none;
+    outline-offset: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .form__description .form__item-field ~ label {
+    left: 1vw;
+  }
+  .form__description .form__item-field:focus ~ label,
+  .form__description .form__item-field:valid ~ label {
+    top: 1.5vh;
+    left: 1vw;
+  }
+
+  .form-appearing-enter {
+    max-height: 0;
+    transform: scaleY(0) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+
+  .form-appearing-enter.form-appearing-enter-active {
+    max-height: 1000px;
+    transform: scaleY(1) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+    transition: max-height .2s linear, opacity .5s ease-in, transform .5s linear;
+  }
+  .form-appearing-leave {
+    max-height: 1000px;
+    transform: scaleY(1) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+  .button {
+    display: flex;
+    justify-content: space-around;
+    width: 30vw;
+    height: 10vh;
+    border: 2.5px solid #000000;
+    border-radius: 25px;
+    background: transparent;
+    color: #000000;
+    font-size: 4.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    outline: 0;
+    outline-offset: 0;
+    transition: background-color .2s, color .2s, font-size .2s;
+  }
+  .button:hover {
+    background: #000000;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 5rem;
+  }
+  .form-appearing-leave.form-appearing-leave-active {
+    max-height: 0;
+    transform: scaleY(0) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 0;
+    transition: all .5s linear;
+  }
+  .form__buttons {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .form__buttons .button {
+    width: 47%;
+    height: 7vh;
+    font-size: 4rem;
+    border-width: 2px;
+    font-weight: normal;
+  }
+  .form__buttons .button:hover {
+    font-size: 4.5rem;
+  }
+  .form__buttons .button--form-send {
+    margin-left: 6%;
+    background: #000000;
+    color: #ffffff;
+  }
+  .form__buttons .button--disabled,
+  .form__buttons .button--disabled:hover {
+    font-size: 4rem;
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+  .button,
+  .form__buttons .button {
+    font-size: 2rem;
+    height: 6vh;
+  }
+  .button:hover,
+  .form__buttons .button:hover {
+    font-size: 2.2rem;
+  }
+  .form__buttons .button:disabled:hover {
+    font-size: 2rem;
+  }
+}

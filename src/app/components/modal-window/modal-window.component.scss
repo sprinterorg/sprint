@@ -25,9 +25,23 @@
 }
 
 .modal_close {
+  height:50px;
+  width:50px;
+  font-size:4rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50px;
   z-index: 4;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 3vh;
+  right: 3vw;
   cursor: pointer;
+  color:#FFFFFF;
+  opacity:0.4;
+  transition:opacity 0.4s;
+}
+
+.modal_close:hover{
+  opacity:0.8;
 }
