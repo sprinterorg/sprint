@@ -4,18 +4,27 @@
         [<a ng-click="loginController.changeModeToSignUp()">Sign up</a>]
     </nav>
 
-    <label for="email_input">E-MAIL</label>
-    <input id="email_input" type="email" ng-model="loginController.entryEmail" autocomplete="on" name="email">
+    <div class="group">
+        <input id="email_input" type="text" ng-model="loginController.entryEmail" autocomplete="off" name="email"
+               required>
+        <span class="bar"></span>
+        <label for="email_input">e-mail</label>
+    </div>
 
-    <label for="password_input">PASSWORD</label>
-    <input id="password_input" type="password" ng-model="loginController.entryPassword" autocomplete="on"
-           name="password">
+    <div class="group">
+        <input id="password_input" type="password" ng-model="loginController.entryPassword" autocomplete="off"
+               name="password" required>
+        <span class="bar"></span>
+        <label for="password_input">password</label>
+    </div>
 
-    <div ng-if="loginController.mode === 'signUp'">
-        <label for="repeat_password_input">REPEAT PASSWORD</label>
+    <div ng-if="loginController.mode === 'signUp'" class="group">
         <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword"
                autocomplete="off"
-               name="repeat_password">
+               name="repeat_password" required>
+        <span class="bar"></span>
+        <label for="repeat_password_input">repeat password</label>
+
     </div>
     <button>{{loginController.showButtonName()}}</button>
 </form>
