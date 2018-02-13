@@ -79,12 +79,13 @@ class FireService {
         projectData.currentSprint.background = '';
         let self = this;
     	return projects.$add(projectData).then( rootRef => {
-    		return self.rootRef.update({
+    		self.rootRef.update({
     		['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/projectName']: projectData.currentSprint.projectName,
             ['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/background'] : projectData.currentSprint.background,
             ['users/'+projectData.currentSprint.managerId+'/my-projects/'+rootRef.key+'/managerId'] : projectData.currentSprint.managerId,
             ['projects/'+rootRef.key+'/currentSprint/users/'+projectData.currentSprint.managerId]: managerData
     		});
+            return rootRef;
     	});
     }
 
@@ -167,14 +168,13 @@ class FireService {
 	}
 
 	addCard(cards, data, managerId, projectId) {
-		data.id = Math.random()*1000000^0;
-		data.priority = 2;
 		let self = this;
-		return cards.$add(data).then( rootRef => {
-				return self.rootRef.child('users').update({
+	    return cards.$add(data).then( rootRef => {
+			self.rootRef.child('users').update({
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/title']: data.title,
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/priority']: data.priority,
-    		}); 
+    		});
+            return rootRef;
 		});
 	}
 
@@ -206,6 +206,12 @@ class FireService {
     getTaskExecutors(projectId, taskId) {
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId+'/executors');
         return this._$firebaseArray(ref);
+    }
+
+    addToHistory(projectId, taskId, taskData) {
+        let ref = this.rootRef.child('projects/'+projectId+'/history').update({
+            [taskId] : taskData
+        })
     }
 }
 

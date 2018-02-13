@@ -17,13 +17,13 @@ export default class sprintController {
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
             return false;
-        }
+        };
 
         $scope.onUserDrop = (item, card)=>{
             console.log('user drop', item, card);
             this._fireBase.addUserToCard(card.$id, this.projectId, item.username);
             return false;
-        }
+        };
 
         $scope.listDrop = (list, index, lists)=> {
             console.log('cards', this.cards)
@@ -39,7 +39,7 @@ export default class sprintController {
             }
             this._fireBase.changeListPosition(this.projectId, list.$id, index)
             return false;
-        }
+        };
 
     }
 
@@ -74,14 +74,22 @@ export default class sprintController {
     }
 
     addCard(listId) {
+        let self = this;
         var temp = this.cardName[listId];
         this.cardName[listId] = '';
-        this._fireBase.addCard(this.cards, {title: temp, list_id: listId}, this.currentSprint.managerId, this.projectId).then( rootRef  => {
-       
+        let cardData = {
+            title: temp, 
+            list_id: listId,
+            id: Math.random()*1000000^0,
+            priority: 2
+        };
+        if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber; 
+        this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then( rootRef  => {
+            if (listId !== 1)
+                self._fireBase.addToHistory(self.projectId, rootRef.key, cardData);
         });
-    };
+    }
     showFullCard(card){
-        console.log(card);
         this.isModalOpen = true;
         this.title = card.title;
         this.cardSuperId = card.$id;
