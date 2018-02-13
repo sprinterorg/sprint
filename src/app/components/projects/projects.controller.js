@@ -18,7 +18,7 @@ export default class projectsController {
             username: this.manager.username,
             email: this.manager.email,
             avatar: this.manager.avatar
-        }).then( rootRef => {
+        }).then( rootRef => { rootRef.key
             self.projectName = '';
             self.duration = '';
         });
