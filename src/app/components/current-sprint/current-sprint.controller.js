@@ -128,7 +128,6 @@ export default class sprintController {
                     sprintStart: item.sprintStart,
                     sprintEnd: this.currentSprint.sprintNumber
                 };
-                console.log(item)
                 if(item.executors) {
                     let keyArr = Object.keys(item.executors);
                     for (let key of keyArr)
@@ -138,7 +137,7 @@ export default class sprintController {
         }
         this._fireBase.addClosedToHistory(this.projectId, this.currentSprint.sprintNumber, tempObj);
         this._fireBase.deleteClosedTasks(this.projectId, Object.keys(tempObj), users);
-
+        this._fireBase.increaseSprintNumber(this.projectId, this.currentSprint.sprintNumber);
     }
 }
 

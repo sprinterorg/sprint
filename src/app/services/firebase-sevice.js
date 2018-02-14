@@ -237,7 +237,8 @@ class FireService {
 
     increaseSprintNumber(projectId, currentSprintNumber) {
         this.rootRef.child('projects/'+projectId+'/currentSprint').update({
-            'sprintNumber' : currentSprintNumber++
+            'sprintNumber' : ++currentSprintNumber
+        })
     }
 }
 export default FireService;
