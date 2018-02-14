@@ -22,9 +22,7 @@ class FireService {
     }
 
     getUserPromise(userId) {
-            return this.rootRef.child('users/'+userId).once('value').then(function(snapshot) {
-            return snapshot.val();
-        });
+            return this.rootRef.child('users/'+userId).once('value').then(snapshot => snapshot.val());
     }
 
     getAllUsers() {
