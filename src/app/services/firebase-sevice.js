@@ -212,12 +212,38 @@ class FireService {
         return this._$firebaseArray(ref);
     }
 
-    addToHistory(projectId, taskId, taskData) {
-        let ref = this.rootRef.child('projects/'+projectId+'/history').update({
+    addToHistory(projectId, sprintNum, taskId, taskData) {
+        this.rootRef.child('projects/'+projectId+'/history/'+sprintNum).update({
             [taskId] : taskData
         })
     }
-}
+    removeFromHistory(projectId, sprintNum, taskId) {
+        this.rootRef.child('projects/'+projectId+'/history/'+sprintNum).child(taskId).remove();
+    }
 
+    addClosedToHistory(projectId, sprintNum, cards) {
+        let cardsArr = Object.keys(cards)
+        cardsArr.forEach(card => {
+            this.rootRef.child('projects/'+projectId+'/history/'+sprintNum).update({
+            [card] : cards[card]
+            });
+        });
+    }
+    deleteClosedTasks(projectId, tasks, users) {
+        let self = this;
+        tasks.map(taskId => {this.rootRef.child('projects/'+projectId+'/cards').child(taskId).remove().then(rootRef => {
+            users.map(userId => {
+                self.rootRef.child('users/'+userId+'/my-projects/'+projectId+'/myTasks').child(taskId).remove();
+            });
+        })
+    
+    })}
+
+    increaseSprintNumber(projectId, currentSprintNumber) {
+        this.rootRef.child('projects/'+projectId+'/currentSprint').update({
+            'sprintNumber' : ++currentSprintNumber
+        })
+    }
+}
 export default FireService;
 

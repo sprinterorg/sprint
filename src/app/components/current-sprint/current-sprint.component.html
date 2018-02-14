@@ -1,4 +1,6 @@
 <section class="lists-container">
+	<h2>{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}</h2>
+	<button ng-click="SprintCtrl.closeSprint()">Close current sprint</button>
 	<div class="lists-container__wrapper"
 		 dnd-allowed-types="['container']"
 		 dnd-list
