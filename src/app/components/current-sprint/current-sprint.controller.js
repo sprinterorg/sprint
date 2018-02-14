@@ -16,6 +16,19 @@ export default class sprintController {
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
+            if(!card.sprintStart && list!==1){
+                let cardData = {
+                    title: card.title, 
+                    list_id: card.list_id,
+                    id: card.id,
+                    priority: card.priority,
+                    sprintStart: this.currentSprint.sprintNumber
+                };
+                this._fireBase.addToHistory(this.projectId, this.currentSprint.sprintNumber, card.$id, cardData);
+            }
+            if (list === 1) {
+                this._fireBase.removeFromHistory(this.projectId, card.sprintStart, card.$id);
+            }
             return false;
         };
 
@@ -86,7 +99,7 @@ export default class sprintController {
         if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber; 
         this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then( rootRef  => {
             if (listId !== 1)
-                self._fireBase.addToHistory(self.projectId, rootRef.key, cardData);
+                self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
         });
     }
     showFullCard(card){
@@ -100,6 +113,32 @@ export default class sprintController {
     }
     closeFullCard(){
         this.isModalOpen = false;
+    }
+
+    closeSprint() {
+        let users = [this.currentSprint.managerId];
+        let tempObj = {};
+        for (let item of this.cards) {
+            if (item.list_id === 3)
+                tempObj[item.$id] = {
+                    title: item.title, 
+                    list_id: item.list_id,
+                    id: item.id,
+                    priority: item.priority,
+                    sprintStart: item.sprintStart,
+                    sprintEnd: this.currentSprint.sprintNumber
+                };
+                console.log(item)
+                if(item.executors) {
+                    let keyArr = Object.keys(item.executors);
+                    for (let key of keyArr)
+                        users.push(key);
+                }
+
+        }
+        this._fireBase.addClosedToHistory(this.projectId, this.currentSprint.sprintNumber, tempObj);
+        this._fireBase.deleteClosedTasks(this.projectId, Object.keys(tempObj), users);
+
     }
 }
 
