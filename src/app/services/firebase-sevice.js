@@ -21,6 +21,12 @@ class FireService {
     	return this._$firebaseObject(ref);
     }
 
+    getUserPromise(userId) {
+            return this.rootRef.child('users/'+userId).once('value').then(function(snapshot) {
+            return snapshot.val();
+        });
+    }
+
     getAllUsers() {
         let ref = this.rootRef.child('users');
         return this._$firebaseArray(ref);
