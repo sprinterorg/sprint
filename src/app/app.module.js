@@ -19,6 +19,7 @@ import './components/profile/profile.component.scss';
 import './components/project-settings/project-settings.component.scss';
 import './components/task/task.component.scss';
 import './components/main-menu/main-menu.component.scss';
+import './components/spinner/spinner.component.scss';
 
 
 
