@@ -1,7 +1,10 @@
 class SupportService {
     /*@ngInject*/
-    constructor() {
+    constructor(fireBase, spinnerService, $rootScope) {
       this.userId = this.getCookie('user') || '';
+        this._fireBase = fireBase;
+        this._spinnerService = spinnerService;
+        this._$rootScope = $rootScope;
     }
 
     setUser(userId) {
@@ -51,6 +54,22 @@ class SupportService {
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+    checkLoadApp (userId) {
+        let self = this;
+        self._$rootScope.$broadcast('hideApp');
+        this._fireBase.getUserPromise(this.userId || userId).then(data => {
+            let img = new Image();
+            img.onload = () => this.deactivate();
+            img.onerror = () => this.deactivate();
+            img.src = data.avatar;
+        });
+    }
+    deactivate () {
+        let self = this;
+        self._$rootScope.$broadcast('appLoaded');
+        self._spinnerService.deactivate();
+        self._$rootScope.$apply();
+    }
 
 }
 

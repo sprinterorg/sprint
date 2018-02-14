@@ -1,22 +1,35 @@
 export default class appController {
     /*@ngInject*/
-    constructor($location,  supportService, $rootScope, $state) {
+    constructor($location,  supportService, $scope, $rootScope, $state, spinnerService, fireBase) {
         this._supportService = supportService;
+        this._fireBase = fireBase;
+        this._spinnerService = spinnerService;
         this._location = $location;
         this.showModalWindow = false;
         this.showSearch = false;
         this.hide = this.toHideModalWindow.bind(this);
         this.hideSearch = this.toHideSearch.bind(this);
         this._$rootScope = $rootScope;
+        this._scope = $scope;
         this._$state = $state;
         this.mode = 'logIn';
+        this.isLoaded = false;
 
+        this._$rootScope.$on('hideApp', () => {
+            this.isLoaded = false;
+        });
 
-        if(!supportService.userId) {
+        if (!supportService.userId) {
             this._$state.go('landing');
+            spinnerService.deactivate();
+            this.isLoaded = true;
+        } else {
+            this._supportService.checkLoadApp();
+            this._$rootScope.$on('appLoaded', () => {
+                this.isLoaded = true;
+            });
         }
     }
-
     toShowModalWindow(mode) {
         this.showModalWindow = true;
         this.mode = mode;
@@ -35,4 +48,5 @@ export default class appController {
     toHideSearch() {
         this.showSearch = false;
     }
+
 }

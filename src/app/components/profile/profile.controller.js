@@ -3,13 +3,17 @@ import './profile.component.scss';
 
 export default class profileController {
     /*@ngInject*/
-    constructor(fireBase, supportService, $scope) {
+    constructor(fireBase, supportService, $scope, $rootScope, spinnerService) {
         this.userId = supportService.getUserId();
         this._fireBase = fireBase;
         this.user = fireBase.getUser(this.userId);
         this.projects = fireBase.getProjects();
         this.visible = true;
         this.scope = $scope;
+        this._$rootScope = $rootScope;
+        this._spinner = spinnerService;
+        this._supportService = supportService;
+
     }
 
     updateUser() {
@@ -30,6 +34,7 @@ export default class profileController {
 
     uploadAvatar(file) {
         let self = this;
+        self._spinner.activate();
         if (file) {
             let exp = /\/(jpg|jpeg|tiff|png)$/i;
             let correctFile = exp.test(file.type);
@@ -43,6 +48,7 @@ export default class profileController {
                 console.log('file format incorrect');
             }
         }
+        self._supportService.checkLoadApp();
     }
 
 }
