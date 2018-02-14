@@ -5,7 +5,7 @@
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
+  width:calc(30vw + 60px);
   a{
     color:#3498DB;
     cursor:pointer;
@@ -18,22 +18,46 @@
     align-items:center;
   }
 
-  .text{
-    font-size:2rem;
+  .server-error-message{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background: rgba(255, 0, 0, 0.1)!important;
+    color: red!important;
+    margin:10px 0; 
+    border-radius:3px;
+    max-width:100%;
   }
+
+  .text{
+    font-size: 1.6rem;
+  }
+
   .button{
     margin: 3vh 0;
   }
+
   .form__item {
     margin-top: 2.5vh;
     padding-top: 1.5vh;
     position: relative;
   }
+
+  .invalid__item-field{
+    background: rgba(255, 0, 0, 0.1)!important;
+  }
+
+  .invalid__label{
+    color: red!important;
+  }
+
   .form__item .form__item-field,
   .form__description .form__item-field,
   .form__item-field ~ label {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
+  /*tuta ne rabotayet valid*/
   .form__item-field:focus ~ label,
   .form__item-field:valid ~ label,
   .form__item-field ~ label.form__error {
@@ -41,13 +65,13 @@
   }
   .form__item-field ~ label {
     position: absolute;
-    top: 4vh;
+    top: 3vh;
     left: 5px;
     transition: top .3s linear, left .3s linear, color .3s linear, font-size .3s linear;
     color: rgba(0, 0, 0, 0.5);
   }
   .form__item-field:focus ~ label,
-  .form__item-field:valid ~ label {
+   {
     top: -0.5vh;
     left: 0;
     color: rgba(0, 0, 0, 1);
@@ -81,43 +105,11 @@
   .form__item-field:focus ~ span:after {
     width: 100%;
   }
-  .form__contacts {
-    display: flex;
-    justify-content: space-between;
-  }
-  .form__contacts .form__item {
-    width: 45%;
-  }
   .form__item .form__item-field,
   .form__contacts .form__item-field,
   .form__contacts .form__item-field ~ span,
   .form__contacts .form__item-field ~ label {
     width: 30vw;
-  }
-  .form__description {
-    position: relative;
-    margin-top: 7vh;
-  }
-  .form__description .form__item-field {
-    padding: 3.5vh 1vw;
-    width: 100%;
-    height: 20vh;
-    border: 2px solid rgba(0, 0, 0, .2);
-    resize: none;
-    border-bottom: none;
-    outline: 0;
-    -webkit-appearance: none;
-    outline-offset: 0;
-    box-shadow: none;
-    border-radius: 0;
-  }
-  .form__description .form__item-field ~ label {
-    left: 1vw;
-  }
-  .form__description .form__item-field:focus ~ label,
-  .form__description .form__item-field:valid ~ label {
-    top: 1.5vh;
-    left: 1vw;
   }
 
   .form-appearing-enter {
@@ -149,7 +141,7 @@
     border-radius: 25px;
     background: transparent;
     color: #000000;
-    font-size: 4.5rem;
+    font-size: 4rem;
     font-weight: bold;
     text-transform: uppercase;
     outline: 0;
@@ -160,7 +152,7 @@
     background: #000000;
     color: #ffffff;
     cursor: pointer;
-    font-size: 5rem;
+    font-size: 4.5rem;
   }
   .form-appearing-leave.form-appearing-leave-active {
     max-height: 0;
@@ -198,12 +190,12 @@
   }
   .button,
   .form__buttons .button {
-    font-size: 2rem;
-    height: 6vh;
+    font-size: 1.6rem;
+    height: 4.5vh;
   }
   .button:hover,
   .form__buttons .button:hover {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .form__buttons .button:disabled:hover {
     font-size: 2rem;

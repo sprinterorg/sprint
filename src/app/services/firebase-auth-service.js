@@ -16,7 +16,6 @@ class firebaseAuthService {
 
     logOut() {
         return firebase.auth().signOut();
-            
     }
 
     verifyAccount(){
