@@ -23,6 +23,7 @@ export default class appController {
             this._$state.go('landing');
             spinnerService.deactivate();
             this.isLoaded = true;
+            this._scope.$apply();
         } else {
             this._supportService.checkLoadApp();
             this._$rootScope.$on('appLoaded', () => {
@@ -36,6 +37,7 @@ export default class appController {
     }
 
     toHideModalWindow(booleanReload) {
+        this._spinnerService.deactivate();
         this.showModalWindow = false;
         if(booleanReload)
         	this._$rootScope.$apply();
