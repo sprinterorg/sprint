@@ -1,6 +1,6 @@
 export default class spinnerSevice{
     /*@ngInject*/
-     constructor($rootScope) {
+     constructor() {
          this.isActive = true;
     }
 
@@ -13,7 +13,6 @@ export default class spinnerSevice{
     }
 
     deactivate(){
-        console.log('deactivate');
         this.isActive = false;
     }
 
