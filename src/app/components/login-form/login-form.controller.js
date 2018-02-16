@@ -1,10 +1,11 @@
 export default class loginFormController {
     /*@ngInject*/
-    constructor(firebaseAuthService, fireBase, supportService, $state) {
+    constructor(firebaseAuthService, fireBase, supportService, $state, $rootScope) {
         this._firebaseAuthService = firebaseAuthService;
         this._fireBase = fireBase;
         this._supportService = supportService;
         this._$state = $state;
+        this._$rootScope = $rootScope;
 
         this.entryEmail = '';
         this.entryPassword = '';
@@ -14,9 +15,9 @@ export default class loginFormController {
         this.entryPasswordLabel = 'password';
         this.entryRepeatPasswordLabel = 'repeat password';
 
-        this.entryEmailValid = null;
-        this.entryPasswordValid = null;
-        this.entryRepeatPasswordValid = null;
+        this.entryEmailValid = true;
+        this.entryPasswordValid = true;
+        this.entryRepeatPasswordValid = true;
 
         this.FormIsValid = false;
 
@@ -48,10 +49,12 @@ export default class loginFormController {
 
     changeModeToLogIn() {
         this.mode = 'logIn';
+        this.entryRepeatPasswordValid = true;
     }
 
     changeModeToSignUp() {
         this.mode = 'signUp';
+        this.entryRepeatPasswordValid = true;
     }
 
     signUp() {
@@ -76,6 +79,7 @@ export default class loginFormController {
             });
         }, error => {
             self.serverResponseError = error.message;
+            self._$rootScope.$apply();
         });
     }
 
@@ -96,6 +100,7 @@ export default class loginFormController {
             });
         }, error => {
             self.serverResponseError = error.message;
+            self._$rootScope.$apply();
         }); 
     }
     clickHanler() {

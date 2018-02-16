@@ -6,6 +6,7 @@
   justify-content:center;
   align-items:center;
   width:calc(30vw + 60px);
+
   a{
     color:#3498DB;
     cursor:pointer;
@@ -71,13 +72,11 @@
     color: rgba(0, 0, 0, 0.5);
   }
   .form__item-field:focus ~ label,
+  .form__item-field:valid ~ label
    {
     top: -0.5vh;
     left: 0;
     color: rgba(0, 0, 0, 1);
-  }
-  .form__item-field ~ label.form__error {
-    color: red;
   }
   .form__item .form__item-field {
     padding:0 3px;
@@ -112,26 +111,6 @@
     width: 30vw;
   }
 
-  .form-appearing-enter {
-    max-height: 0;
-    transform: scaleY(0) translate3d(0, 0, 0);
-    transform-origin: 0 0;
-    opacity: 0;
-  }
-
-  .form-appearing-enter.form-appearing-enter-active {
-    max-height: 1000px;
-    transform: scaleY(1) translate3d(0, 0, 0);
-    transform-origin: 0 0;
-    opacity: 1;
-    transition: max-height .2s linear, opacity .5s ease-in, transform .5s linear;
-  }
-  .form-appearing-leave {
-    max-height: 1000px;
-    transform: scaleY(1) translate3d(0, 0, 0);
-    transform-origin: 0 0;
-    opacity: 1;
-  }
   .button {
     display: flex;
     justify-content: space-around;
@@ -153,13 +132,6 @@
     color: #ffffff;
     cursor: pointer;
     font-size: 4.5rem;
-  }
-  .form-appearing-leave.form-appearing-leave-active {
-    max-height: 0;
-    transform: scaleY(0) translate3d(0, 0, 0);
-    transform-origin: 0 0;
-    opacity: 0;
-    transition: all .5s linear;
   }
   .form__buttons {
     margin-top: 5vh;
