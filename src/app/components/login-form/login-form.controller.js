@@ -49,11 +49,13 @@ export default class loginFormController {
 
     changeModeToLogIn() {
         this.mode = 'logIn';
+        this.entryRepeatPassword = '';
         this.entryRepeatPasswordValid = true;
     }
 
     changeModeToSignUp() {
         this.mode = 'signUp';
+        this.entryRepeatPassword = '';
         this.entryRepeatPasswordValid = true;
     }
 
