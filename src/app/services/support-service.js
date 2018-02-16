@@ -58,10 +58,14 @@ class SupportService {
         let self = this;
         self._$rootScope.$broadcast('hideApp');
         this._fireBase.getUserPromise(this.userId || userId).then(data => {
+            if(data && data.avatar) {
             let img = new Image();
             img.onload = () => this.deactivate();
             img.onerror = () => this.deactivate();
             img.src = data.avatar;
+            } else {
+                this.deactivate();
+            }
         });
     }
     deactivate () {
