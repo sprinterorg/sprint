@@ -72,8 +72,7 @@
     color: rgba(0, 0, 0, 0.5);
   }
   .form__item-field:focus ~ label,
-  .form__item-field:valid ~ label
-   {
+  .form__item-field:valid ~ label {
     top: -0.5vh;
     left: 0;
     color: rgba(0, 0, 0, 1);
