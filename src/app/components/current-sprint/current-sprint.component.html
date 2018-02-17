@@ -1,5 +1,6 @@
 <section class="lists-container">
 	<h2>{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}</h2>
+	<a class="list-container__hystory" ui-sref="hystory({project_id: SprintCtrl.projectId})">Go to Hystory</a>
 	<button ng-click="SprintCtrl.closeSprint()">Close current sprint</button>
 	<div class="lists-container__wrapper"
 		 dnd-allowed-types="['container']"
