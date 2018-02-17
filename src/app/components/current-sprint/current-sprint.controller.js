@@ -2,7 +2,7 @@ export default class sprintController {
     /*@ngInject*/
     constructor($element, fireBase, $stateParams, $scope, supportService) {
         this.projectId = $stateParams.project_id;
-        this.currentSprint = fireBase.getSprint(this.projectId)
+        this.currentSprint = fireBase.getSprint(this.projectId);
         this.lists = fireBase.getSprintLists(this.projectId);
         this.cards = fireBase.getListCards(this.projectId);
         this.users = fireBase.getProjectUsers(this.projectId);
@@ -118,28 +118,42 @@ export default class sprintController {
     }
 
     closeSprint() {
-        let users = [this.currentSprint.managerId];
-        let tempObj = {};
+        let usersOfClosedTasks = [this.currentSprint.managerId];
+        let closedTasks = [];
+        let allTasks = {};
+        
         for (let item of this.cards) {
-            if (item.list_id === 3)
-                tempObj[item.$id] = {
+               if (item.list_id !== 1) {
+                allTasks[item.$id] = {
                     title: item.title, 
                     list_id: item.list_id,
                     id: item.id,
                     priority: item.priority,
-                    sprintStart: item.sprintStart,
-                    sprintEnd: this.currentSprint.sprintNumber
+                    sprintStart: item.sprintStart
                 };
-                if(item.executors) {
-                    let keyArr = Object.keys(item.executors);
-                    for (let key of keyArr)
-                        users.push(key);
+                if (item.list_id === 3) {
+                    allTasks[item.$id].sprintEnd = this.currentSprint.sprintNumber;
+                    closedTasks.push(item.$id);
+                    if(item.executors) {
+                        let keyArr = Object.keys(item.executors);
+                        for (let key of keyArr)
+                            usersOfClosedTasks.push(key);
+                    }
                 }
-
+            }
         }
-        this._fireBase.addClosedToHistory(this.projectId, this.currentSprint.sprintNumber, tempObj);
-        this._fireBase.deleteClosedTasks(this.projectId, Object.keys(tempObj), users);
-        this._fireBase.increaseSprintNumber(this.projectId, this.currentSprint.sprintNumber);
+
+        let closedSprintData = {
+            projectName: this.currentSprint.projectName,
+            sprintStart: this.currentSprint.startTimeStamp,
+            sprintActualFinish: Date.now(),
+            tasksTotal: Object.keys(allTasks).length,
+            tasksClosed: closedTasks.length
+        };
+
+        this._fireBase.addClosedToHistory(this.projectId, this.currentSprint.sprintNumber, allTasks);
+        this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
+        this._fireBase.updateSprintData(this.projectId, this.currentSprint.sprintNumber, closedSprintData);
     }
 }
 

@@ -77,10 +77,14 @@ class SupportService {
         let self = this;
         self._$rootScope.$broadcast('hideApp');
         this._fireBase.getUserPromise(this.userId || userId).then(data => {
+            if(data && data.avatar) {
             let img = new Image();
             img.onload = () => this.deactivate();
             img.onerror = () => this.deactivate();
             img.src = data.avatar;
+            } else {
+                this.deactivate();
+            }
         });
     }
     deactivate () {
@@ -88,6 +92,17 @@ class SupportService {
         self._$rootScope.$broadcast('appLoaded');
         self._spinnerService.deactivate();
         self._$rootScope.$apply();
+    }
+
+    getFormattedDate(ms) {
+        let date = new Date(ms);
+        let dd = date.getDate();
+        if (dd < 10) dd = '0' + dd;
+        let mm = date.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+        let yy = date.getFullYear() % 100;
+        if (yy < 10) yy = '0' + yy;
+        return dd + '.' + mm + '.' + yy;
     }
 
 }

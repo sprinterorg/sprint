@@ -5,8 +5,8 @@
 		</div>
 		<input type="text" ng-model="MyProjectsCtrl.searchProjects" placeholder="Search project">
 	</div>
-	<ul>
-		<li ng-repeat="myProject in MyProjectsCtrl.myProjects | filter: {projectName: MyProjectsCtrl.searchProjects}" ng-click="MyProjectsCtrl.goToSprint(myProject.$id)">
+	<ul class="my-projects__list">
+		<li class="my-projects__item" ng-repeat="myProject in MyProjectsCtrl.myProjects | filter: {projectName: MyProjectsCtrl.searchProjects}" ng-click="MyProjectsCtrl.goToSprint(myProject.$id)">
 			<div class="my-projects__background">
 				<img src="{{myProject.background}}">
 			</div>
