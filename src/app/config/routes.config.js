@@ -4,6 +4,9 @@ import projectsTemplate from '../components/projects/projects.component.html';
 import SprintCtrl from '../components/current-sprint/current-sprint.controller';
 import currentSprintTemplate from '../components/current-sprint/current-sprint.component.html';
 
+import CardChildCtrl from '../components/current-sprint/card/card-child.controller';
+import cardChildTemplate from '../components/current-sprint/card/card-child.component.html';
+
 import ProfileCtrl from '../components/profile/profile.controller';
 import profileTemplate from '../components/profile/profile.component.html';
 
@@ -58,7 +61,14 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         template: currentSprintTemplate,
         controller: SprintCtrl,
         controllerAs: 'SprintCtrl'
-  });
+        })
+        .state('card-child-component', {
+            parent: 'current-sprint',
+            url: '/:card_id',
+            template: cardChildTemplate,
+            controller: SprintCtrl,
+            controllerAs: 'SprintCtrl',
+    });
     $stateProvider.state('parent-component', {
         url: '/parent',
         template: parentCtrlTemplate,

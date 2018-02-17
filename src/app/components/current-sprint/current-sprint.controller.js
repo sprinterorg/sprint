@@ -9,9 +9,19 @@ export default class sprintController {
         this._fireBase = fireBase;
         this._scope = $scope;
         this.userId = supportService.getUserId();
+        this.supportService = supportService;
         this.isModalOpen = false;
         this.element = $element;
         this.isShown = true;
+
+        this.title = 'dgdfgfgsdfdsfdsfdsfsdfd';
+        this.cardSuperId = null;
+        this.cardSimpleId = null;
+        this.cardListId = null;
+        this.superPriority = null;
+        this.priority = null;
+
+
 
 
         $scope.onDrop = (list, card)=>{
@@ -39,18 +49,18 @@ export default class sprintController {
         };
 
         $scope.listDrop = (list, index, lists)=> {
-            console.log('cards', this.cards)
+            index -=2 ;
             if(index < 2 || index > 99) return;
 
             for(let i=2; i<=lists.length-2; i++) {
-                if(i < index) {
+                if(i <= index) {
                     this._fireBase.changeListPosition(this.projectId, lists[i].$id, i)
                 }
-                else if(i >= index) {
-                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index+i)
+                else if(i > index) {
+                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index+i+10)
                 }
             }
-            this._fireBase.changeListPosition(this.projectId, list.$id, index)
+            this._fireBase.changeListPosition(this.projectId, list.$id, index+5);
             return false;
         };
 
@@ -110,6 +120,9 @@ export default class sprintController {
         this.cardListId = card.list_id;
         this.superPriority = card.$priority;
         this.priority = card.priority;
+
+        this.supportService.titleCard = card.title;
+
     }
     closeFullCard(){
         this.isModalOpen = false;

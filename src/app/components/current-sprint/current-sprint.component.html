@@ -30,6 +30,12 @@
 						dnd-effect-allowed="move">
 						{{card.title}}
 
+						<a ng-click="SprintCtrl.showFullCard(card)"
+							ui-sref="card-child-component({card_id:card.id})">
+							To component
+						</a>
+
+
 						<div class="card_user-for-card"
 							 dnd-list dnd-drop="onUserDrop(item, card)"
 							 dnd-allowed-types="['user']">
@@ -64,6 +70,8 @@
 			</div>
 		</div>
 	</div>
+	<a ui-sref="card-child-component">To child component</a>
+	<ui-view></ui-view>
 
 </section>
 
@@ -122,19 +130,4 @@
 
 
 
-<!--<section ng-class="{'card-content': SprintCtrl.isModalOpen, 'hide-content': !SprintCtrl.isModalOpen }" >-->
-	<!--<div ng-class="{'card-content__modal': SprintCtrl.isModalOpen}">-->
-		<!--<div class="card-content__modal__button-wrapper">-->
-			<!--<button ng-click="SprintCtrl.closeFullCard()">x</button>-->
-		<!--</div>-->
-		<!--<div class="card-content__modal__content-wrapper">-->
-			<!--<h2>{{SprintCtrl.title}}</h2>-->
-			<!--<p>{{SprintCtrl.cardSuperId}}</p>-->
-			<!--<p>{{SprintCtrl.cardSimpleId}}</p>-->
-			<!--<p>{{SprintCtrl.cardListId}}</p>-->
-			<!--<p>{{SprintCtrl.superPriority}}</p>-->
-			<!--<p>{{SprintCtrl.priority}}</p>-->
-		<!--</div>-->
-	<!--</div>-->
-<!--</section>-->
 

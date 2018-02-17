@@ -5,6 +5,23 @@ class SupportService {
         this._fireBase = fireBase;
         this._spinnerService = spinnerService;
         this._$rootScope = $rootScope;
+
+        this.isModalOpen = false;
+        this.title = null;
+        this.cardSuperId = null;
+        this.cardSimpleId = null;
+        this.cardListId = null;
+        this.superPriority = null;
+        this.priority = null;
+
+    }
+
+    get titleCard() {
+        return this.title;
+    }
+
+    set titleCard(title) {
+        this.title = title;
     }
 
     setUser(userId) {
