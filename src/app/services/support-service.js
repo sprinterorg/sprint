@@ -7,21 +7,23 @@ class SupportService {
         this._$rootScope = $rootScope;
 
         this.isModalOpen = false;
-        this.title = null;
-        this.cardSuperId = null;
-        this.cardSimpleId = null;
-        this.cardListId = null;
-        this.superPriority = null;
-        this.priority = null;
-
+        this.card = null;
     }
 
-    get titleCard() {
-        return this.title;
+    get isCardOpen() {
+        return this.isModalOpen;
     }
 
-    set titleCard(title) {
-        this.title = title;
+    set isCardOpen(flag) {
+        this.isModalOpen = flag;
+    }
+
+    get openCard() {
+        return this.card;
+    }
+
+    set openCard(card) {
+        this.card = card;
     }
 
     setUser(userId) {
