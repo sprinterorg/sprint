@@ -26,12 +26,12 @@
 			padding: 3px 25px 3px 3px;
 			font-size: 1.6rem;
 		}
-		& ul {
+		& .my-projects__list {
 			margin: 0;
 			padding: 0;
 			list-style: none;
 
-			& li {
+			& .my-projects__item {
 				margin-top: 20px;
 				position: relative;
 				display: block;
@@ -42,8 +42,8 @@
 	}
 
 .search-projects {
-	z-index: 11;
-	position: absolute;
+	z-index: 100;
+	position: fixed;
 	top: 35px;
 	left: 0;
 	background: #ffffff;
@@ -64,7 +64,7 @@
 			padding: 3px 25px 3px 3px;
 			font-size: 1.6rem;
 		}
-		& li {
+		& .my-projects__item {
 			margin-top: 10px;
 			position: relative;
 			height: 40px;
@@ -99,7 +99,7 @@
 	font-size: 1.4rem;
 }
 
-li:hover .my-projects__text {
+.my-projects__item:hover .my-projects__text {
 	opacity: .7;
 }
 

@@ -67,16 +67,6 @@ export default class HystoryController {
         return '';
     }
 
-   /* drowDiagramm(values) {
-        let circle = document.getElementById("pie");
-        let radius = parseInt(circle.getAttribute('r'), 10);
-        let circumference = 2 * radius * Math.PI;
-        let value = Number(values);
-        let percentValue = (value/ 100) * circumference;
-        circle.style.strokeDasharray = percentValue + " " + circumference;
-        circle.style.stroke = "hsl(0 ," + value + "%, 50%)";
-        return values;
-}*/
     getPersantage(data) {
         if(data)
             return data.tasksClosed/data.tasksTotal*100^0;

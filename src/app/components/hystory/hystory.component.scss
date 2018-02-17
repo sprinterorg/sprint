@@ -75,7 +75,8 @@
 
 .table__cell--task {
 	min-width: 200px;
-	font-size: 1.6rem;
+	max-width: 250px;
+	font-size: 1.7rem;
 	padding-left: 20px;
 	text-align: left;
 	border-left: none;
@@ -95,6 +96,7 @@
 	background: linear-gradient(rgba(255,0,0,.4), rgba(255,0,0,.1));
 }
 .table__cell-data {
+	text-align: left;
 	z-index: 10;
 	display: none;
 	position: absolute;
@@ -130,14 +132,65 @@
 		height: 15px;
 		background: #ffffff;
 	}
+	& h3{
+		font-weight: normal;
+		font-size: 1.5rem;
+		color: #444444;
+		margin: 0;
+		padding-bottom: 15px;
+		border-bottom: 1px solid #D1D1D1;
+	}
+
+	& table {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	& td {
+		font-size: 1.6rem;
+		text-transform: lowercase;
+		padding-right: 30px;
+
+		& .grey {
+			opacity: .6;
+		}
+	}
+	
 }
 
+.digramm-data {
+	display: flex;
+	justify-content: space-between;
+}
+
+.hystory-completion {
+	width: 50%;
+	& h4 {
+		font-size: 1.8rem;
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	
+	& td {
+		opacity: 1;
+		padding-right: 15px;
+	}
+
+	& .closed {
+		font-size: 3rem;
+		&--green {
+			color: #91EE7C;
+		}
+	}
+}
 
 .table__cell--head:hover .table__cell-data {
 	display: block;
 }
 
-#readout {
+.hystory-diagramm {
+	width: 40%;
+	flex-shrink: 0;
     position: relative;
   
 svg {
@@ -147,29 +200,38 @@ svg {
     border-radius: 50%;
     width: 100%;
     position: relative;
+    -webkit-box-shadow: -2px 1px 10px -1px rgba(0,0,0,.5);
+	-moz-box-shadow: -2px 1px 10px -1px rgba(0,0,0,.5);
+	box-shadow: -2px 1px 10px -1px rgba(0,0,0,.5);
 }
-#pie {
+.hystory-diagramm__cirle {
     fill: red;
     stroke: hsl(120, 73%, 75%);
     stroke-width: 50;
 }
-#pie {
+.hystory-diagramm__cirle {
   transition:stroke-dasharray 2s;
 }
  p { 
 	position: absolute;
 	color: #000000;
-	font-size: 7rem;
+	font-size: 3rem;
+	font-weight: bold;
 	text-align: center;
 	z-index: 10;
-	width: 175px;
-	height: 175px;
+	width: 85px;
+	height: 85px;
 	border-radius: 50%;
-	left: 65px;
-	top: -5px;
+	left: 18px;
+	top: -12px;
 	background: #ffffff;
-	padding-top: 45px;
+	padding-top: 25px;
 	box-sizing: border-box;
 }
 }
+
+.in-progress {
+	margin-top: 35px;
+}
+
 

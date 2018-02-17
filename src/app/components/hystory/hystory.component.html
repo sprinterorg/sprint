@@ -14,14 +14,38 @@
 	        			<td class="table__cell table__cell--head" ng-repeat="sprint in hystoryCtrl.hystory"><p>{{sprint.$id}}</p>
 	        			<div class="table__cell-data">
 	        				<h3>Srpint #{{sprint.$id}}</h3>
-	        				<p>{{hystoryCtrl.getDate(sprint.sprintData.sprintStart)}}</p>
-							<div id="readout" ng-if="sprint.sprintData">
-    							<svg viewBox="0 0 100 100">
-        							<circle r="25" cx="50" cy="50" id="pie" style="stroke-dasharray:{{hystoryCtrl.strokeDasharray(hystoryCtrl.getPersantage(sprint.sprintData))}}"/>
-    							</svg>
-    							<p>{{hystoryCtrl.getPersantage(sprint.sprintData)}}%</p>
+	        				<div class="full-data" ng-if="sprint.sprintData">
+		        				<table>
+		        					<tr>
+		        						<td>from:</td>
+		        						<td class="grey">{{hystoryCtrl.getDate(sprint.sprintData.sprintStart)}}</td>
+		        					</tr>
+		        						<td>to:</td>
+		        						<td class="grey">{{hystoryCtrl.getDate(sprint.sprintData.sprintActualFinish)}}</td>
+		        				</table>
+		        				<div class="digramm-data">
+									<div class="hystory-diagramm">
+		    							<svg viewBox="0 0 100 100">
+		        							<circle r="25" cx="50" cy="50" class="hystory-diagramm__cirle" style="stroke-dasharray:{{hystoryCtrl.strokeDasharray(hystoryCtrl.getPersantage(sprint.sprintData))}}"/>
+		    							</svg>
+		    							<p>{{hystoryCtrl.getPersantage(sprint.sprintData)}}%</p>
+									</div>
+									<div class="hystory-completion">
+										<h4>completeness</h4>
+										<table>
+											<tr>
+				        						<td>Total:</td>
+				        						<td>{{sprint.sprintData.tasksTotal}}</td>
+				        					</tr>
+				        					<tr>
+				        						<td  class="closed">closed:</td>
+				        						<td  class="closed closed--green">{{sprint.sprintData.tasksClosed}}</td>
+				        					</tr>
+				        				</table>
+									</div>
+								</div>
 							</div>
-							<p ng-if="!sprint.sprintData">Sprint in progress...</p>
+							<div class="in-progress" ng-if="!sprint.sprintData"><p>Sprint in progress...</p></div>
 	        			</div>
 	        			</td>
 	        			<td class="table__cell table__cell--last"></td>
