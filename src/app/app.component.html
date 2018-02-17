@@ -3,8 +3,8 @@
 </modal-window>
 <my-projects class="search-projects" ng-if="appController.showSearch && appController._supportService.userId" hide-func="appController.hideSearch"></my-projects>
 
-<div ng-show="appController.isLoaded">
-    <header  class="header">
+<div ng-show="appController.isLoaded" class="page-content">
+<header  class="header">
 <div class="header__wrapper">
 	<div class="header__search" >
 		<div class="search-icon" ng-click="appController.toShowSearch()" ng-if="appController._supportService.userId">
@@ -23,6 +23,8 @@
     </div>
 </div>
 </header>
+<div class="main-content">
 <ui-view></ui-view>
+</div>
 </div>
 

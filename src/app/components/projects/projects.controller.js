@@ -13,7 +13,8 @@ export default class projectsController {
         this._fireBase.addProject(this.projects, {currentSprint : { 
             projectName: this.projectName,
             managerId: this.userId,
-            duration: this.duration
+            duration: this.duration,
+            startTimeStamp: Date.now()
         }}, {
             username: this.manager.username,
             email: this.manager.email,

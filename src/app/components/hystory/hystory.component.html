@@ -1,0 +1,40 @@
+    <div class="hystory">
+    	<div class="hystory__header">
+    		<div class="hystory__header-wrapper">
+    		<h1 class="hystory__title">{{hystoryCtrl.hystory[0].sprintData.projectName}}</h1>
+    		<button class="hystory__header-button" ng-if="hystoryCtrl.hystory[0].$id != 1" ng-click="hystoryCtrl.showMoreHystory()">Show more</button>
+	        <button class="hystory__header-button" ng-if="hystoryCtrl.showItems > 5" ng-click="hystoryCtrl.showLessHystory()">Show less</button>
+    	</div>
+    	</div>
+    	<div class="hystory__wrapper">
+	        <table class="hystory__table table">
+	        	<thead class="table__head">
+	        		<tr class="table__row">
+	        			<td class="table__cell table__cell--head table__cell--task"></td>
+	        			<td class="table__cell table__cell--head" ng-repeat="sprint in hystoryCtrl.hystory"><p>{{sprint.$id}}</p>
+	        			<div class="table__cell-data">
+	        				<h3>Srpint #{{sprint.$id}}</h3>
+	        				<p>{{hystoryCtrl.getDate(sprint.sprintData.sprintStart)}}</p>
+							<div id="readout" ng-if="sprint.sprintData">
+    							<svg viewBox="0 0 100 100">
+        							<circle r="25" cx="50" cy="50" id="pie" style="stroke-dasharray:{{hystoryCtrl.strokeDasharray(hystoryCtrl.getPersantage(sprint.sprintData))}}"/>
+    							</svg>
+    							<p>{{hystoryCtrl.getPersantage(sprint.sprintData)}}%</p>
+							</div>
+							<p ng-if="!sprint.sprintData">Sprint in progress...</p>
+	        			</div>
+	        			</td>
+	        			<td class="table__cell table__cell--last"></td>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr class="table__row" ng-repeat="(key, value) in hystoryCtrl.getTasks()">
+	        			<td class="table__cell table__cell--task">{{key}}</td>
+	        			<td class="table__cell {{hystoryCtrl.cellStyle(value.sprintStart,value.sprintEnd,sprint.$id)}}" ng-repeat="sprint in hystoryCtrl.hystory"><img class="task-start" ng-if="hystoryCtrl.arrowStart(value.sprintStart,value.sprintEnd,sprint.$id)" src="arrow.png"><img class="task-end" ng-if="hystoryCtrl.arrowEnd(value.sprintStart,value.sprintEnd,sprint.$id)" src="arrow.png">{{hystoryCtrl.cellContent(value.sprintStart,value.sprintEnd,sprint.$id)}}</td>
+	        			<td class="table__cell table__cell--last"></td>
+	        		</tr>
+	        	</tbody>
+	        </table>
+    	</div>
+    </div>
+
