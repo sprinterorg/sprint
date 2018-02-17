@@ -23,7 +23,9 @@ export default class appController {
             this._$state.go('landing');
             spinnerService.deactivate();
             this.isLoaded = true;
-            this._scope.$apply();
+            this._$rootScope.$on('appLoaded', () => {
+                this.isLoaded = true;
+            });
         } else {
             this._supportService.checkLoadApp();
             this._$rootScope.$on('appLoaded', () => {
