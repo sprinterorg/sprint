@@ -1,12 +1,13 @@
 .login_form {
   background: #FFFFFF;
-  padding: 30px 30px 30px 30px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  width:calc(30vw + 60px);
-
+  padding: 20px 15px 15px 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  
   a{
     color:#3498DB;
     cursor:pointer;
@@ -28,7 +29,9 @@
     color: red!important;
     margin:10px 0; 
     border-radius:3px;
-    max-width:100%;
+    max-width:450px;
+    font-size:1.6rem;
+    width:380px;
   }
 
   .text{
@@ -36,12 +39,12 @@
   }
 
   .button{
-    margin: 3vh 0;
+    margin: 0 0 20px 0;
   }
 
   .form__item {
-    margin-top: 2.5vh;
-    padding-top: 1.5vh;
+    margin-top: 10px;
+    padding-top: 10px;
     position: relative;
   }
 
@@ -65,21 +68,21 @@
   }
   .form__item-field ~ label {
     position: absolute;
-    top: 3vh;
+    top: 20px;
     left: 5px;
     transition: top .3s linear, left .3s linear, color .3s linear, font-size .3s linear;
     color: rgba(0, 0, 0, 0.5);
   }
   .form__item-field:focus ~ label,
   .form__item-field:valid ~ label {
-    top: -1vh;
+    top: -10px;
     left: 5px;
     color: rgba(0, 0, 0, 1);
   }
   .form__item .form__item-field {
     padding:0 3px;
     border: none;
-    height: 6vh;
+    height: 40px;
     outline: 0;
     outline-offset: 0;
     box-shadow: none;
@@ -103,16 +106,42 @@
     width: 100%;
   }
   .form__item .form__item-field {
-    width: 30vw;
+    width: 380px;
   }
   .button{
     &--signup{
-      font-size:3vh;
-      width:30vw;
-      height:5vh;
+      font-size:2rem;
+      width: 380px;
+      height:40px;
     }
   }
 }
+@media screen and (max-width:450px){
+  .login_form {
+    width:320px;
+    .form__item .form__item-field {
+      width: 260px;
+      font-size:1.8rem;
+    }
+    .button{
+      width: 260px;
+      font-size:1.8rem;
+    }
+    .form__item-field ~ label {
+      font-size:1.8rem;
+    }
+    .form__item-field:focus ~ label,
+    .form__item-field:valid ~ label {
+      left: 3px;
+    }
+    .server-error-message{
+      font-size:1.6rem;
+      width:260px
+    }
+  }
+
+}
+/*
 @media screen and (max-width:800px){
   .login_form {
     width: calc(40vw + 60px);
@@ -200,3 +229,4 @@
     }
   }
 }
+*/

@@ -12,7 +12,7 @@
     </div>
 
     <div class="form__item">
-        <input id="password_input" type="password" ng-model="loginController.entryPassword" name="password" required ng-class="loginController.entryPasswordValid?'form__item-field':'form__item-field invalid__item-field'" ng-change="loginController.formValidation()">
+        <input id="password_input" type="password" ng-model="loginController.entryPassword" name="password"  ng-class="loginController.entryPasswordValid?'form__item-field':'form__item-field invalid__item-field'" ng-change="loginController.formValidation()" required>
         <label for="password_input" ng-class="loginController.entryPasswordValid?'control-label':'control-label invalid__label'">{{loginController.entryPasswordLabel}}</label>
         <span></span>
     </div>
