@@ -176,13 +176,9 @@ export default class sprintController {
         this._fireBase.updateSprintData(this.projectId, this.currentSprint.sprintNumber, closedSprintData);
     }
 
-<<<<<<< HEAD
-
-=======
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
     }
->>>>>>> develop
 }
 
 
