@@ -116,7 +116,15 @@ ul {
 	}
 }
 
-
+.link-button {
+	font-size: 1.4rem;
+	background: none;
+	border: none;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
+}
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
