@@ -1,3 +1,9 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Roboto;
+}
 .hide-content{
 	visibility: hidden;
 }
@@ -8,79 +14,11 @@
 }
 
 
-//
-//.card-content {
-//	position: absolute;
-//	z-index: 20;
-//	box-sizing: border-box;
-//	top: 0;
-//	left: 0;
-//	display: flex;
-//	justify-content: center;
-//	width: 100%;
-//	height: 100%;
-//	background: rgba(0, 0, 0, .5);
-//	transition: all 0.2s;
-//
-//	&__modal {
-//		animation: show 0.3s ease-in;
-//		margin-top: 120px;
-//		width: 300px;
-//		height: 300px;
-//		background: whitesmoke;
-//		border-radius: 5px;
-//		display: flex;
-//		flex-direction: column;
-//		&__button-wrapper {
-//			width: 100%;
-//			height: 30px;
-//			display: flex;
-//			justify-content: flex-end;
-//			button {
-//				display: flex;
-//				align-items: center;
-//				justify-content: center;
-//				width: 30px;
-//				height: 100%;
-//				background: #4584ff;
-//				border: none;
-//			}
-//		}
-//	}
-//}
 
 .lists-container {
 	position: relative;
-  	width: 100vw;
-	.project-users__wrapper{
-		width: 200px;
-		height: 60px;
-		background: none;
-		.dndDraggingSource{
-			display: flex !important;
-		}
-		&-user {
-			width: 60px;
-			height: 60px;
-			background: red;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			p{
-				font-size: 10px;
-			}
-		}
-	}
-	.backlog-show-button{
-		position: absolute;
-		left: -10px;
-		top: 10px;
-		display: flex;
-		transform: rotate(90deg);
-		transform-origin: left top 0;
-
-	}
+	width: 100vw;
+	background: #f7f7f7;
 	.lists-container__wrapper {
 		display: flex;
 		flex-direction: row;
@@ -88,86 +26,103 @@
 		align-items: flex-start;
 		position: relative;
 		margin-left: 30px;
-		.dndPlaceholder {
-			display: flex;
-			position: relative;
-			flex-shrink: 0;
-			flex-grow: 0;
-			width: 200px;
-			min-height: 80vh;
-			margin: 10px;
-			padding: 5px;
-			background-color: rgba(0,0,0, .05);
-		}
-		.list__wrapper{
-			transition: all 1s;
-		}
+
 		.list {
 			position: relative;
 			flex-shrink: 0;
 			flex-grow: 0;
-			width: 200px;
+			width: 240px;
 			min-height: 150px;
-			background-color: #ffffff;
+			background-color: #f7f7f7;
 			margin: 10px;
 			padding: 5px;
-
-			.dndPlaceholder {
+			border-radius: 3px;
+			border: 2px solid #ebebeb;
+			transition: all 1s;
+			&_list-container {
 				display: flex;
-				width: 100%;
-				min-height: 60px;
-				background-color: rgba(0,0,0, .05);
-				margin: 0;
-				padding: 0;
+				flex-direction: column;
+				//justify-content: space-between;
+				//height: 76vh;
 
-			}
-			.card__wrapper {
-				display: block;
-				width: 100%;
-				min-height: 50px;
-				padding: 0;
-				overflow-y: auto;
-				max-height: 70vh;
-				.card {
-					padding: 10px;
-					min-height: 50px;
-					margin-top: 5px;
-					margin-bottom: 5px;
+				&_header{
 					display: flex;
-					flex-direction: column;
-					h4 {
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
+					width: 100%;
+					height: 36px;
+					&__title{
+						flex-grow: 1.6;
+						color:  #000000;
+						font-size: 20px;/* Приближение из-за подстановки шрифтов */
+						font-weight: 700;
+						line-height: 18px;/* Приближение из-за подстановки шрифтов */
+						text-align: left;
+						padding-left: 10px;
 					}
-					.dndDragover{
-						.card_user-for-card_avatar{
-							display: none !important;
-						}
-					}
-					&_user-for-card{
-						display: flex;
-						justify-content: flex-end;
-						height: 50px;
-						width: 100%;
-						font-size: 8px;
-						&_avatar{
-							display: flex;
-							align-items: center;
-							justify-content: center;
-							height: 50px;
-							width: 50px;
-							border-radius: 50%;
-							background: red;
+					&__cards-count{
+						color:  #9d9d9d;
+						font-size: 12px;/* Приближение из-за подстановки шрифтов */
+						font-weight: 400;
+						line-height: 18px;/* Приближение из-за подстановки шрифтов */
+						text-align: left;
 
+					}
+					&__menu{
+						transform: rotate(90deg) scale(0.5);
+						margin-right: -10px;
+						&::after{
+							content: url("../../../more-button.png");
 						}
-						.dndPlaceholder{
-							display: flex;
-							align-items: center;
-							justify-content: center;
-							max-height: 50px;
-							max-width: 50px;
-							min-height: 50px;
-							min-width: 50px;
-							border-radius: 100%;
-							background: rgba(0,0,0, .5);
+					}
+
+				}
+				&_footer{
+					width: 100%;
+					min-height: 36px;
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+					align-items: center;
+					&__down{
+						width: 34px;
+						height: 34px;
+						margin: 0 10px;
+						transform: rotate(90deg) scale(0.8);
+						&::before {
+							content: url("../../../arrow-point.png");
+						}
+					}
+					&__top{
+						width: 34px;
+						height: 34px;
+						margin: 0 10px;
+						transform: rotate(-90deg) scale(0.8);
+						&::after {
+							content: url("../../../arrow-point.png");
+						}
+					}
+					&__add-card{
+						transform: scale(0.4);
+						&::after {
+							content: url("../../../plus.png");
+						}
+					}
+					&__form-wrapper {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 100%;
+						margin-top: -15px;
+						padding-bottom: 1px;
+						input{
+							width: 100%;
+							height: 26px;
+							border: none;
+							border-radius: 3px 0 0 3px;
+							padding: 0 10px 0 10px;
+							font-size: 16px;
 						}
 					}
 				}
@@ -175,25 +130,242 @@
 		}
 		.backlog{
 			transition: all 1s;
+			z-index: 10;
 			position: absolute;
-			left: -400px;
-			.list{
-				padding-left: 100px;
+			left: -240px;
+			margin-left: -30px;
+			//height: 78vh;
+			&__hide-button{
+				transform: rotate(180deg) scale(0.7);
+				&::before{
+					content: url("../../../arrow-point.png");
+				}
+			}
+		}
+		.backlog-show-button{
+			margin-left: -30px;
+			height: 78vh;
+			width: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 1s;
+			z-index: 20;
+			p{
+				transform: rotate(-90deg);
+				white-space: nowrap;
+			}
+			&__hide{
+				transition: all 1s;
+				margin-left: -80px;
 			}
 		}
 	}
+}
 
-	.dndDraggingSource{
-		display: none !important;
+
+.cards-list__wrapper {
+	display: block;
+	width: 100%;
+	min-height: 90px;
+	max-height: 70vh;
+	padding: 0;
+	overflow-y: hidden;
+	.card {
+		position: relative;
+		background: #ffffff;
+		display: flex;
+		flex-direction: row;
+		min-height: 80px;
+		margin: 0 3px 10px 3px;
+		padding: 7px 10px;
+		border-radius: 3px 0 0 3px;
+		&-priority {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 3px;
+			height: 100%;
+			background: #4584ff;
+		}
+		&_content-card {
+			width: 100%;
+			&__top,
+			&__bottom {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+			&__top {
+				&-title {
+					h4 {
+						color: #414141;
+						font-size: 18px;
+						font-weight: 700;
+						line-height: 18px;
+						text-align: left;
+						margin-bottom: 5px;
+					}
+					p {
+						color: #9d9d9d;
+						font-size: 14px;
+						font-weight: 400;
+						line-height: 18px;
+						text-align: left;
+					}
+				}
+				&-info {
+					p:first-child {
+						color: #9d9d9d;
+						font-size: 12px;
+						font-weight: 400;
+						line-height: 18px;
+						text-align: left;
+					}
+					p:last-child {
+						color: #9d9d9d;
+						font-size: 9px;
+						font-weight: 400;
+						line-height: 4px;
+						text-align: left;
+					}
+				}
+			}
+			&__bottom {
+				&-attributes {
+					display: flex;
+					flex-direction: row;
+					height: 33px;
+					align-items: center;
+					p {
+						margin-right: 5px;
+						color: #9d9d9d;
+						font-size: 18px;
+						font-weight: 700;
+						line-height: 18px;
+						text-align: left;
+						margin-right: 10px;
+					}
+					p:first-child::before {
+						content: url("../../../Shape.png");
+						margin-right: 3px;
+					}
+					p:last-child::before {
+						content: url("../../../paperclip.png");
+						margin-right: 3px;
+					}
+				}
+				&-executors {
+					display: flex;
+					flex-direction: row;
+					height: 33px;
+					align-items: center;
+					&__avatar {
+						display: block;
+						max-width: 33px;
+						max-height: 33px;
+						min-width: 33px;
+						min-height: 33px;
+						border-radius: 50%;
+						margin-left: 3px;
+					}
+				}
+			}
+		}
 	}
+}
 
+.add-list {
+	max-height: 80px;
+	&__form-wrapper {
+		display: block;
+		width: 100%;
+		input{
+			width: 100%;
+			height: 26px;
+			border: none;
+			border-radius: 3px 0 0 3px;
+			padding: 0 10px 0 10px;
+			font-size: 16px;
+		}
+	}
 }
 
 
 
-.card--bv2 {
-	background: rgba(0,255,0,.1);
-}
+	//.project-users__wrapper{
+	//	width: 200px;
+	//	height: 60px;
+	//	background: none;
+	//	.dndDraggingSource{
+	//		display: flex !important;
+	//	}
+	//	&-user {
+	//		max-width: 50px;
+	//		max-height: 50px;
+	//		min-width: 50px;
+	//		min-height: 50px;
+	//		background: red;
+	//		border-radius: 100%;
+	//		display: flex;
+	//		align-items: center;
+	//		justify-content: center;
+	//		img {
+	//			display: block;
+	//			max-width: 50px;
+	//			max-height: 50px;
+	//			min-width: 50px;
+	//			min-height: 50px;
+	//			border-radius: 100%;
+	//		}
+	//	}
+	//}
+
+	//.lists-container__wrapper {
+    //
+	//	.dndPlaceholder {
+	//		display: flex;
+	//		position: relative;
+	//		flex-shrink: 0;
+	//		flex-grow: 0;
+	//		width: 200px;
+	//		min-height: 80vh;
+	//		margin: 10px;
+	//		padding: 5px;
+	//		background-color: rgba(0,0,0, .05);
+	//	}
+	//	.list__wrapper{
+	//		transition: all 1s;
+	//	}
+	//	.list {
+    //
+    //
+	//		.dndPlaceholder {
+	//			display: flex;
+	//			width: 100%;
+	//			min-height: 60px;
+	//			background-color: rgba(0,0,0, .05);
+	//			margin: 0;
+	//			padding: 0;
+    //
+	//		}
+	//	}
+	//	.backlog{
+	//		transition: all 1s;
+	//		position: absolute;
+	//		left: -400px;
+	//		.list{
+	//			padding-left: 100px;
+	//		}
+	//	}
+	//}
+    //
+	//.dndDraggingSource{
+	//	display: none !important;
+	//}
+
+
+
 
 
 

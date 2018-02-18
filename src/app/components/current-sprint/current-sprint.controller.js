@@ -12,6 +12,7 @@ export default class sprintController {
         this.supportService = supportService;
         this.element = $element;
         this.isShown = true;
+        this.cardName = [];
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
@@ -32,14 +33,15 @@ export default class sprintController {
         };
 
         $scope.onUserDrop = (item, card)=>{
-            console.log('user drop', item, card);
+
 
             // this._fireBase.addUserToCard(card.$id, this.projectId, item.username);
 
             this._fireBase.addExecutorsToTask(this.projectId, card.$id, item.$id, {
-            priority: card.priority,
+                priority: card.priority,
                 title: card.title
-        })
+            });
+
             return false;
         };
 
@@ -62,22 +64,26 @@ export default class sprintController {
     }
 
     $onInit(){
-        console.log('users', this.users, this.lists, this.cards)
     }
+
+    getUser(userId) {
+        return this.users.filter(item => item.$id === userId)[0].avatar;
+    }
+
     showBacklog() {
         this.isShown = false;
-        let el = document.getElementsByClassName('backlog');
-        el[0].style.left = '-105px';
-        let lists = document.getElementsByClassName('list__wrapper');
-        lists[1].style.marginLeft = '220px';
+        let el = document.getElementsByClassName('list backlog');
+        el[0].style.left = '0px';
+        let lists = document.getElementsByClassName('list');
+        lists[2].style.marginLeft = '260px';
     }
 
     hideBacklog(){
         this.isShown = true;
-        let el = document.getElementsByClassName('backlog');
-        el[0].style.left = '-400px';
-        let lists = document.getElementsByClassName('list__wrapper');
-        lists[1].style.marginLeft = '0px';
+        let el = document.getElementsByClassName('list backlog');
+        el[0].style.left = '-240px';
+        let lists = document.getElementsByClassName('list');
+        lists[2].style.marginLeft = '10px';
     }
 
     addList() {
@@ -91,9 +97,19 @@ export default class sprintController {
         this._fireBase.deleteList(this.cards.filter(item => item.list_id === list.listId), this.projectId, list.$id);
     }
 
-    addCard(listId) {
+    openAddCardToList(list) {
+        console.log('list', list)
+        if(list.openAddCard == true) {
+            list.openAddCard = false;
+        } else {
+            list.openAddCard = true;
+        }
+    }
+
+    addCard(listId, list) {
         let self = this;
         var temp = this.cardName[listId];
+        list.openAddCard = false;
         this.cardName[listId] = '';
         let cardData = {
             title: temp, 
@@ -136,7 +152,7 @@ export default class sprintController {
                     closedTasks.push(item.$id);
                     if(item.executors) {
                         let keyArr = Object.keys(item.executors);
-                        for (let key of keyArr)
+                        for (let key of keyArr)i
                             usersOfClosedTasks.push(key);
                     }
                 }
@@ -155,6 +171,8 @@ export default class sprintController {
         this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
         this._fireBase.updateSprintData(this.projectId, this.currentSprint.sprintNumber, closedSprintData);
     }
+
+
 }
 
 
