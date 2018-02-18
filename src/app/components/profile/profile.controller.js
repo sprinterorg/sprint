@@ -13,26 +13,46 @@ export default class profileController {
         this._$rootScope = $rootScope;
         this._spinner = spinnerService;
         this._supportService = supportService;
-
     }
 
     updateUser() {
+        console.log("updateUser");
         let ids = [];
         if (this.user['my-projects']) ids = Object.keys(this.user['my-projects']);
-        console.log(ids);
         this._fireBase.updateUser(ids, this.userId, {
             username: this.user.username,
             email: this.user.email,
             avatar: this.user.avatar
         });
-        this.changeUserInfirmation();
+        this.changeUserInformation();
+        this.visibleSave = false;
     }
 
-    changeUserInfirmation() {
+    /*updateAvatar(){
+        console.log();
+        let ids = [];
+        if (this.user['my-projects']) ids = Object.keys(this.user['my-projects']);
+        this._fireBase.updateUser(ids, this.userId, {
+            username: this.user.username,
+            email: this.user.email,
+            avatar: this.user.avatar
+        });
+        this.visibleSave = false;
+        console.log("updateAvatar = "+this.visibleSave);
+    }*/
+
+    cancelUpdateUser(){
+        this.user = this._fireBase.getUser(this.userId);
+        this.visible = !this.visible;
+        this.visibleSave = false;
+    }
+
+    changeUserInformation() {
         this.visible = !this.visible;
     }
 
     uploadAvatar(file) {
+        console.log("uploadAvatar");
         let self = this;
         self._spinner.activate();
         if (file) {
@@ -43,13 +63,11 @@ export default class profileController {
                     .then(avatar => {
                         self.user.avatar = avatar;
                         self.scope.$apply();
-                    });
+                    }, ()=>{console.log("error")});
             } else {
                 console.log('file format incorrect');
             }
         }
         self._supportService.checkLoadApp();
     }
-
 }
-

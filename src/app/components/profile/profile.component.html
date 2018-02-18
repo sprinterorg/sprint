@@ -1,38 +1,73 @@
 <section class="profile">
-    <form ng-if="ProfileCtrl.userId">
-        <fieldset >
-            <legend>Profile data</legend>
-            <div class="inform__block">
-                <div class="inform__block__avatar">
-                    <img src={{ProfileCtrl.user.avatar}}
-                        class="inform__block__avatar_img">
+        <form   ng-if="ProfileCtrl.userId">
+        <center class='profile__inform'>
+        <div class="profile__inform__block">
+            <!-- <legend>Profile data</legend> -->
+            <div    class="inform__block">
+                <div    ng-if="ProfileCtrl.visible"
+                        class="inform__block__avatar">
+                    <img    src={{ProfileCtrl.user.avatar}}
+                            class="inform__block__avatar_img_visible"
+                            />
+                </div>
+                <button class="inform__block__avatar" 
+                        type="file" 
+                        ng-if="!ProfileCtrl.visible"
+                        ngf-select="ProfileCtrl.uploadAvatar($file)"
+                        accept="image/*">
+                    <img    src={{ProfileCtrl.user.avatar}}
+                            class="inform__block__avatar_img_invisible"/>
+                    <div class="inform__block__avatar_textButton">
+                        change
+                    </div>
+                </button>
+                <div    class="inform__block__username__visible" 
+                        ng-if='ProfileCtrl.visible'>
+                    <section class="inform__block__username__visible_username">{{ProfileCtrl.user.username}}</section>
+                    <section class="inform__block__username__visible_email">{{ProfileCtrl.user.email}}</section>
+                    <div class="inform__block__username__visible__button">
+                       <!--  <button class="inform__block__username__visible__button_save buttonPR buttonPR--signup"
+                               type='submit'
+                               ng-if='ProfileCtrl.visibleSave'
+                               ng-click="ProfileCtrl.updateAvatar()">
+                           Save
+                       </button> -->
+                        <button class="inform__block__username__visible__button_edit buttonPR buttonPR--signup"
+                                type='button' 
+                                ng-click="ProfileCtrl.changeUserInformation()">
+                            Edit profile
+                        </button>
+                    </div>
                 </div>
 
-                <div class="inform__block__username" ng-if='ProfileCtrl.visible '>
-                    <h2>{{ProfileCtrl.user.username}}</h2>
-                    <h3>{{ProfileCtrl.user.email}}</h3>
-                    <button type='submit' 
-                            class="inform__block__username_submit"
-                            ng-click="ProfileCtrl.changeUserInfirmation()">Edit profile</button>
-                </div>
+                <div    class="inform__block__username__invisible" 
+                        ng-if='!ProfileCtrl.visible'>
+                    <input  type="text" 
+                            ng-model="ProfileCtrl.user.username" 
+                            placeholder="Username" 
+                            class="inform__block__username__invisible_input input"/>                        
+                    <input  type="text" 
+                            ng-model="ProfileCtrl.user.email" 
+                            placeholder="E-mail" 
+                            class="inform__block__username__invisible_email input"/>                        
+                    <div    class="inform__block__username__button">
+                        <button type='submit'
+                                class="inform__block__username__invisible__button_submit-save buttonPR buttonPR--signup"
+                                ng-click="ProfileCtrl.updateUser()"
+                                >
+                            Save
+                        </button>
 
-                <div class="inform__block__username" ng-if='!ProfileCtrl.visible'>
-                    <p>
-                        <input type="text" ng-model="ProfileCtrl.user.username" placeholder="Username" class="inform__block__username_input"/>                        
-                    </p>
-                    <p>
-                        <input type="text" ng-model="ProfileCtrl.user.email" placeholder="E-mail" class="inform__block__username_email"/>                        
-                    </p>
-                    <p>
-                        <button type="file" ngf-select="ProfileCtrl.uploadAvatar($file)"
-                                accept="image/*">Select File</button>
-                    </p>
-                    <button type='submit'
-                            class="inform__block__username_submit"
-                            ng-click="ProfileCtrl.updateUser()">Save</button>
+                        <button type="button" 
+                                class="inform__block__username__invisible__button_cancel inform__block__username__invisible__button_cancel--signup buttonPR"
+                                ng-click="ProfileCtrl.cancelUpdateUser()">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
-        </fieldset>
+        </div>
+        </center>
     </form>
     <my-projects></my-projects>
     <a class="bar" ui-sref="projects">CREATE NEW PROJECT</a>
