@@ -1,15 +1,10 @@
 class SupportService {
     /*@ngInject*/
-    constructor() {
-      this.userId = '';
-      this.pictures = {
-        ironman: 'https://png.icons8.com/ultraviolet/100/000000/iron-man.png',
-        spiderman: 'https://png.icons8.com/ultraviolet/100/000000/spiderman-head.png'
-      };
-    }
-    getPicture(objKey) {
-      console.log("getPicture = " + objKey);
-      return this.pictures[objKey];
+    constructor(fireBase, spinnerService, $rootScope) {
+      this.userId = this.getCookie('user') || '';
+        this._fireBase = fireBase;
+        this._spinnerService = spinnerService;
+        this._$rootScope = $rootScope;
     }
 
     setUser(userId) {
@@ -54,11 +49,42 @@ class SupportService {
   }
 
   getCookie(name) {
-  var matches = document.cookie.match(new RegExp(
+  let matches = document.cookie.match(new RegExp(
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+    checkLoadApp (userId) {
+        let self = this;
+        self._$rootScope.$broadcast('hideApp');
+        this._fireBase.getUserPromise(this.userId || userId).then(data => {
+            if(data && data.avatar) {
+            let img = new Image();
+            img.onload = () => this.deactivate();
+            img.onerror = () => this.deactivate();
+            img.src = data.avatar;
+            } else {
+                this.deactivate();
+            }
+        });
+    }
+    deactivate () {
+        let self = this;
+        self._$rootScope.$broadcast('appLoaded');
+        self._spinnerService.deactivate();
+        self._$rootScope.$apply();
+    }
+
+    getFormattedDate(ms) {
+        let date = new Date(ms);
+        let dd = date.getDate();
+        if (dd < 10) dd = '0' + dd;
+        let mm = date.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+        let yy = date.getFullYear() % 100;
+        if (yy < 10) yy = '0' + yy;
+        return dd + '.' + mm + '.' + yy;
+    }
 
 }
 

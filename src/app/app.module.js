@@ -3,7 +3,8 @@ import routing from './config/routes.config';
 import appComponent from './app.component';
 import angFire from 'angularfire';
 import firebasecfg from './config/firebase-cfg';
-import angularDragula from 'angularjs-dragula';
+import dndLists from 'angular-drag-and-drop-lists';
+import fileUpload from 'ng-file-upload';
 
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services';
@@ -17,13 +18,15 @@ import './components/my-tasks/my-tasks.component.scss';
 import './components/profile/profile.component.scss';
 import './components/project-settings/project-settings.component.scss';
 import './components/task/task.component.scss';
-
-
+import './components/main-menu/main-menu.component.scss';
+import './components/spinner/spinner.component.scss';
+import './components/hystory/hystory.component.scss';
 
 angular.module('app', [
     angFire,
     uiRouter,
-    angularDragula(angular),
+    'dndLists',
+    fileUpload,
     ComponentsModule.name,
     ServicesModule.name
 

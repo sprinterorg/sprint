@@ -1,0 +1,8 @@
+.my-tasks {
+	display: flex;
+	justify-content: space-between;
+	& li {
+		width: 125px;
+		text-align: center;
+	}
+}

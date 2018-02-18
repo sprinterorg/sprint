@@ -1,8 +1,10 @@
 <modal-window  ng-if="appController.showModalWindow" hide-func="appController.hide">
     <login-form hide-func="appController.hide" mode="appController.mode"></login-form>
 </modal-window>
-<my-projects class="search-projects" ng-if="appController.showSearch && appController._supportService.userId"></my-projects>
-<header class="header">
+<my-projects class="search-projects" ng-if="appController.showSearch && appController._supportService.userId" hide-func="appController.hideSearch"></my-projects>
+
+<div ng-show="appController.isLoaded" class="page-content">
+<header  class="header">
 <div class="header__wrapper">
 	<div class="header__search" >
 		<div class="search-icon" ng-click="appController.toShowSearch()" ng-if="appController._supportService.userId">
@@ -17,9 +19,12 @@
         <button class="button button--signup" ng-click="appController.toShowModalWindow('signUp')">Sign Up</button>
     </nav>
     <div ng-if="appController._supportService.userId" class="header__main-panel">
-        <button class="button" ng-click="appController.logOut()">Log Out</button>
+        <main-menu></main-menu>
     </div>
 </div>
 </header>
+<div class="main-content">
 <ui-view></ui-view>
+</div>
+</div>
 

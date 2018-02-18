@@ -13,12 +13,13 @@ export default class projectsController {
         this._fireBase.addProject(this.projects, {currentSprint : { 
             projectName: this.projectName,
             managerId: this.userId,
-            duration: this.duration
+            duration: this.duration,
+            startTimeStamp: Date.now()
         }}, {
             username: this.manager.username,
             email: this.manager.email,
             avatar: this.manager.avatar
-        }).then( rootRef => {
+        }).then( rootRef => { rootRef.key
             self.projectName = '';
             self.duration = '';
         });

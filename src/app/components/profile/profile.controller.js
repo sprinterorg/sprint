@@ -1,32 +1,55 @@
 import './profile.component.scss';
 
+
 export default class profileController {
     /*@ngInject*/
-    constructor(fireBase, supportService, $stateParams) {
+    constructor(fireBase, supportService, $scope, $rootScope, spinnerService) {
         this.userId = supportService.getUserId();
         this._fireBase = fireBase;
         this.user = fireBase.getUser(this.userId);
         this.projects = fireBase.getProjects();
         this.visible = true;
-        this.srcAvatar = supportService.getPicture('spiderman');
-        console.log("constructor = " + this.srcAvatar);
+        this.scope = $scope;
+        this._$rootScope = $rootScope;
+        this._spinner = spinnerService;
+        this._supportService = supportService;
+
     }
 
     updateUser() {
-        let ids = Object.keys(this.user['my-projects']);
-        let self = this;
-        console.log("updateUser" + this)
+        let ids = [];
+        if (this.user['my-projects']) ids = Object.keys(this.user['my-projects']);
+        console.log(ids);
         this._fireBase.updateUser(ids, this.userId, {
-        	username: this.user.username,
-        	email: this.user.email,
-        	avatar: this.user.avatar
+            username: this.user.username,
+            email: this.user.email,
+            avatar: this.user.avatar
         });
+        this.changeUserInfirmation();
     }
 
-    changeUserInfirmation(){
+    changeUserInfirmation() {
         this.visible = !this.visible;
-        console.log(this.visible);
-        console.log("changeAvatar");
     }
+
+    uploadAvatar(file) {
+        let self = this;
+        self._spinner.activate();
+        if (file) {
+            let exp = /\/(jpg|jpeg|tiff|png)$/i;
+            let correctFile = exp.test(file.type);
+            if (correctFile) {
+                this._fireBase.uploadAvatar(file)
+                    .then(avatar => {
+                        self.user.avatar = avatar;
+                        self.scope.$apply();
+                    });
+            } else {
+                console.log('file format incorrect');
+            }
+        }
+        self._supportService.checkLoadApp();
+    }
+
 }
 
