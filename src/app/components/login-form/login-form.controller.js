@@ -55,6 +55,8 @@ export default class loginFormController {
         this.entryPasswordValid = true;
         this.FormIsValid = false;
         this.serverResponseError = "";
+        this.entryPasswordLabel = 'password';
+        this.entryRepeatPasswordLabel = 'repeat password';
     }
 
     changeModeToSignUp() {
@@ -65,6 +67,8 @@ export default class loginFormController {
         this.entryRepeatPasswordValid = true;
         this.FormIsValid = false;
         this.serverResponseError = "";
+        this.entryPasswordLabel = 'password';
+        this.entryRepeatPasswordLabel = 'repeat password';
     }
 
     signUp() {
