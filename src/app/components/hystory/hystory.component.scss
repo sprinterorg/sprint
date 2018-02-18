@@ -12,6 +12,7 @@
 	z-index: 11;
 	box-sizing: border-box;
 	position: fixed;
+	top: 35px;
 	width: 100vw;
 	background: rgba(255,255,255,.9);
 	padding-left: 80px;
@@ -19,6 +20,7 @@
 }
 
 .hystory__header-wrapper {
+	padding: 20px 0;
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	display: flex;
 	justify-content: flex-start;
@@ -191,7 +193,7 @@
 svg {
     transform: rotate(-90deg);
     color: black;
-    background: red;
+    background: #ff0000;
     border-radius: 50%;
     width: 100%;
     position: relative;
@@ -218,7 +220,7 @@ svg {
 	height: 85px;
 	border-radius: 50%;
 	left: 18px;
-	top: -12px;
+	top: 18px;
 	background: #ffffff;
 	padding-top: 25px;
 	box-sizing: border-box;

@@ -1,9 +1,9 @@
-*{
+.lists-container *{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: Roboto;
 }
+
 .hide-content{
 	visibility: hidden;
 }
@@ -16,6 +16,7 @@
 
 
 .lists-container {
+	box-sizing: border-box;
 	position: relative;
 	width: 100vw;
 	background: #f7f7f7;
