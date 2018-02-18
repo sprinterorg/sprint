@@ -1,33 +1,71 @@
+<div class="task-wrap">
 <section  class="task task-layer">
     <div class='task__wrapper'>
-		<div class='task__content'>
+		<div class='task-content'>
 			<h1>{{TaskCtrl.task.title}}</h1>
-			<p>{{TaskCtrl.task.priority}}</p>
+			<p> Priority {{TaskCtrl.task.priority}}</p>
 			<ul>
 				<li ng-repeat="user in TaskCtrl.executors track by $index">
-				{{TaskCtrl.getUser(user.$id)}}
+				{{TaskCtrl.getUser(user.$id).username}}
 				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
 				</li>
 			</ul>
-		
-		  <form ng-submit="TaskCtrl.addExecutorsToTask()">
-			<select
+
+		  <form ng-submit="TaskCtrl.addExecutorsToTask()" >
+			<div class="black rounded">
+			  <select
 		            ng-model="TaskCtrl.newUserId"
 		            ng-options="user.$id as user.username for user in TaskCtrl.projectUsers">
-		      <option value="-- choose user --"></option>        
+		      <option value="-- choose user --"></option>
 		    </select>
+			</div>
 			<button type='submit'>Add User</button>
 		  </form>
-		  {{TaskCtrl.getListName()}}
+
+		  <h3>
+			List name {{TaskCtrl.getListName()}}
+		  </h3>
+
 		  <form ng-submit="TaskCtrl.moveToList()">
+			  <div class="black rounded">
 			<select
 		            ng-model="TaskCtrl.newListId"
 		            ng-options="list.listId as list.listName for list in TaskCtrl.lists">
-		      <option value="-- choose user --"></option>        
+		      <option value="-- choose user --"></option>
 		    </select>
+			  </div>
 			<button type='submit'>Move to another list</button>
 		  </form>
 		</div>
 	</div>
 </section>
 
+	<div class="add-comment">
+	<textarea ng-model="TaskCtrl.comment" rows="4" cols="50" name="comment" placeholder="Wright comment">
+		</textarea>
+	<button ng-click="TaskCtrl.addComment()">Save comment</button>
+	</div>
+
+	<div ng-repeat="comment in TaskCtrl.comments" class="comments user-comment">
+		<img src="{{TaskCtrl.getUser(comment.userId).avatar}}" alt="" class="comment-avatar">
+		<div class="comment-body">
+			<div class="comment-in">
+			<span class="comment-arrow"></span>
+				<div class="user-name">{{TaskCtrl.getUser(comment.userId).username}}</div>
+
+				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  class="comment-text">{{comment.comment}}</span>
+
+				<textarea ng-if="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id" ng-model="TaskCtrl.commentText"></textarea>
+
+				<span ng-show="comment.userId === TaskCtrl.userId" ng-click="TaskCtrl.deleteComment(comment.$id)" class="close"></span>
+
+				<span ng-show="comment.userId === TaskCtrl.userId && !TaskCtrl.editMode &&
+				!(TaskCtrl.editCommentId === comment.$id)" ng-click="TaskCtrl.editComment(comment)" class="edit-comment">edit</span>
+
+				<span ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id"
+					  ng-click="TaskCtrl.saveEditedComment(comment.$id)" class="edit-comment">save</span>
+			</div>
+		</div>
+	</div>
+
+</div>
