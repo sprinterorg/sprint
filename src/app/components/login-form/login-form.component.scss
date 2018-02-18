@@ -58,7 +58,6 @@
   .form__item-field ~ label {
     font-size: 2rem;
   }
-  /*tuta ne rabotayet valid*/
   .form__item-field:focus ~ label,
   .form__item-field:valid ~ label,
   .form__item-field ~ label.form__error {
@@ -73,8 +72,8 @@
   }
   .form__item-field:focus ~ label,
   .form__item-field:valid ~ label {
-    top: -0.5vh;
-    left: 0;
+    top: -1vh;
+    left: 5px;
     color: rgba(0, 0, 0, 1);
   }
   .form__item .form__item-field {
@@ -103,72 +102,101 @@
   .form__item-field:focus ~ span:after {
     width: 100%;
   }
-  .form__item .form__item-field,
-  .form__contacts .form__item-field,
-  .form__contacts .form__item-field ~ span,
-  .form__contacts .form__item-field ~ label {
+  .form__item .form__item-field {
     width: 30vw;
   }
-
-  .button {
-    display: flex;
-    justify-content: space-around;
-    width: 30vw;
-    height: 10vh;
-    border: 2.5px solid #000000;
-    border-radius: 25px;
-    background: transparent;
-    color: #000000;
-    font-size: 4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    outline: 0;
-    outline-offset: 0;
-    transition: background-color .2s, color .2s, font-size .2s;
+  .button{
+    &--signup{
+      font-size:3vh;
+      width:30vw;
+      height:5vh;
+    }
   }
-  .button:hover {
-    background: #000000;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 4.5rem;
+}
+@media screen and (max-width:800px){
+  .login_form {
+    width: calc(40vw + 60px);
+    .button{
+      width: 40vw !important;
+      &--signup{
+        font-size:1.2em;
+        width:30vw;
+        height:5vh;
+      }
+    }
+    .form__item .form__item-field{
+      font-size: 1.5rem;
+      height: 5vh;
+      width: 40vw;
+    }
+    .form__item-field:focus ~ label,
+    .form__item-field:valid ~ label {
+      top: 0vh;
+      left: 5px;
+    }
   }
-  .form__buttons {
-    margin-top: 5vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+}
+@media screen and (max-width:400px){
+  .login_form {
+    width: calc(40vw + 60px);
+    .text,
+    .server-error-message{
+      font-size: 1.2rem;
+    }
+    .button{
+      margin: 0vh 0 3vh 0;
+      width: 50vw !important;
+      &--signup{
+        font-size: 1em;
+        width:30vw;
+        height:5vh;
+      }
+    }
+    .form__item .form__item-field{
+      font-size: 1.2rem;
+      height: 5vh;
+      width: 50vw;
+    }
+    .form__item-field ~ label{
+      font-size: 1.2rem;
+    }
+    .form__item-field:focus ~ label,
+    .form__item-field:valid ~ label {
+      top: -1.2vh;
+      left: 2px;
+      font-size:1rem;
+    }
   }
-  .form__buttons .button {
-    width: 47%;
-    height: 7vh;
-    font-size: 4rem;
-    border-width: 2px;
-    font-weight: normal;
-  }
-  .form__buttons .button:hover {
-    font-size: 4.5rem;
-  }
-  .form__buttons .button--form-send {
-    margin-left: 6%;
-    background: #000000;
-    color: #ffffff;
-  }
-  .form__buttons .button--disabled,
-  .form__buttons .button--disabled:hover {
-    font-size: 4rem;
-    opacity: 0.8;
-    cursor: not-allowed;
-  }
-  .button,
-  .form__buttons .button {
-    font-size: 1.6rem;
-    height: 4.5vh;
-  }
-  .button:hover,
-  .form__buttons .button:hover {
-    font-size: 2rem;
-  }
-  .form__buttons .button:disabled:hover {
-    font-size: 2rem;
+}
+@media screen and (max-height:600px){
+  .login_form {
+    width: calc(40vw + 60px);
+    .text,
+    .server-error-message{
+      font-size: 1.2rem;
+    }
+    .button{
+      margin: 0vh 0 3vh 0;
+      width: 50vw !important;
+      &--signup{
+        font-size: 1em;
+        width:30vw;
+        height: 8vh;
+      }
+    }
+    .form__item .form__item-field{
+      font-size: 1.2rem;
+      height: 8vh;
+      width: 50vw;
+    }
+    .form__item-field ~ label{
+      font-size: 1.2rem;
+    }
+    .form__item-field:focus ~ label,
+    .form__item-field:valid ~ label {
+      top: -1.2vh;
+      left: 2px;
+      font-size:1rem;
+    }
   }
 }
