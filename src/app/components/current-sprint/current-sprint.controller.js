@@ -12,6 +12,8 @@ export default class sprintController {
         this.isModalOpen = false;
         this.element = $element;
         this.isShown = true;
+        this.hide = this.toShowProjectSettings.bind(this);
+        this.showProjectSettings = false;
 
 
         $scope.onDrop = (list, card)=>{
@@ -152,6 +154,10 @@ export default class sprintController {
         this._fireBase.addClosedToHistory(this.projectId, this.currentSprint.sprintNumber, allTasks);
         this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
         this._fireBase.updateSprintData(this.projectId, this.currentSprint.sprintNumber, closedSprintData);
+    }
+
+    toShowProjectSettings() {
+        this.showProjectSettings = !this.showProjectSettings;
     }
 }
 
