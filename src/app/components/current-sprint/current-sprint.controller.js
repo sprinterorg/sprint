@@ -12,7 +12,11 @@ export default class sprintController {
         this.supportService = supportService;
         this.element = $element;
         this.isShown = true;
+
         this.cardName = [];
+
+        this.hide = this.toShowProjectSettings.bind(this);
+        this.showProjectSettings = false;
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
@@ -172,7 +176,13 @@ export default class sprintController {
         this._fireBase.updateSprintData(this.projectId, this.currentSprint.sprintNumber, closedSprintData);
     }
 
+<<<<<<< HEAD
 
+=======
+    toShowProjectSettings() {
+        this.showProjectSettings = !this.showProjectSettings;
+    }
+>>>>>>> develop
 }
 
 

@@ -1,5 +1,5 @@
 .modal_include {
-  z-index: 2;
+  z-index: 31;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 }
 
 .modal_overlay {
-  z-index: 1; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+  z-index: 30; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
   position: fixed; /* всегдa перекрывaет весь сaйт */
   background-color: #000; /* чернaя */
   opacity: 0.8; /* нo немнoгo прoзрaчнa */
@@ -25,9 +25,24 @@
 }
 
 .modal_close {
+  z-index:33!important;
+  height:50px;
+  width:50px;
+  font-size:2.2em;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50px;
   z-index: 4;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 3vh;
+  right: 2vw;
   cursor: pointer;
+  color:#FFFFFF;
+  opacity:0.4;
+  transition:opacity 0.4s;
+}
+
+.modal_close:hover{
+  opacity:0.8;
 }

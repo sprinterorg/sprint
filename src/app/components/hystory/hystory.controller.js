@@ -13,7 +13,7 @@ export default class HystoryController {
         for (let item of this.hystory) {
             let tasks = Object.keys(item.tasks);
             for (let task of tasks) {
-                allTasks[item.tasks[task].title]=item.tasks[task];
+                allTasks[task]=item.tasks[task];
             }
         }
         return allTasks;

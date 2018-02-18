@@ -6,7 +6,9 @@ export default class myProjectsComponent{
         this._fireBase = fireBase;
         this._$state = $state;
         this.searchProjects = '';
-
+        this.showModalWindow = false;
+        this.hide = this.toHideModalWindow.bind(this);
+        this.projectToShow = null;
     }
 
     isManager(managerId) {
@@ -14,7 +16,18 @@ export default class myProjectsComponent{
     }
 
     goToSprint(projectId) {
+        if(!this.showModalWindow){
         this._$state.go('current-sprint', {project_id: projectId});
         this.hideFunc && this.hideFunc();
+        }
+    }
+
+    toShowProjectSettings(projectId) {
+        this.projectToShow =  projectId;
+        this.showModalWindow = true;
+    }
+
+    toHideModalWindow() {
+        this.showModalWindow = false;
     }
 }

@@ -2,11 +2,12 @@ export default class projectSettingsController {
     /*@ngInject*/
     constructor(fireBase, supportService, $stateParams) {
 		this.userId = supportService.getUserId();
-        this.projectId = $stateParams.project_id;
+        this.projectId = this.projectHash || $stateParams.project_id;
         this._fireBase = fireBase;
 		this.project = fireBase.getSprint(this.projectId);
 		this.users = fireBase.getAllUsers();
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
+        this.projectEdit = false;
     }
 
     updateProject() {
