@@ -10,15 +10,15 @@
 }
 
 .modal_overlay {
-  z-index: 30; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
-  position: fixed; /* всегдa перекрывaет весь сaйт */
-  background-color: #000; /* чернaя */
-  opacity: 0.8; /* нo немнoгo прoзрaчнa */
-  -moz-opacity: 0.8; /* фикс прозрачности для старых браузеров */
+  z-index: 30;
+  position: fixed;
+  background-color: #000000;
+  opacity: 0.8;
+  -moz-opacity: 0.8;
   filter: alpha(opacity=80);
   width: 100vw;
-  height: 100vh; /* рaзмерoм вo весь экрaн */
-  top: 0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+  height: 100vh;
+  top: 0;
   left: 0;
   cursor: pointer;
   overflow: hidden;
