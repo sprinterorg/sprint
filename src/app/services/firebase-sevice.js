@@ -207,6 +207,30 @@ class FireService {
         return this._$firebaseObject(ref);
     }
 
+    getComments(projectId, taskId){
+        let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/comments');
+        return this._$firebaseArray(ref);
+    }
+
+    addComment(comments, newComment) {
+        return comments.$add(newComment)
+    }
+
+    deleteComment($id, projectId, taskId) {
+       this.rootRef.child('projects/'+projectId+'/cards/'+taskId +'/comments').child($id).remove();
+    }
+
+    editComment($id, projectId, taskId, commentText) {
+       this.rootRef.child('projects/'+projectId+'/cards/'+taskId +'/comments').child($id).update({
+         comment: commentText
+       });
+    }
+
+
+    getTaskPromise(projectId, taskId){
+        return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).once('value').then(snapshot => snapshot.val());
+    }
+
     getTaskExecutors(projectId, taskId) {
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId+'/executors');
         return this._$firebaseArray(ref);

@@ -4,7 +4,7 @@ var headers = {
   'Content-Type': 'application/json'
 };
 
-var dataString = ''{"docker_tag": '$''{process.env.CIRCLE_BRANCH}"}'';
+var dataString = `'{"docker_tag": '$''{process.env.CIRCLE_BRANCH}"}'`;
 
 var options = {
   url: '', // add your docker url aka 'https://registry.hub.docker.com/u/{{the rest of your url}}'
