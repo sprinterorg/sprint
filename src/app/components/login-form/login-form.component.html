@@ -1,21 +1,46 @@
-<form class="login_form" ng-submit="loginController.clickHanler()">
-    <nav>
-        [<a ng-click="loginController.changeModeToLogIn()">Log in</a>] |
-        [<a ng-click="loginController.changeModeToSignUp()">Sign up</a>]
-    </nav>
-
-    <label for="email_input">E-MAIL</label>
-    <input id="email_input" type="email" ng-model="loginController.entryEmail" autocomplete="on" name="email">
-
-    <label for="password_input">PASSWORD</label>
-    <input id="password_input" type="password" ng-model="loginController.entryPassword" autocomplete="on"
-           name="password">
-
-    <div ng-if="loginController.mode === 'signUp'">
-        <label for="repeat_password_input">REPEAT PASSWORD</label>
-        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword"
-               autocomplete="off"
-               name="repeat_password">
+<form class="login_form" ng-submit="loginController.clickHanler()" name="login_form" novalidate>
+    <!--
+    loginController.FormIsValid:{{loginController.FormIsValid}}<br>
+    loginController.entryEmailValid:{{loginController.entryEmailValid}}<br>
+    loginController.entryPasswordValid:{{loginController.entryPasswordValid}}<br>
+    loginController.entryRepeatPasswordValid:{{loginController.entryRepeatPasswordValid}}<br>
+    -->
+    <div class="form__item">
+        <input id="email_input" type="text" ng-model="loginController.entryEmail" ng-class="loginController.entryEmailValid?'form__item-field':'form__item-field invalid__item-field'" name="email" ng-change="loginController.formValidation()" required>
+        <label for="email_input" ng-class="loginController.entryEmailValid?'control-label':'control-label invalid__label'">{{loginController.entryEmailLabel}}</label>
+        <span></span>
     </div>
-    <button>{{loginController.showButtonName()}}</button>
+
+    <div class="form__item">
+        <input id="password_input" type="password" ng-model="loginController.entryPassword" name="password" required ng-class="loginController.entryPasswordValid?'form__item-field':'form__item-field invalid__item-field'" ng-change="loginController.formValidation()">
+        <label for="password_input" ng-class="loginController.entryPasswordValid?'control-label':'control-label invalid__label'">{{loginController.entryPasswordLabel}}</label>
+        <span></span>
+    </div>
+
+    <div ng-show="loginController.mode === 'signUp'" class="form__item">
+        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword" autocomplete="off" ng-class="loginController.entryRepeatPasswordValid?'form__item-field':'form__item-field invalid__item-field'" name="repeat_password" ng-change="loginController.formValidation()" required>
+        <label for="repeat_password_input" ng-class="loginController.entryRepeatPasswordValid?'control-label':'control-label invalid__label'">{{loginController.entryRepeatPasswordLabel}}</label>
+        <span></span>
+    </div>
+
+    <div  class="server-error-message">
+        {{loginController.serverResponseError}}
+    </div>
+
+    <button class="button button--signup">{{loginController.showButtonName()}}</button>
+
+    <div class="text" ng-show="loginController.mode === 'logIn'">
+        Don't have an account?
+        <span> 
+            Go to
+            <a ng-click="loginController.changeModeToSignUp()">Sign up</a>
+        </span>
+    </div>
+    <div class="text" ng-show="loginController.mode === 'signUp'">
+        Already have an account?<br> 
+        <span>
+            Go to
+            <a ng-click="loginController.changeModeToLogIn()">Log in</a>
+        </span>
+    </div>
 </form>
