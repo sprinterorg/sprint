@@ -10,14 +10,15 @@
 			 ng-class="{'backlog-show-button__hide' : !SprintCtrl.isShown}"
 			 ng-click="SprintCtrl.showBacklog()">
 			<p>Back-log</p>
-		</div >
+		</div>
 		<div ng-repeat="list in SprintCtrl.lists"
-			class="list"
-			ng-class="{'backlog' : list.listId == 1}">
-			<div class="list_list-container"
-				 dnd-type="'container'"
-				 dnd-disable-if="list.listId < 4"
-				 dnd-draggable='list'>
+			 dnd-type="'container'"
+			 dnd-disable-if="list.listId < 4"
+			 dnd-draggable='list'
+			 class="list"
+			 ng-class="{'backlog' : list.listId == 1}">
+			<div class="list_list-container">
+
 
 				<!--<button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>-->
 

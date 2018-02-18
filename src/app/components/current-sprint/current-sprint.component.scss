@@ -19,6 +19,7 @@
 	position: relative;
 	width: 100vw;
 	background: #f7f7f7;
+
 	.lists-container__wrapper {
 		display: flex;
 		flex-direction: row;
@@ -42,9 +43,6 @@
 			&_list-container {
 				display: flex;
 				flex-direction: column;
-				//justify-content: space-between;
-				//height: 76vh;
-
 				&_header{
 					display: flex;
 					flex-direction: row;
@@ -160,6 +158,27 @@
 				margin-left: -80px;
 			}
 		}
+
+		.list.dndDraggingSource {
+			display: none !important;
+		}
+
+		&>.dndPlaceholder {
+			display: flex;
+			position: relative;
+			flex-shrink: 0;
+			flex-grow: 0;
+			width: 240px;
+			min-height: 76vh;
+			margin: 10px;
+			padding: 5px;
+			border-radius: 3px;
+			border: 2px solid #ebebeb;
+			background: repeating-linear-gradient( 135deg,
+							#a9a9a9, #a9a9a9 .5em,
+							transparent .5em, transparent 1em);
+			background-color: #fff;
+		}
 	}
 }
 
@@ -171,6 +190,7 @@
 	max-height: 70vh;
 	padding: 0;
 	overflow-y: hidden;
+	overflow-x: hidden;
 	.card {
 		position: relative;
 		background: #ffffff;
@@ -273,6 +293,24 @@
 			}
 		}
 	}
+	.card.dndDraggingSource {
+		background: black !important;
+		opacity: 0.5 !important;
+	}
+	&>.dndPlaceholder {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		min-height: 86px !important;
+		height: 86px !important;
+		margin: 0 3px 10px 3px;
+		padding: 7px 10px;
+		border-radius: 3px 0 0 3px;
+		background: repeating-linear-gradient( 135deg,
+						#a9a9a9, #a9a9a9 .5em,
+						transparent .5em, transparent 1em);
+		background-color: #fff;
+	}
 }
 
 .add-list {
@@ -290,82 +328,6 @@
 		}
 	}
 }
-
-
-
-	//.project-users__wrapper{
-	//	width: 200px;
-	//	height: 60px;
-	//	background: none;
-	//	.dndDraggingSource{
-	//		display: flex !important;
-	//	}
-	//	&-user {
-	//		max-width: 50px;
-	//		max-height: 50px;
-	//		min-width: 50px;
-	//		min-height: 50px;
-	//		background: red;
-	//		border-radius: 100%;
-	//		display: flex;
-	//		align-items: center;
-	//		justify-content: center;
-	//		img {
-	//			display: block;
-	//			max-width: 50px;
-	//			max-height: 50px;
-	//			min-width: 50px;
-	//			min-height: 50px;
-	//			border-radius: 100%;
-	//		}
-	//	}
-	//}
-
-	//.lists-container__wrapper {
-    //
-	//	.dndPlaceholder {
-	//		display: flex;
-	//		position: relative;
-	//		flex-shrink: 0;
-	//		flex-grow: 0;
-	//		width: 200px;
-	//		min-height: 80vh;
-	//		margin: 10px;
-	//		padding: 5px;
-	//		background-color: rgba(0,0,0, .05);
-	//	}
-	//	.list__wrapper{
-	//		transition: all 1s;
-	//	}
-	//	.list {
-    //
-    //
-	//		.dndPlaceholder {
-	//			display: flex;
-	//			width: 100%;
-	//			min-height: 60px;
-	//			background-color: rgba(0,0,0, .05);
-	//			margin: 0;
-	//			padding: 0;
-    //
-	//		}
-	//	}
-	//	.backlog{
-	//		transition: all 1s;
-	//		position: absolute;
-	//		left: -400px;
-	//		.list{
-	//			padding-left: 100px;
-	//		}
-	//	}
-	//}
-    //
-	//.dndDraggingSource{
-	//	display: none !important;
-	//}
-
-
-
 
 
 
