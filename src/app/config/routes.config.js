@@ -67,10 +67,11 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         })
         .state('card-child-component', {
             parent: 'current-sprint',
-            url: '/:card_id',
-            template: cardChildTemplate,
-            controller: SprintCtrl,
-            controllerAs: 'SprintCtrl',
+            url: '/task/:project_id/:task_id',
+            secure: true,
+            template: taskTemplate,
+            controller: TaskCtrl,
+            controllerAs: 'TaskCtrl'
     });
     $stateProvider.state('parent-component', {
         url: '/parent',

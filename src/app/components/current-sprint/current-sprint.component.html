@@ -19,32 +19,48 @@
 			 dnd-draggable='list'
 			 class="list"
 			 ng-class="{'backlog' : list.listId == 1}">
+
+
+
+			<div ng-if="list.listId !== 1"
+				 ng-class="{'list__full-menu_open' : list.isListMenuShown,
+				 'list__full-menu_close': !list.isListMenuShown}">
+
+				<div ng-click="SprintCtrl.hideListMenu(list)">close</div>
+				<input placeholder="Edit list name">
+				<div ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>Remove List</div>
+			</div>
+
 			<div class="list_list-container">
 
 
-				<!--<button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>-->
+
 
 				<div class="list_list-container_header">
 					<div class="list_list-container_header__title">
 						{{list.listName}}
 					</div>
 					<div class="list_list-container_header__cards-count">
-						10 Tasks
+						{{SprintCtrl.cardsCountForList(list)}} Tasks
 					</div>
 					<div ng-if="list.listId !== 1"
-						 class="list_list-container_header__menu">
+						 class="list_list-container_header__menu"
+                         ng-click="SprintCtrl.showListMenu(list)">
+
+
 					</div>
 					<div ng-if="list.listId == 1"
 						 ng-click="SprintCtrl.hideBacklog()"
 						 class="backlog__hide-button">
 					</div>
+
 				</div>
 				<ul class="cards-list__wrapper"
 					dnd-allowed-types="['item']"
 					dnd-list
 					dnd-drop="onDrop(list.listId, item)">
 					<li ng-click="SprintCtrl.showFullCard(card)"
-					    ui-sref="card-child-component({card_id:card.id})"
+					    ui-sref="card-child-component({project_id: SprintCtrl.projectId ,task_id:card.$id})"
 					    ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
 					    class="card"
 					    dnd-draggable="card"

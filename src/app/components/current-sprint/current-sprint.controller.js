@@ -179,6 +179,24 @@ export default class sprintController {
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
     }
+
+    showListMenu(list) {
+        list.isListMenuShown = true;
+    }
+    hideListMenu(list) {
+        list.isListMenuShown = false;
+    }
+
+    cardsCountForList(list) {
+        let count = 0;
+        for (let i=0; i<this.cards.length; i++) {
+            if (this.cards[i].list_id == list.listId){
+                count++;
+            }
+        }
+        return count;
+    }
+
 }
 
 

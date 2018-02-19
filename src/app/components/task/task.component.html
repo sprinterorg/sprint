@@ -1,44 +1,47 @@
 <div class="task-wrap">
-<section  class="task task-layer">
-    <div class='task__wrapper'>
-		<div class='task-content'>
-			<h1>{{TaskCtrl.task.title}}</h1>
-			<p> Priority {{TaskCtrl.task.priority}}</p>
-			<ul>
-				<li ng-repeat="user in TaskCtrl.executors track by $index">
-				{{TaskCtrl.getUser(user.$id).username}}
-				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
-				</li>
-			</ul>
+	<section  class="task task-layer">
+		<a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
+			<button ng-click="SprintCtrl.closeFullCard()">x</button>
+		</a>
+		<div class='task__wrapper'>
+			<div class='task-content'>
+				<h1>{{TaskCtrl.task.title}}</h1>
+				<p> Priority {{TaskCtrl.task.priority}}</p>
+				<ul>
+					<li ng-repeat="user in TaskCtrl.executors track by $index">
+					{{TaskCtrl.getUser(user.$id).username}}
+					<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
+					</li>
+				</ul>
 
-		  <form ng-submit="TaskCtrl.addExecutorsToTask()" >
-			<div class="black rounded">
-			  <select
-		            ng-model="TaskCtrl.newUserId"
-		            ng-options="user.$id as user.username for user in TaskCtrl.projectUsers">
-		      <option value="-- choose user --"></option>
-		    </select>
+			  <form ng-submit="TaskCtrl.addExecutorsToTask()" >
+				<div class="black rounded">
+				  <select
+						ng-model="TaskCtrl.newUserId"
+						ng-options="user.$id as user.username for user in TaskCtrl.projectUsers">
+				  <option value="-- choose user --"></option>
+				</select>
+				</div>
+				<button type='submit'>Add User</button>
+			  </form>
+
+			  <h3>
+				List name {{TaskCtrl.getListName()}}
+			  </h3>
+
+			  <form ng-submit="TaskCtrl.moveToList()">
+				  <div class="black rounded">
+				<select
+						ng-model="TaskCtrl.newListId"
+						ng-options="list.listId as list.listName for list in TaskCtrl.lists">
+				  <option value="-- choose user --"></option>
+				</select>
+				  </div>
+				<button type='submit'>Move to another list</button>
+			  </form>
 			</div>
-			<button type='submit'>Add User</button>
-		  </form>
-
-		  <h3>
-			List name {{TaskCtrl.getListName()}}
-		  </h3>
-
-		  <form ng-submit="TaskCtrl.moveToList()">
-			  <div class="black rounded">
-			<select
-		            ng-model="TaskCtrl.newListId"
-		            ng-options="list.listId as list.listName for list in TaskCtrl.lists">
-		      <option value="-- choose user --"></option>
-		    </select>
-			  </div>
-			<button type='submit'>Move to another list</button>
-		  </form>
 		</div>
-	</div>
-</section>
+	</section>
 
 	<div class="add-comment">
 	<textarea ng-model="TaskCtrl.comment" rows="4" cols="50" name="comment" placeholder="Wright comment">
@@ -69,3 +72,27 @@
 	</div>
 
 </div>
+
+
+
+
+
+
+
+<!--<section ng-class="{'card-content': SprintCtrl.supportService.isCardOpen, 'hide-content': !SprintCtrl.supportService.isCardOpen }">-->
+	<!--<div ng-class="{'card-content__modal': SprintCtrl.supportService.isCardOpen}">-->
+		<!--<div class="card-content__modal__button-wrapper">-->
+			<!--<a ui-sref="current-sprint({project_id: SprintCtrl.projectId})">-->
+				<!--<button ng-click="SprintCtrl.closeFullCard()">x</button>-->
+			<!--</a>-->
+		<!--</div>-->
+		<!--<div class="card-content__modal__content-wrapper">-->
+			<!--<h2>{{SprintCtrl.supportService.openCard.title }}</h2>-->
+			<!--<p>{{ SprintCtrl.supportService.openCard.$id }}</p>-->
+			<!--<p>{{ SprintCtrl.supportService.openCard.id }}</p>-->
+			<!--<p>{{ SprintCtrl.supportService.openCard.list_id }}</p>-->
+			<!--<p>{{ SprintCtrl.supportService.openCard.$priority }}</p>-->
+			<!--<p>{{ SprintCtrl.supportService.openCard.priority }}</p>-->
+		<!--</div>-->
+	<!--</div >-->
+<!--</section>-->
