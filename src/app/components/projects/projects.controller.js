@@ -1,6 +1,7 @@
 export default class projectsController {
     /*@ngInject*/
-    constructor(fireBase, supportService) {
+    constructor(fireBase, supportService, $state) {
+        this._$state = $state;
         this.userId = supportService.getUserId();
         this.projects = fireBase.getProjects();
         this.myProjects = fireBase.getMyProjects(this.userId);
@@ -10,6 +11,7 @@ export default class projectsController {
 
     addProject () {
         let self = this;
+        this.hideFunc();
         this._fireBase.addProject(this.projects, {currentSprint : { 
             projectName: this.projectName,
             managerId: this.userId,
@@ -19,9 +21,10 @@ export default class projectsController {
             username: this.manager.username,
             email: this.manager.email,
             avatar: this.manager.avatar
-        }).then( rootRef => { rootRef.key
-            self.projectName = '';
-            self.duration = '';
+        }).then( rootRef => {
+            //self.projectName = '';
+            //self.duration = '';
+            self._$state.go('current-sprint', {project_id: rootRef.key});
         });
     }
 }
