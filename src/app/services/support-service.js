@@ -5,9 +5,9 @@ class SupportService {
         this._fireBase = fireBase;
         this._spinnerService = spinnerService;
         this._$rootScope = $rootScope;
-
         this.isModalOpen = false;
         this.card = null;
+        
     }
 
     get isCardOpen() {

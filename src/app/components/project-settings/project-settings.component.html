@@ -1,10 +1,41 @@
 <section class="project-settings">
     <div class="project-settings__close" ng-click="ProjectSettingsCtrl.hideFunc()">+</div>
     <form ng-submit="ProjectSettingsCtrl.updateProject()">
-        <p ng-if="!ProjectSettingsCtrl.projectEdit">{{ProjectSettingsCtrl.project.projectName}}</p>
-        <input ng-if="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName" placeholder="project name"/>
-        <input type="text" ng-model="ProjectSettingsCtrl.project.duration" placeholder="project duration"/>
-        <input type="text" ng-model="ProjectSettingsCtrl.project.background" placeholder="project background image"/>
+       <div class="project-settings__project-name">
+          <p class="project-settings__text" ng-if="!ProjectSettingsCtrl.projectEdit">{{ProjectSettingsCtrl.project.projectName}}</p>
+          <input class="project-settings__input" ng-if="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName" placeholder="project name"/>
+          <div ng-if="!ProjectSettingsCtrl.projectEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName()">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div ng-if="ProjectSettingsCtrl.projectEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName()">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+        <div class="project-settings__project-duration">
+        <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
+        <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
+        <input ng-if="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="text" ng-model="ProjectSettingsCtrl.project.duration" placeholder="project duration"/>
+        <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration()">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div ng-if="ProjectSettingsCtrl.durationEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration()">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+        <div class="project-settings__project-background">
+          <div class="background-item">
+            <img src="ProjectSettingsCtrl.project.background">
+          </div>
+          <ul background-items>
+            <li ng-repeat="">
+              <div class="background-item">
+                <img src="ProjectSettingsCtrl.project.background">
+              </div>
+            </li>
+          </ul>
+        </div>
+        <input class="project-settings__input" type="text" ng-model="ProjectSettingsCtrl.project.background" placeholder="project background image"/>
+        
       <button type='submit'>Update</button>
   </form>
   <ul>

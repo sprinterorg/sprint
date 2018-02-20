@@ -8,6 +8,7 @@ export default class projectSettingsController {
 		this.users = fireBase.getAllUsers();
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
         this.projectEdit = false;
+        this.durationEdit = false;
     }
 
     updateProject() {
@@ -46,9 +47,15 @@ export default class projectSettingsController {
     }
 
     isManager(userId) {
-        console.log(userId.length);
-        console.log(this.userId.length);
         return userId == this.userId;
+    }
+
+    editProjectName() {
+        this.projectEdit = !this.projectEdit;
+    }
+
+    editProjectDuration() {
+        this.durationEdit = !this.durationEdit;
     }
 }
 
