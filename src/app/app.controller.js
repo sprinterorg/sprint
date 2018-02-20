@@ -19,6 +19,13 @@ export default class appController {
         this._$rootScope.$on('hideApp', () => {
             this.isLoaded = false;
         });
+        
+        const self = this;
+        this._scope.$on('createProjectEvent', function (event, data) {
+          console.log(data);
+          console.log(event); // Данные, которые нам прислали
+          self.toShowModalWindow("projects");
+        });
 
         if (!supportService.userId) {
             this._$state.go('landing');
