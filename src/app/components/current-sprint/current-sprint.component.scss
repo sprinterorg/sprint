@@ -42,22 +42,26 @@
 			border: 2px solid #ebebeb;
 			transition: all 1s;
 			&__full-menu{
-
-				&_open{
-					position: absolute;
-					transition: all 0.5s;
-					z-index: 40;
-					width: 220px;
-					height: 200px;
-					background: red;
-				}
+				transform-origin: left top !important;
+				top: 20px;
+				right: -216px;
+				position: absolute;
+				transition: all 0.5s;
+				z-index: 40;
+				width: 220px;
+				height: 200px;
+				background: #f7f7f7;
+				border: 2px solid #ebebeb;
 				&_close{
-					width: 220px;
-					height: 0;
-					position: absolute;
 					transition: all 0.5s;
 					z-index: -10;
 					opacity: 0.8;
+					transform: scale(0);
+				}
+				&__close-icon{
+					&::after{
+						content: url("../../../delete.png");
+					}
 				}
 			}
 
@@ -125,6 +129,9 @@
 						}
 					}
 					&__add-card{
+						position: absolute;
+						right: 0;
+						z-index: 10;
 						transform: scale(0.4);
 						&::after {
 							content: url("../../../plus.png");
@@ -134,17 +141,35 @@
 						display: flex;
 						align-items: center;
 						justify-content: center;
-						width: 100%;
-						margin-top: -15px;
-						padding-bottom: 1px;
+						width: 0;
+						padding: 0 8px 0 8px;
+						//z-index: -10;
+						position: absolute;
+						bottom: 5px;
+						transition: all 0.5s;
+						right: 0;
+						transform-origin: right;
 						input{
-							width: 100%;
-							height: 26px;
+							width: 0;
+							opacity: 0;
+							height: 32px;
 							border: none;
 							border-radius: 3px 0 0 3px;
 							padding: 0 10px 0 10px;
 							font-size: 16px;
+							margin-bottom: 2px;
+							transition: all 0.7s;
 						}
+						&__open{
+							width: 100%;
+							z-index: 5;
+							transition: all 0.5s;
+							input{
+								width: 100%;
+								opacity: 1;
+							}
+						}
+
 					}
 				}
 			}

@@ -23,12 +23,21 @@
 
 
 			<div ng-if="list.listId !== 1"
+				 class="list__full-menu"
+				 ng-blur="SprintCtrl.hideListMenu(list)"
 				 ng-class="{'list__full-menu_open' : list.isListMenuShown,
 				 'list__full-menu_close': !list.isListMenuShown}">
 
-				<div ng-click="SprintCtrl.hideListMenu(list)">close</div>
-				<input placeholder="Edit list name">
-				<div ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>Remove List</div>
+				<!--<div ng-click="SprintCtrl.hideListMenu(list)"-->
+				     <!--class="list__full-menu__close-icon"></div>-->
+				<form class="list__full-menu__title-change">
+					<input placeholder="Edit list name">
+				</form>
+				<div ng-if="list.listId>3"
+					 class="list__full-menu__delete-list"
+					 ng-click='SprintCtrl.deleteList(list)'>
+					Remove List
+				</div>
 			</div>
 
 			<div class="list_list-container">
@@ -41,7 +50,7 @@
 						{{list.listName}}
 					</div>
 					<div class="list_list-container_header__cards-count">
-						{{SprintCtrl.cardsCountForList(list)}} Tasks
+						{{SprintCtrl.cardsCountForList(list)}}
 					</div>
 					<div ng-if="list.listId !== 1"
 						 class="list_list-container_header__menu"
@@ -80,8 +89,8 @@
 
 							<div class="card_content-card__bottom">
 								<div class="card_content-card__bottom-attributes">
-									<p>1</p>
-									<p>2</p>
+									<p>{{ SprintCtrl.cardCommentsCount(card) }}</p>
+									<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>
 								</div>
 								<div class="card_content-card__bottom-executors">
 									<img ng-repeat="executor in card.executors"
@@ -90,7 +99,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-priority">
+						<div class="card-priority"
+						 	 ng-style="{'background-color': SprintCtrl.cardPrioriry(card)}">
 						</div>
 					</li>
 				</ul>
@@ -104,10 +114,11 @@
 					</div>
 
 				</div>
-				<form ng-if="!!list.openAddCard"
-					  class="list_list-container_footer list_list-container_footer__form-wrapper"
+				<form class="list_list-container_footer list_list-container_footer__form-wrapper"
+					  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': !!list.openAddCard}"
 					  ng-submit="SprintCtrl.addCard(list.listId, list)">
-					<input type="text" ng-model="SprintCtrl.cardName[list.listId]"
+					<input
+							type="text" ng-model="SprintCtrl.cardName[list.listId]"
 						   placeholder="Enter task name"/>
 				</form>
 
