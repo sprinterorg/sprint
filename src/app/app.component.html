@@ -1,7 +1,7 @@
 <modal-window  ng-if="appController.showModalWindow" hide-func="appController.hide">
-    <div ng-switch on="appController.mode">
-        <login-form ng-switch-when="logIn" hide-func="appController.hide" mode="appController.mode"></login-form>
+    <div ng-switch on="appController.mode"> 
         <projects ng-switch-when="projects" hide-func="appController.hide"></projects>
+        <login-form ng-switch-default hide-func="appController.hide" mode="appController.mode"></login-form>
     </div>
 </modal-window>
 
