@@ -52,12 +52,15 @@ export default class projectSettingsController {
         return userId == this.userId;
     }
 
-    editProjectName() {
+    editProjectName(save) {
         this.projectEdit = !this.projectEdit;
+        if(save) this.updateProject();
+
     }
 
     editProjectDuration() {
         this.durationEdit = !this.durationEdit;
+        if(save) this.updateProject();
     }
 
     editProjectBackground() {
@@ -67,6 +70,7 @@ export default class projectSettingsController {
     selectBackground(background) {
         this.project.background = background;
         this.editProjectBackground();
+        this.updateProject();
     }
 }
 
