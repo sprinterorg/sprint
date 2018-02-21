@@ -34,7 +34,7 @@
           </div>
           </div>
          
-          <ul class="background-items" ng-if="ProjectSettingsCtrl.backgroundEdit">
+          <ul class="background-items" ng-show="ProjectSettingsCtrl.backgroundEdit">
             <li ng-repeat="srcImg in ProjectSettingsCtrl.backgrounds | filter:'!'+ProjectSettingsCtrl.project.background">
               <div class="background-item" ng-click="ProjectSettingsCtrl.selectBackground(srcImg)">
                 <img src="{{srcImg}}">
