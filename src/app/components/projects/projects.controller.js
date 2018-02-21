@@ -12,7 +12,7 @@ export default class projectsController {
         this.validateDuration.bind(this);
         this.formValidation.bind(this);
 
-        this.duration = "0";
+        this.duration = "";
         this.projectName = "";
 
         this.projectNameIsValid = true;

@@ -22,7 +22,7 @@ import './components/main-menu/main-menu.component.scss';
 import './components/spinner/spinner.component.scss';
 import './components/current-sprint/card/card-child.component.scss';
 import './components/hystory/hystory.component.scss';
-
+import '../font/flaticon.css';
 
 angular.module('app', [
     angFire,
