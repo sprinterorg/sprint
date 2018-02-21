@@ -10,6 +10,7 @@ export default class projectSettingsController {
         this.projectEdit = false;
         this.durationEdit = false;
         this.backgroundEdit = false;
+        this.addUserSelect = false;
         this.backgrounds = supportService.getBackgrounds();
     }
 
@@ -71,6 +72,9 @@ export default class projectSettingsController {
         this.project.background = background;
         this.editProjectBackground();
         this.updateProject();
+    }
+    showAddUser() {
+        this.addUserSelect = !this.addUserSelect;
     }
 }
 
