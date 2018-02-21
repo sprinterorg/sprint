@@ -9,6 +9,8 @@ export default class projectSettingsController {
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
         this.projectEdit = false;
         this.durationEdit = false;
+        this.backgroundEdit = false;
+        this.backgrounds = supportService.getBackgrounds();
     }
 
     updateProject() {
@@ -56,6 +58,15 @@ export default class projectSettingsController {
 
     editProjectDuration() {
         this.durationEdit = !this.durationEdit;
+    }
+
+    editProjectBackground() {
+        this.backgroundEdit = !this.backgroundEdit;
+    }
+
+    selectBackground(background) {
+        this.project.background = background;
+        this.editProjectBackground();
     }
 }
 
