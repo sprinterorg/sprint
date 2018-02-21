@@ -8,6 +8,9 @@ export default class projectSettingsController {
 		this.users = fireBase.getAllUsers();
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
         this.projectEdit = false;
+        this.durationEdit = false;
+        this.backgroundEdit = false;
+        this.backgrounds = supportService.getBackgrounds();
     }
 
     updateProject() {
@@ -46,9 +49,28 @@ export default class projectSettingsController {
     }
 
     isManager(userId) {
-        console.log(userId.length);
-        console.log(this.userId.length);
         return userId == this.userId;
+    }
+
+    editProjectName(save) {
+        this.projectEdit = !this.projectEdit;
+        if(save) this.updateProject();
+
+    }
+
+    editProjectDuration() {
+        this.durationEdit = !this.durationEdit;
+        if(save) this.updateProject();
+    }
+
+    editProjectBackground() {
+        this.backgroundEdit = !this.backgroundEdit;
+    }
+
+    selectBackground(background) {
+        this.project.background = background;
+        this.editProjectBackground();
+        this.updateProject();
     }
 }
 
