@@ -18,6 +18,15 @@ export default class sprintController {
         this.hide = this.toShowProjectSettings.bind(this);
         this.showProjectSettings = false;
 
+        this.query = {
+            0: 'red',
+            1: 'yellow',
+            2: 'green',
+            3: 'blue'
+        }
+
+
+
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
             if(!card.sprintStart && list!==1){
@@ -179,6 +188,53 @@ export default class sprintController {
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
     }
+
+    showListMenu(list) {
+       if (list['isListMenuShown']) {
+           list.isListMenuShown = false
+       } else {
+           list.isListMenuShown = true;
+       }
+    }
+    hideListMenu(list) {
+        list.isListMenuShown = false;
+    }
+
+    cardsCountForList(list) {
+        let count = 0;
+        for (let i=0; i<this.cards.length; i++) {
+            if (this.cards[i].list_id == list.listId){
+                count++;
+            }
+        }
+        let str;
+        if (count == 1) {
+            str = count.toString() + ' Task';
+        }else {
+            str = count.toString() + ' Tasks';
+        }
+        return str;
+    }
+
+    cardPrioriry(card) {
+        return this.query[card.priority] || 'green';
+    }
+
+    cardCommentsCount(card) {
+        if ('comments' in card) {
+            return Object.keys(card.comments)['length']
+        } else {
+            return 0;
+        }
+    }
+    cardAttachmentCount(card) {
+        if ('attachment' in card) {
+            return Object.keys(card.attachment)['length']
+        } else {
+            return 0;
+        }
+    }
+
 }
 
 

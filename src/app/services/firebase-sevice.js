@@ -10,7 +10,7 @@ class FireService {
     }
 
     createUser(userId, data) {
-        data.avatar = 'stub.jpg';
+        data.avatar = 'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F594513avatar.png?alt=media&token=d9d2be2e-5755-4057-adac-1f1d8ff72f76';
     	return this.rootRef.child('users').update({
             [userId]: data
         });
@@ -80,7 +80,7 @@ class FireService {
 		    }
     	];
         projectData.currentSprint.sprintNumber = 1;
-        projectData.currentSprint.background = '';
+        projectData.currentSprint.background = 'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F435530bg2-max.png?alt=media&token=13cdd15f-648d-4bd6-8c33-584561dde2ce';
         let self = this;
     	return projects.$add(projectData).then( rootRef => {
     		self.rootRef.update({

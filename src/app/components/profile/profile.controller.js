@@ -32,19 +32,6 @@ export default class profileController {
         this.visibleSave = false;
     }
 
-    /*updateAvatar(){
-        console.log();
-        let ids = [];
-        if (this.user['my-projects']) ids = Object.keys(this.user['my-projects']);
-        this._fireBase.updateUser(ids, this.userId, {
-            username: this.user.username,
-            email: this.user.email,
-            avatar: this.user.avatar
-        });
-        this.visibleSave = false;
-        console.log("updateAvatar = "+this.visibleSave);
-    }*/
-
     cancelUpdateUser(){
         this.user = this._fireBase.getUser(this.userId);
         this.visible = !this.visible;
