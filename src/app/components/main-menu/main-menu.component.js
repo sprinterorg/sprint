@@ -4,7 +4,7 @@ import controller from './main-menu.controller';
 let mainMenuComponent = {
   restrict: 'E',
   bindings: {
-        hideFunc: '<'
+    toShowModalWindow: '<'
   },
   template,
   controller,

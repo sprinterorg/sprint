@@ -7,7 +7,6 @@ export default class myProjectsComponent{
         this._$state = $state;
         this.searchProjects = '';
         this.showModalWindow = false;
-        this.hide = this.toHideModalWindow.bind(this);
         this.projectToShow = null;
     }
 
@@ -25,9 +24,5 @@ export default class myProjectsComponent{
     toShowProjectSettings(projectId) {
         this.projectToShow =  projectId;
         this.showModalWindow = true;
-    }
-
-    toHideModalWindow() {
-        this.showModalWindow = false;
     }
 }

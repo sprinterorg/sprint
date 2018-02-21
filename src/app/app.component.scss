@@ -32,6 +32,11 @@ ul {
 	}
 }
 
+a{
+  color:#3498DB;
+  cursor:pointer;
+}
+
 .main-content {
 	padding-top: 35px;
 }
@@ -74,9 +79,11 @@ ul {
 .search-icon {
 	padding: 1px 6px;
 	border-radius: 5px;
-	font-size: 2rem;
 	cursor: pointer;
-
+	i:before{
+		margin:0;
+		font-size:1.9rem;
+	}
 	&:hover {
 		background: #000000;
 		color: #ffffff;

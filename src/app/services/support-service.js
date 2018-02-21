@@ -119,5 +119,3 @@ class SupportService {
 }
 
 export default SupportService;
-
-

@@ -9,6 +9,7 @@ export default class appController {
         this.showSearch = false;
         this.hide = this.toHideModalWindow.bind(this);
         this.hideSearch = this.toHideSearch.bind(this);
+        this.showProjects = this.toShowModalWindow.bind(this);
         this._$rootScope = $rootScope;
         this._scope = $scope;
         this._$state = $state;
@@ -17,6 +18,13 @@ export default class appController {
 
         this._$rootScope.$on('hideApp', () => {
             this.isLoaded = false;
+        });
+        
+        const self = this;
+        this._scope.$on('createProjectEvent', function (event, data) {
+          console.log(data);
+          console.log(event); // Данные, которые нам прислали
+          self.toShowModalWindow("projects");
         });
 
         if (!supportService.userId) {
@@ -33,9 +41,11 @@ export default class appController {
             });
         }
     }
+    
     toShowModalWindow(mode) {
         this.showModalWindow = true;
         this.mode = mode;
+        console.log('toShowModalWindow call.');
     }
 
     toHideModalWindow(booleanReload) {
@@ -52,5 +62,4 @@ export default class appController {
     toHideSearch() {
         this.showSearch = false;
     }
-
 }

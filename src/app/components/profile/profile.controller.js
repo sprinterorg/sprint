@@ -15,6 +15,10 @@ export default class profileController {
         this._supportService = supportService;
     }
 
+    emit(){
+        this.scope.$emit('createProjectEvent','');
+    }
+
     updateUser() {
         console.log("updateUser");
         let ids = [];
