@@ -38,7 +38,6 @@
             <li ng-repeat="srcImg in ProjectSettingsCtrl.backgrounds | filter:'!'+ProjectSettingsCtrl.project.background">
               <div class="background-item" ng-click="ProjectSettingsCtrl.selectBackground(srcImg)">
                 <img src="{{srcImg}}">
-                {{ProjectSettingsCtrl.backgrounds}}
               </div>
             </li>
           </ul>
@@ -53,20 +52,32 @@
       <div class="background__executor__name">{{ user.username }}</div>
     </div>
     <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true"">
-      <img 
-            class="background__executor__avatar"
+      <img  class="background__executor__avatar"
             src="{{ user.avatar }}">
       <div class="background__executor__name">{{ user.username }}</div>
       <div class="background__executor__delete" ng-click="ProjectSettingsCtrl.deleteUserFromProject(user.$id)"><i class="fas fa-times"></i></div>
     </div>
-  </div>
-  <form ng-submit="ProjectSettingsCtrl.addUserToProject()">
+    <div class="background__executor" ng-click="ProjectSettingsCtrl.showAddUser()">
+    <img class="background__executor__avatar background__executor__avatar--add"
+            src="plus.png">
+    </div>
+    <input class="project-settings__executors-input" type="text" ng-model="ProjectSettingsCtrl.searchUser" placeholder="Search user">
+    <ul class="project-settings__executors-select">
+            <li ng-repeat="user in ProjectSettingsCtrl.users | filter: {username: ProjectSettingsCtrl.searchUser || ' '}">
+              <div class="background__executor background__executor--select" ng-click="ProjectSettingsCtrl.addUserToProject(user)">
+                <img  class="background__executor__avatar background__executor__avatar--adding"
+            src="{{ user.avatar }}">
+                <p class="background__exector__avatar-name">{{user.username}}</p>
+              </div>
+            </li>
+          </ul>
+  <!-- <form ng-submit="ProjectSettingsCtrl.addUserToProject()">
 	<select
             ng-model="ProjectSettingsCtrl.newUserId"
             ng-options="user.$id as user.username for user in ProjectSettingsCtrl.users | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true">
       <option value="-- choose user --"></option>        
     </select>
 	<button type='submit'>Add User</button>
-  </form>
+  </form> -->
   <button ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
 </section>
