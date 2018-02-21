@@ -5,6 +5,14 @@
     loginController.entryPasswordValid:{{loginController.entryPasswordValid}}<br>
     loginController.entryRepeatPasswordValid:{{loginController.entryRepeatPasswordValid}}<br>
     -->
+    <div class="form-header">
+        <div>
+            {{loginController.showButtonName()}}
+        </div>
+        <div class="close">
+            <i class="flaticon-close"></i>
+        </div>
+    </div>
     <div class="form__item">
         <input id="email_input" type="text" ng-model="loginController.entryEmail" ng-class="loginController.entryEmailValid?'form__item-field':'form__item-field invalid__item-field'" name="email" ng-change="loginController.formValidation()" required>
         <label for="email_input" ng-class="loginController.entryEmailValid?'control-label':'control-label invalid__label'">{{loginController.entryEmailLabel}}</label>

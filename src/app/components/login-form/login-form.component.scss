@@ -1,23 +1,50 @@
 .login_form {
   background: #FFFFFF;
-  padding: 20px 15px 15px 15px;
+  padding-bottom:20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 450px;
-  
-  a{
-    color:#3498DB;
-    cursor:pointer;
-  }
-
+  border-radius: 5px;
   div{
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+  }
+
+  .form-header{
+    border-top-left-radius: 5px;
+    border-top-right-radius:5px;
+    width:100%;
+    height:50px;
+    background:#000000;
+    padding:5px 10px 5px 35px;
+    margin-bottom:15px;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    font-size:2.2rem;
+    font-weight:lighter;
+    color:#FFFFFF;
+    .close {
+      font-size:2.8rem;
+      padding-left:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+      color:#FFFFFF;
+      opacity:1;
+      transition:opacity 0.3s;
+    }
+    .close:hover{
+      opacity:0.7;
+    }
   }
 
   .server-error-message{
@@ -43,7 +70,7 @@
   }
 
   .form__item {
-    margin-top: 10px;
+    margin-top: 15px;
     padding-top: 10px;
     position: relative;
   }
@@ -141,92 +168,3 @@
   }
 
 }
-/*
-@media screen and (max-width:800px){
-  .login_form {
-    width: calc(40vw + 60px);
-    .button{
-      width: 40vw !important;
-      &--signup{
-        font-size:1.2em;
-        width:30vw;
-        height:5vh;
-      }
-    }
-    .form__item .form__item-field{
-      font-size: 1.5rem;
-      height: 5vh;
-      width: 40vw;
-    }
-    .form__item-field:focus ~ label,
-    .form__item-field:valid ~ label {
-      top: 0vh;
-      left: 5px;
-    }
-  }
-}
-@media screen and (max-width:400px){
-  .login_form {
-    width: calc(40vw + 60px);
-    .text,
-    .server-error-message{
-      font-size: 1.2rem;
-    }
-    .button{
-      margin: 0vh 0 3vh 0;
-      width: 50vw !important;
-      &--signup{
-        font-size: 1em;
-        width:30vw;
-        height:5vh;
-      }
-    }
-    .form__item .form__item-field{
-      font-size: 1.2rem;
-      height: 5vh;
-      width: 50vw;
-    }
-    .form__item-field ~ label{
-      font-size: 1.2rem;
-    }
-    .form__item-field:focus ~ label,
-    .form__item-field:valid ~ label {
-      top: -1.2vh;
-      left: 2px;
-      font-size:1rem;
-    }
-  }
-}
-@media screen and (max-height:600px){
-  .login_form {
-    width: calc(40vw + 60px);
-    .text,
-    .server-error-message{
-      font-size: 1.2rem;
-    }
-    .button{
-      margin: 0vh 0 3vh 0;
-      width: 50vw !important;
-      &--signup{
-        font-size: 1em;
-        width:30vw;
-        height: 8vh;
-      }
-    }
-    .form__item .form__item-field{
-      font-size: 1.2rem;
-      height: 8vh;
-      width: 50vw;
-    }
-    .form__item-field ~ label{
-      font-size: 1.2rem;
-    }
-    .form__item-field:focus ~ label,
-    .form__item-field:valid ~ label {
-      top: -1.2vh;
-      left: 2px;
-      font-size:1rem;
-    }
-  }
-}
-*/

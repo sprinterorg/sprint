@@ -1,7 +1,21 @@
-<div class="projects">
-    <form ng-submit='ProjectsCtrl.addProject()'>
-        <input type='text' ng-model="ProjectsCtrl.projectName" placeholder='project name'>
-        <input type='text' ng-model="ProjectsCtrl.duration" placeholder='duration of the sprint'>
-        <button type='submit'>Add project</button>
-    </form>
-</div>
+<form ng-submit='ProjectsCtrl.addProject()' class="projects-form" novalidate>
+	<div class="form-header">
+		<div>
+			Create new project
+		</div>
+		<div class="close" ng-click="ProjectsCtrl.hideFunc()">
+        	<span>&#10006;</span>
+    	</div>
+	</div>
+	<div class="form__item">
+		<input id="project-name" ng-class="ProjectsCtrl.projectNameIsValid?'form__item-field':'form__item-field invalid__item-field'" type='text' ng-model="ProjectsCtrl.projectName" ng-change="ProjectsCtrl.validateProjectName()" required>
+		<label for="project-name" ng-class="ProjectsCtrl.projectNameIsValid?'control-label':'control-label invalid__label'">{{ProjectsCtrl.projectNameLabel}}</label>
+		<span class="underscore"></span>
+	</div>
+    <div class="form__item">
+    	<input id="duration-of-the-sprint" ng-class="ProjectsCtrl.durationIsValid?'form__item-field':'form__item-field invalid__item-field'" type='number' ng-model="ProjectsCtrl.duration" ng-change="ProjectsCtrl.validateDuration()" required>
+	    <label for="duration-of-the-sprint" ng-class="ProjectsCtrl.durationIsValid?'control-label':'control-label invalid__label'">{{ProjectsCtrl.durationLabel}}</label>
+	    <span class="underscore"></span>
+	</div>
+    <button class="button button--signup" type='submit'>Add project</button>
+</form>
