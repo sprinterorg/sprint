@@ -10,7 +10,7 @@ class FireService {
     }
 
     createUser(userId, data) {
-        data.avatar = 'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F947799avatar.png?alt=media&token=c417ea2b-e139-4cae-8f19-821181f28286';
+        data.avatar = 'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F594513avatar.png?alt=media&token=d9d2be2e-5755-4057-adac-1f1d8ff72f76';
     	return this.rootRef.child('users').update({
             [userId]: data
         });
