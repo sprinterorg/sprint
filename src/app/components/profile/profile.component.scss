@@ -4,14 +4,14 @@
 }
 
 .profile__inform__block{
-  width: 400px;
-  /*outline: 1px solid green;*/
+  width: 360px;
 }
 
 .inform__block{
   display: flex;
   text-align: center;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .inform__block__avatar{
@@ -22,59 +22,62 @@
   padding: 0;
   position: relative;
   border-radius: 100%;
-  /*border: 3px solid #FFFFFF;
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.6);*/
 }
 
 .inform__block__avatar_img_visible{
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.6);
-  position: absolute;
-  top: -3px;
-  left: -3px;
   height: 100px;
   width: 100px;
   border-radius: 100%; 
   border: 3px solid #FFFFFF; 
   &:hover{
-    /*transform: scale(1.1);
-    opacity: 0.2;*/
+
   }
 }
 
 .inform__block__avatar_img_invisible{
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.6);
-  position: absolute;
-  top: -5px;
-  left: -5px;
   height: 100px;
   width: 100px;
   border-radius: 100%; 
   border: 3px solid #FFFFFF; 
 
   &:hover{
-    /*transform: scale(1.1);
-    opacity: 0.2;*/
+    
   }
 }
 
 .inform__block__avatar_textButton{
-  height: 40px;
-  width: 95px;
-  opacity: 0.1;
-  cursor: pointer;
-  background-color: #000000;
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
-  bottom: -2px;
-  left: 0;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
   position: absolute;
-  
-  &:hover{
-    opacity: 0.7;
-    color: #FFFFFF;
+  overflow: hidden;
+
+  &::before {
+    padding-top: 5px;
+    content: "change";
+    color: #ffffff;
+    display: block;
+    top: 60px;
+    left: 0;
+    width: 100px;
+    height: 50px;
+    background: #000000;
+    position: absolute;
     font-weight: bold;
-    line-height: 2.5;
+    opacity: .2;
+    font-size: 1.7rem;
+    cursor: pointer;
   }
+  
 }
+.inform__block__avatar_textButton:hover::before{
+  opacity: .7;
+}
+
 
 .inform__block__username__visible_username{
   font-size: 2.6rem;
@@ -91,6 +94,7 @@
 .inform__block__username__visible_email{
   width: 200px;
   margin: 5px 0 10px 0;
+  overflow: hidden;
 }
 
 .inform__block__username__visible,
@@ -99,16 +103,18 @@
   text-align: left;
   height: 100px;
   margin: 5% 0; 
-  /*outline: 1px solid green;*/
 }
 
 
 .input{
+  overflow: hidden;
   width: 200px;
   border: none; 
   outline: none;
-  padding: 5px;
-  margin: 2px 0 10px 0;
+  padding: 3px;
+  margin: 3px 0 10px 0;
+  font-size: 1.6rem;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .buttonPR {
@@ -126,7 +132,6 @@
     background: #000000;
     color: #ffffff;
     border-color: black;
-    /* margin-left: 5px; */
   }
 
   &--signup {
@@ -148,5 +153,17 @@
    color: #ffffff;
    border-color: black;
    margin-left: 5px;
-    }
+  }
 }
+  @media screen and (max-width: 450px){
+    .profile__inform__block{
+      width: 250px;
+    }
+    .inform__block{
+      flex-direction: column;
+    }
+    .inform__block__username__visible,
+    .inform__block__username__invisible{
+      text-align: center;
+    }
+  }
