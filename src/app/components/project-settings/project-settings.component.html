@@ -61,14 +61,19 @@
     <img class="background__executor__avatar background__executor__avatar--add"
             src="plus.png">
     </div>
-    <input class="project-settings__executors-input" type="text" ng-model="ProjectSettingsCtrl.searchUser" placeholder="Search user">
-    <ul class="project-settings__executors-select">
-            <li ng-repeat="user in ProjectSettingsCtrl.users | filter: {username: ProjectSettingsCtrl.searchUser || ' '}">
+    <div ng-if="ProjectSettingsCtrl.addUserSelect" class="project-setting__search">
+      <div class="loop-icon loop-icon--project-settings">
+        <i class="fas fa-search"></i>
+      </div>
+      <input class="project-settings__executors-input" type="text" ng-model="ProjectSettingsCtrl.searchUser" placeholder="Search user" required>
+    </div>
+    <ul ng-if="ProjectSettingsCtrl.addUserSelect" class="project-settings__executors-select">
+            <li class="project-settings__executors-option" ng-click="ProjectSettingsCtrl.addUserToProject(user)" ng-repeat="user in ProjectSettingsCtrl.users | filter: {username: ProjectSettingsCtrl.searchUser || ' '}">
               <div class="background__executor background__executor--select" ng-click="ProjectSettingsCtrl.addUserToProject(user)">
                 <img  class="background__executor__avatar background__executor__avatar--adding"
             src="{{ user.avatar }}">
-                <p class="background__exector__avatar-name">{{user.username}}</p>
               </div>
+              <p class="background__exector__avatar-name">{{user.username}}</p>
             </li>
           </ul>
   <!-- <form ng-submit="ProjectSettingsCtrl.addUserToProject()">

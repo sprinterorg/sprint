@@ -7,6 +7,7 @@ export default class projectSettingsController {
 		this.project = fireBase.getSprint(this.projectId);
 		this.users = fireBase.getAllUsers();
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
+        this.cards = fireBase.getListCards(this.projectId);
         this.projectEdit = false;
         this.durationEdit = false;
         this.backgroundEdit = false;
@@ -24,12 +25,11 @@ export default class projectSettingsController {
         });
     }
 	
-	addUserToProject() {
-		let userData = this.users.filter(item => item.$id === this.newUserId)[0];
-        this._fireBase.addUserToProject(userData.$id, this.projectId, {
-            username: userData.username,
-            email: userData.email,
-            avatar: userData.avatar
+	addUserToProject(user) {
+        this._fireBase.addUserToProject(user.$id, this.projectId, {
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar
         }, {
             projectName: this.project.projectName,
             background: this.project.background,
@@ -39,7 +39,10 @@ export default class projectSettingsController {
 	}
 
     deleteUserFromProject(userId) {
-        this._fireBase.deleteUserFromProject(userId, this.projectId);
+        let cards = [];
+        this.cards.filter(card => {if (card.executors) return userId in card.executors; return false}).forEach(card => cards.push(card.$id));
+        console.log(cards)
+        this._fireBase.deleteUserFromProject(userId, this.projectId, cards);
     }
 
 
@@ -59,7 +62,7 @@ export default class projectSettingsController {
 
     }
 
-    editProjectDuration() {
+    editProjectDuration(save) {
         this.durationEdit = !this.durationEdit;
         if(save) this.updateProject();
     }

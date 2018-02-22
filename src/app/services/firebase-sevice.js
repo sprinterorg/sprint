@@ -121,9 +121,13 @@ class FireService {
         });
     }
 
-    deleteUserFromProject(userId, projectId) {
+    deleteUserFromProject(userId, projectId, cards) {
         this.rootRef.child('projects/'+projectId+'/currentSprint/users').child(userId).remove().then( rootRef => {
-            this.rootRef.child('users/'+userId+'/my-projects').child(projectId).remove()
+            this.rootRef.child('users/'+userId+'/my-projects').child(projectId).remove();
+            cards.map( cardId => {
+                console.log('projects/'+projectId+'/cards/'+cardId+'/executors/'+userId)
+                this.rootRef.child('projects/'+projectId+'/cards/'+cardId+'/executors/').child(userId).remove();
+            })
         });
     }
 
