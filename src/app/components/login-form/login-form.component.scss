@@ -58,6 +58,8 @@
   }
 
   .server-error-message{
+    padding:0 5px;
+    box-sizing:border-box;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -97,6 +99,7 @@
   .form__description .form__item-field,
   .form__item-field ~ label {
     font-size: 2rem;
+    box-sizing:border-box;
   }
   .form__item-field:focus ~ label,
   .form__item-field:valid ~ label,

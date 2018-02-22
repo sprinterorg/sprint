@@ -45,7 +45,6 @@ export default class appController {
     toShowModalWindow(mode) {
         this.showModalWindow = true;
         this.mode = mode;
-        console.log('toShowModalWindow call.');
     }
 
     toHideModalWindow(booleanReload) {

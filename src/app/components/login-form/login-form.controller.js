@@ -17,6 +17,7 @@ export default class loginFormController {
         this.entryPasswordLabel = 'password';
         this.entryRepeatPasswordLabel = 'repeat password';
 
+        this.regularForEmail=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.entryEmailValid = true;
         this.entryPasswordValid = true;
         this.entryRepeatPasswordValid = true;
@@ -26,26 +27,53 @@ export default class loginFormController {
         this.serverResponseError = "";
     }
 
-    validateEmail(email) {
-      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    }
-
-    validatePassword(password){
-        if(password.length >= 6){
+    validateEmail() {
+        if(this.regularForEmail.test(this.entryEmail)){
+            this.entryEmailValid = true;
+            this.entryEmailLabel = 'e-mail';
             return true;
         }
         else{
+            this.entryEmailValid = false;
+            this.entryEmailLabel = 'invalid e-mail adress';
             return false;
         }
     }
 
-    checkPasswordsMatching(password1, password2){
-        if(password1 === password2){
+    validatePassword(){
+        if(this.entryPassword.length >= 6){
+            this.entryPasswordValid = true;
+            this.entryPasswordLabel = 'password';
             return true;
         }
         else{
+            this.entryPasswordValid = false;
+            this.entryPasswordLabel = 'weak password';
             return false;
+        }
+    }
+
+    checkPasswordsMatching(){
+        if(this.entryPassword === this.entryRepeatPassword){
+            this.entryRepeatPasswordValid = true;
+            this.entryRepeatPasswordLabel = 'repeat password';
+            return true;
+        }
+        else{
+            this.entryRepeatPasswordValid = false;
+            this.entryRepeatPasswordLabel = "passwords don't match";
+            return false;
+        }
+    }
+
+    formValidation(){
+        if(this.mode === 'logIn'){
+            this.FormIsValid = this.validateEmail() && this.validatePassword();
+            return this.FormIsValid;
+        }
+        if(this.mode === 'signUp'){
+            this.FormIsValid = this.validateEmail() && this.validatePassword() && this.checkPasswordsMatching();
+            return this.FormIsValid;
         }
     }
 
@@ -119,83 +147,20 @@ export default class loginFormController {
             self._$rootScope.$apply();
         }); 
     }
+
     clickHanler() {
-        if(this.FormIsValid){
-            if(this.mode === 'signUp'){
-            this.signUp();
-            }
-            else{
+        if(this.formValidation()){
+            if(this.mode === 'logIn'){
                 this.logIn();
             }
+            if(this.mode === 'signUp'){
+                this.signUp();
+            }
         }
         else{
-            this.formValidation();
+            return;
         }
         
-    }
-
-    formValidation(){
-        if(this.mode === 'signUp'){
-            if(!this.validateEmail(this.entryEmail)){
-                this.entryEmailValid = false;
-                this.entryEmailLabel = 'invalid e-mail adress';
-                this.FormIsValid = false;
-                return false;
-            }
-            else{
-                this.entryEmailValid = true;
-                this.entryEmailLabel = 'e-mail';
-            }
-
-            if(!this.validatePassword(this.entryPassword)){
-                this.entryPasswordValid = false;
-                this.entryPasswordLabel = 'weak password';
-                this.FormIsValid = false;
-                return false;
-            }
-            else{
-                this.entryPasswordValid = true;
-                this.entryPasswordLabel = 'password';
-            }
-
-            if(!this.checkPasswordsMatching(this.entryPassword, this.entryRepeatPassword)){
-                this.entryRepeatPasswordValid = false;
-                this.entryRepeatPasswordLabel = "passwords don't match";
-                this.FormIsValid = false;
-                return false;
-            }
-            else{
-                this.entryRepeatPasswordValid = true;
-                this.entryRepeatPasswordLabel = 'repeat password';
-            }
-            this.FormIsValid = true;
-            return true;
-        }
-        else{
-            if(!this.validateEmail(this.entryEmail)){
-                this.entryEmailValid = false;
-                this.entryEmailLabel = 'invalid e-mail adress';
-                this.FormIsValid = false;
-                return false;
-            }
-            else{
-                this.entryEmailValid = true;
-                this.entryEmailLabel = 'e-mail';
-            }
-
-            if(!this.validatePassword(this.entryPassword)){
-                this.entryPasswordValid = false;
-                this.entryPasswordLabel = 'weak password';
-                this.FormIsValid = false;
-                return false;
-            }
-            else{
-                this.entryPasswordValid = true;
-                this.entryPasswordLabel = 'password';
-            }
-            this.FormIsValid= true;
-            return true;
-        }
     }
 
     showButtonName() {
