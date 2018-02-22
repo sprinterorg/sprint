@@ -58,6 +58,8 @@
 
   .server-error-message{
     display:flex;
+    padding:0 5px;
+    box-sizing:border-box;
     flex-direction:column;
     justify-content:center;
     align-items:center;
