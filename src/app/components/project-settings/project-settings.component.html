@@ -10,6 +10,10 @@
           <div ng-if="ProjectSettingsCtrl.projectEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName(true)">
             <i class="fas fa-check"></i>
           </div>
+          <div class="project-settings__management-buttons">
+            <button class="link-button link-button--close-sprint" ng-click="ProjectSettingsCtrl.closeSprint()">Close sprint</button>
+            <button class="link-button link-button--delete" ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
+          </div>
         </div>
         <div class="project-settings__project-duration">
         <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
@@ -43,6 +47,7 @@
           </ul>
         </div>
   </form>
+  <div class=project-setting__users-section>
   <p class="project-settings__text project-settings__text--users">project users:</p>
   <div class="background__executors">
     <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: ProjectSettingsCtrl.userId}:true"">
@@ -61,14 +66,15 @@
     <img class="background__executor__avatar background__executor__avatar--add"
             src="plus.png">
     </div>
-    <div ng-if="ProjectSettingsCtrl.addUserSelect" class="project-setting__search">
+    <div ng-if="ProjectSettingsCtrl.addUserSelect" class="project-settings__search-section">
+    <div class="project-setting__search">
       <div class="loop-icon loop-icon--project-settings">
         <i class="fas fa-search"></i>
       </div>
       <input class="project-settings__executors-input" type="text" ng-model="ProjectSettingsCtrl.searchUser" placeholder="Search user" required>
     </div>
-    <ul ng-if="ProjectSettingsCtrl.addUserSelect" class="project-settings__executors-select">
-            <li class="project-settings__executors-option" ng-click="ProjectSettingsCtrl.addUserToProject(user)" ng-repeat="user in ProjectSettingsCtrl.users | filter: {username: ProjectSettingsCtrl.searchUser || ' '}">
+    <ul class="project-settings__executors-select">
+            <li class="project-settings__executors-option" ng-click="ProjectSettingsCtrl.addUserToProject(user)" ng-repeat="user in ProjectSettingsCtrl.users | filter: {username: ProjectSettingsCtrl.searchUser || '*'}">
               <div class="background__executor background__executor--select" ng-click="ProjectSettingsCtrl.addUserToProject(user)">
                 <img  class="background__executor__avatar background__executor__avatar--adding"
             src="{{ user.avatar }}">
@@ -76,13 +82,7 @@
               <p class="background__exector__avatar-name">{{user.username}}</p>
             </li>
           </ul>
-  <!-- <form ng-submit="ProjectSettingsCtrl.addUserToProject()">
-	<select
-            ng-model="ProjectSettingsCtrl.newUserId"
-            ng-options="user.$id as user.username for user in ProjectSettingsCtrl.users | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true">
-      <option value="-- choose user --"></option>        
-    </select>
-	<button type='submit'>Add User</button>
-  </form> -->
-  <button ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
+        </div>
+    </div>
+  </div>
 </section>

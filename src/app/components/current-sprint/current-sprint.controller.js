@@ -146,45 +146,6 @@ export default class sprintController {
         this.supportService.isCardOpen = false;
     }
 
-    closeSprint() {
-        let usersOfClosedTasks = [this.currentSprint.managerId];
-        let closedTasks = [];
-        let allTasks = {};
-        
-        for (let item of this.cards) {
-               if (item.list_id !== 1) {
-                allTasks[item.$id] = {
-                    title: item.title, 
-                    list_id: item.list_id,
-                    id: item.id,
-                    priority: item.priority,
-                    sprintStart: item.sprintStart
-                };
-                if (item.list_id === 3) {
-                    allTasks[item.$id].sprintEnd = this.currentSprint.sprintNumber;
-                    closedTasks.push(item.$id);
-                    if(item.executors) {
-                        let keyArr = Object.keys(item.executors);
-                        for (let key of keyArr)i
-                            usersOfClosedTasks.push(key);
-                    }
-                }
-            }
-        }
-
-        let closedSprintData = {
-            projectName: this.currentSprint.projectName,
-            sprintStart: this.currentSprint.startTimeStamp,
-            sprintActualFinish: Date.now(),
-            tasksTotal: Object.keys(allTasks).length,
-            tasksClosed: closedTasks.length
-        };
-
-        this._fireBase.addClosedToHistory(this.projectId, this.currentSprint.sprintNumber, allTasks);
-        this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
-        this._fireBase.updateSprintData(this.projectId, this.currentSprint.sprintNumber, closedSprintData);
-    }
-
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
     }
