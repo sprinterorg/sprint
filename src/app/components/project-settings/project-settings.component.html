@@ -50,16 +50,16 @@
   <div class=project-setting__users-section>
   <p class="project-settings__text project-settings__text--users">project users:</p>
   <div class="background__executors">
-    <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: ProjectSettingsCtrl.userId}:true"">
+    <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: ProjectSettingsCtrl.userId}:true" >
       <img 
             class="background__executor__avatar background__executor__avatar--admin"
-            src="{{ user.avatar }}">
-      <div class="background__executor__name">{{ user.username }}</div>
+            src="{{ user.avatar }}" title="{{user.username}}">
+     <!--  <div class="background__executor__name">{{ user.username }}</div> -->
     </div>
-    <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true"">
+    <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true" title="{{user.username}}">
       <img  class="background__executor__avatar"
             src="{{ user.avatar }}">
-      <div class="background__executor__name">{{ user.username }}</div>
+     <!--  <div class="background__executor__name">{{ user.username }}</div> -->
       <div class="background__executor__delete" ng-click="ProjectSettingsCtrl.deleteUserFromProject(user.$id)"><i class="fas fa-times"></i></div>
     </div>
     <div class="background__executor" ng-click="ProjectSettingsCtrl.showAddUser()">
