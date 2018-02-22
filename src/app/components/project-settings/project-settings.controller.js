@@ -35,7 +35,7 @@ export default class projectSettingsController {
             background: this.project.background,
             managerId: this.project.managerId
         });
-        
+         this.addUserSelect = false;
 	}
 
     deleteUserFromProject(userId) {
@@ -78,6 +78,45 @@ export default class projectSettingsController {
     }
     showAddUser() {
         this.addUserSelect = !this.addUserSelect;
+    }
+
+    closeSprint() {
+        let usersOfClosedTasks = [this.project.managerId];
+        let closedTasks = [];
+        let allTasks = {};
+        
+        for (let item of this.cards) {
+               if (item.list_id !== 1) {
+                allTasks[item.$id] = {
+                    title: item.title, 
+                    list_id: item.list_id,
+                    id: item.id,
+                    priority: item.priority,
+                    sprintStart: item.sprintStart
+                };
+                if (item.list_id === 3) {
+                    allTasks[item.$id].sprintEnd = this.project.sprintNumber;
+                    closedTasks.push(item.$id);
+                    if(item.executors) {
+                        let keyArr = Object.keys(item.executors);
+                        for (let key of keyArr)i
+                            usersOfClosedTasks.push(key);
+                    }
+                }
+            }
+        }
+
+        let closedSprintData = {
+            projectName: this.project.projectName,
+            sprintStart: this.project.startTimeStamp,
+            sprintActualFinish: Date.now(),
+            tasksTotal: Object.keys(allTasks).length,
+            tasksClosed: closedTasks.length
+        };
+
+        this._fireBase.addClosedToHistory(this.projectId, this.project.sprintNumber, allTasks);
+        this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
+        this._fireBase.updateSprintData(this.projectId, this.project.sprintNumber, closedSprintData);
     }
 }
 

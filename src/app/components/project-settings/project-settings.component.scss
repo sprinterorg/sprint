@@ -18,7 +18,7 @@
 .sprint-project-settings {
 	& .project-settings {
 		box-sizing: border-box;
-		padding: 20px;
+		padding: 20px 20px 40px 20px;
 		z-index: 11;
 		position: absolute;
 		top: 0px;
@@ -44,19 +44,19 @@
 
 .project-settings__project-name {
 	border-bottom: 1px solid #D1D1D1;
-	height: 35px;
+	height: 60px;
 }
 
 .project-settings__project-duration {
 	height: 30px;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 
 .project-settings__button.edit {
 	position: absolute;
 	display: none;
 	top: 8px;
-	right: 5px;
+	right: 10px;
 	color: #9d9d9d;
 
 	&--background {
@@ -65,18 +65,26 @@
 	}
 }
 
+.project-settings__project-duration .edit {
+	top: 20px;
+}
+
 .project-settings__text {
-	padding: 5px;
+	padding: 5px 5px 7px 5px;
 	font-size: 1.7rem;
 	color: #9d9d9d;
 	text-transform: uppercase;
 	&--duration,
 	&--users {
+		margin-top: 20px;
 		display: inline-block;
-		padding: 10px 5px 0 5px;
+		padding: 0 5px 0 5px;
 		font-size: 1.5rem;
 		text-transform: lowercase;
 		color: #000000;
+	}
+	&--users {
+		margin-top: 10px;
 	}
 }
 
@@ -138,10 +146,19 @@
 	width: 100%;
 	border: 2px solid #000000;
 	background: #ffffff;
-
+	-webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+	-moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+	box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
 	& .background-item:hover {
 		opacity: .6;
 	}
+}
+
+.project-setting__users-section {
+	margin-top: 25px;
+	border: 1px solid #D1D1D1;
+	padding-bottom: 10px;
+	position: relative;
 }
 
 .background__executors {
@@ -155,7 +172,7 @@
 	display: block;
 	width: 40px;
 	height: 40px;
-	margin: 5px 7px;
+	margin: 5px 6px;
 	&__avatar {
 		flex-shrink: 0;
 		width: 100%;
@@ -235,6 +252,38 @@
 		background: #ffffff;
 	}
 }
+
+.project-settings__search-section {
+	width: 268px;
+	position: absolute;
+	bottom: -36px;
+}
+
+.project-settings__executors-select {
+	position: absolute;
+	top: 40px;
+	-webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+	-moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+	box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+}
+
+.project-settings__management-buttons {
+	display: flex;
+	justify-content: flex-start;
+	position: absolute;
+	bottom: -3px;
+}
+
+.link-button--close-sprint,
+.link-button--delete {
+	color: #D1D1D1;
+	padding: 0 5px 10px 5px;
+	text-transform: lowercase;
+	
+}
+
+
+
 
 
 
