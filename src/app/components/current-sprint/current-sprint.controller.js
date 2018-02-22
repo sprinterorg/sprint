@@ -14,6 +14,8 @@ export default class sprintController {
         this.isShown = true;
 
         this.focusElement = null
+        this.observableElement;
+        this.targetForClosing = false;
 
         this.cardName = [];
         this.newListName = null;
@@ -80,8 +82,17 @@ export default class sprintController {
     }
 
     $onInit(){
+        document.addEventListener('click', (event)=>{
+
+            // this.clickWatcher(event.target)
+
+        })
+    }
+
+    clickWatcher(target) {
 
     }
+
 
     getUser(userId) {
         return this.users.filter(item => item.$id === userId)[0].avatar;
@@ -122,14 +133,7 @@ export default class sprintController {
         }
         this.focusElement = document.getElementById(elId)
         this.focusElement.focus();
-        this.focusElement.addEventListener('blur', ()=>{
-           this.lists.map( (el)=> {
-               if ('openAddCard' in el){
-                   el['openAddCard'] = false;
-               }
-           })
-           //  list.openAddCard = false;
-        })
+
     }
 
 
@@ -152,6 +156,12 @@ export default class sprintController {
         });
     }
 
+    onBlur(list) {
+        list.openAddCard = false;
+    }
+    onMenuBlur(list) {
+        list.isListMenuShown = false;
+    }
     showFullCard(card){
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
@@ -165,13 +175,20 @@ export default class sprintController {
         this.showProjectSettings = !this.showProjectSettings;
     }
 
-    showListMenu(list) {
+    showListMenu(list, elemId) {
+        this.observableElement = document.getElementById(elemId);
+        this.targetForClosing = list;
+
        if (list['isListMenuShown']) {
            list.isListMenuShown = false
        } else {
            list.isListMenuShown = true;
        }
+
+       this.observableElement.children[0].children[0].focus();
     }
+
+
     hideListMenu(list) {
         list.isListMenuShown = false;
     }
@@ -214,7 +231,29 @@ export default class sprintController {
     changeListTitle(list) {
         console.log(list);
         this.newListName = null;
+        list.isListMenuShown = false;
     }
+
+    scrollListTop(elId) {
+        let el = document.getElementById(elId)
+        el.scrollBy(0,-100);
+    }
+
+    scrollListDown(elId) {
+        let el = document.getElementById(elId)
+        el.scrollBy(0,100);
+    }
+
+    isNeedScroll(elId) {
+        let el = document.getElementById(elId);
+        console.log(el.clientHeight < el.scrollHeight)
+        if (el.clientHeight < el.scrollHeight) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
 

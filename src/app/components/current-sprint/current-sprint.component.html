@@ -32,6 +32,7 @@
 
 
 			<div ng-if="list.listId !== 1"
+				 id="{{list.listId + 100}}"
 				 class="list__full-menu"
 				 ng-blur="SprintCtrl.hideListMenu(list)"
 				 ng-class="{'list__full-menu_open' : list.isListMenuShown,
@@ -39,10 +40,10 @@
 
 				<!--<div ng-click="SprintCtrl.hideListMenu(list)"-->
 				     <!--class="list__full-menu__close-icon"></div>-->
-				<form ng-if="list.listId>3"
-                      class="list__full-menu__title-change"
+				<form class="list__full-menu__title-change"
 					  ng-submit="SprintCtrl.changeListTitle(list)">
-					<input type="text" ng-model="SprintCtrl.newListName"
+					<input ng-blur="SprintCtrl.onMenuBlur(list)"
+							type="text" ng-model="SprintCtrl.newListName"
 						   placeholder="Edit list name">
 				</form>
 				<div ng-if="list.listId>3"
@@ -66,9 +67,7 @@
 					</div>
 					<div ng-if="list.listId !== 1"
 						 class="list_list-container_header__menu"
-                         ng-click="SprintCtrl.showListMenu(list)">
-
-
+                         ng-click="SprintCtrl.showListMenu(list, list.listId+100)">
 					</div>
 					<div ng-if="list.listId == 1"
 						 ng-click="SprintCtrl.hideBacklog()"
@@ -77,6 +76,7 @@
 
 				</div>
 				<ul class="cards-list__wrapper"
+					id="{{list.listId+200}}"
 					dnd-allowed-types="['item']"
 					dnd-list
 					dnd-drop="onDrop(list.listId, item)">
@@ -86,7 +86,8 @@
 					    class="card"
 					    dnd-draggable="card"
 					    dnd-type="'item'"
-					    dnd-effect-allowed="move">
+					    dnd-effect-allowed="move"
+						>
 						<div class="card_content-card"
 							>
 							<div class="card_content-card__top">
@@ -122,8 +123,12 @@
 
 				<div class="list_list-container_footer">
 
-					<div class="list_list-container_footer__top"></div>
-					<div class="list_list-container_footer__down"></div>
+					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
+						class="list_list-container_footer__top"
+						 ng-click="SprintCtrl.scrollListTop(list.listId +200)"></div>
+					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
+						 class="list_list-container_footer__down"
+					ng-click="SprintCtrl.scrollListDown(list.listId +200)"></div>
 					<div class="list_list-container_footer__add-card"
 						 ng-click="SprintCtrl.openAddCardToList(list, list.listId)">
 					</div>
@@ -134,6 +139,7 @@
 					  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': !!list.openAddCard}"
 					  ng-submit="SprintCtrl.addCard(list.listId, list)">
 					<input id="{{list.listId}}"
+						   ng-blur="SprintCtrl.onBlur(list)"
 							type="text" ng-model="SprintCtrl.cardName[list.listId]"
 						   placeholder="Enter task name"/>
 				</form>
