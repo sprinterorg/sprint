@@ -50,16 +50,15 @@
 	</section>
 	<section class="comments-section">
 	<div class="add-comment">
-	<textarea ng-model="TaskCtrl.comment" rows="4" cols="50" name="comment" placeholder="Wright comment">
+	<textarea class="add-comment__textarea" ng-model="TaskCtrl.comment" name="comment" placeholder="Your comment">
 		</textarea>
-	<button ng-click="TaskCtrl.addComment()">Save comment</button>
+	<button class="button button--send" ng-click="TaskCtrl.addComment()">Add comment</button>
 	</div>
 
 	<div ng-repeat="comment in TaskCtrl.comments" class="comments user-comment">
 		<img src="{{TaskCtrl.getUser(comment.userId).avatar}}" alt="" class="comment-avatar">
 		<div class="comment-body">
 			<div class="comment-in">
-			<span class="comment-arrow"></span>
 				<div class="user-name">{{TaskCtrl.getUser(comment.userId).username}}</div>
 
 				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  class="comment-text">{{comment.comment}}</span>

@@ -59,26 +59,53 @@
   
   .task__wrapper {
     padding: 40px;
+    background: #ffffff;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
     
   }
 
 
   .task {
     margin: 0 auto;
+    background: #f3f3f3;
   }
 
 }
 
 .comments-section {
-  padding: 30px;
-  background: #f3f3f3;
+  padding: 15px 30px;
 }
 
+.add-comment {
+  padding-bottom: 20px;
+}
+
+.add-comment__textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  border: 1px solid #D1D1D1;
+  resize: none;
+  font-size: 1.6rem;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+ .button--send {
+    background: #000000;
+    color: #ffffff;
+    border-color: black;
+    font-size: 1.6rem;
+    padding: 5px;
+  }
 
 .comments {
   display: flex;
   justify-content: space-between;
-  margin: 0 0 35px;
+  align-items: flex-start;
+  margin: 0 0 15px;
 
   .comment-avatar {
     border: 2px solid #ffffff;
@@ -96,14 +123,16 @@
   }
 
   .comment-body {
-    box-shadow: rgb(230, 230, 230) 3px 3px 3px 0;
     position: relative;
-    width: 370px;
+    width: 100%;
     background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
     border: 1px solid rgb(204, 204, 204);
-    border-radius: 3px 3px 3px 3px;
-    margin: 10px 0 0 15px;
+    border-radius: 0px 15px 15px 15px;
     height: max-content;
+    margin-left: 30px;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
 
 
     .comment-in {
@@ -159,27 +188,6 @@
         height: 15px;
         text-align: left;
 
-      }
-
-      .comment-arrow {
-        background-position: -38px -7659px;
-        color: rgb(51, 51, 51);
-        display: block;
-        height: 15px;
-        left: -10px;
-        position: absolute;
-        text-align: left;
-        text-decoration: none solid rgb(51, 51, 51);
-        text-rendering: optimizelegibility;
-        top: 10px;
-        width: 10px;
-        perspective-origin: 5px 7.5px;
-        transform-origin: 5px 7.5px;
-        background: rgba(0, 0, 0, 0) url(https://cdn2.f-cdn.com/img/sprite-icons.png?46&amp;v=d5abe80…&amp;m=2) repeat scroll -38px -7659px / auto padding-box border-box;
-        border: 0px none rgb(51, 51, 51);
-        font: normal normal normal 13px/normal Arial, Verdana, sans-serif;
-        list-style: none outside none;
-        outline: rgb(51, 51, 51) none 0;
       }
 
       .user-name {
