@@ -217,7 +217,7 @@ class FireService {
     }
 
     addComment(comments, newComment) {
-        return comments.$add(newComment)
+        return comments.$add(newComment);
     }
 
     deleteComment($id, projectId, taskId) {

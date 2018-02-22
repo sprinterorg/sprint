@@ -51,8 +51,8 @@ export default class ticketController {
         this._fireBase.addComment(this.comments, {comment: this.comment, userId: this.userId});
     }
 
-    deleteComment(id) {
-        this._fireBase.deleteComment(id, this.projectId, this.taskId);
+    deleteComment(commentId) {
+        this._fireBase.deleteComment(commentId, this.projectId, this.taskId);
     }
 
     editComment(comment) {
