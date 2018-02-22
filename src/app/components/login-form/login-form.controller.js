@@ -41,6 +41,11 @@ export default class loginFormController {
     }
 
     validatePassword(){
+        if(this.entryPassword === undefined){
+            this.entryPasswordValid = false;
+            this.entryPasswordLabel = 'weak password';
+            return false;
+        }
         if(this.entryPassword.length >= 6){
             this.entryPasswordValid = true;
             this.entryPasswordLabel = 'password';
