@@ -1,5 +1,8 @@
 <div class="task-wrap">
 <section  class="task task-layer">
+	<a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
+			<button ng-click="SprintCtrl.closeFullCard()">x</button>
+		</a>
     <div class='task__wrapper'>
 		<div class='task-content'>
 			<h1>{{TaskCtrl.task.title}}</h1>
