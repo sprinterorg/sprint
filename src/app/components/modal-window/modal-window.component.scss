@@ -1,5 +1,5 @@
 .modal_include {
-  z-index: 31;
+  z-index: 100;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 }
 
 .modal_overlay {
-  z-index: 30;
+  z-index: 90;
   position: fixed;
   background-color: #000000;
   opacity: 0.8;

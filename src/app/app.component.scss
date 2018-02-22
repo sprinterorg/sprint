@@ -17,7 +17,8 @@ body {
 	box-sizing: border-box;
 }
 
-input {
+input,
+textarea {
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -46,7 +47,7 @@ a{
 }
 
 .header {
-	z-index: 20;
+	z-index: 60;
 	position: fixed;
 	width: 100%;
 	background: #ffffff;
