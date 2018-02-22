@@ -1,11 +1,18 @@
 <div class="task-wrap">
 <section  class="task task-layer">
-	<a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
-			<button ng-click="SprintCtrl.closeFullCard()">x</button>
+	<div class="task-header">
+        <div class="task-title">
+            {{TaskCtrl.task.title}}
+        </div>
+        <div class="close" ng-click="loginController.hideFunc()"">
+            <a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
+			<div class='close-button' ng-click="SprintCtrl.closeFullCard()"><i class="flaticon-cancel"></i></div>
 		</a>
-    <div class='task__wrapper'>
+        </div>
+    </div>
+	
+    <section class='task__wrapper'>
 		<div class='task-content'>
-			<h1>{{TaskCtrl.task.title}}</h1>
 			<p> Priority {{TaskCtrl.task.priority}}</p>
 			<ul>
 				<li ng-repeat="user in TaskCtrl.executors track by $index">
@@ -40,9 +47,8 @@
 			<button type='submit'>Move to another list</button>
 		  </form>
 		</div>
-	</div>
-</section>
-
+	</section>
+	<section class="comments-section">
 	<div class="add-comment">
 	<textarea ng-model="TaskCtrl.comment" rows="4" cols="50" name="comment" placeholder="Wright comment">
 		</textarea>
@@ -70,5 +76,8 @@
 			</div>
 		</div>
 	</div>
+</section>
+</section>
+
 
 </div>
