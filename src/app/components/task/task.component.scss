@@ -1,7 +1,7 @@
 .card-content {
   box-sizing: border-box;
   position: absolute;
-  z-index: 20;
+  z-index: 100;
   box-sizing: border-box;
   top: -35px;
   left: 0;
@@ -47,7 +47,7 @@
   width: 100vw;
   height: 100vh;
   overflow-y: hidden;
-  z-index: 50;
+  z-index: 90;
 
   .task-layer {
     box-sizing: border-box;
