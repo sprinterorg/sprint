@@ -14,19 +14,19 @@
         </div>
     </div>
     <div class="form__item">
-        <input id="email_input" type="text" ng-model="loginController.entryEmail" ng-class="loginController.entryEmailValid?'form__item-field':'form__item-field invalid__item-field'" name="email" ng-change="loginController.formValidation()" required>
+        <input id="email_input" type="text" ng-model="loginController.entryEmail" ng-class="loginController.entryEmailValid?'form__item-field':'form__item-field invalid__item-field'" name="email" ng-change="loginController.validateEmail()" required>
         <label for="email_input" ng-class="loginController.entryEmailValid?'control-label':'control-label invalid__label'">{{loginController.entryEmailLabel}}</label>
         <span></span>
     </div>
 
     <div class="form__item">
-        <input id="password_input" type="password" ng-model="loginController.entryPassword" name="password"  ng-class="loginController.entryPasswordValid?'form__item-field':'form__item-field invalid__item-field'" ng-change="loginController.formValidation()" required>
+        <input id="password_input" type="password" ng-model="loginController.entryPassword" name="password"  ng-class="loginController.entryPasswordValid?'form__item-field':'form__item-field invalid__item-field'" ng-change="loginController.validatePassword()" required>
         <label for="password_input" ng-class="loginController.entryPasswordValid?'control-label':'control-label invalid__label'">{{loginController.entryPasswordLabel}}</label>
         <span></span>
     </div>
 
     <div ng-show="loginController.mode === 'signUp'" class="form__item">
-        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword" autocomplete="off" ng-class="loginController.entryRepeatPasswordValid?'form__item-field':'form__item-field invalid__item-field'" name="repeat_password" ng-change="loginController.formValidation()" required>
+        <input id="repeat_password_input" type="password" ng-model="loginController.entryRepeatPassword" autocomplete="off" ng-class="loginController.entryRepeatPasswordValid?'form__item-field':'form__item-field invalid__item-field'" name="repeat_password" ng-change="loginController.checkPasswordsMatching()" required>
         <label for="repeat_password_input" ng-class="loginController.entryRepeatPasswordValid?'control-label':'control-label invalid__label'">{{loginController.entryRepeatPasswordLabel}}</label>
         <span></span>
     </div>
