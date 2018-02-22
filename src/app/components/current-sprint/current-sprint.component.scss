@@ -21,6 +21,26 @@
 	width: 100vw;
 	background: #f7f7f7;
 
+	&__project-users{
+		position: fixed;
+		right: 20px;
+		z-index: 30;
+		display: flex;
+		flex-direction: column;
+		&__icons{
+			width: 50px;
+			height: 50px;
+			cursor: -webkit-grab;
+			display: block;
+			border-radius: 50%;
+			img{
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+		}
+	}
+
 	.lists-container__wrapper {
 		display: flex;
 		flex-direction: row;
@@ -49,18 +69,50 @@
 				transition: all 0.5s;
 				z-index: 40;
 				width: 220px;
-				height: 200px;
+				//height: 200px;
+				min-height: 100px;
 				background: #f7f7f7;
 				border: 2px solid #ebebeb;
+				padding: 10px;
 				&_close{
 					transition: all 0.5s;
 					z-index: -10;
 					opacity: 0.8;
 					transform: scale(0);
+					padding: 10px;
 				}
 				&__close-icon{
 					&::after{
 						content: url("../../../delete.png");
+					}
+				}
+				&__delete-list{
+					width: 100%;
+					font-size: 16px;
+					height: 32px;
+					background: #fff;
+					padding: 0 10px 0 10px;
+					margin-bottom: 10px;
+					display: flex;
+					align-items: center;
+					border-radius: 5px;
+					box-sizing: border-box;
+					&:hover{
+						background: rgba(0,0,0, 0.1);
+						//border: 1px solid black;
+					}
+				}
+				&__title-change{
+					width: 100%;
+					margin-bottom: 10px;
+
+					input{
+						border: none;
+						width: 100%;
+						height: 32px;
+						font-size: 17px;
+						padding: 0 10px 0 10px;
+						border-radius: 5px;
 					}
 				}
 			}
@@ -155,7 +207,7 @@
 							height: 32px;
 							border: none;
 							border-radius: 3px 0 0 3px;
-							padding: 0 10px 0 10px;
+							padding: 0 42px 0 10px;
 							font-size: 16px;
 							margin-bottom: 2px;
 							transition: all 0.7s;
@@ -327,7 +379,20 @@
 					display: flex;
 					flex-direction: row;
 					height: 33px;
+					min-width: 33px;
 					align-items: center;
+
+					&>.dndPlaceholder{
+						display: block;
+						max-width: 33px;
+						max-height: 33px;
+						min-width: 33px;
+						min-height: 33px;
+						border-radius: 50%;
+						margin-left: 3px;
+						background: #a9a9a9;
+					}
+
 					&__avatar {
 						display: block;
 						max-width: 33px;
@@ -367,6 +432,7 @@
 		display: block;
 		width: 100%;
 		input{
+
 			width: 100%;
 			height: 26px;
 			border: none;

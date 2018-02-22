@@ -3,6 +3,16 @@
 	<a class="list-container__hystory" ui-sref="hystory({project_id: SprintCtrl.projectId})">Go to Hystory</a>
 	<button class="link-button" ng-click="SprintCtrl.toShowProjectSettings()">Project Settings</button>
 	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
+
+	<div class="lists-container__project-users">
+		<div class="lists-container__project-users__icons"
+		ng-repeat="user in SprintCtrl.users"
+		dnd-type="'user'"
+		dnd-draggable="user">
+			<img src="{{user.avatar}}">
+		</div>
+	</div>
+
 	<div class="lists-container__wrapper"
 		 dnd-allowed-types="['container']"
 		 dnd-list
@@ -29,8 +39,11 @@
 
 				<!--<div ng-click="SprintCtrl.hideListMenu(list)"-->
 				     <!--class="list__full-menu__close-icon"></div>-->
-				<form class="list__full-menu__title-change">
-					<input placeholder="Edit list name">
+				<form ng-if="list.listId>3"
+                      class="list__full-menu__title-change"
+					  ng-submit="SprintCtrl.changeListTitle(list)">
+					<input type="text" ng-model="SprintCtrl.newListName"
+						   placeholder="Edit list name">
 				</form>
 				<div ng-if="list.listId>3"
 					 class="list__full-menu__delete-list"
@@ -74,7 +87,8 @@
 					    dnd-draggable="card"
 					    dnd-type="'item'"
 					    dnd-effect-allowed="move">
-						<div class="card_content-card">
+						<div class="card_content-card"
+							>
 							<div class="card_content-card__top">
 								<div class="card_content-card__top-title">
 									<h4>{{ card.title }}</h4>
@@ -91,7 +105,9 @@
 									<p>{{ SprintCtrl.cardCommentsCount(card) }}</p>
 									<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>
 								</div>
-								<div class="card_content-card__bottom-executors">
+								<div class="card_content-card__bottom-executors"
+									 dnd-list dnd-drop="onUserDrop(item, card)"
+									 dnd-allowed-types="['user']">
 									<img ng-repeat="executor in card.executors"
 										 class="card_content-card__bottom-executors__avatar"
 										 src="{{ SprintCtrl.getUser(executor) }}">
@@ -109,30 +125,19 @@
 					<div class="list_list-container_footer__top"></div>
 					<div class="list_list-container_footer__down"></div>
 					<div class="list_list-container_footer__add-card"
-						 ng-click="SprintCtrl.openAddCardToList(list)">
+						 ng-click="SprintCtrl.openAddCardToList(list, list.listId)">
 					</div>
 
 				</div>
-				<form class="list_list-container_footer list_list-container_footer__form-wrapper"
+				<form
+						class="list_list-container_footer list_list-container_footer__form-wrapper"
 					  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': !!list.openAddCard}"
 					  ng-submit="SprintCtrl.addCard(list.listId, list)">
-					<input
+					<input id="{{list.listId}}"
 							type="text" ng-model="SprintCtrl.cardName[list.listId]"
 						   placeholder="Enter task name"/>
 				</form>
 
-
-
-
-				<!--<div ng-if="list.listId == 1"-->
-					<!--class="project-users__wrapper">-->
-					<!--<div class="project-users__wrapper-user"-->
-						 <!--ng-repeat="user in SprintCtrl.users"-->
-						 <!--dnd-type="'user'"-->
-						 <!--dnd-draggable="user">-->
-						<!--<img src="{{user.avatar}}">-->
-					<!--</div>-->
-				<!--</div>-->
 			</div>
 		</div>
 		<div class="list add-list">
@@ -149,5 +154,6 @@
 			</div>
 		</div>
 	</div>
+
 	<ui-view></ui-view>
 </section>

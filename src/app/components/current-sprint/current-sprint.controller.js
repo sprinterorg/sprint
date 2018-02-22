@@ -13,7 +13,10 @@ export default class sprintController {
         this.element = $element;
         this.isShown = true;
 
+        this.focusElement = null
+
         this.cardName = [];
+        this.newListName = null;
 
         this.hide = this.toShowProjectSettings.bind(this);
         this.showProjectSettings = false;
@@ -77,6 +80,7 @@ export default class sprintController {
     }
 
     $onInit(){
+
     }
 
     getUser(userId) {
@@ -110,14 +114,25 @@ export default class sprintController {
         this._fireBase.deleteList(this.cards.filter(item => item.list_id === list.listId), this.projectId, list.$id);
     }
 
-    openAddCardToList(list) {
-        console.log('list', list)
+    openAddCardToList(list, elId) {
         if(list.openAddCard == true) {
             list.openAddCard = false;
         } else {
             list.openAddCard = true;
         }
+        this.focusElement = document.getElementById(elId)
+        this.focusElement.focus();
+        this.focusElement.addEventListener('blur', ()=>{
+           this.lists.map( (el)=> {
+               if ('openAddCard' in el){
+                   el['openAddCard'] = false;
+               }
+           })
+           //  list.openAddCard = false;
+        })
     }
+
+
 
     addCard(listId, list) {
         let self = this;
@@ -194,6 +209,11 @@ export default class sprintController {
         } else {
             return 0;
         }
+    }
+
+    changeListTitle(list) {
+        console.log(list);
+        this.newListName = null;
     }
 
 }
