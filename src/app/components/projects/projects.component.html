@@ -13,7 +13,7 @@
 		<span class="underscore"></span>
 	</div>
     <div class="form__item">
-    	<input id="duration-of-the-sprint" ng-class="ProjectsCtrl.durationIsValid?'form__item-field':'form__item-field invalid__item-field'" type='number' ng-model="ProjectsCtrl.duration" ng-change="ProjectsCtrl.validateDuration()" required>
+    	<input id="duration-of-the-sprint" step="1" ng-class="ProjectsCtrl.durationIsValid?'form__item-field':'form__item-field invalid__item-field'" type='number' ng-model="ProjectsCtrl.duration" ng-change="ProjectsCtrl.validateDuration()" required>
 	    <label for="duration-of-the-sprint" ng-class="ProjectsCtrl.durationIsValid?'control-label':'control-label invalid__label'">{{ProjectsCtrl.durationLabel}}</label>
 	    <span class="underscore"></span>
 	</div>

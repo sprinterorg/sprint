@@ -37,13 +37,15 @@ export default class projectsController {
     }
 
     validateDuration(){
-        if(!this.duration){
+        console.log(this.duration);
+        if(this.duration === undefined){
             this.duration = 0;
             this.durationIsValid = true;
             this.durationLabel = 'duration of the sprint (in days)';
             return true;
         }
-        if(this.duration <= 0 || isNaN(this.duration)){
+        if(this.duration < 0 || isNaN(this.duration)){
+            this.duration = 0;
             this.durationIsValid = false;
             this.durationLabel = 'invalid durration';
             return false;
@@ -67,7 +69,7 @@ export default class projectsController {
             this._fireBase.addProject(this.projects, {currentSprint : { 
                 projectName: this.projectName,
                 managerId: this.userId,
-                duration: this.duration,
+                duration: ((this.duration === undefined ) ? 0 :this.duration),
                 startTimeStamp: Date.now()
             }}, {
                 username: this.manager.username,
