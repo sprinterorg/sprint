@@ -1,0 +1,67 @@
+.progress-bar{
+  margin: 20px 0;
+  height: 10px;
+  width: 80%;
+}
+#progress-bar-container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.progress-bar-child {
+  width: 100%;
+  height: 100%;
+}
+
+.progress {
+  color: white;
+  text-align: center;
+  line-height: 75px;
+  font-size: 3.5rem;
+  font-family: "Segoe UI";
+  animation-direction: reverse;
+  background: #e5405e;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #e5405e 0%, #ffdb3a 25%, #3fffa2 50%, #3fffa2 50%, #1a9be0 73%, #ba68ed 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(right, #e5405e 0%, #ffdb3a 25%, #3fffa2 50%, #3fffa2 50%, #1a9be0 73%, #ba68ed 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to left, #e5405e 0%, #ffdb3a 25%, #3fffa2 50%, #3fffa2 50%, #1a9be0 73%, #ba68ed 100%);
+}
+
+.shrinker {
+  background-color: #F7F7F7;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+.timelapse {
+  animation-name: timelapse;
+  animation-fill-mode: forwards;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+}
+
+.overlay{
+  background-color: #F7F7F7;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@keyframes timelapse {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
