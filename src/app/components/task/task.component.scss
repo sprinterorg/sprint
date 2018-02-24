@@ -44,6 +44,7 @@
 
   .task-content__left-section {
     width: calc(100% - 400px);
+    padding-right: 40px;
 
     .task__description-title {
       font-size: 1.6rem;
@@ -107,12 +108,25 @@
     width: 400px;
     padding-left: 30px;
     padding-bottom: 30px;
+    border-left: 1px solid #d3d3d3;
 
     .task-priority {
       display: flex;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #d3d3d3;
     }
 
-
+    .priority-priorities {
+      width: 250px;
+      td {
+        height: 30px;
+        width: 100%;
+        border: 1px solid #d3d3d3;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+    }
   }
 
 }
