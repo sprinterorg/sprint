@@ -3,8 +3,8 @@
 		 ng-style="{'background': 'url('+SprintCtrl.projBackgound+')'}">
 	</div>
 	<h2>{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}</h2>
-	<a class="list-container__hystory" ui-sref="hystory({project_id: SprintCtrl.projectId})">Go to Hystory</a>
-	<button class="link-button" ng-click="SprintCtrl.toShowProjectSettings()">Project Settings</button>
+	<a class="link-button_project-history" ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
+	<div class="link-button_project-setting" ng-click="SprintCtrl.toShowProjectSettings()"></div>
 	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
 
 	<div class="lists-container__project-users"
@@ -30,7 +30,7 @@
 		<div class="backlog-show-button list"
 			 ng-class="{'backlog-show-button__hide' : !SprintCtrl.isShown}"
 			 ng-click="SprintCtrl.showBacklog()">
-			<p>Back-log</p>
+			<!--<p>Back-log</p>-->
 		</div>
 		<div ng-repeat="list in SprintCtrl.lists"
 			 dnd-type="'container'"
