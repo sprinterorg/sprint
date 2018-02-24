@@ -126,6 +126,7 @@
 			&_list-container {
 				display: flex;
 				flex-direction: column;
+				cursor: default;
 				&_header{
 					display: flex;
 					flex-direction: row;
@@ -142,6 +143,7 @@
 						line-height: 18px;/* Приближение из-за подстановки шрифтов */
 						text-align: left;
 						padding-left: 10px;
+						//cursor: pointer;
 					}
 					&__cards-count{
 						color:  #9d9d9d;
@@ -168,6 +170,7 @@
 					flex-direction: row;
 					justify-content: center;
 					align-items: center;
+					padding-top: 10px;
 					&__scroll{
 						cursor: pointer;
 					}
@@ -285,15 +288,15 @@
 			flex-shrink: 0;
 			flex-grow: 0;
 			width: 240px;
-			min-height: 76vh;
+			min-height: 79.5vh;
 			margin: 10px;
 			padding: 5px;
 			border-radius: 3px;
 			border: 2px solid #ebebeb;
 			background: repeating-linear-gradient( 135deg,
-							#a9a9a9, #a9a9a9 .5em,
+							rgba(169,169,169, 0.7), rgba(169,169,169, 0.7) .5em,
 							transparent .5em, transparent 1em);
-			background-color: #fff;
+			background-color: rgba(247,247,247, 0.7);
 		}
 	}
 }
@@ -444,25 +447,53 @@
 		padding: 7px 10px;
 		border-radius: 3px 0 0 3px;
 		background: repeating-linear-gradient( 135deg,
-						#a9a9a9, #a9a9a9 .5em,
+						rgba(169,169,169, 0.7), rgba(169,169,169, 0.7) .5em,
 						transparent .5em, transparent 1em);
-		background-color: #fff;
+		background-color: rgba(247,247,247, 0);
 	}
+}
+.list-add-list__wrapper{
+	padding-right: 80px;
 }
 
 .add-list {
-	max-height: 80px;
+	font-weight: normal;
+	font-size: 18px;
+	position: relative;
+	flex-shrink: 0;
+	flex-grow: 0;
+	width: 240px;
+	min-height: 50px;
+	background-color: rgba(247,247,247, 0.85);
+	margin: 10px;
+	padding: 5px;
+	border-radius: 3px;
+	border: 2px solid #ebebeb;
+	transition: all 1s;
+	max-height: 50px;
+	cursor: pointer;
+	&__container {
+
+		max-height: 50px !important;
+		&_header {
+			&_title {
+				font-weight: normal !important;
+				font-size: 18px !important;
+			}
+		}
+	}
 	&__form-wrapper {
 		display: block;
 		width: 100%;
 		input{
-
+			font-weight: normal !important;
+			font-size: 18px !important;
 			width: 100%;
 			height: 26px;
 			border: none;
 			border-radius: 3px 0 0 3px;
 			padding: 0 10px 0 10px;
-			font-size: 16px;
+			margin-top: 5px;
 		}
 	}
 }

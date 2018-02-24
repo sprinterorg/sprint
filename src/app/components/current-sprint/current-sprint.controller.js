@@ -17,6 +17,7 @@ export default class sprintController {
         this.focusElement = null
         this.observableElement;
         this.targetForClosing = false;
+        this.addListShow = true;
 
         this.cardName = [];
         this.newListName = null;
@@ -136,6 +137,10 @@ export default class sprintController {
         this._fireBase.addList(this.lists, {listName: this.listName}).then(rootRef => {
             self.listName = '';
         });
+
+        setTimeout( () => {
+            window.scrollBy(260,0);
+        }, 50);
     }
 
     deleteList(list) {
@@ -143,11 +148,9 @@ export default class sprintController {
     }
 
     openAddCardToList(list, elId) {
-        // if(list.openAddCard == true) {
-        //     list.openAddCard = false;
-        // } else {
-            list.openAddCard = true;
-        // }
+
+        list.openAddCard = true;
+
         this.focusElement = document.getElementById(elId)
         this.focusElement.focus();
 
@@ -259,12 +262,12 @@ export default class sprintController {
 
     scrollListTop(elId) {
         let el = document.getElementById(elId)
-        el.scrollBy(0,-90);
+        el.scrollBy(0,-98);
     }
 
     scrollListDown(elId) {
         let el = document.getElementById(elId)
-        el.scrollBy(0,90);
+        el.scrollBy(0,98);
     }
 
     isNeedScroll(elId) {
@@ -291,6 +294,24 @@ export default class sprintController {
         let date = new Date(card.createdAt);
         date = date.toLocaleTimeString();
         return date.substring(0,date.length-6) + date.substring(date.length-3);
+    }
+
+    get isAddListActive(){
+        return this.addListShow;
+    }
+
+    set isAddListActive(val) {
+        this.addListShow = val;
+    }
+    isAddListActiveFunc(val) {
+        this.isAddListActive = val;
+        setTimeout( ()=> {
+            document.getElementById('addListTitle').focus()
+        },10)
+
+    }
+    addListBlur(){
+        this.isAddListActive = true;
     }
 
 }

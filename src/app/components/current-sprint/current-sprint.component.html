@@ -1,4 +1,4 @@
-<section class="lists-container">
+<section class="lists-container" id="listContainer">
 	<div class="lists-container__background"
 		 ng-style="{'background': 'url('+SprintCtrl.projBackgound+')'}">
 	</div>
@@ -157,17 +157,24 @@
 
 			</div>
 		</div>
-		<div class="list add-list">
-			<div class="list_list-container">
-				<div class="list_list-container_header">
-					<div class="list_list-container_header__title">
-						Add List
+		<div class="list-add-list__wrapper">
+			<div class=" add-list">
+				<div class="list_list-container add-list__container">
+					<div ng-if="SprintCtrl.isAddListActive"
+							class="list_list-container_header add-list__container_header"
+					ng-click="SprintCtrl.isAddListActiveFunc(false)">
+						<div class="list_list-container_header__title add-list__container_header_title">
+							<p>Create new list</p>
+						</div>
 					</div>
+					<form ng-if="!SprintCtrl.isAddListActive"
+							class='add-list__form-wrapper' ng-submit="SprintCtrl.addList()">
+						<input id="addListTitle"
+							   ng-blur="SprintCtrl.addListBlur()"
+								type="text" ng-model="SprintCtrl.listName"
+							   placeholder="Create new list"/>
+					</form>
 				</div>
-				<form class='add-list__form-wrapper' ng-submit="SprintCtrl.addList()">
-					<input type="text" ng-model="SprintCtrl.listName"
-						   placeholder="Enter list name"/>
-				</form>
 			</div>
 		</div>
 	</div>
