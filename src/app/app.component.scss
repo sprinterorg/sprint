@@ -63,7 +63,9 @@ textarea {
 	font-family: 'Open Sans', sans-serif;
 }
 
-button {
+button,
+input,
+textarea {
 	outline: 0;
 	outline-offset: 0;
 	box-shadow: none;
@@ -81,6 +83,10 @@ ul {
 a{
   color:#3498DB;
   cursor:pointer;
+}
+
+table {
+	border-collapse: collapse;
 }
 
 .main-content {
@@ -183,6 +189,16 @@ a{
 		text-decoration: underline;
 	}
 }
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  border: 1px solid #D1D1D1;
+  resize: none;
+  font-size: 1.6rem;
+}
+
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;

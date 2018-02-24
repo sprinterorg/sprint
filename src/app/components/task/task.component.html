@@ -4,20 +4,66 @@
         <div class="task-title">
             {{TaskCtrl.task.title}}
         </div>
-        <div class="close" ng-click="loginController.hideFunc()"">
+        <div class="close" 
+        	 ng-click="loginController.hideFunc()">
             <a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
-			<div class='close-button' ng-click="SprintCtrl.closeFullCard()"><i class="flaticon-cancel"></i></div>
-		</a>
+			<div class='close-button' 
+				 ng-click="SprintCtrl.closeFullCard()"><i class="flaticon-cancel"></i></div>
+			</a>
         </div>
     </div>
 	
     <section class='task__wrapper'>
+    	<h1 class="task__title">{{TaskCtrl.task.title}}</h1>
 		<div class='task-content'>
-			<p> Priority {{TaskCtrl.task.priority}}</p>
+			<section class="task-content__left-section">
+			
+			<div class="task__description">
+				<p class="task__description-title">Task description:</p>
+				<p ng-if="!TaskCtrl.editDescription" 
+				   class="task__description-text">{{TaskCtrl.task.description || "no description yet"}}</p>
+				<textarea ng-if="TaskCtrl.editDescription" 
+						  class="textarea textarea--description" 
+						  ng-model="TaskCtrl.task.description" 
+						  name="description">
+				</textarea>
+				<button ng-if="!TaskCtrl.editDescription" 
+					 class="button button--change-description" 
+					 ng-click="TaskCtrl.changeDescription()">Change</button>
+				<div class="edit-buttons" ng-if="TaskCtrl.editDescription">
+					<button  
+					 class="button button--change-save" 
+					 ng-click="TaskCtrl.saveDescription()">Save</button>
+					 <button  
+					 class="button button--change-cancel" 
+					 ng-click="TaskCtrl.cancelSavingDescription()">Cancel</button>
+				</div>
+			</div>
+			</section>
+			<section class="task-content__right-section">
+				<div class="task-priority">
+					<div class="priority-label">priority:</div>
+					<table class="priority-priorities">
+						<tr ng-repeat="priority in TaskCtrl.priorities">
+							<td ng-style="{'background-color': TaskCtrl.taskPrioriry(priority)}"
+								ng-click="TaskCtrl.setPriority(priority)">BV{{priority}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="task-lists">
+					<div class="lists-label">is in list:</div>
+					<table class="lists-lists">
+						<tr ng-repeat="list in TaskCtrl.lists">
+							<td 
+								ng-click="TaskCtrl.setPriority(priority)">{{list.listName}}</td>
+						</tr>
+					</table>
+				</div>
 			<ul>
 				<li ng-repeat="user in TaskCtrl.executors track by $index">
 				{{TaskCtrl.getUser(user.$id).username}}
 				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
+
 				</li>
 			</ul>
 
@@ -33,7 +79,7 @@
 		  </form>
 
 		  <h3>
-			List name {{TaskCtrl.getListName()}}
+			List name {{TaskCtrl.getListName()[0].listName}}
 		  </h3>
 
 		  <form ng-submit="TaskCtrl.moveToList()">
@@ -46,11 +92,13 @@
 			  </div>
 			<button type='submit'>Move to another list</button>
 		  </form>
+		
+		</section>
 		</div>
 	</section>
 	<section class="comments-section">
 	<div class="add-comment">
-	<textarea class="add-comment__textarea" ng-model="TaskCtrl.comment" name="comment" placeholder="Your comment">
+		<textarea class="textarea textarea--add-comment" ng-model="TaskCtrl.comment" name="comment" placeholder="Your comment">
 		</textarea>
 	<button class="button button--send" ng-click="TaskCtrl.addComment()">Add comment</button>
 	</div>
