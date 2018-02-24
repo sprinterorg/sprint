@@ -231,13 +231,19 @@ class FireService {
     }
 
 
-    getTaskPromise(projectId, taskId){
+    /*getTaskPromise(projectId, taskId){
         return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).once('value').then(snapshot => snapshot.val());
-    }
+    }*/
 
     getTaskExecutors(projectId, taskId) {
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId+'/executors');
         return this._$firebaseArray(ref);
+    }
+
+    updateDescription(projectId, taskId, newDescription) {
+        return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).update({
+         description: newDescription
+       });
     }
 
     addToHistory(projectId, sprintNum, taskId, taskData, sprintData) {

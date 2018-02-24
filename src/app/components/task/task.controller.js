@@ -1,6 +1,6 @@
 export default class ticketController {
     /*@ngInject*/
-    constructor(fireBase, $stateParams, supportService, $scope) {
+    constructor(fireBase, $stateParams, supportService) {
         this._fireBase = fireBase;
         this.projectId = $stateParams.project_id;
         this.taskId = $stateParams.task_id;
@@ -13,13 +13,15 @@ export default class ticketController {
         this.comments = fireBase.getComments(this.projectId, this.taskId);
         this.userId = supportService.getUserId();
 
-        this.scope = $scope;
+        this.editDescription = false;
 
         this.comment = '';
         this.commentText = '';
 
         this.editMode = false;
         this.editCommentId = '';
+
+        this.task.description = '';
 
     }
 
@@ -44,7 +46,7 @@ export default class ticketController {
     }
 
     getListName() {
-        return this.lists.filter(item => item.listId === this.task.list_id)[0].listName;
+        return this.lists.filter(item => item.listId === this.task.list_id);
     }
 
     addComment(){
@@ -65,6 +67,20 @@ export default class ticketController {
         this.editMode = false;
         this.editCommentId = '';
         this._fireBase.editComment(id, this.projectId, this.taskId,  this.commentText);
+    }
+
+    changeDescription() {
+        this.editDescription = !this.editDescription;
+    }
+
+    saveDescription() {
+        this._fireBase.updateDescription(this.projectId, this.taskId, this.task.description);
+        this.changeDescription();
+    }
+
+    cancelSavingDescription() {
+        this.task = this._fireBase.getTask(this.projectId, this.taskId);
+        this.changeDescription();
     }
 
 }

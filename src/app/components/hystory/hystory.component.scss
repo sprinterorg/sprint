@@ -21,7 +21,7 @@
 
 .hystory__header-wrapper {
 	padding: 20px 0;
-	border-bottom: 1px solid rgba(0,0,0,.1);
+	border-bottom: 1px solid #D1D1D1;
 	display: flex;
 	justify-content: flex-start;
 	align-items: baseline;
@@ -30,6 +30,7 @@
 .hystory__title {
 	font-weight: normal;
 	text-transform: uppercase;
+	font-size: 3rem;
 }
 
 .hystory__header-button {
