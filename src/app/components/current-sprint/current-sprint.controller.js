@@ -121,7 +121,7 @@ export default class sprintController {
         let el = document.getElementsByClassName('list backlog');
         el[0].style.left = '0px';
         let lists = document.getElementsByClassName('list');
-        lists[2].style.marginLeft = '260px';
+        lists[2].style.marginLeft = '275px';
     }
 
     hideBacklog(){

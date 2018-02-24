@@ -1,8 +1,10 @@
 <section class="lists-container" id="listContainer">
 	<div class="lists-container__background"
-		 ng-style="{'background': 'url('+SprintCtrl.projBackgound+')'}">
+		 ng-style="{'background': 'url('+SprintCtrl.projBackgound+')', 'background-size' : 'cover' }">
 	</div>
-	<h2>{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}</h2>
+	<!--<div class="lists-container__project-name_wrapper">-->
+		<!--{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}-->
+	<!--</div>-->
 	<a class="link-button_project-history" ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
 	<div class="link-button_project-setting" ng-click="SprintCtrl.toShowProjectSettings()"></div>
 	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
@@ -23,8 +25,9 @@
 		</div>
 	</div>
 
-	<progress-bar></progress-bar> <!-- alex-progress -->
-
+	<div class="lists-container__progress-bar_wrapper">
+		<progress-bar></progress-bar> <!-- alex-progress -->
+	</div>
 	<div class="lists-container__wrapper"
 		 dnd-allowed-types="['container']"
 		 dnd-list

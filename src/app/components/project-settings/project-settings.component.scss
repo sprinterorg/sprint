@@ -16,6 +16,9 @@
 }
 
 .sprint-project-settings {
+	position: fixed;
+	right: 0;
+	z-index: 35;
 	& .project-settings {
 		box-sizing: border-box;
 		padding: 20px 20px 35px 20px;
