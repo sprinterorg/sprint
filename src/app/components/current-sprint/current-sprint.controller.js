@@ -2,6 +2,7 @@ export default class sprintController {
     /*@ngInject*/
     constructor($element, fireBase, $stateParams, $scope, supportService) {
         this.projectId = $stateParams.project_id;
+        this.project = fireBase.getSprint(this.projectId);
         this.currentSprint = fireBase.getSprint(this.projectId);
         this.lists = fireBase.getSprintLists(this.projectId);
         this.cards = fireBase.getListCards(this.projectId);
@@ -95,7 +96,23 @@ export default class sprintController {
 
 
     getUser(userId) {
-        return this.users.filter(item => item.$id === userId)[0].avatar;
+        return this.users.filter(item => item.$id === userId)[0].avatar || null;
+    }
+
+    get managerAvatar(){
+        return this.getUser(this.project.managerId);
+    }
+
+    get projectLoad(){
+        return this.project['managerId'] || null;
+    }
+
+    get usersWithoutManager() {
+        return this.users.filter( (user)=> user.$id !== this.project.managerId)
+    }
+
+    get usersManager() {
+        return this.users.filter( (user)=> user.$id === this.project.managerId)
     }
 
     showBacklog() {
@@ -126,43 +143,49 @@ export default class sprintController {
     }
 
     openAddCardToList(list, elId) {
-        if(list.openAddCard == true) {
-            list.openAddCard = false;
-        } else {
+        // if(list.openAddCard == true) {
+        //     list.openAddCard = false;
+        // } else {
             list.openAddCard = true;
-        }
+        // }
         this.focusElement = document.getElementById(elId)
         this.focusElement.focus();
 
+    }
+
+    onBlur(list) {
+        list.openAddCard = false;
     }
 
 
 
     addCard(listId, list) {
         let self = this;
+        let createdDate = new Date().toString();
         var temp = this.cardName[listId];
-        list.openAddCard = false;
         this.cardName[listId] = '';
         let cardData = {
             title: temp, 
             list_id: listId,
             id: Math.random()*1000000^0,
-            priority: 2
+            priority: 2,
+            createdAt: createdDate
         };
         if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber; 
         this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then( rootRef  => {
             if (listId !== 1)
                 self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
         });
+
+
     }
 
-    onBlur(list) {
-        list.openAddCard = false;
-    }
+
     onMenuBlur(list) {
         list.isListMenuShown = false;
     }
     showFullCard(card){
+        console.log(card);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
 
@@ -176,6 +199,7 @@ export default class sprintController {
     }
 
     showListMenu(list, elemId) {
+
         this.observableElement = document.getElementById(elemId);
         this.targetForClosing = list;
 
@@ -229,24 +253,22 @@ export default class sprintController {
     }
 
     changeListTitle(list) {
-        console.log(list);
         this.newListName = null;
         list.isListMenuShown = false;
     }
 
     scrollListTop(elId) {
         let el = document.getElementById(elId)
-        el.scrollBy(0,-100);
+        el.scrollBy(0,-90);
     }
 
     scrollListDown(elId) {
         let el = document.getElementById(elId)
-        el.scrollBy(0,100);
+        el.scrollBy(0,90);
     }
 
     isNeedScroll(elId) {
         let el = document.getElementById(elId);
-        console.log(el.clientHeight < el.scrollHeight)
         if (el.clientHeight < el.scrollHeight) {
             return true;
         } else {
@@ -254,6 +276,22 @@ export default class sprintController {
         }
     }
 
+    get projBackgound() {
+        // console.log(this.project, this.users)
+        return this.project.background;
+    }
+
+    cardCreatedDate(card) {
+        let date = new Date(card.createdAt);
+        date = date.toLocaleDateString();
+        return date.substring(0, date.length-4) + date.substring(date.length-2);
+    }
+
+    cardCreatedTime(card) {
+        let date = new Date(card.createdAt);
+        date = date.toLocaleTimeString();
+        return date.substring(0,date.length-6) + date.substring(date.length-3);
+    }
 
 }
 

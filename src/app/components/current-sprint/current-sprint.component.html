@@ -1,12 +1,22 @@
 <section class="lists-container">
+	<div class="lists-container__background"
+		 ng-style="{'background': 'url('+SprintCtrl.projBackgound+')'}">
+	</div>
 	<h2>{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}</h2>
 	<a class="list-container__hystory" ui-sref="hystory({project_id: SprintCtrl.projectId})">Go to Hystory</a>
 	<button class="link-button" ng-click="SprintCtrl.toShowProjectSettings()">Project Settings</button>
 	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
 
-	<div class="lists-container__project-users">
+	<div class="lists-container__project-users"
+	ng-if="SprintCtrl.projectLoad">
 		<div class="lists-container__project-users__icons"
-		ng-repeat="user in SprintCtrl.users"
+			 ng-repeat="user in SprintCtrl.usersManager"
+			 dnd-type="'user'"
+			 dnd-draggable="user">
+			<img src="{{user.avatar}}">
+		</div>
+		<div class="lists-container__project-users__icons"
+		ng-repeat="user in SprintCtrl.usersWithoutManager"
 		dnd-type="'user'"
 		dnd-draggable="user">
 			<img src="{{user.avatar}}">
@@ -58,7 +68,8 @@
 
 
 
-				<div class="list_list-container_header">
+				<div class="list_list-container_header"
+				ng-class="{'grabbing' : (list.listId > 3)}">
 					<div class="list_list-container_header__title">
 						{{list.listName}}
 					</div>
@@ -96,8 +107,8 @@
 									<p>Card text</p>
 								</div>
 								<div class="card_content-card__top-info">
-									<p>10/02/18</p>
-									<p>12:00 AM</p>
+									<p>{{SprintCtrl.cardCreatedDate(card)}}</p>
+									<p>{{SprintCtrl.cardCreatedTime(card)}}</p>
 								</div>
 							</div>
 
@@ -136,11 +147,11 @@
 				</div>
 				<form
 						class="list_list-container_footer list_list-container_footer__form-wrapper"
-					  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': !!list.openAddCard}"
+					  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
 					  ng-submit="SprintCtrl.addCard(list.listId, list)">
 					<input id="{{list.listId}}"
 						   ng-blur="SprintCtrl.onBlur(list)"
-							type="text" ng-model="SprintCtrl.cardName[list.listId]"
+						   type="text" ng-model="SprintCtrl.cardName[list.listId]"
 						   placeholder="Enter task name"/>
 				</form>
 

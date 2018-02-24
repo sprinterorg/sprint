@@ -20,6 +20,11 @@
 	position: relative;
 	width: 100vw;
 	background: #f7f7f7;
+    &__background{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+    }
 
 	&__project-users{
 		position: fixed;
@@ -55,7 +60,7 @@
 			flex-grow: 0;
 			width: 240px;
 			min-height: 150px;
-			background-color: #f7f7f7;
+			background-color: rgba(247,247,247, 0.85);
 			margin: 10px;
 			padding: 5px;
 			border-radius: 3px;
@@ -63,8 +68,8 @@
 			transition: all 1s;
 			&__full-menu{
 				transform-origin: left top !important;
-				top: 20px;
-				right: -216px;
+				top: 15px;
+				right: -208px;
 				position: absolute;
 				transition: all 0.5s;
 				z-index: 40;
@@ -149,6 +154,7 @@
 					&__menu{
 						transform: rotate(90deg) scale(0.5);
 						margin-right: -10px;
+						cursor: pointer;
 						&::after{
 							content: url("../../../more-button.png");
 						}
@@ -169,6 +175,7 @@
 						width: 34px;
 						height: 34px;
 						margin: 0 10px;
+						cursor: pointer;
 						transform: rotate(90deg) scale(0.8);
 						&::before {
 							content: url("../../../arrow-point.png");
@@ -178,6 +185,7 @@
 						width: 34px;
 						height: 34px;
 						margin: 0 10px;
+						cursor: pointer;
 						transform: rotate(-90deg) scale(0.8);
 						&::after {
 							content: url("../../../arrow-point.png");
@@ -186,8 +194,9 @@
 					&__add-card{
 						position: absolute;
 						right: 0;
-						z-index: 10;
+						//z-index: 10;
 						transform: scale(0.4);
+						cursor: pointer;
 						&::after {
 							content: url("../../../plus.png");
 						}
@@ -210,7 +219,7 @@
 							height: 32px;
 							border: none;
 							border-radius: 3px 0 0 3px;
-							padding: 0 42px 0 10px;
+							padding: 0;
 							font-size: 16px;
 							margin-bottom: 2px;
 							transition: all 0.7s;
@@ -219,9 +228,11 @@
 							width: 100%;
 							z-index: 5;
 							transition: all 0.5s;
+							opacity: 1;
 							input{
 								width: 100%;
 								opacity: 1;
+								padding: 0 42px 0 10px;
 							}
 						}
 
@@ -237,6 +248,7 @@
 			margin-left: -30px;
 			//height: 78vh;
 			&__hide-button{
+				cursor: pointer;
 				transform: rotate(180deg) scale(0.7);
 				&::before{
 					content: url("../../../arrow-point.png");
@@ -245,13 +257,14 @@
 		}
 		.backlog-show-button{
 			margin-left: -30px;
-			height: 78vh;
+			height: 79.5vh;
 			width: 40px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			transition: all 1s;
 			z-index: 20;
+			cursor: pointer;
 			p{
 				transform: rotate(-90deg);
 				white-space: nowrap;
@@ -285,12 +298,16 @@
 	}
 }
 
+.grabbing{
+	cursor: -webkit-grab;
+}
+
 
 .cards-list__wrapper {
 	display: block;
 	width: 100%;
-	min-height: 90px;
-	max-height: 70vh;
+	min-height: 98px;
+	max-height: 66.8vh;
 	padding: 0;
 	overflow-y: hidden;
 	overflow-x: hidden;
@@ -303,6 +320,7 @@
 		margin: 0 3px 10px 3px;
 		padding: 7px 10px;
 		border-radius: 3px 0 0 3px;
+		cursor: -webkit-grab;
 		&-priority {
 			position: absolute;
 			right: 0;
@@ -321,6 +339,8 @@
 			}
 			&__top {
 				&-title {
+                  max-width: 136px;
+                  word-break: break-all;
 					h4 {
 						color: #414141;
 						font-size: 18px;
@@ -328,6 +348,7 @@
 						line-height: 18px;
 						text-align: left;
 						margin-bottom: 5px;
+                        max-width: 136px;
 					}
 					p {
 						color: #9d9d9d;
