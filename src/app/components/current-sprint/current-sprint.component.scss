@@ -13,30 +13,63 @@
 	to {opacity: 1;}
 }
 
-
+.link-button_project-setting{
+	position: fixed;
+	right: 0;
+	top: 25px;
+	z-index: 30;
+	transform: scale(0.4);
+	cursor: pointer;
+	&::before{
+		content: url("../../../settings.png");
+	}
+}
+.link-button_project-history{
+	position: fixed;
+	right: 40px;
+	top: 25px;
+	z-index: 30;
+	transform: scale(0.4);
+	cursor: pointer;
+	&::before{
+		content: url("../../../history.png");
+	}
+}
 
 .lists-container {
 	box-sizing: border-box;
 	position: relative;
 	width: 100vw;
 	background: #f7f7f7;
+	//margin-top: 10px;
+    &__background{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+		//display: none;
+    }
 
 	&__project-users{
 		position: fixed;
-		right: 20px;
+		right: 6px;
+		margin-top: 6px;
 		z-index: 30;
 		display: flex;
 		flex-direction: column;
+		padding-top: 10px;
+
 		&__icons{
 			width: 50px;
 			height: 50px;
 			cursor: -webkit-grab;
 			display: block;
 			border-radius: 50%;
+			margin-bottom: 5px;
 			img{
 				width: 100%;
 				height: 100%;
 				border-radius: 50%;
+				box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 			}
 		}
 	}
@@ -48,23 +81,24 @@
 		align-items: flex-start;
 		position: relative;
 		margin-left: 30px;
-
+		margin-top: 10px;
 		.list {
 			position: relative;
 			flex-shrink: 0;
 			flex-grow: 0;
 			width: 240px;
 			min-height: 150px;
-			background-color: #f7f7f7;
+			background-color: rgba(247,247,247, 0.85);
 			margin: 10px;
 			padding: 5px;
 			border-radius: 3px;
 			border: 2px solid #ebebeb;
-			transition: all 1s;
+			transition: all 0.8s;
+			box-shadow: 6px 6px 22px rgba(0,0,0,0.8);
 			&__full-menu{
 				transform-origin: left top !important;
-				top: 20px;
-				right: -216px;
+				top: 14px;
+				right: -207px;
 				position: absolute;
 				transition: all 0.5s;
 				z-index: 40;
@@ -74,6 +108,8 @@
 				background: #f7f7f7;
 				border: 2px solid #ebebeb;
 				padding: 10px;
+				box-shadow: 6px 6px 22px rgba(0,0,0,0.8);
+				border-radius: 5px;
 				&_close{
 					transition: all 0.5s;
 					z-index: -10;
@@ -97,6 +133,7 @@
 					align-items: center;
 					border-radius: 5px;
 					box-sizing: border-box;
+					box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 					&:hover{
 						background: rgba(0,0,0, 0.1);
 						//border: 1px solid black;
@@ -113,6 +150,7 @@
 						font-size: 17px;
 						padding: 0 10px 0 10px;
 						border-radius: 5px;
+						box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 					}
 				}
 			}
@@ -121,6 +159,7 @@
 			&_list-container {
 				display: flex;
 				flex-direction: column;
+				cursor: default;
 				&_header{
 					display: flex;
 					flex-direction: row;
@@ -137,6 +176,7 @@
 						line-height: 18px;/* Приближение из-за подстановки шрифтов */
 						text-align: left;
 						padding-left: 10px;
+						//cursor: pointer;
 					}
 					&__cards-count{
 						color:  #9d9d9d;
@@ -149,6 +189,7 @@
 					&__menu{
 						transform: rotate(90deg) scale(0.5);
 						margin-right: -10px;
+						cursor: pointer;
 						&::after{
 							content: url("../../../more-button.png");
 						}
@@ -162,6 +203,7 @@
 					flex-direction: row;
 					justify-content: center;
 					align-items: center;
+					padding-top: 10px;
 					&__scroll{
 						cursor: pointer;
 					}
@@ -169,6 +211,7 @@
 						width: 34px;
 						height: 34px;
 						margin: 0 10px;
+						cursor: pointer;
 						transform: rotate(90deg) scale(0.8);
 						&::before {
 							content: url("../../../arrow-point.png");
@@ -178,6 +221,7 @@
 						width: 34px;
 						height: 34px;
 						margin: 0 10px;
+						cursor: pointer;
 						transform: rotate(-90deg) scale(0.8);
 						&::after {
 							content: url("../../../arrow-point.png");
@@ -186,8 +230,9 @@
 					&__add-card{
 						position: absolute;
 						right: 0;
-						z-index: 10;
+						//z-index: 10;
 						transform: scale(0.4);
+						cursor: pointer;
 						&::after {
 							content: url("../../../plus.png");
 						}
@@ -210,18 +255,22 @@
 							height: 32px;
 							border: none;
 							border-radius: 3px 0 0 3px;
-							padding: 0 42px 0 10px;
+							padding: 0;
 							font-size: 16px;
 							margin-bottom: 2px;
 							transition: all 0.7s;
+							box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 						}
 						&__open{
 							width: 100%;
 							z-index: 5;
 							transition: all 0.5s;
+							opacity: 1;
 							input{
 								width: 100%;
 								opacity: 1;
+								padding: 0 42px 0 10px;
+								box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 							}
 						}
 
@@ -230,13 +279,14 @@
 			}
 		}
 		.backlog{
-			transition: all 1s;
+			transition: all 0.8s;
 			z-index: 10;
 			position: absolute;
 			left: -240px;
 			margin-left: -30px;
 			//height: 78vh;
 			&__hide-button{
+				cursor: pointer;
 				transform: rotate(180deg) scale(0.7);
 				&::before{
 					content: url("../../../arrow-point.png");
@@ -245,16 +295,21 @@
 		}
 		.backlog-show-button{
 			margin-left: -30px;
-			height: 78vh;
+			height: 79.5vh;
 			width: 40px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			transition: all 1s;
+			transition: all 0.8s;
 			z-index: 20;
+			cursor: pointer;
+			&::before{
+				content: url("../../../arrow-point.png");
+			}
 			p{
 				transform: rotate(-90deg);
 				white-space: nowrap;
+
 			}
 			&__hide{
 				transition: all 1s;
@@ -272,25 +327,29 @@
 			flex-shrink: 0;
 			flex-grow: 0;
 			width: 240px;
-			min-height: 76vh;
+			min-height: 79.5vh;
 			margin: 10px;
 			padding: 5px;
 			border-radius: 3px;
 			border: 2px solid #ebebeb;
 			background: repeating-linear-gradient( 135deg,
-							#a9a9a9, #a9a9a9 .5em,
+							rgba(169,169,169, 0.7), rgba(169,169,169, 0.7) .5em,
 							transparent .5em, transparent 1em);
-			background-color: #fff;
+			background-color: rgba(247,247,247, 0.7);
 		}
 	}
+}
+
+.grabbing{
+	cursor: -webkit-grab;
 }
 
 
 .cards-list__wrapper {
 	display: block;
 	width: 100%;
-	min-height: 90px;
-	max-height: 70vh;
+	min-height: 98px;
+	max-height: 66.8vh;
 	padding: 0;
 	overflow-y: hidden;
 	overflow-x: hidden;
@@ -303,6 +362,8 @@
 		margin: 0 3px 10px 3px;
 		padding: 7px 10px;
 		border-radius: 3px 0 0 3px;
+		cursor: -webkit-grab;
+		box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 		&-priority {
 			position: absolute;
 			right: 0;
@@ -321,6 +382,8 @@
 			}
 			&__top {
 				&-title {
+                  max-width: 136px;
+                  word-break: break-all;
 					h4 {
 						color: #414141;
 						font-size: 18px;
@@ -328,6 +391,7 @@
 						line-height: 18px;
 						text-align: left;
 						margin-bottom: 5px;
+                        max-width: 136px;
 					}
 					p {
 						color: #9d9d9d;
@@ -423,28 +487,84 @@
 		padding: 7px 10px;
 		border-radius: 3px 0 0 3px;
 		background: repeating-linear-gradient( 135deg,
-						#a9a9a9, #a9a9a9 .5em,
+						rgba(169,169,169, 0.7), rgba(169,169,169, 0.7) .5em,
 						transparent .5em, transparent 1em);
-		background-color: #fff;
+		background-color: rgba(247,247,247, 0);
 	}
+}
+.list-add-list__wrapper{
+	padding-right: 80px;
 }
 
 .add-list {
-	max-height: 80px;
+	font-weight: normal;
+	font-size: 18px;
+	position: relative;
+	flex-shrink: 0;
+	flex-grow: 0;
+	width: 240px;
+	min-height: 50px;
+	background-color: rgba(247,247,247, 0.85);
+	margin: 10px;
+	padding: 5px;
+	border-radius: 3px;
+	border: 2px solid #ebebeb;
+	transition: all 1s;
+	max-height: 50px;
+	cursor: pointer;
+	box-shadow: 6px 6px 22px rgba(0,0,0,0.8);
+	&__container {
+		cursor: pointer;
+		max-height: 50px !important;
+		&_header {
+			cursor: pointer;
+			&_title {
+				font-weight: normal !important;
+				font-size: 18px !important;
+				cursor: pointer;
+			}
+		}
+	}
 	&__form-wrapper {
 		display: block;
 		width: 100%;
 		input{
-
+			font-weight: normal !important;
+			font-size: 18px !important;
 			width: 100%;
 			height: 26px;
 			border: none;
 			border-radius: 3px 0 0 3px;
 			padding: 0 10px 0 10px;
-			font-size: 16px;
+			margin-top: 5px;
+			box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
 		}
 	}
 }
 
 
 
+@media only screen and (max-device-width:480px){
+	.lists-container {
+		//max-height: 100%;
+		overflow-y: hidden;
+	}
+	.link-button_project-setting{
+		top: 35px;
+		&::before{
+			content: url("../../../settings.png");
+		}
+	}
+	.link-button_project-history{
+		top: 35px;
+		&::before{
+			content: url("../../../history.png");
+		}
+	}
+	.lists-container .lists-container__wrapper {
+		margin-top: 18px !important;
+	}
+	.lists-container__project-users{
+		margin-top: 15px;
+	}
+}
