@@ -110,14 +110,20 @@
     padding-bottom: 30px;
     border-left: 1px solid #d3d3d3;
 
-    .task-priority {
+    .task-priority,
+    .task-lists {
       display: flex;
       justify-content: space-between;
       padding-bottom: 20px;
       border-bottom: 1px solid #d3d3d3;
     }
 
-    .priority-priorities {
+    .task-lists {
+      padding-top: 20px;
+    }
+
+    .priority-priorities,
+    .lists-lists {
       width: 250px;
       td {
         height: 30px;

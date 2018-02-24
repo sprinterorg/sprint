@@ -44,21 +44,21 @@
 				<div class="task-priority">
 					<div class="priority-label">priority:</div>
 					<table class="priority-priorities">
-						<tr>
-							<td>BV0</td>
-						</tr>
-						<tr>
-							<td>BV1</td>
-						</tr>
-						<tr>
-							<td>BV2</td>
-						</tr>
-						<tr>
-							<td>BV3</td>
+						<tr ng-repeat="priority in TaskCtrl.priorities">
+							<td ng-style="{'background-color': TaskCtrl.taskPrioriry(priority)}"
+								ng-click="TaskCtrl.setPriority(priority)">BV{{priority}}</td>
 						</tr>
 					</table>
 				</div>
-				<p> Priority {{TaskCtrl.task.priority}}</p>
+				<div class="task-lists">
+					<div class="lists-label">is in list:</div>
+					<table class="lists-lists">
+						<tr ng-repeat="list in TaskCtrl.lists">
+							<td 
+								ng-click="TaskCtrl.setPriority(priority)">{{list.listName}}</td>
+						</tr>
+					</table>
+				</div>
 			<ul>
 				<li ng-repeat="user in TaskCtrl.executors track by $index">
 				{{TaskCtrl.getUser(user.$id).username}}

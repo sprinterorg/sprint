@@ -23,6 +23,15 @@ export default class ticketController {
 
         this.task.description = '';
 
+        this.priorities = supportService.getPriorities();
+
+        this.priorityStyles = {
+            0: 'red',
+            1: 'yellow',
+            2: 'green',
+            3: 'blue'
+        }
+
     }
 
 
@@ -83,4 +92,16 @@ export default class ticketController {
         this.changeDescription();
     }
 
+    taskPrioriry(priority) {
+        if (priority === this.task.priority)
+            return this.priorityStyles[priority];
+        return 'transparent';
+    }
+
+    setPriority(priority) {
+        console.log(priority)
+        let users = [this.project.managerId];
+        this.executors.map( user => users.push(user.$id));
+        this._fireBase.updatePriority(this.projectId, this.taskId, priority, users);
+    }
 }
