@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+
 }
 
 .hide-content{
@@ -321,7 +322,8 @@
 			transition: all 0.8s;
 			z-index: 20;
 			cursor: pointer;
-
+			border-left: hidden;
+			border-radius: 0 3px 3px 0;
 			&::before{
 				transform: scale(0.7);
 				content: url("../../../arrow-point.png");

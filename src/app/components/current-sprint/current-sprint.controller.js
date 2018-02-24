@@ -1,6 +1,9 @@
 export default class sprintController {
     /*@ngInject*/
     constructor($element, fireBase, $stateParams, $scope, supportService) {
+        this._scope = $scope;
+        this.element = $element;
+
         this.projectId = $stateParams.project_id;
         this.project = fireBase.getSprint(this.projectId);
         this.currentSprint = fireBase.getSprint(this.projectId);
@@ -8,20 +11,17 @@ export default class sprintController {
         this.cards = fireBase.getListCards(this.projectId);
         this.users = fireBase.getProjectUsers(this.projectId);
         this._fireBase = fireBase;
-        this._scope = $scope;
+
         this.userId = supportService.getUserId();
         this.supportService = supportService;
-        this.element = $element;
-        this.isShown = true;
 
+        this.isShown = true;
         this.focusElement = null
         this.observableElement;
         this.targetForClosing = false;
         this.addListShow = true;
-
         this.cardName = [];
         this.newListName = null;
-
         this.hide = this.toShowProjectSettings.bind(this);
         this.showProjectSettings = false;
 
@@ -31,8 +31,6 @@ export default class sprintController {
             2: 'green',
             3: 'blue'
         }
-
-
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
@@ -53,15 +51,10 @@ export default class sprintController {
         };
 
         $scope.onUserDrop = (item, card)=>{
-
-
-            // this._fireBase.addUserToCard(card.$id, this.projectId, item.username);
-
             this._fireBase.addExecutorsToTask(this.projectId, card.$id, item.$id, {
                 priority: card.priority,
                 title: card.title
             });
-
             return false;
         };
 
@@ -84,22 +77,14 @@ export default class sprintController {
     }
 
     $onInit(){
-        document.addEventListener('click', (event)=>{
-
+        // document.addEventListener('click', (event)=>{
             // this.clickWatcher(event.target)
-
-        })
+        // })
     }
 
-    clickWatcher(target) {
-
+    get projBackgound() {
+        return this.project.background;
     }
-
-
-    getUser(userId) {
-        return this.users.filter(item => item.$id === userId)[0].avatar || null;
-    }
-
     get managerAvatar(){
         return this.getUser(this.project.managerId);
     }
@@ -115,6 +100,18 @@ export default class sprintController {
     get usersManager() {
         return this.users.filter( (user)=> user.$id === this.project.managerId)
     }
+    get isAddListActive(){
+        return this.addListShow;
+    }
+
+    set isAddListActive(val) {
+        this.addListShow = val;
+    }
+
+    getUser(userId) {
+        return this.users.filter(item => item.$id === userId)[0].avatar || null;
+    }
+
 
     showBacklog() {
         this.isShown = false;
@@ -123,7 +120,6 @@ export default class sprintController {
         let lists = document.getElementsByClassName('list');
         lists[2].style.marginLeft = '275px';
     }
-
     hideBacklog(){
         this.isShown = true;
         let el = document.getElementsByClassName('list backlog');
@@ -132,34 +128,29 @@ export default class sprintController {
         lists[2].style.marginLeft = '10px';
     }
 
+
     addList() {
         let self = this;
         this._fireBase.addList(this.lists, {listName: this.listName}).then(rootRef => {
             self.listName = '';
         });
-
         setTimeout( () => {
             window.scrollBy(260,0);
         }, 50);
     }
-
     deleteList(list) {
         this._fireBase.deleteList(this.cards.filter(item => item.list_id === list.listId), this.projectId, list.$id);
     }
 
+
     openAddCardToList(list, elId) {
-
         list.openAddCard = true;
-
         this.focusElement = document.getElementById(elId)
         this.focusElement.focus();
-
     }
-
     onBlur(list) {
         list.openAddCard = false;
     }
-
 
 
     addCard(listId, list) {
@@ -179,46 +170,40 @@ export default class sprintController {
             if (listId !== 1)
                 self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
         });
-
-
     }
 
 
-    onMenuBlur(list) {
-        list.isListMenuShown = false;
-    }
     showFullCard(card){
         console.log(card);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
-
     }
     closeFullCard(){
         this.supportService.isCardOpen = false;
     }
+
 
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
     }
 
     showListMenu(list, elemId) {
-
         this.observableElement = document.getElementById(elemId);
         this.targetForClosing = list;
-
        if (list['isListMenuShown']) {
            list.isListMenuShown = false
        } else {
            list.isListMenuShown = true;
        }
-
        this.observableElement.children[0].children[0].focus();
     }
-
-
+    onMenuBlur(list) {
+        list.isListMenuShown = false;
+    }
     hideListMenu(list) {
         list.isListMenuShown = false;
     }
+
 
     cardsCountForList(list) {
         let count = 0;
@@ -235,11 +220,9 @@ export default class sprintController {
         }
         return str;
     }
-
     cardPrioriry(card) {
         return this.query[card.priority] || 'green';
     }
-
     cardCommentsCount(card) {
         if ('comments' in card) {
             return Object.keys(card.comments)['length']
@@ -254,11 +237,38 @@ export default class sprintController {
             return 0;
         }
     }
+    cardCreatedDate(card) {
+        let date = new Date(card.createdAt);
+        date = date.toLocaleDateString();
+        let x = this.supportService.getFormattedDate(Date.parse(card.createdAt))
+        x = x.replace('.','/')
+        x = x.replace('.','/')
+        // return date.substring(0, date.length-4) + date.substring(date.length-2);
+        return x
+
+    }
+    cardCreatedTime(card) {
+        let date = new Date(card.createdAt);
+        date = date.toLocaleTimeString();
+        return date.substring(0,date.length-6) + date.substring(date.length-3);
+    }
+
 
     changeListTitle(list) {
         this.newListName = null;
         list.isListMenuShown = false;
     }
+
+    isAddListActiveFunc(val) {
+        this.isAddListActive = val;
+        setTimeout( ()=> {
+            document.getElementById('addListTitle').focus()
+        },10)
+    }
+    addListBlur(){
+        this.isAddListActive = true;
+    }
+
 
     scrollListTop(elId) {
         let el = document.getElementById(elId)
@@ -278,42 +288,6 @@ export default class sprintController {
             return false;
         }
     }
-
-    get projBackgound() {
-        // console.log(this.project, this.users)
-        return this.project.background;
-    }
-
-    cardCreatedDate(card) {
-        let date = new Date(card.createdAt);
-        date = date.toLocaleDateString();
-        return date.substring(0, date.length-4) + date.substring(date.length-2);
-    }
-
-    cardCreatedTime(card) {
-        let date = new Date(card.createdAt);
-        date = date.toLocaleTimeString();
-        return date.substring(0,date.length-6) + date.substring(date.length-3);
-    }
-
-    get isAddListActive(){
-        return this.addListShow;
-    }
-
-    set isAddListActive(val) {
-        this.addListShow = val;
-    }
-    isAddListActiveFunc(val) {
-        this.isAddListActive = val;
-        setTimeout( ()=> {
-            document.getElementById('addListTitle').focus()
-        },10)
-
-    }
-    addListBlur(){
-        this.isAddListActive = true;
-    }
-
 }
 
 

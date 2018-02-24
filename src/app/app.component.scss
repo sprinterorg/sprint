@@ -15,7 +15,29 @@ body {
 	height: 100%;
 	font-size: 1.6rem;
 	box-sizing: border-box;
+
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 5px;
+		background-color: rgba(255,255,255, 0.5);
+	}
+
+	&::-webkit-scrollbar
+	{
+		width: 8px;
+		background-color: rgba(255,255,255, 0.5);
+	}
+
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 5px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: rgba(197,197,197, 0.8);
+	}
 }
+
+
 
 input,
 textarea {
