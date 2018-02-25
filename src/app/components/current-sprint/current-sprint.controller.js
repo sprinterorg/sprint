@@ -82,6 +82,10 @@ export default class sprintController {
         // })
     }
 
+    get isProjectHasHistory() {
+        return this.project.sprintNumber > 1;
+    }
+
     get projBackgound() {
         if (this.project && 'background' in this.project) {
             return this.project.background;
@@ -135,7 +139,7 @@ export default class sprintController {
     hideBacklog(){
         this.isShown = true;
         let el = document.getElementsByClassName('list backlog');
-        el[0].style.left = '-240px';
+        el[0].style.left = '-260px';
         let lists = document.getElementsByClassName('list');
         lists[2].style.marginLeft = '10px';
     }

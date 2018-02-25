@@ -123,7 +123,7 @@
 			transition: all 0.8s;
 			box-shadow: 6px 6px 22px rgba(0,0,0,0.8);
 			&__full-menu{
-				transform-origin: left top !important;
+				transform-origin: left top;
 				top: 14px;
 				right: -207px;
 				position: absolute;
@@ -309,7 +309,7 @@
 			transition: all 0.8s;
 			z-index: 10;
 			position: absolute;
-			left: -240px;
+			left: -260px;
 			margin-left: -30px;
 			//height: 78vh;
 			&__hide-button{
@@ -578,18 +578,21 @@
 	.lists-container {
 		//max-height: 100%;
 		overflow-y: hidden;
+		min-height: 630px;
 	}
 	.link-button_project-setting{
 		top: 35px;
 		&::before{
 			content: url("../../../settings.png");
 		}
+		display: none;
 	}
 	.link-button_project-history{
 		top: 35px;
 		&::before{
 			content: url("../../../history.png");
 		}
+		display: none;
 	}
 	.lists-container .lists-container__wrapper {
 		margin-top: 18px !important;
@@ -599,8 +602,35 @@
 	}
 	.lists-container {
 		&__progress-bar_wrapper{
-			top: 40px;
-			left: -42px;
+			top: 46px;
+			//left: -42px;
+		}
+	}
+	.lists-container__sprint-header{
+		display: none !important;
+	}
+	.lists-container {
+		&__wrapper {
+			padding-top: 40px !important;
+			.list__full-menu{
+				transform-origin: right top !important;
+				top: 13px;
+				left: 10px;
+				position: absolute;
+				transition: all 0.5s;
+				z-index: 40;
+				width: 220px;
+				//height: 200px;
+				min-height: 100px;
+				background: #f7f7f7;
+				border: 2px solid #ebebeb;
+				padding: 10px;
+				box-shadow: 6px 6px 22px rgba(0,0,0,0.8);
+				border-radius: 5px;
+			}
+		}
+		&__project-users{
+			padding-top: 52px !important;
 		}
 	}
 }

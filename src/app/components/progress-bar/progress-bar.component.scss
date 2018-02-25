@@ -93,3 +93,12 @@
     width: 0%;
   }
 }
+
+@media only screen and (max-device-width:480px){
+  .progress-bar__date{
+    display: none;
+  }
+  .progress-bar{
+    width: 100%;
+  }
+}
