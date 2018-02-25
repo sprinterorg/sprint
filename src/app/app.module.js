@@ -5,6 +5,7 @@ import angFire from 'angularfire';
 import firebasecfg from './config/firebase-cfg';
 import dndLists from 'angular-drag-and-drop-lists';
 import fileUpload from 'ng-file-upload';
+import timeAgo from 'angular-moment';
 
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services';
@@ -29,6 +30,7 @@ angular.module('app', [
     uiRouter,
     'dndLists',
     fileUpload,
+    timeAgo,
     ComponentsModule.name,
     ServicesModule.name
 
