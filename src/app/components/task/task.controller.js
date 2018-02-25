@@ -1,10 +1,13 @@
 export default class ticketController {
     /*@ngInject*/
-    constructor(fireBase, $stateParams, supportService) {
+    constructor($scope, fireBase, $stateParams, supportService) {
+        this.scope = $scope;
         this._fireBase = fireBase;
         this.projectId = $stateParams.project_id;
         this.taskId = $stateParams.task_id;
         this.task = fireBase.getTask(this.projectId, this.taskId);
+        this.taskFiles = fireBase.getTaskFileLinks(this.projectId, this.taskId);
+
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
         this.executors = fireBase.getTaskExecutors(this.projectId, this.taskId);
         this.project = fireBase.getSprint(this.projectId);
@@ -18,13 +21,17 @@ export default class ticketController {
 
         this.editDescription = false;
 
+       //comments var
         this.comment = '';
         this.commentText = '';
+        this.fileLinks = [];
+
 
         this.editMode = false;
         this.editCommentId = '';
 
         this.task.description = '';
+        this.descFileLinks = [];
 
         this.priorities = supportService.getPriorities();
 
@@ -33,7 +40,7 @@ export default class ticketController {
             1: 'priority-yellow',
             2: 'priority-green',
             3: 'priority-blue'
-        }
+        };
 
     }
     get isTitleEdit() {
@@ -71,8 +78,9 @@ export default class ticketController {
     }
 
     addComment(){
-        this._fireBase.addComment(this.comments, {comment: this.comment, userId: this.userId, date: Date.parse(new Date())});
+        this._fireBase.addComment(this.comments, {comment: this.comment, userId: this.userId, files: this.fileLinks, date: Date.parse(new Date())});
         this.comment = '';
+        this.fileLinks.splice(0,  this.fileLinks.length);
     }
 
     deleteComment(commentId) {
@@ -98,6 +106,10 @@ export default class ticketController {
     saveDescription() {
         this._fireBase.updateDescription(this.projectId, this.taskId, this.task.description);
         this.changeDescription();
+    }
+
+    addFileToDesc(file){
+        this._fireBase.addFilesToTask(this.taskFiles, file);
     }
 
     cancelSavingDescription() {
@@ -126,4 +138,36 @@ export default class ticketController {
     displayList(listId) {
         return listId != 1 || this.userId === this.project.managerId;
     }
+
+    uploadFile(file, add){
+        let self = this;
+        let fileObj = {};
+                    if(file) {
+                    this._fireBase.uploadFile(file)
+                        .then(fileLink => {
+                            if (add.addToComment) {
+                            fileObj.fileName = file.name;
+                            fileObj.fileLink = fileLink.downloadURL;
+                            self.fileLinks.push(fileObj);
+                            self.scope.$apply();
+                            } else if(!add.addToComment) {
+                                fileObj.fileName = file.name;
+                                fileObj.fileLink = fileLink.downloadURL;
+                                fileObj.fileLocation = fileLink.ref.location.path;
+
+                                self.descFileLinks.push(fileObj);
+                                self.scope.$apply();
+                                self.addFileToDesc(fileObj);
+                            }
+                        }, ()=>{console.log("error")});
+
+                    } else {
+                    console.log('file format incorrect');
+            }
+        }
+
+        deleteFile(file, id){
+            this._fireBase.deleteFile(file, this.projectId, this.taskId, id);
+        }
+
 }
