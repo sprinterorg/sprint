@@ -19,13 +19,13 @@
 			 ng-repeat="user in SprintCtrl.usersManager"
 			 dnd-type="'user'"
 			 dnd-draggable="user">
-			<img src="{{user.avatar}}">
+			<img ng-src="{{user.avatar}}">
 		</div>
 		<div class="lists-container__project-users__icons"
 		ng-repeat="user in SprintCtrl.usersWithoutManager"
 		dnd-type="'user'"
 		dnd-draggable="user">
-			<img src="{{user.avatar}}">
+			<img ng-src="{{user.avatar}}">
 		</div>
 	</div>
 
@@ -132,7 +132,7 @@
 									 dnd-allowed-types="['user']">
 									<img ng-repeat="executor in card.executors"
 										 class="card_content-card__bottom-executors__avatar"
-										 src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
+										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
 								</div>
 							</div>
 						</div>
