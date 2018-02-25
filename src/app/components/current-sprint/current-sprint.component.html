@@ -54,16 +54,18 @@
 			 dnd-disable-if="list.listId < 4"
 			 dnd-draggable='list'
 			 class="list"
+			 ng-style="{'transition' : SprintCtrl.transitionProtertyBacklog}"
 			 ng-class="{'backlog' : list.listId == 1}">
 
 
 
 			<div ng-if="list.listId !== 1"
 				 id="{{list.listId + 100}}"
+				 ng-style="{'transition' : SprintCtrl.transitionProterty}"
 				 class="list__full-menu"
 				 ng-blur="SprintCtrl.hideListMenu(list)"
 				 ng-class="{'list__full-menu_open' : list.isListMenuShown,
-				 'list__full-menu_close': !list.isListMenuShown}">
+				 'list__full-menu_close': !(list.isListMenuShown || false)}">
 
 				<!--<div ng-click="SprintCtrl.hideListMenu(list)"-->
 				     <!--class="list__full-menu__close-icon"></div>-->
@@ -130,7 +132,7 @@
 							<div class="card_content-card__bottom">
 								<div class="card_content-card__bottom-attributes">
 									<p>{{ SprintCtrl.cardCommentsCount(card) }}</p>
-									<!--<p>{{ SprintCtrl.cardAttachmentCount(sprint-header) }}</p>-->
+									<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>
 								</div>
 								<div class="card_content-card__bottom-executors"
 									 dnd-list dnd-drop="onUserDrop(item, card)"

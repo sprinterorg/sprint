@@ -127,7 +127,7 @@
 				top: 14px;
 				right: -207px;
 				position: absolute;
-				transition: all 0.5s;
+				//transition: all 0.5s;
 				z-index: 40;
 				width: 220px;
 				//height: 200px;
@@ -138,11 +138,14 @@
 				box-shadow: 6px 6px 22px rgba(0,0,0,0.8);
 				border-radius: 5px;
 				&_close{
-					transition: all 0.5s;
+					//transition: all 0.5s;
 					z-index: -10;
 					opacity: 0.8;
 					transform: scale(0);
 					padding: 10px;
+				}
+				&_open{
+					//transition: all 0.5s;
 				}
 				&__close-icon{
 					&::after{
@@ -306,7 +309,7 @@
 			}
 		}
 		.backlog{
-			transition: all 0.8s;
+			//transition: all 0.8s;
 			z-index: 10;
 			position: absolute;
 			left: -260px;
@@ -467,10 +470,10 @@
 						content: url("../../../Shape.png");
 						margin-right: 3px;
 					}
-					//p:last-child::before {
-					//	content: url("../../../paperclip.png");
-					//	margin-right: 3px;
-					//}
+					p:last-child::before {
+						content: url("../../../paperclip.png");
+						margin-right: 3px;
+					}
 				}
 				&-executors {
 					display: flex;

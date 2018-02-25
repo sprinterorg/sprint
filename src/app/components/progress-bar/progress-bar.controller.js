@@ -15,15 +15,15 @@ export default class progressBarComponent {
 
     get startDate() {
         let x = this._supportService.getFormattedDate(this.project.startTimeStamp)
-        x = x.replace('.','/')
-        x = x.replace('.','/')
+        // x = x.replace('.','/')
+        // x = x.replace('.','/')
         return x;
     }
     get finishDate() {
         let plus = 3600 * 24 * 1000 * (+this.project.duration);
         let x = this._supportService.getFormattedDate(this.project.startTimeStamp + plus)
-        x = x.replace('.','/')
-        x = x.replace('.','/')
+        // x = x.replace('.','/')
+        // x = x.replace('.','/')
         return x;
     }
 

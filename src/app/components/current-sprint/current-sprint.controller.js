@@ -24,6 +24,7 @@ export default class sprintController {
         this.newListName = null;
         this.hide = this.toShowProjectSettings.bind(this);
         this.showProjectSettings = false;
+        this.projectDelay = false;
 
         this.query = {
             0: 'red',
@@ -80,6 +81,25 @@ export default class sprintController {
         // document.addEventListener('click', (event)=>{
             // this.clickWatcher(event.target)
         // })
+        setTimeout( ()=>{
+            this.projectDelay = true;
+        },100)
+    }
+
+    get transitionProterty() {
+        if (this.projectDelay) {
+            return 'all 0.5s'
+        } else {
+            return 'none';
+        }
+    }
+
+    get transitionProtertyBacklog() {
+        if (this.projectDelay) {
+            return 'all 0.8s'
+        } else {
+            return 'none';
+        }
     }
 
     get isProjectHasHistory() {
@@ -190,7 +210,7 @@ export default class sprintController {
 
 
     showFullCard(card){
-        // console.log(this.cards, this.project);
+        // console.log(card);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -247,8 +267,8 @@ export default class sprintController {
         }
     }
     cardAttachmentCount(card) {
-        if ('attachment' in card) {
-            return Object.keys(card.attachment)['length']
+        if ('descfiles' in card) {
+            return Object.keys(card.descfiles)['length']
         } else {
             return 0;
         }
@@ -257,8 +277,8 @@ export default class sprintController {
         let date = new Date(card.createdAt);
         date = date.toLocaleDateString();
         let x = this.supportService.getFormattedDate(Date.parse(card.createdAt))
-        x = x.replace('.','/')
-        x = x.replace('.','/')
+        // x = x.replace('.','/')
+        // x = x.replace('.','/')
         // return date.substring(0, date.length-4) + date.substring(date.length-2);
         return x;
 
