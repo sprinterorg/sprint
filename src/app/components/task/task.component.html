@@ -45,7 +45,7 @@
 					<div class="priority-label">priority:</div>
 					<table class="priority-priorities">
 						<tr ng-repeat="priority in TaskCtrl.priorities">
-							<td ng-style="{'background-color': TaskCtrl.taskPrioriry(priority)}"
+							<td ng-class="TaskCtrl.taskPrioriry(priority)"
 								ng-click="TaskCtrl.setPriority(priority)">BV{{priority}}</td>
 						</tr>
 					</table>
@@ -55,44 +55,20 @@
 					<table class="lists-lists">
 						<tr ng-repeat="list in TaskCtrl.lists">
 							<td 
-								ng-click="TaskCtrl.setPriority(priority)">{{list.listName}}</td>
+								ng-if="TaskCtrl.displayList(list.listId)" ng-click="TaskCtrl.moveToList(list.listId)" ng-class="TaskCtrl.taskList(list.listId)">{{list.listName}}</td>
 						</tr>
 					</table>
 				</div>
-			<ul>
-				<li ng-repeat="user in TaskCtrl.executors track by $index">
-				{{TaskCtrl.getUser(user.$id).username}}
-				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
 
-				</li>
-			</ul>
-
-		  <form ng-submit="TaskCtrl.addExecutorsToTask()" >
-			<div class="black rounded">
-			  <select
-		            ng-model="TaskCtrl.newUserId"
-		            ng-options="user.$id as user.username for user in TaskCtrl.projectUsers">
-		      <option value="-- choose user --"></option>
-		    </select>
-			</div>
-			<button type='submit'>Add User</button>
-		  </form>
-
-		  <h3>
-			List name {{TaskCtrl.getListName()[0].listName}}
-		  </h3>
-
-		  <form ng-submit="TaskCtrl.moveToList()">
-			  <div class="black rounded">
-			<select
-		            ng-model="TaskCtrl.newListId"
-		            ng-options="list.listId as list.listName for list in TaskCtrl.lists">
-		      <option value="-- choose user --"></option>
-		    </select>
-			  </div>
-			<button type='submit'>Move to another list</button>
-		  </form>
-		
+				{{console.log(TaskCtrl.executors)}}
+				<user-adding class="task-executors"
+							 all-users="TaskCtrl.projectUsers"
+               				 users="TaskCtrl.executors" 
+               				 project="TaskCtrl.project"
+               				 project-id="TaskCtrl.projectId"
+               				 task="TaskCtrl.task"
+               				 task-id="TaskCtrl.taskId">
+  				</user-adding>
 		</section>
 		</div>
 	</section>

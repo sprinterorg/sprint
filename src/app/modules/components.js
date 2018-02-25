@@ -6,7 +6,8 @@ import mainMenuComponent from '../components/main-menu/main-menu.component';
 import spinner from '../components/spinner/spinner.component';
 import projectSettingsComponent from '../components/project-settings/project-settings.component';
 import projectsComponent from '../components/projects/projects.component';
-import progressBarComponent from '../components/progress-bar/progress-bar.component';//alex-progress
+import progressBarComponent from '../components/progress-bar/progress-bar.component';
+import userAddingComponent from '../components/user-adding/user-adding.component';
 
 
 const ComponentsModule = angular.module('app-components',[])
@@ -18,6 +19,7 @@ const ComponentsModule = angular.module('app-components',[])
     .component('spinner', spinner)
     .component('projectSettings', projectSettingsComponent)
     .component('projects', projectsComponent)
-    .component('progressBar', progressBarComponent);//alex-progress
+    .component('progressBar', progressBarComponent)
+    .component('userAdding', userAddingComponent);
 
 export default ComponentsModule;

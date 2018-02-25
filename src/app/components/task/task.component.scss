@@ -133,6 +133,27 @@
         font-size: 1.2rem;
       }
     }
+
+     .priority-red {
+        color: #ffffff;
+        background-color: red;
+     }
+     .priority-yellow {
+        color: #000000;
+        background-color: yellow;
+     }
+     .priority-green {
+        color: #ffffff;
+        background-color: green;
+     }
+     .priority-blue {
+        color: #ffffff;
+        background-color: blue;
+     }
+     .active-list {
+        color: #ffffff;
+        background-color: #000000;
+     }
   }
 
 }

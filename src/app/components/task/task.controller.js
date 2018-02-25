@@ -26,32 +26,16 @@ export default class ticketController {
         this.priorities = supportService.getPriorities();
 
         this.priorityStyles = {
-            0: 'red',
-            1: 'yellow',
-            2: 'green',
-            3: 'blue'
+            0: 'priority-red',
+            1: 'priority-yellow',
+            2: 'priority-green',
+            3: 'priority-blue'
         }
 
     }
 
-
-    addExecutorsToTask() {
-        this._fireBase.addExecutorsToTask(this.projectId, this.taskId, this.newUserId, {
-            priority: this.task.priority,
-            title: this.task.title
-        }); 
-    }
-
-    deleteExecutorFromTask(userId) {
-        this._fireBase.deleteExecutorFromTask(this.projectId, this.taskId, this.project.managerId, userId);
-    }
-
-    getUser(userId) {
-        return this.projectUsers.filter(item => item.$id === userId)[0];
-    }
-
-    moveToList() {
-        this._fireBase.moveToList(this.taskId, Number(this.newListId), this.projectId);
+    moveToList(listId) {
+        this._fireBase.moveToList(this.taskId, Number(listId), this.projectId);
     }
 
     getListName() {
@@ -95,13 +79,22 @@ export default class ticketController {
     taskPrioriry(priority) {
         if (priority === this.task.priority)
             return this.priorityStyles[priority];
-        return 'transparent';
+        return '';
+    }
+
+    taskList(listId) {
+        if (listId === this.task.list_id)
+            return 'active-list';
+        return '';
     }
 
     setPriority(priority) {
-        console.log(priority)
         let users = [this.project.managerId];
         this.executors.map( user => users.push(user.$id));
         this._fireBase.updatePriority(this.projectId, this.taskId, priority, users);
+    }
+
+    displayList(listId) {
+        return listId != 1 || this.userId === this.project.managerId;
     }
 }

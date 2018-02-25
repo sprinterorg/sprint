@@ -175,6 +175,12 @@ class FireService {
     	return this._$firebaseArray(ref);
 	}
 
+    updateListName(projectId, $listId, newListName) {
+        this.rootRef.child('projects/'+projectId+'/lists').update({
+            [$listId + '/listName']: newListName
+        });
+    }
+
 	addCard(cards, data, managerId, projectId) {
 		let self = this;
 	    return cards.$add(data).then( rootRef => {

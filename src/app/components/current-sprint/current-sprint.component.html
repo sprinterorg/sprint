@@ -127,7 +127,7 @@
 									 dnd-allowed-types="['user']">
 									<img ng-repeat="executor in card.executors"
 										 class="card_content-card__bottom-executors__avatar"
-										 src="{{ SprintCtrl.getUser(executor) }}">
+										 src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
 								</div>
 							</div>
 						</div>
