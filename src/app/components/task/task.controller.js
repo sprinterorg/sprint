@@ -9,6 +9,9 @@ export default class ticketController {
         this.executors = fireBase.getTaskExecutors(this.projectId, this.taskId);
         this.project = fireBase.getSprint(this.projectId);
         this.lists = fireBase.getSprintLists(this.projectId);
+        this.taskTitle = null;
+        this._supportService = supportService;
+        this.titleEditFlag = false;
 
         this.comments = fireBase.getComments(this.projectId, this.taskId);
         this.userId = supportService.getUserId();
@@ -32,6 +35,27 @@ export default class ticketController {
             3: 'priority-blue'
         }
 
+    }
+    get isTitleEdit() {
+        return this.titleEditFlag;
+    }
+    set isTitleEdit(flag){
+        this.titleEditFlag = flag;
+        if (flag == true) {
+            this.taskTitle = this.task.title;
+            setTimeout(() => {
+                document.getElementById('editTaskTitle').focus()
+            }, 10)
+        }
+    }
+
+    onTitleBlur() {
+        this.editTitle();
+    }
+
+    editTitle() {
+        this.isTitleEdit = false;
+        this._fireBase.updateTitle(this.projectId, this.task.$id, this.taskTitle);
     }
 
     moveToList(listId) {

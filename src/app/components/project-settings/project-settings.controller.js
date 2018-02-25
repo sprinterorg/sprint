@@ -1,6 +1,6 @@
 export default class projectSettingsController {
     /*@ngInject*/
-    constructor(fireBase, supportService, $stateParams) {
+    constructor(fireBase, supportService, $stateParams, $state) {
 		this.userId = supportService.getUserId();
         this.projectId = this.projectHash || $stateParams.project_id;
         this._fireBase = fireBase;
@@ -12,6 +12,7 @@ export default class projectSettingsController {
         this.durationEdit = false;
         this.backgroundEdit = false;
         this.backgrounds = supportService.getBackgrounds();
+        this._$state = $state;
     }
 
     updateProject() {
@@ -28,6 +29,7 @@ export default class projectSettingsController {
         let ids = [];
         this.projectUsers.map( user => ids.push(user.$id));
         this._fireBase.deleteProject(ids, this.projectId);
+        this._$state.go('profile');
     }
 
     isManager(userId) {

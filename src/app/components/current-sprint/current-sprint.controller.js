@@ -83,7 +83,19 @@ export default class sprintController {
     }
 
     get projBackgound() {
-        return this.project.background;
+        if (this.project && 'background' in this.project) {
+            return this.project.background;
+        } else {
+            return '../../../backgrount-default.jpg'
+        }
+    }
+    get isProjectManager() {
+        if (this.project.managerId == this.userId){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     get managerAvatar(){
         return this.getUser(this.project.managerId);
@@ -174,7 +186,7 @@ export default class sprintController {
 
 
     showFullCard(card){
-        console.log(card);
+        // console.log(card);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -258,6 +270,29 @@ export default class sprintController {
         this._fireBase.updateListName(this.projectId, list.$id, this.newListName)
         this.newListName = null;
         list.isListMenuShown = false;
+    }
+
+    cardDescription(text) {
+        if ('description' in text) {
+            if (text.description['length'] && text.description['length'] >= 16) {
+                return text.description.slice(0, 14) + '...'
+            } else if (text.description['length'] && text.description['length'] < 16) {
+                return text.description;
+            }
+        } else {
+            return 'Card description'
+        }
+    }
+    cardsFilter(listId) {
+        let arr = this.cards.filter( (el)=> el.list_id == listId)
+        return arr.sort(this.cardsPrioritySort);
+    }
+
+    cardsPrioritySort(a,b) {
+        a = a.priority;
+        b = b.priority;
+        if (a > b) return 1;
+        if (a < b) return -1;
     }
 
     isAddListActiveFunc(val) {

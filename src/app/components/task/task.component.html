@@ -1,8 +1,12 @@
 <div class="task-wrap">
+	<div class="task-wrap__blur"
+		 ui-sref="current-sprint({project_id: TaskCtrl.projectId})"
+		 ng-click="SprintCtrl.closeFullCard()"></div>
 <section  class="task task-layer">
 	<div class="task-header">
         <div class="task-title">
-            {{TaskCtrl.task.title}}
+            <!--{{TaskCtrl.task.title}}-->
+			Card description
         </div>
         <div class="close" 
         	 ng-click="loginController.hideFunc()">
@@ -14,7 +18,22 @@
     </div>
 	
     <section class='task__wrapper'>
-    	<h1 class="task__title">{{TaskCtrl.task.title}}</h1>
+		<div class="task__title">
+			<p ng-if="!TaskCtrl.isTitleEdit"
+			   ng-click="TaskCtrl.isTitleEdit = true">
+			   {{TaskCtrl.task.title}}
+			</p>
+			<form ng-if="TaskCtrl.isTitleEdit"
+					class="task__title_form"
+					ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
+				  ng-submit="TaskCtrl.editTitle()">
+				<input id="editTaskTitle"
+					   ng-blur="TaskCtrl.onTitleBlur()"
+						type="text" ng-model="TaskCtrl.taskTitle"
+					   value="{{TaskCtrl.taskTitle}}"/>
+			</form>
+		</div>
+
 		<div class='task-content'>
 			<section class="task-content__left-section">
 			

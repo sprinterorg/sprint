@@ -107,7 +107,7 @@
 			flex-grow: 0;
 			width: 240px;
 			min-height: 150px;
-			background-color: rgba(247,247,247, 0.85);
+			background-color: rgba(247,247,247, 0.8);
 			margin: 10px;
 			padding: 5px;
 			border-radius: 3px;
@@ -355,9 +355,9 @@
 			border-radius: 3px;
 			border: 2px solid #ebebeb;
 			background: repeating-linear-gradient( 135deg,
-							rgba(169,169,169, 0.7), rgba(169,169,169, 0.7) .5em,
+							rgba(169,169,169, 0.5), rgba(169,169,169, 0.5) .5em,
 							transparent .5em, transparent 1em);
-			background-color: rgba(247,247,247, 0.7);
+			background-color: rgba(247,247,247, 0.5);
 		}
 	}
 }
@@ -509,9 +509,9 @@
 		padding: 7px 10px;
 		border-radius: 3px 0 0 3px;
 		background: repeating-linear-gradient( 135deg,
-						rgba(169,169,169, 0.7), rgba(169,169,169, 0.7) .5em,
+						rgba(169,169,169, 0.5), rgba(169,169,169, 0.5) .5em,
 						transparent .5em, transparent 1em);
-		background-color: rgba(247,247,247, 0);
+		background-color: rgba(247,247,247, 0.1);
 	}
 }
 .list-add-list__wrapper{
@@ -526,7 +526,7 @@
 	flex-grow: 0;
 	width: 240px;
 	min-height: 50px;
-	background-color: rgba(247,247,247, 0.85);
+	background-color: rgba(247,247,247, 0.8);
 	margin: 10px;
 	padding: 5px;
 	border-radius: 3px;

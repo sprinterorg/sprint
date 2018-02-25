@@ -247,6 +247,12 @@ class FireService {
        });
     }
 
+    updateTitle(projectId, taskId, newTitle) {
+        return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).update({
+            title: newTitle
+        });
+    }
+
     updatePriority(projectId, taskId, newPriority, users) {
         let temp = {
             ['projects/'+projectId+'/cards/'+taskId+'/priority']: newPriority,

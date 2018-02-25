@@ -8,12 +8,20 @@
   height: 100vh;
   overflow-y: hidden;
   z-index: 90;
+  &__blur{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+    //background: red;
+  }
 
   .task {
     margin: 0 auto;
   }
 
   .task-layer {
+    position: relative;
     box-sizing: border-box;
     width: 1000px;
     height: 100vh;
@@ -27,13 +35,27 @@
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
-    
+    margin-top: 50px;
   }
 
   .task__title {
-    font-size: 3rem;
-    padding: 10px 0;
+    cursor: pointer;
+    //font-size: 3rem;
+    padding: 5px 0;
     border-bottom: 1px solid #D1D1D1;
+    &>input,
+    &>p{
+      font-size: 26px;
+      padding: 7px 5px 7px 7px;
+    }
+    &_form{
+      font-size: 26px;
+      input{
+        font-size: 26px;
+        padding: 5px;
+      }
+    }
+
   }
 
   .task-content {
@@ -160,16 +182,19 @@
 
 .task-header {
   display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
   padding: 5px 20px 5px 35px;
   background: #000000;
-  width: 100%;
+  //width: 100%;
+  width: 1000px;
   height: 50px;
-
   .task-title {
     font-size: 2.2rem;
     color: #ffffff;
+    cursor: default !important;
+
   }
 
   .close a {

@@ -5,8 +5,12 @@
 	<!--<div class="lists-container__project-name_wrapper">-->
 		<!--{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}-->
 	<!--</div>-->
-	<a class="link-button_project-history" ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
-	<div class="link-button_project-setting" ng-click="SprintCtrl.toShowProjectSettings()"></div>
+	<a ng-if="SprintCtrl.isProjectManager"
+	   class="link-button_project-history"
+	   ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
+	<div ng-if="SprintCtrl.isProjectManager"
+		 class="link-button_project-setting"
+		 ng-click="SprintCtrl.toShowProjectSettings()"></div>
 	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
 
 	<div class="lists-container__project-users"
@@ -33,6 +37,7 @@
 		 dnd-list
 		 dnd-drop="listDrop(item, index, SprintCtrl.lists)">
 		<div class="backlog-show-button list"
+			 ng-if="SprintCtrl.isProjectManager"
 			 ng-class="{'backlog-show-button__hide' : !SprintCtrl.isShown}"
 			 ng-click="SprintCtrl.showBacklog()">
 			<!--<p>Back-log</p>-->
@@ -98,7 +103,7 @@
 					dnd-drop="onDrop(list.listId, item)">
 					<li ng-click="SprintCtrl.showFullCard(card)"
 					    ui-sref="card-child-component({project_id: SprintCtrl.projectId ,task_id:card.$id})"
-					    ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
+					    ng-repeat="card in SprintCtrl.cardsFilter(list.listId)"
 					    class="card"
 					    dnd-draggable="card"
 					    dnd-type="'item'"
@@ -109,7 +114,7 @@
 							<div class="card_content-card__top">
 								<div class="card_content-card__top-title">
 									<h4>{{ card.title }}</h4>
-									<p>Card text</p>
+									<p>{{ SprintCtrl.cardDescription(card) }}</p>
 								</div>
 								<div class="card_content-card__top-info">
 									<p>{{SprintCtrl.cardCreatedDate(card)}}</p>
@@ -120,7 +125,7 @@
 							<div class="card_content-card__bottom">
 								<div class="card_content-card__bottom-attributes">
 									<p>{{ SprintCtrl.cardCommentsCount(card) }}</p>
-									<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>
+									<!--<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>-->
 								</div>
 								<div class="card_content-card__bottom-executors"
 									 dnd-list dnd-drop="onUserDrop(item, card)"
