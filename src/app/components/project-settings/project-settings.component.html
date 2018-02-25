@@ -47,42 +47,10 @@
           </ul>
         </div>
   </form>
-  <div class=project-setting__users-section>
-  <p class="project-settings__text project-settings__text--users">project users:</p>
-  <div class="background__executors">
-    <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: ProjectSettingsCtrl.userId}:true" >
-      <img 
-            class="background__executor__avatar background__executor__avatar--admin"
-            src="{{ user.avatar }}" title="{{user.username}}">
-     <!--  <div class="background__executor__name">{{ user.username }}</div> -->
-    </div>
-    <div class="background__executor" ng-repeat="user in ProjectSettingsCtrl.projectUsers | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true" title="{{user.username}}">
-      <img  class="background__executor__avatar"
-            src="{{ user.avatar }}">
-     <!--  <div class="background__executor__name">{{ user.username }}</div> -->
-      <div class="background__executor__delete" ng-click="ProjectSettingsCtrl.deleteUserFromProject(user.$id)"><i class="fas fa-times"></i></div>
-    </div>
-    <div class="background__executor" ng-click="ProjectSettingsCtrl.showAddUser()">
-    <img class="background__executor__avatar background__executor__avatar--add"
-            src="plus.png">
-    </div>
-    <div ng-if="ProjectSettingsCtrl.addUserSelect" class="project-settings__search-section">
-    <div class="project-setting__search">
-      <div class="loop-icon loop-icon--project-settings">
-        <i class="fas fa-search"></i>
-      </div>
-      <input class="project-settings__executors-input" type="text" ng-model="ProjectSettingsCtrl.searchUser" placeholder="Search user" required>
-    </div>
-    <ul class="project-settings__executors-select">
-            <li class="project-settings__executors-option" ng-click="ProjectSettingsCtrl.addUserToProject(user)" ng-repeat="user in ProjectSettingsCtrl.users | filter: {username: ProjectSettingsCtrl.searchUser || '*'}">
-              <div class="background__executor background__executor--select" ng-click="ProjectSettingsCtrl.addUserToProject(user)">
-                <img  class="background__executor__avatar background__executor__avatar--adding"
-            src="{{ user.avatar }}">
-              </div>
-              <p class="background__exector__avatar-name">{{user.username}}</p>
-            </li>
-          </ul>
-        </div>
-    </div>
-  </div>
+  <user-adding all-users="ProjectSettingsCtrl.users"
+               users="ProjectSettingsCtrl.projectUsers" 
+               project="ProjectSettingsCtrl.project"
+               project-id="ProjectSettingsCtrl.projectId"
+               boolean-project="true">
+  </user-adding>
 </section>
