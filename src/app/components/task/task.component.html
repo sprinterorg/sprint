@@ -49,6 +49,7 @@
 				<button ng-if="!TaskCtrl.editDescription"
 					 class="button button--change-description"
 					 ng-click="TaskCtrl.changeDescription()">Change</button>
+
 				<div class="edit-buttons" ng-if="TaskCtrl.editDescription">
 					<button
 					 class="button button--change-save"
@@ -56,6 +57,13 @@
 					 <button
 					 class="button button--change-cancel"
 					 ng-click="TaskCtrl.cancelSavingDescription()">Cancel</button>
+				</div>
+
+				<span class="file-add" type="file" ngf-select="TaskCtrl.uploadFile($file, {addToComment: false})"></span>
+
+				<div ng-repeat="task in TaskCtrl.taskFiles" class="file-editor">
+					<a ng-href="{{task.fileLink}}" download="task.fileName">{{task.fileName}}</a>
+					<span ng-click="TaskCtrl.deleteFile(task.fileLocation, task.$id)" class="close"></span>
 				</div>
 			</div>
 			</section>
@@ -96,6 +104,9 @@
 		<textarea class="textarea textarea--add-comment" ng-model="TaskCtrl.comment" name="comment" placeholder="Your comment">
 		</textarea>
 	<button class="button button--send" ng-click="TaskCtrl.addComment()">Add comment</button>
+	<span class="file-add" type="file"
+			ngf-select="TaskCtrl.uploadFile($file, {addToComment: true})"></span>
+		<span ng-repeat="file in TaskCtrl.fileLinks">{{file.fileName}}</span>
 	</div>
 
 	<div ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" class="comments user-comment">
@@ -104,7 +115,7 @@
 			<div class="comment-in">
 				<div class="user-info">
 					<span class="user-name">by {{TaskCtrl.getUser(comment.userId).username}}</span>
-					<span class="user-name" am-time-ago="comment.date"></span>
+					<span ng-if="comment.date" class="user-name" am-time-ago="comment.date"></span>
 				</div>
 
 				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  class="comment-text">{{comment.comment}}</span>
@@ -118,6 +129,10 @@
 
 				<span ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id"
 					  ng-click="TaskCtrl.saveEditedComment(comment.$id)" class="edit-comment">save</span>
+
+				<div ng-repeat="file in comment.files">
+					<a ng-href="{{file.fileLink}}" download="file.fileName">{{file.fileName}}</a>
+				</div>
 			</div>
 		</div>
 	</div>
