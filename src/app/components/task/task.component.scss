@@ -20,6 +20,49 @@
     margin: 0 auto;
   }
 
+  .file-editor {
+    margin-top: 15px;
+    position: relative;
+  }
+
+  .file-add {
+    margin-left: 15px;
+    content: url("../../../paperclip.png");
+    margin-right: 3px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .close {
+    position: absolute;
+    right: 10px;
+    top: 3px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+    &:before, &:after {
+      position: absolute;
+      left: 15px;
+      content: ' ';
+      height: 20px;
+      width: 2px;
+      background-color: #333;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+  }
+
+
   .task-layer {
     position: relative;
     box-sizing: border-box;
@@ -219,6 +262,8 @@
 
 .add-comment {
   padding-bottom: 20px;
+
+
 }
 
 .textarea--add-comment {
@@ -278,34 +323,10 @@
         resize: none;
       }
 
-      .close {
-        position: absolute;
-        right: 10px;
-        top: 3px;
-        width: 32px;
-        height: 32px;
-        opacity: 0.3;
-
-        &:hover {
-          cursor: pointer;
-          opacity: 1;
-        }
-        &:before, &:after {
-          position: absolute;
-          left: 15px;
-          content: ' ';
-          height: 20px;
-          width: 2px;
-          background-color: #333;
-        }
-        &:before {
-          transform: rotate(45deg);
-        }
-        &:after {
-          transform: rotate(-45deg);
-        }
-
+      .user-info {
+        margin-bottom: 10px;
       }
+
 
       .edit-comment {
         display: block;
