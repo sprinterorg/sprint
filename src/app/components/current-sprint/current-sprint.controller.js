@@ -109,7 +109,7 @@ export default class sprintController {
     }
 
     getUser(userId) {
-        return this.users.filter(item => item.$id === userId)[0].avatar || null;
+        return this.users.filter(item => item.$id === userId);
     }
 
 
@@ -255,6 +255,7 @@ export default class sprintController {
 
 
     changeListTitle(list) {
+        this._fireBase.updateListName(this.projectId, list.$id, this.newListName)
         this.newListName = null;
         list.isListMenuShown = false;
     }

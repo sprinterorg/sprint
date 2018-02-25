@@ -11,7 +11,6 @@ export default class projectSettingsController {
         this.projectEdit = false;
         this.durationEdit = false;
         this.backgroundEdit = false;
-        this.addUserSelect = false;
         this.backgrounds = supportService.getBackgrounds();
     }
 
@@ -25,27 +24,6 @@ export default class projectSettingsController {
         });
     }
 	
-	addUserToProject(user) {
-        this._fireBase.addUserToProject(user.$id, this.projectId, {
-            username: user.username,
-            email: user.email,
-            avatar: user.avatar
-        }, {
-            projectName: this.project.projectName,
-            background: this.project.background,
-            managerId: this.project.managerId
-        });
-         this.addUserSelect = false;
-	}
-
-    deleteUserFromProject(userId) {
-        let cards = [];
-        this.cards.filter(card => {if (card.executors) return userId in card.executors; return false}).forEach(card => cards.push(card.$id));
-        console.log(cards)
-        this._fireBase.deleteUserFromProject(userId, this.projectId, cards);
-    }
-
-
     deleteProject() {
         let ids = [];
         this.projectUsers.map( user => ids.push(user.$id));
@@ -76,9 +54,6 @@ export default class projectSettingsController {
         this.editProjectBackground();
         this.updateProject();
     }
-    showAddUser() {
-        this.addUserSelect = !this.addUserSelect;
-    }
 
     closeSprint() {
         let usersOfClosedTasks = [this.project.managerId];
@@ -99,7 +74,7 @@ export default class projectSettingsController {
                     closedTasks.push(item.$id);
                     if(item.executors) {
                         let keyArr = Object.keys(item.executors);
-                        for (let key of keyArr)i
+                        for (let key of keyArr)
                             usersOfClosedTasks.push(key);
                     }
                 }

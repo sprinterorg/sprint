@@ -23,7 +23,8 @@ import './components/spinner/spinner.component.scss';
 import './components/current-sprint/card/card-child.component.scss';
 import './components/hystory/hystory.component.scss';
 import '../font/flaticon.css';
-import './components/progress-bar/progress-bar.component.scss';//alex-progress
+import './components/progress-bar/progress-bar.component.scss';
+import './components/user-adding/user-adding.component.scss';
 
 angular.module('app', [
     angFire,

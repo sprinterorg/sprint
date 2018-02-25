@@ -14,7 +14,8 @@ class SupportService {
           'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F405789bg4-max.jpeg?alt=media&token=55e1628d-7154-40bb-b89c-3b8b88580e6e',
           'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F558877bg5-max.jpeg?alt=media&token=15c213c0-01c2-43f0-8f6c-52dfc407d7cd',
           'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/img%2F125175bg6-max.jpg?alt=media&token=c232bbb3-ccd2-4bf3-af37-66459dd8babd'
-        ];   
+        ];  
+        this.priorities = [0,1,2,3]; 
     }
 
     get isCardOpen() {
@@ -114,6 +115,10 @@ class SupportService {
 
     getBackgrounds() {
       return this.backgrounds;
+    }
+
+    getPriorities() {
+      return this.priorities;
     }
 
 }
