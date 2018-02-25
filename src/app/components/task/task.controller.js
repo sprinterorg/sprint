@@ -66,8 +66,13 @@ export default class ticketController {
         return this.lists.filter(item => item.listId === this.task.list_id);
     }
 
+    getUser(userId) {
+        return this.projectUsers.filter(item => item.$id === userId)[0];
+    }
+
     addComment(){
-        this._fireBase.addComment(this.comments, {comment: this.comment, userId: this.userId});
+        this._fireBase.addComment(this.comments, {comment: this.comment, userId: this.userId, date: Date.parse(new Date())});
+        this.comment = '';
     }
 
     deleteComment(commentId) {
