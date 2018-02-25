@@ -1,7 +1,7 @@
 <div class="main-menu">
 	<button class="button main-menu__create-project" ng-click="MainMenuCtrl.toShowModalWindow('projects')">+ New Project</button>
 	<div class="main-menu__avatar" ng-click="MainMenuCtrl.toShowMenu()">
-		<img src="{{MainMenuCtrl.user.avatar}}">
+		<img ng-src="{{MainMenuCtrl.user.avatar}}">
 	</div>
 	<div class="main-menu__menu" ng-if="MainMenuCtrl.showMenu">
 		<div class="main-manu__menu-close" ng-click="MainMenuCtrl.toShowMenu()">+</div>

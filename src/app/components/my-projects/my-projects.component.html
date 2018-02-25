@@ -8,7 +8,7 @@
 	<ul class="my-projects__list">
 		<li class="my-projects__item" ng-repeat="myProject in MyProjectsCtrl.myProjects | filter: {projectName: MyProjectsCtrl.searchProjects}" ng-click="MyProjectsCtrl.goToSprint(myProject.$id)">
 			<div class="my-projects__background">
-				<img src="{{myProject.background}}">
+				<img ng-src="{{myProject.background}}">
 			</div>
 			<p class="my-projects__text">{{myProject.projectName }}</p>
 			<my-tasks class="my-tasks" tasks="myProject.myTasks" project-id="myProject.$id"></my-tasks>
