@@ -51,6 +51,23 @@ class FireService {
         return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
     }
 
+    uploadFile(file){
+        let key = Math.random()*1000000^0;
+        let ref = this.storageRef.child('files/'+key+file.name);
+        return new Promise(resolve => ref.put(file).then(response => resolve(response)));
+    }
+
+    deleteFile(file, projectId, taskId, $id){
+       console.log($id);
+        let desertRef = this.storageRef.child(file);
+        desertRef.delete().then(() => {
+            this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles').child($id).remove();
+            console.log('File deleted successfully');
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
     getMyProjects(userId) {
     	let ref = this.rootRef.child('users/'+userId+'/my-projects');
     	return this._$firebaseArray(ref);
@@ -215,6 +232,15 @@ class FireService {
     getTask(projectId, taskId) {
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId);
         return this._$firebaseObject(ref);
+    }
+
+    getTaskFileLinks(projectId, taskId) {
+        let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles');
+        return this._$firebaseArray(ref);
+    }
+
+    addFilesToTask(descfiles, newFile) {
+        return descfiles.$add(newFile);
     }
 
     getComments(projectId, taskId){
