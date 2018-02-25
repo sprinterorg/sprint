@@ -8,15 +8,15 @@
             <!--{{TaskCtrl.task.title}}-->
 			Card description
         </div>
-        <div class="close" 
+        <div class="close"
         	 ng-click="loginController.hideFunc()">
             <a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
-			<div class='close-button' 
+			<div class='close-button'
 				 ng-click="SprintCtrl.closeFullCard()"><i class="flaticon-cancel"></i></div>
 			</a>
         </div>
     </div>
-	
+
     <section class='task__wrapper'>
 		<div class="task__title">
 			<p ng-if="!TaskCtrl.isTitleEdit"
@@ -36,25 +36,25 @@
 
 		<div class='task-content'>
 			<section class="task-content__left-section">
-			
+
 			<div class="task__description">
 				<p class="task__description-title">Task description:</p>
-				<p ng-if="!TaskCtrl.editDescription" 
+				<p ng-if="!TaskCtrl.editDescription"
 				   class="task__description-text">{{TaskCtrl.task.description || "no description yet"}}</p>
-				<textarea ng-if="TaskCtrl.editDescription" 
-						  class="textarea textarea--description" 
-						  ng-model="TaskCtrl.task.description" 
+				<textarea ng-if="TaskCtrl.editDescription"
+						  class="textarea textarea--description"
+						  ng-model="TaskCtrl.task.description"
 						  name="description">
 				</textarea>
-				<button ng-if="!TaskCtrl.editDescription" 
-					 class="button button--change-description" 
+				<button ng-if="!TaskCtrl.editDescription"
+					 class="button button--change-description"
 					 ng-click="TaskCtrl.changeDescription()">Change</button>
 				<div class="edit-buttons" ng-if="TaskCtrl.editDescription">
-					<button  
-					 class="button button--change-save" 
+					<button
+					 class="button button--change-save"
 					 ng-click="TaskCtrl.saveDescription()">Save</button>
-					 <button  
-					 class="button button--change-cancel" 
+					 <button
+					 class="button button--change-cancel"
 					 ng-click="TaskCtrl.cancelSavingDescription()">Cancel</button>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 					<div class="lists-label">is in list:</div>
 					<table class="lists-lists">
 						<tr ng-repeat="list in TaskCtrl.lists">
-							<td 
+							<td
 								ng-if="TaskCtrl.displayList(list.listId)" ng-click="TaskCtrl.moveToList(list.listId)" ng-class="TaskCtrl.taskList(list.listId)">{{list.listName}}</td>
 						</tr>
 					</table>
@@ -82,7 +82,7 @@
 				{{console.log(TaskCtrl.executors)}}
 				<user-adding class="task-executors"
 							 all-users="TaskCtrl.projectUsers"
-               				 users="TaskCtrl.executors" 
+               				 users="TaskCtrl.executors"
                				 project="TaskCtrl.project"
                				 project-id="TaskCtrl.projectId"
                				 task="TaskCtrl.task"
@@ -98,11 +98,14 @@
 	<button class="button button--send" ng-click="TaskCtrl.addComment()">Add comment</button>
 	</div>
 
-	<div ng-repeat="comment in TaskCtrl.comments" class="comments user-comment">
-		<img src="{{TaskCtrl.getUser(comment.userId).avatar}}" alt="" class="comment-avatar">
+	<div ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" class="comments user-comment">
+		<img ng-src="{{TaskCtrl.getUser(comment.userId).avatar}}" alt="" class="comment-avatar">
 		<div class="comment-body">
 			<div class="comment-in">
-				<div class="user-name">{{TaskCtrl.getUser(comment.userId).username}}</div>
+				<div class="user-info">
+					<span class="user-name">by {{TaskCtrl.getUser(comment.userId).username}}</span>
+					<span class="user-name" am-time-ago="comment.date"></span>
+				</div>
 
 				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  class="comment-text">{{comment.comment}}</span>
 
