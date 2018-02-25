@@ -4,8 +4,8 @@ import projectsTemplate from '../components/projects/projects.component.html';*/
 import SprintCtrl from '../components/current-sprint/current-sprint.controller';
 import currentSprintTemplate from '../components/current-sprint/current-sprint.component.html';
 
-import CardChildCtrl from '../components/current-sprint/card/card-child.controller';
-import cardChildTemplate from '../components/current-sprint/card/card-child.component.html';
+import CardChildCtrl from '../components/current-sprint/sprint-header/sprint-header.controller';
+import cardChildTemplate from '../components/current-sprint/sprint-header/sprint-header.component.html';
 
 import ProfileCtrl from '../components/profile/profile.controller';
 import profileTemplate from '../components/profile/profile.component.html';

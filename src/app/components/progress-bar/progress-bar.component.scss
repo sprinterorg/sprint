@@ -1,3 +1,28 @@
+.progress-bar__wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.progress-bar__wrapper-wrapper{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.progress-bar__date{
+  padding-top: 2px;
+  font-size: 20px;
+  color: #fff;
+  &-start{
+    padding-right: 10px;
+  }
+  &-finish{
+    padding-left: 10px;
+  }
+}
+
 .progress-bar{
   margin: 20px 0;
   height: 14px;

@@ -43,6 +43,14 @@
 	width: 100vw;
 	background: #f7f7f7;
 	//margin-top: 10px;
+	&__sprint-header{
+		position: fixed;
+		z-index: 10;
+		width:100%;
+		height: 50px;
+		top: 80px;
+	}
+
 	&__project-name_wrapper{
 		position: fixed;
 		left: 10px;
@@ -74,7 +82,7 @@
 		z-index: 20;
 		display: flex;
 		flex-direction: column;
-		padding-top: 44px;
+		padding-top: 102px;
 
 		&__icons{
 			width: 50px;
@@ -100,7 +108,7 @@
 		position: relative;
 		margin-left: 30px;
 		margin-top: 0px;
-		padding-top: 42px;
+		padding-top: 100px;
 		.list {
 			position: relative;
 			flex-shrink: 0;
@@ -371,7 +379,7 @@
 	display: block;
 	width: 100%;
 	min-height: 98px;
-	max-height: 66.8vh;
+	max-height: 61vh;
 	padding: 0;
 	overflow-y: hidden;
 	overflow-x: hidden;
@@ -405,7 +413,7 @@
 			&__top {
 				&-title {
                   max-width: 136px;
-                  word-break: break-all;
+                  word-break: normal;
 					h4 {
 						color: #414141;
 						font-size: 18px;
@@ -459,10 +467,10 @@
 						content: url("../../../Shape.png");
 						margin-right: 3px;
 					}
-					p:last-child::before {
-						content: url("../../../paperclip.png");
-						margin-right: 3px;
-					}
+					//p:last-child::before {
+					//	content: url("../../../paperclip.png");
+					//	margin-right: 3px;
+					//}
 				}
 				&-executors {
 					display: flex;
@@ -479,7 +487,7 @@
 						min-height: 33px;
 						border-radius: 50%;
 						margin-left: 3px;
-						background: #a9a9a9;
+						background: rgba(169,169,169, 0.85);
 					}
 
 					&__avatar {

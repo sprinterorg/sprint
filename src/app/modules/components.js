@@ -8,6 +8,7 @@ import projectSettingsComponent from '../components/project-settings/project-set
 import projectsComponent from '../components/projects/projects.component';
 import progressBarComponent from '../components/progress-bar/progress-bar.component';
 import userAddingComponent from '../components/user-adding/user-adding.component';
+import sprintHeaderComponent from '../components/current-sprint/sprint-header/sprint-header.component';
 
 
 const ComponentsModule = angular.module('app-components',[])
@@ -20,6 +21,7 @@ const ComponentsModule = angular.module('app-components',[])
     .component('projectSettings', projectSettingsComponent)
     .component('projects', projectsComponent)
     .component('progressBar', progressBarComponent)
+    .component('sprintHeader', sprintHeaderComponent)
     .component('userAdding', userAddingComponent);
 
 export default ComponentsModule;

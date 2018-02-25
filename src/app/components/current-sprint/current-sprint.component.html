@@ -29,9 +29,16 @@
 		</div>
 	</div>
 
-	<div class="lists-container__progress-bar_wrapper">
-		<progress-bar></progress-bar> <!-- alex-progress -->
-	</div>
+	<progress-bar
+			class="lists-container__progress-bar_wrapper">
+	</progress-bar>
+
+	<sprint-header
+			class="lists-container__sprint-header"
+			cards="SprintCtrl.cards"
+			project="SprintCtrl.project">
+	</sprint-header>
+
 	<div class="lists-container__wrapper"
 		 dnd-allowed-types="['container']"
 		 dnd-list
@@ -125,7 +132,7 @@
 							<div class="card_content-card__bottom">
 								<div class="card_content-card__bottom-attributes">
 									<p>{{ SprintCtrl.cardCommentsCount(card) }}</p>
-									<!--<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>-->
+									<!--<p>{{ SprintCtrl.cardAttachmentCount(sprint-header) }}</p>-->
 								</div>
 								<div class="card_content-card__bottom-executors"
 									 dnd-list dnd-drop="onUserDrop(item, card)"
@@ -133,6 +140,9 @@
 									<img ng-repeat="executor in card.executors"
 										 class="card_content-card__bottom-executors__avatar"
 										 src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
+									<img ng-if="SprintCtrl.isExecutors(card)"
+											class="card_content-card__bottom-executors__avatar"
+											src="{{'../../../plus.png'}}">
 								</div>
 							</div>
 						</div>

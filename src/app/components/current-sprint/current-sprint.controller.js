@@ -186,7 +186,7 @@ export default class sprintController {
 
 
     showFullCard(card){
-        // console.log(card);
+        // console.log(this.cards, this.project);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -256,7 +256,7 @@ export default class sprintController {
         x = x.replace('.','/')
         x = x.replace('.','/')
         // return date.substring(0, date.length-4) + date.substring(date.length-2);
-        return x
+        return x;
 
     }
     cardCreatedTime(card) {
@@ -293,6 +293,11 @@ export default class sprintController {
         b = b.priority;
         if (a > b) return 1;
         if (a < b) return -1;
+    }
+
+    isExecutors(card) {
+        if ('executors' in card) return false;
+        else return true;
     }
 
     isAddListActiveFunc(val) {
