@@ -1,33 +1,143 @@
+<div class="task-wrap">
+	<div class="task-wrap__blur"
+		 ui-sref="current-sprint({project_id: TaskCtrl.projectId})"
+		 ng-click="SprintCtrl.closeFullCard()"></div>
 <section  class="task task-layer">
-    <div class='task__wrapper'>
-		<div class='task__content'>
-			<h1>{{TaskCtrl.task.title}}</h1>
-			<p>{{TaskCtrl.task.priority}}</p>
-			<ul>
-				<li ng-repeat="user in TaskCtrl.executors track by $index">
-				{{TaskCtrl.getUser(user.$id)}}
-				<button ng-click="TaskCtrl.deleteExecutorFromTask(user.$id)">delete</button>
-				</li>
-			</ul>
-		
-		  <form ng-submit="TaskCtrl.addExecutorsToTask()">
-			<select
-		            ng-model="TaskCtrl.newUserId"
-		            ng-options="user.$id as user.username for user in TaskCtrl.projectUsers">
-		      <option value="-- choose user --"></option>        
-		    </select>
-			<button type='submit'>Add User</button>
-		  </form>
-		  {{TaskCtrl.getListName()}}
-		  <form ng-submit="TaskCtrl.moveToList()">
-			<select
-		            ng-model="TaskCtrl.newListId"
-		            ng-options="list.listId as list.listName for list in TaskCtrl.lists">
-		      <option value="-- choose user --"></option>        
-		    </select>
-			<button type='submit'>Move to another list</button>
-		  </form>
+	<div class="task-header">
+        <div class="task-title">
+            <!--{{TaskCtrl.task.title}}-->
+			Card description
+        </div>
+        <div class="close"
+        	 ng-click="loginController.hideFunc()">
+            <a ui-sref="current-sprint({project_id: TaskCtrl.projectId})">
+			<div class='close-button'
+				 ng-click="SprintCtrl.closeFullCard()"><i class="flaticon-cancel"></i></div>
+			</a>
+        </div>
+    </div>
+
+    <section class='task__wrapper'>
+		<div class="task__title">
+			<p ng-if="!TaskCtrl.isTitleEdit"
+			   ng-click="TaskCtrl.isTitleEdit = true">
+			   {{TaskCtrl.task.title}}
+			</p>
+			<form ng-if="TaskCtrl.isTitleEdit"
+					class="task__title_form"
+					ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
+				  ng-submit="TaskCtrl.editTitle()">
+				<input id="editTaskTitle"
+					   ng-blur="TaskCtrl.onTitleBlur()"
+						type="text" ng-model="TaskCtrl.taskTitle"
+					   value="{{TaskCtrl.taskTitle}}"/>
+			</form>
+		</div>
+
+		<div class='task-content'>
+			<section class="task-content__left-section">
+
+			<div class="task__description">
+				<p class="task__description-title">Task description:</p>
+				<p ng-if="!TaskCtrl.editDescription"
+				   class="task__description-text">{{TaskCtrl.task.description || "no description yet"}}</p>
+				<textarea ng-if="TaskCtrl.editDescription"
+						  class="textarea textarea--description"
+						  ng-model="TaskCtrl.task.description"
+						  name="description">
+				</textarea>
+				<button ng-if="!TaskCtrl.editDescription"
+					 class="button button--change-description"
+					 ng-click="TaskCtrl.changeDescription()">Change</button>
+
+				<div class="edit-buttons" ng-if="TaskCtrl.editDescription">
+					<button
+					 class="button button--change-save"
+					 ng-click="TaskCtrl.saveDescription()">Save</button>
+					 <button
+					 class="button button--change-cancel"
+					 ng-click="TaskCtrl.cancelSavingDescription()">Cancel</button>
+				</div>
+
+				<span class="file-add" type="file" ngf-select="TaskCtrl.uploadFile($file, {addToComment: false})"></span>
+
+				<div ng-repeat="task in TaskCtrl.taskFiles" class="file-editor">
+					<a ng-href="{{task.fileLink}}" download="task.fileName">{{task.fileName}}</a>
+					<span ng-click="TaskCtrl.deleteFile(task.fileLocation, task.$id)" class="close"></span>
+				</div>
+			</div>
+			</section>
+			<section class="task-content__right-section">
+				<div class="task-priority">
+					<div class="priority-label">priority:</div>
+					<table class="priority-priorities">
+						<tr ng-repeat="priority in TaskCtrl.priorities">
+							<td ng-class="TaskCtrl.taskPrioriry(priority)"
+								ng-click="TaskCtrl.setPriority(priority)">BV{{priority}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="task-lists">
+					<div class="lists-label">is in list:</div>
+					<table class="lists-lists">
+						<tr ng-repeat="list in TaskCtrl.lists">
+							<td
+								ng-if="TaskCtrl.displayList(list.listId)" ng-click="TaskCtrl.moveToList(list.listId)" ng-class="TaskCtrl.taskList(list.listId)">{{list.listName}}</td>
+						</tr>
+					</table>
+				</div>
+
+				{{console.log(TaskCtrl.executors)}}
+				<user-adding class="task-executors"
+							 all-users="TaskCtrl.projectUsers"
+               				 users="TaskCtrl.executors"
+               				 project="TaskCtrl.project"
+               				 project-id="TaskCtrl.projectId"
+               				 task="TaskCtrl.task"
+               				 task-id="TaskCtrl.taskId">
+  				</user-adding>
+		</section>
+		</div>
+	</section>
+	<section class="comments-section">
+	<div class="add-comment">
+		<textarea class="textarea textarea--add-comment" ng-model="TaskCtrl.comment" name="comment" placeholder="Your comment">
+		</textarea>
+	<button class="button button--send" ng-click="TaskCtrl.addComment()">Add comment</button>
+	<span class="file-add" type="file"
+			ngf-select="TaskCtrl.uploadFile($file, {addToComment: true})"></span>
+		<span ng-repeat="file in TaskCtrl.fileLinks">{{file.fileName}}</span>
+	</div>
+
+	<div ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" class="comments user-comment">
+		<img ng-src="{{TaskCtrl.getUser(comment.userId).avatar}}" alt="" class="comment-avatar">
+		<div class="comment-body">
+			<div class="comment-in">
+				<div class="user-info">
+					<span class="user-name">by {{TaskCtrl.getUser(comment.userId).username}}</span>
+					<span ng-if="comment.date" class="user-name" am-time-ago="comment.date"></span>
+				</div>
+
+				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  class="comment-text">{{comment.comment}}</span>
+
+				<textarea ng-if="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id" ng-model="TaskCtrl.commentText"></textarea>
+
+				<span ng-show="comment.userId === TaskCtrl.userId" ng-click="TaskCtrl.deleteComment(comment.$id)" class="close"></span>
+
+				<span ng-show="comment.userId === TaskCtrl.userId && !TaskCtrl.editMode &&
+				!(TaskCtrl.editCommentId === comment.$id)" ng-click="TaskCtrl.editComment(comment)" class="edit-comment">edit</span>
+
+				<span ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id"
+					  ng-click="TaskCtrl.saveEditedComment(comment.$id)" class="edit-comment">save</span>
+
+				<div ng-repeat="file in comment.files">
+					<a ng-href="{{file.fileLink}}" download="file.fileName">{{file.fileName}}</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
+</section>
 
+
+</div>

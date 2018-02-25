@@ -1,5 +1,5 @@
 <ul class="my-tasks">
 	<li ng-repeat="(key, value) in MyTasksCtrl.tasks">
-		<a ui-sref="task({project_id: MyTasksCtrl.projectId, task_id: key})">{{value.title}}</a>
+		<a ui-sref="card-child-component({project_id: MyTasksCtrl.projectId, task_id: key})">{{value.title}}</a>
 	</li>
 </ul>

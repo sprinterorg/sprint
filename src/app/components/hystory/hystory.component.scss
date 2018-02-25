@@ -1,0 +1,234 @@
+.hystory {
+  height: calc(100% - 35px);
+  background: #ffffff;
+}
+
+.hystory__wrapper {
+	padding: 20px 100px 100px 100px;
+	margin: 0 auto;
+}
+
+.hystory__header {
+	z-index: 11;
+	box-sizing: border-box;
+	position: fixed;
+	top: 35px;
+	width: 100vw;
+	background: rgba(255,255,255,.9);
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
+.hystory__header-wrapper {
+	padding: 20px 0;
+	border-bottom: 1px solid #D1D1D1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: baseline;
+}
+
+.hystory__title {
+	font-weight: normal;
+	text-transform: uppercase;
+	font-size: 3rem;
+}
+
+.hystory__header-button {
+	font-size: 1.5rem;
+	margin-left: 20px;
+	opacity: .6;
+}
+
+.table {
+	margin-top: 70px;
+}
+
+.table__cell {
+	position: relative;
+	min-width: 75px;
+	height: 58px;
+	text-align: center;
+	vertical-align: center;
+	border-left: 1px solid #D1D1D1;
+	overflow: hidden;
+	text-transform: uppercase;
+	font-size: 1.2rem;
+
+	& .task-start {
+		position: absolute;
+		top: -20px;
+		left: -82px;
+	}
+	& .task-end {
+		position: absolute;
+		top: -20px;
+		right: -70px;
+	}
+}
+
+.table__cell--last {
+	border: none;
+}
+
+.table__cell--task {
+	min-width: 200px;
+	max-width: 250px;
+	font-size: 1.7rem;
+	padding-left: 20px;
+	text-align: left;
+	border-left: none;
+	text-transform: none;
+}
+
+.table__cell--head {
+	font-size: 2rem;
+	border-left: none;
+	overflow: visible;
+}
+
+.table__cell--closed {
+	background: linear-gradient(rgba(0,255,0,.4), rgba(0,255,0,.1));
+}
+.table__cell--opened {
+	background: linear-gradient(rgba(255,0,0,.4), rgba(255,0,0,.1));
+}
+.table__cell-data {
+	text-align: left;
+	z-index: 10;
+	display: none;
+	position: absolute;
+	top: 60px;
+	right: 0;
+	width: 300px;
+	padding: 20px;
+	background: #ffffff;
+	-webkit-box-shadow: -2px 1px 10px -1px rgba(0,0,0,.3);
+	-moz-box-shadow: -2px 1px 10px -1px rgba(0,0,0,.3);
+	box-shadow: -2px 1px 10px -1px rgba(0,0,0,.3);
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: -10px;
+		right: 30px;
+		background: #ffffff;
+		width: 20px;
+		height: 20px;
+		transform: rotate(45deg);
+		-webkit-box-shadow: -3px 0px 5px -1px rgba(0,0,0,.3);
+		-moz-box-shadow: -3px 0px 5px -1px rgba(0,0,0,.3);
+		box-shadow: -3px 0px 5px -1px rgba(0,0,0,.3);
+	}
+	&::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0px;
+		right: 35px;
+		width: 30px;
+		height: 15px;
+		background: #ffffff;
+	}
+	& h3{
+		font-weight: normal;
+		font-size: 1.5rem;
+		color: #9d9d9d;
+		margin: 0;
+		padding-bottom: 15px;
+		border-bottom: 1px solid #D1D1D1;
+	}
+
+	& table {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	& td {
+		font-size: 1.6rem;
+		text-transform: lowercase;
+		padding-right: 30px;
+
+		& .grey {
+			opacity: .6;
+		}
+	}
+	
+}
+
+.digramm-data {
+	display: flex;
+	justify-content: space-between;
+}
+
+.hystory-completion {
+	width: 50%;
+	& h4 {
+		font-size: 1.8rem;
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	
+	& td {
+		opacity: 1;
+		padding-right: 15px;
+	}
+
+	& .closed {
+		font-size: 3rem;
+		&--green {
+			color: #91EE7C;
+		}
+	}
+}
+
+.table__cell--head:hover .table__cell-data {
+	display: block;
+}
+
+.hystory-diagramm {
+	width: 40%;
+	flex-shrink: 0;
+    position: relative;
+  
+svg {
+    transform: rotate(-90deg);
+    color: #000000;
+    background: #ff0000;
+    border-radius: 50%;
+    width: 100%;
+    position: relative;
+    -webkit-box-shadow: -2px 1px 10px -1px rgba(0,0,0,.5);
+	-moz-box-shadow: -2px 1px 10px -1px rgba(0,0,0,.5);
+	box-shadow: -2px 1px 10px -1px rgba(0,0,0,.5);
+}
+.hystory-diagramm__cirle {
+    fill: red;
+    stroke: hsl(120, 73%, 75%);
+    stroke-width: 50;
+}
+.hystory-diagramm__cirle {
+  transition:stroke-dasharray 2s;
+}
+ p { 
+	position: absolute;
+	color: #000000;
+	font-size: 3rem;
+	font-weight: bold;
+	text-align: center;
+	z-index: 10;
+	width: 85px;
+	height: 85px;
+	border-radius: 50%;
+	left: 18px;
+	top: 18px;
+	background: #ffffff;
+	padding-top: 25px;
+	box-sizing: border-box;
+}
+}
+
+.in-progress {
+	margin-top: 35px;
+}
+
+

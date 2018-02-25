@@ -1,15 +1,204 @@
-body {
-  background: grey;
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
+ *{
+	margin: 0;
+	padding: 0;
+	 &::-webkit-scrollbar-track
+	 {
+		 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		 border-radius: 5px;
+		 background-color: rgba(255,255,255, 0.5);
+	 }
+
+	 &::-webkit-scrollbar
+	 {
+		 width: 8px;
+		 background-color: rgba(255,255,255, 0.5);
+	 }
+
+	 &::-webkit-scrollbar-thumb
+	 {
+		 border-radius: 5px;
+		 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		 background-color: rgba(197,197,197, 0.8);
+	 }
 }
 
-header{
-  display:flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding:10px 5px;
+html {
+	font-size: 10px;
 }
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	background: #ffffff;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	font-size: 1.6rem;
+	box-sizing: border-box;
+
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 5px;
+		background-color: rgba(255,255,255, 0.5);
+	}
+
+	&::-webkit-scrollbar
+	{
+		width: 8px;
+		background-color: rgba(255,255,255, 0.5);
+	}
+
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 5px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: rgba(197,197,197, 0.8);
+	}
+}
+
+
+
+input,
+textarea {
+	font-family: 'Open Sans', sans-serif;
+}
+
+button,
+input,
+textarea {
+	outline: 0;
+	outline-offset: 0;
+	box-shadow: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	& li {
+		display: block;
+	}
+}
+
+a{
+  color:#3498DB;
+  cursor:pointer;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.main-content {
+	padding-top: 35px;
+}
+
+.header {
+	z-index: 60;
+	position: fixed;
+	width: 100%;
+	background: #ffffff;
+	-webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,.2);
+	-moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,.2);
+	box-shadow: 0px 2px 10px 0px rgba(0,0,0,.2);
+
+	&__wrapper {
+		display:flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 4px 10px;
+	}
+}
+
+.header__main-panel,
+.header__login-nav,
+.header__logo,
+.header__search {
+	width: 33%;
+	display: flex;
+}
+
+.header__main-panel,
+.header__login-nav {
+	justify-content: flex-end;
+}
+
+.header__search {
+	justify-content: flex-start;
+	color: #000000;
+}
+
+.search-icon {
+	padding: 1px 6px;
+	border-radius: 5px;
+	cursor: pointer;
+	i:before{
+		margin:0;
+		font-size:1.9rem;
+	}
+	&:hover {
+		background: #000000;
+		color: #ffffff;
+	}
+}
+
+
+.header__logo {
+	justify-content: space-around;
+	& p {
+		margin: 0;
+		padding: 0;
+		font-family: 'Cinzel', serif;
+		font-size: 2.5rem;
+		line-height: 1;
+	}
+}
+
+
+.button {
+	background: transparent;
+	color: #000000;
+	border: none;
+	font-size: 1.4rem;
+	min-width: 30px;
+	padding: 3px 10px;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	cursor: pointer;
+
+	&--signup {
+		background: #000000;
+		color: #ffffff;
+		border-color: black;
+		margin-left: 5px;
+	}
+
+	&:hover {
+		border-color: #000000;
+		background: transparent;
+		color: #000000;
+	}
+}
+
+.link-button {
+	font-size: 1.4rem;
+	background: none;
+	border: none;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  border: 1px solid #D1D1D1;
+  resize: none;
+  font-size: 1.6rem;
+}
+
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;

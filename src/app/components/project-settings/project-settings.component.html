@@ -1,26 +1,56 @@
 <section class="project-settings">
+    <div class="project-settings__close" ng-click="ProjectSettingsCtrl.hideFunc()">+</div>
     <form ng-submit="ProjectSettingsCtrl.updateProject()">
-      <fieldset>
-        <legend>Project data</legend>
-        <input type="text" ng-model="ProjectSettingsCtrl.project.projectName" placeholder="project name"/>
-        <input type="text" ng-model="ProjectSettingsCtrl.project.duration" placeholder="project duration"/>
-        <input type="text" ng-model="ProjectSettingsCtrl.project.background" placeholder="project background image"/>
-      </fieldset>
-      <button type='submit'>Update</button>
+       <div class="project-settings__project-name">
+          <p class="project-settings__text" ng-if="!ProjectSettingsCtrl.projectEdit">{{ProjectSettingsCtrl.project.projectName}}</p>
+          <input class="project-settings__input" ng-if="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName"/>
+          <div ng-if="!ProjectSettingsCtrl.projectEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName(false)">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div ng-if="ProjectSettingsCtrl.projectEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName(true)">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="project-settings__management-buttons">
+            <button class="link-button link-button--close-sprint" ng-click="ProjectSettingsCtrl.closeSprint()">Close sprint</button>
+            <button class="link-button link-button--delete" ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
+          </div>
+        </div>
+        <div class="project-settings__project-duration">
+        <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
+        <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
+        <input ng-if="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="text" ng-model="ProjectSettingsCtrl.project.duration"/>
+        <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(false)">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div ng-if="ProjectSettingsCtrl.durationEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(true)">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+        <div class="project-settings__project-background">
+          <p class="project-settings__background-text">project background</p>
+          <div class="background-item">
+            <img src="{{ProjectSettingsCtrl.project.background}}">
+             <div ng-if="!ProjectSettingsCtrl.backgroundEdit" class="project-settings__button edit edit--background" ng-click="ProjectSettingsCtrl.editProjectBackground()">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div ng-if="ProjectSettingsCtrl.backgroundEdit" class="project-settings__button edit edit--background" ng-click="ProjectSettingsCtrl.editProjectBackground()">
+            <i class="fas fa-check"></i>
+          </div>
+          </div>
+         
+          <ul class="background-items" ng-show="ProjectSettingsCtrl.backgroundEdit">
+            <li ng-repeat="srcImg in ProjectSettingsCtrl.backgrounds | filter:'!'+ProjectSettingsCtrl.project.background">
+              <div class="background-item" ng-click="ProjectSettingsCtrl.selectBackground(srcImg)">
+                <img src="{{srcImg}}">
+              </div>
+            </li>
+          </ul>
+        </div>
   </form>
-  <ul>
-    <li ng-repeat="user in ProjectSettingsCtrl.projectUsers">
-      {{user.username}}
-      <button ng-if="!ProjectSettingsCtrl.isManager(user.$id)" ng-click="ProjectSettingsCtrl.deleteUserFromProject(user.$id)">delete</button>
-    </li>
-  </ul>
-  <form ng-submit="ProjectSettingsCtrl.addUserToProject()">
-	<select
-            ng-model="ProjectSettingsCtrl.newUserId"
-            ng-options="user.$id as user.username for user in ProjectSettingsCtrl.users | filter:{$id: '!' + ProjectSettingsCtrl.userId}:true">
-      <option value="-- choose user --"></option>        
-    </select>
-	<button type='submit'>Add User</button>
-  </form>
-  <button ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
+  <user-adding all-users="ProjectSettingsCtrl.users"
+               users="ProjectSettingsCtrl.projectUsers" 
+               project="ProjectSettingsCtrl.project"
+               project-id="ProjectSettingsCtrl.projectId"
+               boolean-project="true">
+  </user-adding>
 </section>

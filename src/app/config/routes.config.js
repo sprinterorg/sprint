@@ -1,8 +1,11 @@
-import ProjectsCtrl from '../components/projects/projects.controller';
-import projectsTemplate from '../components/projects/projects.component.html';
+/*import ProjectsCtrl from '../components/projects/projects.controller';
+import projectsTemplate from '../components/projects/projects.component.html';*/
 
 import SprintCtrl from '../components/current-sprint/current-sprint.controller';
 import currentSprintTemplate from '../components/current-sprint/current-sprint.component.html';
+
+import CardChildCtrl from '../components/current-sprint/sprint-header/sprint-header.controller';
+import cardChildTemplate from '../components/current-sprint/sprint-header/sprint-header.component.html';
 
 import ProfileCtrl from '../components/profile/profile.controller';
 import profileTemplate from '../components/profile/profile.component.html';
@@ -21,6 +24,9 @@ import taskTemplate from '../components/task/task.component.html';
 
 import LandingCtrl from '../components/landing/landing.controller';
 import landingTemplate from '../components/landing/landing.component.html';
+
+import hystoryCtrl from '../components/hystory/hystory.controller';
+import hystoryTemplate from '../components/hystory/hystory.component.html';
 
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -44,21 +50,30 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         controllerAs: 'ProfileCtrl'
 
     });
+    /*
     $stateProvider.state('projects', {
         url: '/projects',
         secure: true,
         template: projectsTemplate,
         controller: ProjectsCtrl,
         controllerAs: 'ProjectsCtrl'
-
     });
+    */
     $stateProvider.state('current-sprint', {
         url: '/project/:project_id',
         secure: true,
         template: currentSprintTemplate,
         controller: SprintCtrl,
         controllerAs: 'SprintCtrl'
-  });
+        })
+        .state('card-child-component', {
+            parent: 'current-sprint',
+            url: '/task/:project_id/:task_id',
+            secure: true,
+            template: taskTemplate,
+            controller: TaskCtrl,
+            controllerAs: 'TaskCtrl'
+    });
     $stateProvider.state('parent-component', {
         url: '/parent',
         template: parentCtrlTemplate,
@@ -85,5 +100,12 @@ export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRou
         template: taskTemplate,
         controller: TaskCtrl,
         controllerAs: 'TaskCtrl'
+  });
+    $stateProvider.state('hystory', {
+        url: '/project/:project_id/hystory',
+        secure: true,
+        template: hystoryTemplate,
+        controller: hystoryCtrl,
+        controllerAs: 'hystoryCtrl'
   });
 }

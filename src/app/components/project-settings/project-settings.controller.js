@@ -1,12 +1,18 @@
 export default class projectSettingsController {
     /*@ngInject*/
-    constructor(fireBase, supportService, $stateParams) {
+    constructor(fireBase, supportService, $stateParams, $state) {
 		this.userId = supportService.getUserId();
-        this.projectId = $stateParams.project_id;
+        this.projectId = this.projectHash || $stateParams.project_id;
         this._fireBase = fireBase;
 		this.project = fireBase.getSprint(this.projectId);
 		this.users = fireBase.getAllUsers();
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
+        this.cards = fireBase.getListCards(this.projectId);
+        this.projectEdit = false;
+        this.durationEdit = false;
+        this.backgroundEdit = false;
+        this.backgrounds = supportService.getBackgrounds();
+        this._$state = $state;
     }
 
     updateProject() {
@@ -19,35 +25,75 @@ export default class projectSettingsController {
         });
     }
 	
-	addUserToProject() {
-		let userData = this.users.filter(item => item.$id === this.newUserId)[0];
-        this._fireBase.addUserToProject(userData.$id, this.projectId, {
-            username: userData.username,
-            email: userData.email,
-            avatar: userData.avatar
-        }, {
-            projectName: this.project.projectName,
-            background: this.project.background,
-            managerId: this.project.managerId
-        });
-        
-	}
-
-    deleteUserFromProject(userId) {
-        this._fireBase.deleteUserFromProject(userId, this.projectId);
-    }
-
-
     deleteProject() {
         let ids = [];
         this.projectUsers.map( user => ids.push(user.$id));
         this._fireBase.deleteProject(ids, this.projectId);
+        this._$state.go('profile');
     }
 
     isManager(userId) {
-        console.log(userId.length);
-        console.log(this.userId.length);
         return userId == this.userId;
+    }
+
+    editProjectName(save) {
+        this.projectEdit = !this.projectEdit;
+        if(save) this.updateProject();
+
+    }
+
+    editProjectDuration(save) {
+        this.durationEdit = !this.durationEdit;
+        if(save) this.updateProject();
+    }
+
+    editProjectBackground() {
+        this.backgroundEdit = !this.backgroundEdit;
+    }
+
+    selectBackground(background) {
+        this.project.background = background;
+        this.editProjectBackground();
+        this.updateProject();
+    }
+
+    closeSprint() {
+        let usersOfClosedTasks = [this.project.managerId];
+        let closedTasks = [];
+        let allTasks = {};
+        
+        for (let item of this.cards) {
+               if (item.list_id !== 1) {
+                allTasks[item.$id] = {
+                    title: item.title, 
+                    list_id: item.list_id,
+                    id: item.id,
+                    priority: item.priority,
+                    sprintStart: item.sprintStart
+                };
+                if (item.list_id === 3) {
+                    allTasks[item.$id].sprintEnd = this.project.sprintNumber;
+                    closedTasks.push(item.$id);
+                    if(item.executors) {
+                        let keyArr = Object.keys(item.executors);
+                        for (let key of keyArr)
+                            usersOfClosedTasks.push(key);
+                    }
+                }
+            }
+        }
+
+        let closedSprintData = {
+            projectName: this.project.projectName,
+            sprintStart: this.project.startTimeStamp,
+            sprintActualFinish: Date.now(),
+            tasksTotal: Object.keys(allTasks).length,
+            tasksClosed: closedTasks.length
+        };
+
+        this._fireBase.addClosedToHistory(this.projectId, this.project.sprintNumber, allTasks);
+        this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
+        this._fireBase.updateSprintData(this.projectId, this.project.sprintNumber, closedSprintData);
     }
 }
 

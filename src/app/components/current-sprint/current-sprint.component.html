@@ -1,49 +1,203 @@
-<section  class="lists-container" dragula="'first-bag'">
-    <div class="lists-container__wrapper" >
-      	<section class="list"
-               ng-repeat="list in SprintCtrl.lists">
+<section class="lists-container" id="listContainer">
+	<div class="lists-container__background"
+		 ng-style="{'background': 'url('+SprintCtrl.projBackgound+')', 'background-size' : 'cover' }">
+	</div>
+	<!--<div class="lists-container__project-name_wrapper">-->
+		<!--{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}-->
+	<!--</div>-->
+	<a ng-if="SprintCtrl.isProjectManager && SprintCtrl.isProjectHasHistory"
+	   class="link-button_project-history"
+	   ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
+	<div ng-if="SprintCtrl.isProjectManager"
+		 class="link-button_project-setting"
+		 ng-click="SprintCtrl.toShowProjectSettings()"></div>
+	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
 
-		  <div class="list__wrapper" id="{{list.listId}}">
-			  <button ng-if="list.listId>3" class="list__button" ng-click='SprintCtrl.deleteList(list)'>x</button>
-			  <div class="title__wrapper">
-				  <h3 class="list__title">{{list.listName}}</h3>
-			  </div>
-		  </div>
-		  <div dragula="'first-bag'" class="drag-scope">
-
-			  <div ng-click="SprintCtrl.showFullCard(card)"
-					  ng-repeat="card in SprintCtrl.cards | filter:{list_id:list.listId}:true"
-				   class='card card--bv{{card.priority}}' id="{{card}}">
-				  <div class="drag-zone">+</div>
-				  <h4>{{card.title}}</h4>
-			  </div>
-		  </div>
-		  <div class="card card--new card--bv2">
-			  <form  class='list__form-wrapper' ng-submit="SprintCtrl.addCard(list.listId)">
-				  <input type="text" ng-model="SprintCtrl.cardName[list.listId]"/>
-			  </form>
-		  </div>
-      	</section>
-       	<section class="list list--new">
-      		<form class='list__form-wrapper' ng-submit="SprintCtrl.addList()">
-        		<input type="text" ng-model="SprintCtrl.listName"/>
-      		</form>
-    	</section>
-    </div>
-</section>
-<section ng-class="{'card-content': SprintCtrl.isModalOpen, 'hide-content': !SprintCtrl.isModalOpen }" >
-	<div ng-class="{'card-content__modal': SprintCtrl.isModalOpen}">
-		<div class="card-content__modal__button-wrapper">
-			<button ng-click="SprintCtrl.closeFullCard()">x</button>
+	<div class="lists-container__project-users"
+	ng-if="SprintCtrl.projectLoad">
+		<div class="lists-container__project-users__icons"
+			 ng-repeat="user in SprintCtrl.usersManager"
+			 dnd-type="'user'"
+			 dnd-draggable="user">
+			<img ng-src="{{user.avatar}}">
 		</div>
-		<div class="card-content__modal__content-wrapper">
-			<h2>{{SprintCtrl.title}}</h2>
-			<p>{{SprintCtrl.cardSuperId}}</p>
-			<p>{{SprintCtrl.cardSimpleId}}</p>
-			<p>{{SprintCtrl.cardListId}}</p>
-			<p>{{SprintCtrl.superPriority}}</p>
-			<p>{{SprintCtrl.priority}}</p>
+		<div class="lists-container__project-users__icons"
+		ng-repeat="user in SprintCtrl.usersWithoutManager"
+		dnd-type="'user'"
+		dnd-draggable="user">
+			<img ng-src="{{user.avatar}}">
 		</div>
 	</div>
-</section>
 
+	<progress-bar
+			class="lists-container__progress-bar_wrapper">
+	</progress-bar>
+
+	<sprint-header
+			class="lists-container__sprint-header"
+			cards="SprintCtrl.cards"
+			project="SprintCtrl.project">
+	</sprint-header>
+
+	<div class="lists-container__wrapper"
+		 dnd-allowed-types="['container']"
+		 dnd-list
+		 dnd-drop="listDrop(item, index, SprintCtrl.lists)">
+		<div class="backlog-show-button list"
+			 ng-if="SprintCtrl.isProjectManager"
+			 ng-class="{'backlog-show-button__hide' : !SprintCtrl.isShown}"
+			 ng-click="SprintCtrl.showBacklog()">
+			<!--<p>Back-log</p>-->
+		</div>
+		<div ng-repeat="list in SprintCtrl.lists"
+			 dnd-type="'container'"
+			 dnd-disable-if="list.listId < 4"
+			 dnd-draggable='list'
+			 class="list"
+			 ng-style="{'transition' : SprintCtrl.transitionProtertyBacklog}"
+			 ng-class="{'backlog' : list.listId == 1}">
+
+
+
+			<div ng-if="list.listId !== 1"
+				 id="{{list.listId + 100}}"
+				 ng-style="{'transition' : SprintCtrl.transitionProterty}"
+				 class="list__full-menu"
+				 ng-blur="SprintCtrl.hideListMenu(list)"
+				 ng-class="{'list__full-menu_open' : list.isListMenuShown,
+				 'list__full-menu_close': !(list.isListMenuShown || false)}">
+
+				<!--<div ng-click="SprintCtrl.hideListMenu(list)"-->
+				     <!--class="list__full-menu__close-icon"></div>-->
+				<form class="list__full-menu__title-change"
+					  ng-submit="SprintCtrl.changeListTitle(list)">
+					<input ng-blur="SprintCtrl.onMenuBlur(list)"
+							type="text" ng-model="SprintCtrl.newListName"
+						   placeholder="Edit list name">
+				</form>
+				<div ng-if="list.listId>3"
+					 class="list__full-menu__delete-list"
+					 ng-click='SprintCtrl.deleteList(list)'>
+					Remove List
+				</div>
+			</div>
+
+			<div class="list_list-container">
+
+
+
+
+				<div class="list_list-container_header"
+				ng-class="{'grabbing' : (list.listId > 3)}">
+					<div class="list_list-container_header__title">
+						{{list.listName}}
+					</div>
+					<div class="list_list-container_header__cards-count">
+						{{SprintCtrl.cardsCountForList(list)}}
+					</div>
+					<div ng-if="list.listId !== 1"
+						 class="list_list-container_header__menu"
+                         ng-click="SprintCtrl.showListMenu(list, list.listId+100)">
+					</div>
+					<div ng-if="list.listId == 1"
+						 ng-click="SprintCtrl.hideBacklog()"
+						 class="backlog__hide-button">
+					</div>
+
+				</div>
+				<ul class="cards-list__wrapper"
+					id="{{list.listId+200}}"
+					dnd-allowed-types="['item']"
+					dnd-list
+					dnd-drop="onDrop(list.listId, item)">
+					<li ng-click="SprintCtrl.showFullCard(card)"
+					    ui-sref="card-child-component({project_id: SprintCtrl.projectId ,task_id:card.$id})"
+					    ng-repeat="card in SprintCtrl.cardsFilter(list.listId)"
+					    class="card"
+					    dnd-draggable="card"
+					    dnd-type="'item'"
+					    dnd-effect-allowed="move">
+						<div class="card_content-card">
+							<div class="card_content-card__top">
+								<div class="card_content-card__top-title">
+									<h4>{{ card.title }}</h4>
+									<p>{{ SprintCtrl.cardDescription(card) }}</p>
+								</div>
+								<div class="card_content-card__top-info">
+									<p>{{SprintCtrl.cardCreatedDate(card)}}</p>
+									<p>{{SprintCtrl.cardCreatedTime(card)}}</p>
+								</div>
+							</div>
+
+							<div class="card_content-card__bottom">
+								<div class="card_content-card__bottom-attributes">
+									<p>{{ SprintCtrl.cardCommentsCount(card) }}</p>
+									<p>{{ SprintCtrl.cardAttachmentCount(card) }}</p>
+								</div>
+								<div class="card_content-card__bottom-executors"
+									 dnd-list dnd-drop="onUserDrop(item, card)"
+									 dnd-allowed-types="['user']">
+									<img ng-repeat="executor in card.executors"
+										 class="card_content-card__bottom-executors__avatar"
+										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
+									<img ng-if="SprintCtrl.isExecutors(card)"
+											class="card_content-card__bottom-executors__avatar"
+											src="{{'../../../plus.png'}}">
+								</div>
+							</div>
+						</div>
+						<div class="card-priority"
+						 	 ng-style="{'background-color': SprintCtrl.cardPrioriry(card)}">
+						</div>
+					</li>
+				</ul>
+
+				<div class="list_list-container_footer">
+
+					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
+						class="list_list-container_footer__top"
+						 ng-click="SprintCtrl.scrollListTop(list.listId +200)"></div>
+					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
+						 class="list_list-container_footer__down"
+					ng-click="SprintCtrl.scrollListDown(list.listId +200)"></div>
+					<div class="list_list-container_footer__add-card"
+						 ng-click="SprintCtrl.openAddCardToList(list, list.listId)">
+					</div>
+
+				</div>
+				<form
+						class="list_list-container_footer list_list-container_footer__form-wrapper"
+					  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
+					  ng-submit="SprintCtrl.addCard(list.listId, list)">
+					<input id="{{list.listId}}"
+						   ng-blur="SprintCtrl.onBlur(list)"
+						   type="text" ng-model="SprintCtrl.cardName[list.listId]"
+						   placeholder="Enter task name"/>
+				</form>
+
+			</div>
+		</div>
+		<div class="list-add-list__wrapper">
+			<div class=" add-list">
+				<div class="list_list-container add-list__container">
+					<div ng-if="SprintCtrl.isAddListActive"
+							class="list_list-container_header add-list__container_header"
+					ng-click="SprintCtrl.isAddListActiveFunc(false)">
+						<div class="list_list-container_header__title add-list__container_header_title">
+							<p>Create new list</p>
+						</div>
+					</div>
+					<form ng-if="!SprintCtrl.isAddListActive"
+							class='add-list__form-wrapper' ng-submit="SprintCtrl.addList()">
+						<input id="addListTitle"
+							   ng-blur="SprintCtrl.addListBlur()"
+								type="text" ng-model="SprintCtrl.listName"
+							   placeholder="Create new list"/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<ui-view></ui-view>
+</section>

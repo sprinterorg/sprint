@@ -1,0 +1,22 @@
+<div class="sprint-header__wrapper">
+    <div class="sprint-header">
+        <div class="sprint-header__title">
+            <div class="sprint-header__title_current-sprint">
+                {{ SprintHeaderCtrl.currentSprint }}
+            </div>
+            <div>{{ SprintHeaderCtrl.projectName }}</div>
+        </div>
+        <div class="sprint-header__date">
+            <div>DUE DATE</div>
+            <div class="sprint-header__date_current-date">
+                {{ SprintHeaderCtrl.deadLine }}
+            </div>
+        </div>
+        <div class="sprint-header__cards">
+            <p>{{ SprintHeaderCtrl.cardsPriority(0) }}</p>
+            <p>{{ SprintHeaderCtrl.cardsPriority(1) }}</p>
+            <p>{{ SprintHeaderCtrl.cardsPriority(2) }}</p>
+            <p>{{ SprintHeaderCtrl.cardsPriority(3) }}</p>
+        </div>
+    </div>
+</div>
