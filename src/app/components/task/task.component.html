@@ -20,19 +20,18 @@
 		<div class="task__title">
 			<div class="task__title-text" ng-if="!TaskCtrl.isTitleEdit">
 				<p
-			   	   ng-click="TaskCtrl.isTitleEdit = !TaskCtrl.isTitleEdit">
+			   	   ng-click="TaskCtrl.toEditTitle($event)">
 			   	{{TaskCtrl.task.title}}
 				</p>
 				<div class="edit-mode">
 					<i class="fas fa-edit"></i>
 				</div>
 			</div>
-			<form ng-if="TaskCtrl.isTitleEdit"
+			<form ng-show="TaskCtrl.isTitleEdit"
 				  class="task__title_form"
 				  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
 				  ng-submit="TaskCtrl.editTitle()">
-				<input id="editTaskTitle"
-					   ng-blur="TaskCtrl.onTitleBlur()"
+				<input ng-blur="TaskCtrl.onTitleBlur()"
 					   type="text" 
 					   ng-model="TaskCtrl.taskTitle"
 					   value="{{TaskCtrl.taskTitle}}"/>
@@ -46,14 +45,14 @@
 				<p class="task__description-title">Description:</p>
 				<p ng-if="!TaskCtrl.editDescription"
 				   class="task__description-text">{{TaskCtrl.task.description || 'no description yet'}}</p>
-				<textarea ng-if="TaskCtrl.editDescription"
+				<textarea ng-show="TaskCtrl.editDescription"
 						  class="textarea textarea--description"
 						  ng-model="TaskCtrl.task.description"
 						  name="description">
 				</textarea>
 				<button ng-if="!TaskCtrl.editDescription"
 					 class="button button--change-cancel"
-					 ng-click="TaskCtrl.changeDescription()">Change</button>
+					 ng-click="TaskCtrl.changeDescription($event)">Change</button>
 
 				<div class="edit-buttons" ng-if="TaskCtrl.editDescription">
 					<button
@@ -160,12 +159,12 @@
 				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  
 				   	  class="comment-text">{{comment.comment}}</span>
 
-				<textarea class="textarea textarea--comment"ng-if="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id" 
+				<textarea class="textarea textarea--comment" ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id" 
 						  ng-model="TaskCtrl.commentText"></textarea>
 				<div class="comment-buttons">
 					<span ng-show="comment.userId === TaskCtrl.userId && !TaskCtrl.editMode &&
 					!(TaskCtrl.editCommentId === comment.$id)" 
-						  ng-click="TaskCtrl.editComment(comment)" 
+						  ng-click="TaskCtrl.editComment($event,comment)" 
 						  class="edit-comment">edit</span>
 					<span ng-show="comment.userId === TaskCtrl.userId" 
 						  ng-click="TaskCtrl.deleteComment(comment.$id)"
