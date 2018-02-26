@@ -21,7 +21,6 @@ export default class ticketController {
 
         this.editDescription = false;
 
-       //comments var
         this.comment = '';
         this.commentText = '';
         this.fileLinks = [];
@@ -62,7 +61,9 @@ export default class ticketController {
 
     editTitle() {
         this.isTitleEdit = false;
-        this._fireBase.updateTitle(this.projectId, this.task.$id, this.taskTitle);
+        let users = [this.project.managerId];
+        this.executors.map( user => users.push(user.$id));
+        this._fireBase.updateTitle(this.projectId, this.task.$id, this.taskTitle, users);
     }
 
     moveToList(listId) {

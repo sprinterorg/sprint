@@ -8,7 +8,14 @@
 .task-executors {
   .project-setting__users-section {
   border: none;
-}
+  margin-top: 10px;
+  .project-settings__text--users {
+    display: none;
+  }
+  .project-settings__executors-select {
+    z-index: 60;
+  }
+ }
 }
 
 .background__executors {

@@ -273,15 +273,23 @@ class FireService {
        });
     }
 
-    updateTitle(projectId, taskId, newTitle) {
+    updateTitle(projectId, taskId, newTitle, users) {
         return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).update({
             title: newTitle
         });
+
+        let temp = {
+            ['projects/'+projectId+'/cards/'+taskId+'/title']: newTitle
+        };
+        users.map( item => {
+            temp['users/'+item+'/my-projects/'+projectId+'/getMyProjects/'+taskId+'/title'] = newTitle;
+        });
+        this.rootRef.update(temp);
     }
 
     updatePriority(projectId, taskId, newPriority, users) {
         let temp = {
-            ['projects/'+projectId+'/cards/'+taskId+'/priority']: newPriority,
+            ['projects/'+projectId+'/cards/'+taskId+'/priority']: newPriority
         };
         users.map( item => {
             temp['users/'+item+'/my-projects/'+projectId+'/getMyProjects/'+taskId+'/priority'] = newPriority;
