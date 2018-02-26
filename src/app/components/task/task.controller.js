@@ -32,6 +32,8 @@ export default class ticketController {
         this.task.description = '';
         this.descFileLinks = [];
 
+        this.loadFileIndex = null;
+
         this.priorities = supportService.getPriorities();
 
         this.priorityStyles = {
@@ -118,6 +120,8 @@ export default class ticketController {
 
     addFileToDesc(file){
         this._fireBase.addFilesToTask(this.taskFiles, file);
+        this.taskFiles.splice(this.taskFiles.length -1, 1);
+        this.loadFileIndex = null;
     }
 
     cancelSavingDescription() {
@@ -150,8 +154,13 @@ export default class ticketController {
     uploadFile(file, add){
         let self = this;
         let fileObj = {};
-                    if(file) {
-                    this._fireBase.uploadFile(file)
+                 if(file) {
+                     if(!add.addToComment) {
+                        fileObj.fileName = file.name;
+                        let filePosition = this.taskFiles.push(fileObj);
+                        this.loadFileIndex = filePosition-1;
+                     }
+                        this._fireBase.uploadFile(file)
                         .then(fileLink => {
                             if (add.addToComment) {
                             fileObj.fileName = file.name;
@@ -162,20 +171,19 @@ export default class ticketController {
                                 fileObj.fileName = file.name;
                                 fileObj.fileLink = fileLink.downloadURL;
                                 fileObj.fileLocation = fileLink.ref.location.path;
-
-                                self.descFileLinks.push(fileObj);
                                 self.scope.$apply();
                                 self.addFileToDesc(fileObj);
                             }
                         }, ()=>{console.log("error")});
-
                     } else {
                     console.log('file format incorrect');
             }
         }
 
-        deleteFile(file, id){
-            this._fireBase.deleteFile(file, this.projectId, this.taskId, id);
+        deleteFile(file, id, index){
+            this.loadFileIndex = index;
+            this._fireBase.deleteFile(file, this.projectId, this.taskId, id)
+                .then(() => this.loadFileIndex = null).catch(() => this.loadFileIndex = null);
         }
 
 }
