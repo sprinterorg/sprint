@@ -10,9 +10,8 @@
 	   ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
 	<div ng-if="SprintCtrl.isProjectManager"
 		 class="menu link-button_project-setting"
-		 ng-click="SprintCtrl.toShowProjectSettings()"
-		 click-outside="SprintCtrl.toHideProjectSettings()"></div>
-	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
+		 ng-click="SprintCtrl.toShowProjectSettings()"></div>
+	<project-settings click-outside="SprintCtrl.toHideProjectSettings()" ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
 
 	<div class="lists-container__project-users"
 	ng-if="SprintCtrl.projectLoad">
