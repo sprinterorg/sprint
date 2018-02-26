@@ -222,6 +222,9 @@ export default class sprintController {
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
     }
+    toHideProjectSettings() {
+        this.showProjectSettings = false;
+    }
 
     showListMenu(list, elemId) {
         this.observableElement = document.getElementById(elemId);

@@ -22,6 +22,9 @@ export default class MainMenuComponent{
     toShowMenu() {
         this.showMenu = !this.showMenu;
     }
+    toHideMenu() {
+        this.showMenu = false;
+    }
 
     logOut() {
         let self = this;
