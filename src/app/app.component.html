@@ -11,7 +11,7 @@
 <header  class="header">
 <div class="header__wrapper">
 	<div class="header__search" >
-		<div class="search-icon" ng-click="appController.toShowSearch()" ng-if="appController._supportService.userId">
+		<div class="search-icon menu" ng-click="appController.toShowSearch()" click-outside="appController.toHideSearch()" ng-if="appController._supportService.userId">
 			<i class="flaticon-two-columns-layout"></i>
 		</div>
 	</div>
