@@ -49,10 +49,13 @@ export default class ticketController {
         this.titleEditFlag = flag;
         if (flag == true) {
             this.taskTitle = this.task.title;
-            setTimeout(() => {
-                document.getElementById('editTaskTitle').focus()
-            }, 10)
         }
+    }
+
+    toEditTitle($event) {
+        let el = $event.target.parentNode.parentNode.querySelector('input');
+        this.isTitleEdit = !this.isTitleEdit;
+        setTimeout( () => el.focus(), 10);
     }
 
     onTitleBlur() {
@@ -88,10 +91,12 @@ export default class ticketController {
         this._fireBase.deleteComment(commentId, this.projectId, this.taskId);
     }
 
-    editComment(comment) {
+    editComment($event, comment) {
+        let el = $event.target.parentNode.parentNode.querySelector('textarea');
         this.editCommentId = comment.$id;
         this.commentText = comment.comment;
         this.editMode = !this.editMode;
+        setTimeout( () => el.focus(), 10);
     }
 
     saveEditedComment (id) {
@@ -100,13 +105,15 @@ export default class ticketController {
         this._fireBase.editComment(id, this.projectId, this.taskId,  this.commentText);
     }
 
-    changeDescription() {
+    changeDescription($event) {
+        let el = $event.target.parentNode.parentNode.querySelector('textarea');
         this.editDescription = !this.editDescription;
+        setTimeout( () => el.focus(), 10);
     }
 
     saveDescription() {
         this._fireBase.updateDescription(this.projectId, this.taskId, this.task.description);
-        this.changeDescription();
+        this.editDescription = !this.editDescription;
     }
 
     addFileToDesc(file){
@@ -115,7 +122,7 @@ export default class ticketController {
 
     cancelSavingDescription() {
         this.task = this._fireBase.getTask(this.projectId, this.taskId);
-        this.changeDescription();
+        this.editDescription = !this.editDescription;
     }
 
     taskPrioriry(priority) {
