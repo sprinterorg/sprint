@@ -55,7 +55,7 @@
 			 dnd-draggable='list'
 			 class="list"
 			 ng-style="{'transition' : SprintCtrl.transitionProtertyBacklog}"
-			 ng-class="{'backlog' : list.listId == 1}">
+			 ng-class="{'backlog' : list.listId == 1, 'lists-container__wrapper__closed' : list.listId == 3}">
 
 
 
@@ -137,9 +137,10 @@
 								<div class="card_content-card__bottom-executors"
 									 dnd-list dnd-drop="onUserDrop(item, card)"
 									 dnd-allowed-types="['user']">
-									<img ng-repeat="executor in card.executors"
+									<img ng-repeat="executor in SprintCtrl.cardExecutors(card)"
 										 class="card_content-card__bottom-executors__avatar"
 										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
+									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
 									<img ng-if="SprintCtrl.isExecutors(card)"
 											class="card_content-card__bottom-executors__avatar"
 											ng-src="{{'../../../plus.png'}}">
@@ -154,12 +155,14 @@
 
 				<div class="list_list-container_footer">
 
-					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
-						class="list_list-container_footer__top"
-						 ng-click="SprintCtrl.scrollListTop(list.listId +200)"></div>
-					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
-						 class="list_list-container_footer__down"
-					ng-click="SprintCtrl.scrollListDown(list.listId +200)"></div>
+					<!--<div ng-class="{'list_list-container_footer__scroll': false}"-->
+						<!--class="list_list-container_footer__top"-->
+						 <!--ng-click="SprintCtrl.scrollListTop(list.listId +200)">-->
+						<!--{{ SprintCtrl.isNeedScroll(list.listId +200) }}-->
+					<!--</div>-->
+					<!--<div ng-class="{'list_list-container_footer__scroll': true }"-->
+						 <!--class="list_list-container_footer__down"-->
+					<!--ng-click="SprintCtrl.scrollListDown(list.listId +200)"></div>-->
 					<div class="list_list-container_footer__add-card"
 						 ng-click="SprintCtrl.openAddCardToList(list, list.listId)">
 					</div>

@@ -6,8 +6,9 @@ export default class HystoryController {
         this.showItems = 5;
         this.hystory = fireBase.getHystory(this.projectId, this.showItems);
         this._supportService = supportService;
+        this.showCircle = false;
     }
-    
+
     getTasks() {
         let allTasks = {};
         for (let item of this.hystory) {
@@ -61,19 +62,30 @@ export default class HystoryController {
         this.hystory = this._fireBase.getHystory(this.projectId, this.showItems);
     }
 
+    get isShowCircle() {
+        return this.showCircle;
+    }
+
+    set isShowCircle(val){
+        this.showCircle = val;
+    }
+
     getDate(ms) {
-        if(ms)
-            return this._supportService.getFormattedDate(Number(ms));
-        return '';
+        if(ms) return this._supportService.getFormattedDate(Number(ms));
+        else return '';
+    }
+
+    createPromise(data){
+        return this.strokeDasharray(this.getPersantage(data));
     }
 
     getPersantage(data) {
-        if(data)
-            return data.tasksClosed/data.tasksTotal*100^0;
-        return 0;
+        if(data) return data.tasksClosed / data.tasksTotal * 100 ^ 0;
+        else return 0;
     }
 
     strokeDasharray(value) {
         return (value/100 * 2 * 25 * Math.PI) + ' ' + 2 * 25* Math.PI;
     }
+
 }

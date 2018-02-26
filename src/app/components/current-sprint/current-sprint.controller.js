@@ -148,6 +148,25 @@ export default class sprintController {
         return this.users.filter(item => item.$id === userId);
     }
 
+    cardExecutors(card){
+        let arr = [];
+        for (let key in card.executors){
+            arr.push(card.executors[key])
+        }
+        return arr.slice(0,2);
+    }
+
+    cardExecutorsFull(card){
+        let arr = [];
+        for (let key in card.executors){
+            arr.push(card.executors[key])
+        }
+        if (arr.length > 2){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     showBacklog() {
         this.isShown = false;
@@ -190,27 +209,30 @@ export default class sprintController {
 
 
     addCard(listId, list) {
-        let self = this;
-        let createdDate = new Date().toString();
-        var temp = this.cardName[listId];
-        this.cardName[listId] = '';
-        let cardData = {
-            title: temp, 
-            list_id: listId,
-            id: Math.random()*1000000^0,
-            priority: 2,
-            createdAt: createdDate
-        };
-        if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber; 
-        this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then( rootRef  => {
-            if (listId !== 1)
-                self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
-        });
+        if(this.cardName[listId]) {
+            let self = this;
+            let createdDate = Date.parse(new Date());
+            var temp = this.cardName[listId];
+            this.cardName[listId] = '';
+            if (temp == '') return;
+            let cardData = {
+                title: temp,
+                list_id: listId,
+                id: Math.random() * 1000000 ^ 0,
+                priority: 2,
+                createdAt: createdDate
+            };
+            if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber;
+            this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then(rootRef => {
+                if (listId !== 1)
+                    self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
+            });
+        }
     }
 
 
     showFullCard(card){
-        // console.log(card);
+        // console.log(card, this.cards);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -277,12 +299,7 @@ export default class sprintController {
         }
     }
     cardCreatedDate(card) {
-        let date = new Date(card.createdAt);
-        date = date.toLocaleDateString();
-        let x = this.supportService.getFormattedDate(Date.parse(card.createdAt))
-        // x = x.replace('.','/')
-        // x = x.replace('.','/')
-        // return date.substring(0, date.length-4) + date.substring(date.length-2);
+        let x = this.supportService.getFormattedDate(card.createdAt)
         return x;
 
     }
@@ -348,14 +365,7 @@ export default class sprintController {
         el.scrollBy(0,98);
     }
 
-    isNeedScroll(elId) {
-        let el = document.getElementById(elId);
-        if (el.clientHeight < el.scrollHeight) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 }
 
 
