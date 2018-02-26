@@ -69,14 +69,14 @@
 					  type="file" 
 					  ngf-select="TaskCtrl.uploadFile($file, {addToComment: false})">
 					  <span class="file-add"> </span>add attachment</span>
-				
+
 				<div class="attachment__list">
 				<div class="attachment__list-item" 
-					 ng-repeat="task in TaskCtrl.taskFiles" 
-					 class="file-editor">
-					<a ng-href="{{task.fileLink}}" 
+					 ng-repeat="task in TaskCtrl.taskFiles"
+					  class="file-editor" ng-class="{'load-file': $index === TaskCtrl.loadFileIndex}">
+					<a ng-href="{{task.fileLink}}"
 					   download="task.fileName">{{task.fileName}}</a>
-					<span ng-click="TaskCtrl.deleteFile(task.fileLocation, task.$id)" 
+					<span ng-click="TaskCtrl.deleteFile(task.fileLocation, task.$id, $index)"
 					      class="cross"></span>
 				</div>
 			</div>
