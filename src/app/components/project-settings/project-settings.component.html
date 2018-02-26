@@ -16,14 +16,14 @@
           </div>
         </div>
         <div class="project-settings__project-duration">
-        <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
-        <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
-        <input ng-if="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="text" ng-model="ProjectSettingsCtrl.project.duration"/>
-        <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(false)">
-            <i class="fas fa-edit"></i>
+          <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
+          <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
+          <input ng-if="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="text" ng-model="ProjectSettingsCtrl.project.duration"/>
+          <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(false)">
+              <i class="fas fa-edit"></i>
           </div>
           <div ng-if="ProjectSettingsCtrl.durationEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(true)">
-            <i class="fas fa-check"></i>
+              <i class="fas fa-check"></i>
           </div>
         </div>
         <div class="project-settings__project-background">
