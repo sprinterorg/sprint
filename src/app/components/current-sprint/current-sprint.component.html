@@ -137,7 +137,7 @@
 								<div class="card_content-card__bottom-executors"
 									 dnd-list dnd-drop="onUserDrop(item, card)"
 									 dnd-allowed-types="['user']">
-									<img ng-repeat="executor in SprintCtrl.cardExecutors(card)"
+									<img ng-if="SprintCtrl.getUser(executor)[0].avatar" ng-repeat="executor in SprintCtrl.cardExecutors(card)"
 										 class="card_content-card__bottom-executors__avatar"
 										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
 									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
