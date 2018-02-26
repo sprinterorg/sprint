@@ -51,6 +51,23 @@ class FireService {
         return new Promise(resolve => ref.put(file).then(response => resolve(response.downloadURL)));
     }
 
+    uploadFile(file){
+        let key = Math.random()*1000000^0;
+        let ref = this.storageRef.child('files/'+key+file.name);
+        return new Promise(resolve => ref.put(file).then(response => resolve(response)));
+    }
+
+    deleteFile(file, projectId, taskId, $id){
+       console.log($id);
+        let desertRef = this.storageRef.child(file);
+        desertRef.delete().then(() => {
+            this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles').child($id).remove();
+            console.log('File deleted successfully');
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
     getMyProjects(userId) {
     	let ref = this.rootRef.child('users/'+userId+'/my-projects');
     	return this._$firebaseArray(ref);
@@ -175,6 +192,12 @@ class FireService {
     	return this._$firebaseArray(ref);
 	}
 
+    updateListName(projectId, $listId, newListName) {
+        this.rootRef.child('projects/'+projectId+'/lists').update({
+            [$listId + '/listName']: newListName
+        });
+    }
+
 	addCard(cards, data, managerId, projectId) {
 		let self = this;
 	    return cards.$add(data).then( rootRef => {
@@ -211,6 +234,15 @@ class FireService {
         return this._$firebaseObject(ref);
     }
 
+    getTaskFileLinks(projectId, taskId) {
+        let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles');
+        return this._$firebaseArray(ref);
+    }
+
+    addFilesToTask(descfiles, newFile) {
+        return descfiles.$add(newFile);
+    }
+
     getComments(projectId, taskId){
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/comments');
         return this._$firebaseArray(ref);
@@ -230,14 +262,39 @@ class FireService {
        });
     }
 
-
-    getTaskPromise(projectId, taskId){
-        return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).once('value').then(snapshot => snapshot.val());
-    }
-
     getTaskExecutors(projectId, taskId) {
         let ref = this.rootRef.child('projects/'+projectId+'/cards/'+taskId+'/executors');
         return this._$firebaseArray(ref);
+    }
+
+    updateDescription(projectId, taskId, newDescription) {
+        return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).update({
+         description: newDescription
+       });
+    }
+
+    updateTitle(projectId, taskId, newTitle, users) {
+        return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).update({
+            title: newTitle
+        });
+
+        let temp = {
+            ['projects/'+projectId+'/cards/'+taskId+'/title']: newTitle
+        };
+        users.map( item => {
+            temp['users/'+item+'/my-projects/'+projectId+'/getMyProjects/'+taskId+'/title'] = newTitle;
+        });
+        this.rootRef.update(temp);
+    }
+
+    updatePriority(projectId, taskId, newPriority, users) {
+        let temp = {
+            ['projects/'+projectId+'/cards/'+taskId+'/priority']: newPriority
+        };
+        users.map( item => {
+            temp['users/'+item+'/my-projects/'+projectId+'/getMyProjects/'+taskId+'/priority'] = newPriority;
+        });
+        this.rootRef.update(temp);
     }
 
     addToHistory(projectId, sprintNum, taskId, taskData, sprintData) {

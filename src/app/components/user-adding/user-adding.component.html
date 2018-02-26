@@ -1,0 +1,51 @@
+<div class=project-setting__users-section>
+  <p class="project-settings__text project-settings__text--users">{{UserAddingCtrl.booleanProject ? 'project users:' : 'executors:'}}</p>
+  <div class="background__executors">
+    <div ng-if="UserAddingCtrl.booleanProject" class="background__executor" ng-repeat="user in UserAddingCtrl.users | filter:{$id: UserAddingCtrl.userId}:true" >
+      <img 
+            class="background__executor__avatar background__executor__avatar--admin"
+            ng-src="{{ user.avatar }}" title="{{user.username}}">
+    </div>
+    <div ng-if="UserAddingCtrl.booleanProject" class="background__executor" ng-repeat="user in UserAddingCtrl.users | filter:{$id: '!' + UserAddingCtrl.userId}:true" title="{{user.username}}">
+      <img  class="background__executor__avatar"
+            ng-src="{{ user.avatar }}">
+      <div class="background__executor__delete" ng-click="UserAddingCtrl.deleteUserFromProject(user.$id)"><i class="fas fa-times"></i></div>
+    </div>
+      <div ng-if="!UserAddingCtrl.booleanProject" class="background__executor" ng-repeat="user in UserAddingCtrl.users" title="{{UserAddingCtrl.getUser(user.$id).username}}">
+
+      <img  class="background__executor__avatar"
+            ng-src="{{ UserAddingCtrl.getUser(user.$id).avatar }}">
+      <div class="background__executor__delete" ng-click="UserAddingCtrl.deleteExecutorFromTask(user.$id)"><i class="fas fa-times"></i></div>
+    </div>
+
+    <div class="background__executor" ng-click="UserAddingCtrl.showAddUser()">
+    <img class="background__executor__avatar background__executor__avatar--add"
+            ng-src="plus.png">
+    </div>
+    <div ng-if="UserAddingCtrl.addUserSelect" class="project-settings__search-section">
+    <div class="project-setting__search">
+      <div class="loop-icon loop-icon--project-settings">
+        <i class="fas fa-search"></i>
+      </div>
+      <input class="project-settings__executors-input" type="text" ng-model="UserAddingCtrl.searchUser" placeholder="Search user" required>
+    </div>
+    <ul class="project-settings__executors-select">
+            <li ng-if="UserAddingCtrl.booleanProject" class="project-settings__executors-option" ng-click="UserAddingCtrl.addUserToProject(user)" ng-repeat="user in UserAddingCtrl.allUsers | filter: {username: UserAddingCtrl.searchUser || '*'}">
+              <div class="background__executor background__executor--select" ng-click="UserAddingCtrl.addUserToProject(user)">
+                <img  class="background__executor__avatar background__executor__avatar--adding"
+            ng-src="{{ user.avatar }}">
+              </div>
+              <p class="background__exector__avatar-name">{{user.username}}</p>
+            </li>
+
+            <li ng-if="!UserAddingCtrl.booleanProject" class="project-settings__executors-option" ng-click="UserAddingCtrl.addExecutorsToTask(user.$id)" ng-repeat="user in UserAddingCtrl.allUsers">
+              <div class="background__executor background__executor--select" ng-click="UserAddingCtrl.addExecutorsToTask(user.$id)">
+                <img  class="background__executor__avatar background__executor__avatar--adding"
+            ng-src="{{ user.avatar }}">
+              </div>
+              <p class="background__exector__avatar-name">{{user.username}}</p>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>

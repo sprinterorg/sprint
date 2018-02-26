@@ -1,77 +1,334 @@
-.card-content {
-  box-sizing: border-box;
-  position: absolute;
-  z-index: 100;
-  box-sizing: border-box;
-  top: -35px;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, .5);
-  transition: all 0.2s;
-  overflow-x: hidden;
-  &__modal {
-    animation: show 0.3s ease-in;
-    margin-top: 120px;
-    width: 300px;
-    height: 300px;
-    background: whitesmoke;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    &__button-wrapper {
-      width: 100%;
-      height: 30px;
-      display: flex;
-      justify-content: flex-end;
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 100%;
-        background: #4584ff;
-        border: none;
-      }
-    }
-  }
-}
 
 .task-wrap {
-  position: absolute;
+  position: fixed;
   background: rgba(0,0,0, 0.8);
-  top: -35px;
+  top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   overflow-y: hidden;
   z-index: 90;
+  &__blur{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+  }
+
+  .task {
+    margin: 0 auto;
+  }
+
+  .file-editor {
+    margin-top: 15px;
+    position: relative;
+  }
+
+
+
+  .file-add {
+    margin-left: 10px;
+    content: url("../../../paperclip.png");
+    margin-right: 3px;
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--comment {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+  }
+
+  .cross {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+    &:before, &:after {
+      position: absolute;
+      left: 15px;
+      content: ' ';
+      height: 15px;
+      width: 2px;
+      background-color: #333333;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+  }
+
+  .link-button--attachment {
+    color: rgba(0,0,0,.6);
+    &:hover {
+      opacity: .6;
+    }
+  }
+
+  .attachment__list {
+    margin-top: 10px;
+  }
+
+ .attachment__list-item {
+    padding: 10px;
+    position: relative;
+    background: rgba(0,0,255,.1);
+  }
 
   .task-layer {
+    position: relative;
     box-sizing: border-box;
-    width: 700px;
+    width: 800px;
     height: 100vh;
-    background: #ffffff;
+    background: #f3f3f3;
     overflow-y: auto;
   }
   
   .task__wrapper {
-    padding: 40px;
+    padding: 10px 40px;
     background: #ffffff;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+    margin-top: 50px;
+  }
+
+  .task__title {
+    cursor: pointer;
+    padding: 5px 0;
+    border-bottom: 1px solid #D1D1D1;
+    & input,
+    & p{
+      font-size: 26px;
+      padding: 7px 5px 7px 7px;
+    }
+    & .edit-mode {
+      display: none;
+      margin-left: 20px;
+      opacity: .5;
+    }
+    &_form{
+      font-size: 26px;
+      input{
+        font-size: 26px;
+        width: 415px;
+        padding: 5px;
+      }
+    }
+  
+  .task__title-text p:hover ~ .edit-mode {
+    display: block;
+  }
+
+
+  }
+  .task__title-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .task-content {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .task-content__left-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% - 265px);
+    padding-right: 40px;
+
+    .task__description,
+    .task__attachment {
+      padding-bottom: 20px;
+    }
+
+    .task__description-title,
+    .task__attachment-title {
+      font-size: 1.6rem;
+      padding-bottom: 10px;
+      padding-left: 10px;
+    }
     
+    .task__description-text,
+    .textarea--description,
+    .textarea--comment {
+      font-size: 1.7rem;
+      color: rgba(0,0,0,.6);
+    }
+
+
+
+    .task__description-text {
+      padding: 10px;
+      margin-bottom: 20px;
+      min-height: 104px;
+    }
+
+    .textarea--description {
+      padding: 9px;
+      height: 100px;
+    }
+
+    .button--change-description,
+    .button--change-save,
+    .button--change-cancel {
+      font-size: 1.4rem;
+      text-align: center;
+      width: 80px;
+      padding: 2px;
+      border: 2px solid #000000;
+      &:hover {
+        color: #ffffff;
+        background: #000000;
+      }
+    }
+
+    .edit-buttons {
+      margin-top: 20px;
+    }
+
+    .button--change-save,
+    .button--change-cancel
+     {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .button--change-cancel {
+      color: #ffffff;
+      background: #000000;
+      &:hover {
+        color: #000000;
+        background: #ffffff;
+      }
+    }
+    
+    .task__attachment {
+      padding-top: 20px;
+      border-top: 1px solid #d3d3d3;
+    }
+
+  }
+  .task-content__right-section {
+    
+    .task-priority,
+    .task-lists,
+    .executors {
+      padding-bottom: 20px;
+    }
+
+    .lists-list,
+    .priority-list,
+    .executors-list {
+      width: 265px;
+      background: #f3f3f3;
+      border-radius: 3px;
+      -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+      -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+      box-shadow: 0px 2px 5px 0px rgba(0,0,0,.3);
+
+      .lists-list__title,
+      .priority-list__title,
+      .executors-list__title {
+        color: #ffffff;
+        background: #000000;
+        padding: 7px 15px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+
+      .lists-list__items,
+      .priority-list__items {
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        div {
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin: 1px;
+            border: 2px solid transparent;
+            &:hover {
+              border: 2px solid #d3d3d3;
+            }
+          }
+      }
+
+
+
+    }
+
+
+
+
+
+     .priority-red {
+        color: #ffffff;
+        background-color: red;
+     }
+     .priority-yellow {
+        color: #000000;
+        background-color: yellow;
+     }
+     .priority-green {
+        color: #ffffff;
+        background-color: green;
+     }
+     .priority-blue {
+        color: #ffffff;
+        background-color: blue;
+     }
+     .active-list {
+        color: #ffffff;
+        background-color: #000000;
+     }
   }
 
+}
 
-  .task {
-    margin: 0 auto;
-    background: #f3f3f3;
+.task-header {
+  z-index: 100;
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px 5px 35px;
+  background: #000000;
+  width: 800px;
+  height: 50px;
+  .task-title {
+    font-size: 2.2rem;
+    color: #ffffff;
+    cursor: default !important;
+
   }
 
+  .close a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .close-button {
+  color: #ffffff;
+  &:hover {
+    opacity:0.7;
+  }
+}
 }
 
 .comments-section {
@@ -80,30 +337,41 @@
 
 .add-comment {
   padding-bottom: 20px;
+  position: relative;
 }
 
-.add-comment__textarea {
-  box-sizing: border-box;
-  width: 100%;
-  height: 70px;
-  border: 1px solid #D1D1D1;
-  resize: none;
-  font-size: 1.6rem;
-  padding: 5px;
+.textarea--add-comment {
   margin-bottom: 5px;
+  padding: 10px 10px 20px 10px;
+}
+
+.add-comment__attachment-wrapper {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: 390px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.add-comment__attachment {
+   font-size: 1.2rem;
+   color: #3498DB;
+   padding: 0;
+   line-height: 1;
 }
 
  .button--send {
     background: #000000;
     color: #ffffff;
     border-color: black;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     padding: 5px;
   }
 
 .comments {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   margin: 0 0 15px;
 
@@ -123,8 +391,8 @@
   }
 
   .comment-body {
+    width: 500px;
     position: relative;
-    width: 100%;
     background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
     border: 1px solid rgb(204, 204, 204);
     border-radius: 0px 15px 15px 15px;
@@ -136,58 +404,74 @@
 
 
     .comment-in {
+      overflow: hidden;
       text-align: left;
       text-decoration: none solid rgb(51, 51, 51);
       text-rendering: optimizelegibility;
       padding: 8px 12px;
       word-wrap: break-word;
-      textarea {
-        resize: none;
+      
+
+      .user-info {
+        margin-bottom: 10px;
       }
 
-      .close {
-        position: absolute;
-        right: 10px;
-        top: 3px;
-        width: 32px;
-        height: 32px;
-        opacity: 0.3;
-
-        &:hover {
-          cursor: pointer;
-          opacity: 1;
-        }
-        &:before, &:after {
-          position: absolute;
-          left: 15px;
-          content: ' ';
-          height: 20px;
-          width: 2px;
-          background-color: #333;
-        }
-        &:before {
-          transform: rotate(45deg);
-        }
-        &:after {
-          transform: rotate(-45deg);
-        }
-
-      }
 
       .edit-comment {
-        display: block;
+        display: inline-block;
         text-decoration: underline;
         cursor: pointer;
         opacity: 0.6;
-        margin-top: 10px;
+        margin-right: 5px;
+        font-size: 1.3rem;
+        &:hover {
+          opacity: .3;
+        }
       }
 
+      .edit-comment__attachment-wrapper {
+        padding: 15px 10px 0 7px;
+        a {
+          font-size: 1.4rem;
+        }
+      }
+
+      .comment-buttons {
+        display: none;
+        width: 80px;
+        justify-content: flex-end;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+      }
+      
+      &:hover .comment-buttons {
+        display: flex;
+      }
 
       .comment-text {
+        display: block;
         color: rgb(51, 51, 51);
         height: 15px;
         text-align: left;
+        padding: 6px;
+      }
 
+      .textarea--comment {
+        padding: 5px;
+        margin-bottom: 7px;
+      }
+
+      .button--send-comment {
+        background: #000000;
+        color: #ffffff;
+        border-color: #000000;
+        font-size: 1.4rem;
+        padding: 2px 10px;
+        &:hover {
+          background: #ffffff;
+          color: #000000;
+        }
       }
 
       .user-name {
@@ -205,68 +489,19 @@
         margin: 0;
         outline: rgb(51, 51, 51) none 0;
         margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .user-date {
+        position: absolute;
+        top: 5px;
+        right: -120px;
+        color: rgba(0,0,0,.5);
+        font-size: 1.3rem;
       }
     }
 
   }
 
-  & button {
-    font-size: 1.4rem;
-    min-width: 30px;
-    padding: 3px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline;
-    width: 130px;
-    background: #000000;
-    color: #ffffff;
-    border-color: black;
-
-    &:hover{
-      border-color: #000000;
-      background: transparent;
-      color: #000000;
-    }
-  }
-
-  select {
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    height: 29px;
-    padding: 5px;
-    color: #000;
-    &:active { outline: none; border: none;}
-  }
-  .black   {
-    background-color: white;
-  }
-  .rounded {
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    display: inline-block;
-  }
 }
 
-.task-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 20px 5px 35px;
-  background: #000000;
-  width: 100%;
-  height: 50px;
-  & .task-title {
-    font-size: 2.2rem;
-    color: #ffffff;
-  }
-}
-
-
-.close-button {
-  color: #ffffff;
-  &:hover {
-    opacity:0.7;
-  }
-}

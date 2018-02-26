@@ -1,6 +1,25 @@
  *{
 	margin: 0;
 	padding: 0;
+	 &::-webkit-scrollbar-track
+	 {
+		 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		 border-radius: 5px;
+		 background-color: rgba(255,255,255, 0.5);
+	 }
+
+	 &::-webkit-scrollbar
+	 {
+		 width: 8px;
+		 background-color: rgba(255,255,255, 0.5);
+	 }
+
+	 &::-webkit-scrollbar-thumb
+	 {
+		 border-radius: 5px;
+		 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		 background-color: rgba(197,197,197, 0.8);
+	 }
 }
 
 html {
@@ -15,14 +34,38 @@ body {
 	height: 100%;
 	font-size: 1.6rem;
 	box-sizing: border-box;
+
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 5px;
+		background-color: rgba(255,255,255, 0.5);
+	}
+
+	&::-webkit-scrollbar
+	{
+		width: 8px;
+		background-color: rgba(255,255,255, 0.5);
+	}
+
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 5px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: rgba(197,197,197, 0.8);
+	}
 }
+
+
 
 input,
 textarea {
 	font-family: 'Open Sans', sans-serif;
 }
 
-button {
+button,
+input,
+textarea {
 	outline: 0;
 	outline-offset: 0;
 	box-shadow: none;
@@ -40,6 +83,10 @@ ul {
 a{
   color:#3498DB;
   cursor:pointer;
+}
+
+table {
+	border-collapse: collapse;
 }
 
 .main-content {
@@ -142,6 +189,16 @@ a{
 		text-decoration: underline;
 	}
 }
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  border: 1px solid #D1D1D1;
+  resize: none;
+  font-size: 1.6rem;
+}
+
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
