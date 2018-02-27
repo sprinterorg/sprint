@@ -58,13 +58,16 @@ class FireService {
     }
 
     deleteFile(file, projectId, taskId, $id){
-       console.log($id);
         let desertRef = this.storageRef.child(file);
-        desertRef.delete().then(() => {
-            this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles').child($id).remove();
-            console.log('File deleted successfully');
-        }).catch(error => {
-            console.log(error);
+        return new Promise((resolve, reject )=> {
+            desertRef.delete().then(() => {
+                this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles').child($id).remove();
+                console.log('File deleted successfully');
+                resolve(true)
+            }).catch(error => {
+                console.log(error);
+                reject(false);
+            });
         });
     }
 
@@ -204,6 +207,7 @@ class FireService {
 			self.rootRef.child('users').update({
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/title']: data.title,
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/priority']: data.priority,
+            [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/createdAt']: data.createdAt
     		});
             return rootRef;
 		});
