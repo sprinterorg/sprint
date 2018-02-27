@@ -32,8 +32,6 @@ export default class ticketController {
         this.task.description = '';
         this.descFileLinks = [];
 
-        this.loadFileIndex = null;
-
         this.priorities = supportService.getPriorities();
 
         this.priorityStyles = {
@@ -120,8 +118,6 @@ export default class ticketController {
 
     addFileToDesc(file){
         this._fireBase.addFilesToTask(this.taskFiles, file);
-        this.taskFiles.splice(this.taskFiles.length -1, 1);
-        this.loadFileIndex = null;
     }
 
     cancelSavingDescription() {

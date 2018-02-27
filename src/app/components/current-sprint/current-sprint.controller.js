@@ -54,7 +54,8 @@ export default class sprintController {
         $scope.onUserDrop = (item, card)=>{
             this._fireBase.addExecutorsToTask(this.projectId, card.$id, item.$id, {
                 priority: card.priority,
-                title: card.title
+                title: card.title,
+                createdAt: card.createdAt
             });
             return false;
         };

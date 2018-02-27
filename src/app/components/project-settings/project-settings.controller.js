@@ -9,7 +9,7 @@ export default class projectSettingsController {
         this.projectUsers = fireBase.getProjectUsers(this.projectId);
         this.cards = fireBase.getListCards(this.projectId);
         this.projectEdit = false;
-        this.durationEdit = false;
+        this.durationEdit = false
         this.backgroundEdit = false;
         this.backgrounds = supportService.getBackgrounds();
         this._$state = $state;
@@ -54,6 +54,11 @@ export default class projectSettingsController {
     selectBackground(background) {
         this.project.background = background;
         this.editProjectBackground();
+        this.updateProject();
+    }
+
+    selectBackgroundFullscreen(background) {
+        this.project.background = background;
         this.updateProject();
     }
 
