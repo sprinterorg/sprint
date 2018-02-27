@@ -11,7 +11,7 @@ import userAddingComponent from '../components/user-adding/user-adding.component
 import sprintHeaderComponent from '../components/current-sprint/sprint-header/sprint-header.component';
 
 
-const ComponentsModule = angular.module('app-components',['angular-click-outside'])
+const ComponentsModule = angular.module('app-components',[])
     .component('myProjects', myProjectsComponent)
     .component('myTasks', myTasksComponent)
     .component('modalWindow', modalWindowComponent)
