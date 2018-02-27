@@ -42,7 +42,8 @@ export default class UserAddingController{
     addExecutorsToTask(userId) {
         this._fireBase.addExecutorsToTask(this.projectId, this.taskId, userId, {
             priority: this.task.priority,
-            title: this.task.title
+            title: this.task.title,
+            createdAt: this.task.createdAt
         }); 
         this.addUserSelect = false;
     }

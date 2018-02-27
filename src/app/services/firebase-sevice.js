@@ -207,6 +207,7 @@ class FireService {
 			self.rootRef.child('users').update({
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/title']: data.title,
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/priority']: data.priority,
+            [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/createdAt']: data.createdAt
     		});
             return rootRef;
 		});

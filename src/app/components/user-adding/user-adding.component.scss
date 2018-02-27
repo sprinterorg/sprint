@@ -76,7 +76,8 @@
 }
 
 .project-settings__executors-input {
-  width: 100%;
+  box-sizing:border-box;
+  width: 270px;
   border: 1px solid #D1D1D1;
   box-shadow: none;
   outline: 0;
@@ -115,7 +116,7 @@
 }
 
 .project-settings__search-section {
-  width: 268px;
+  width: 270px;
   position: absolute;
   bottom: -22px;
 }
@@ -126,16 +127,4 @@
   -webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
   -moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
   box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
-}
-.project-settings__text {
-&--users {
-    margin-top: 20px;
-    display: inline-block;
-    padding: 0 5px 0 5px;
-    font-size: 1.5rem;
-    text-transform: lowercase;
-    color: #000000;
-    margin-top: 10px;
-    margin-bottom: 7px;
-  }
 }
