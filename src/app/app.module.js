@@ -9,6 +9,7 @@ import timeAgo from 'angular-moment';
 
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services';
+import '@iamadamjowett/angular-click-outside';
 
 import './components/projects/projects.component.scss';
 import './components/current-sprint/current-sprint.component.scss';
@@ -27,12 +28,14 @@ import '../font/flaticon.css';
 import './components/progress-bar/progress-bar.component.scss';
 import './components/user-adding/user-adding.component.scss';
 
+
 angular.module('app', [
     angFire,
     uiRouter,
     'dndLists',
     fileUpload,
     timeAgo,
+    'angular-click-outside',
     ComponentsModule.name,
     ServicesModule.name
 
