@@ -6,12 +6,19 @@
 
 	<div class="lists-container__project-users">
 		<div class="lists-container__project-users__icons"
-		ng-repeat="user in SprintCtrl.users"
+		ng-repeat="(index, user) in SprintCtrl.users"
 		dnd-type="'user'"
-		dnd-draggable="user">
+		dnd-draggable="user"
+		ng-dblclick="SprintCtrl.ondbclick(user, $index)"
+		>
 			<img src="{{user.avatar}}">
 		</div>
 	</div>
+	
+	<window-profile user-info = "SprintCtrl.isShowUser"
+					user-is-show = "SprintCtrl.isShowWind"
+					user-top = "SprintCtrl.isShowTop">
+	</window-profile> <!-- alex-window-profile -->
 
 	<progress-bar></progress-bar> <!-- alex-progress -->
 

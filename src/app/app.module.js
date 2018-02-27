@@ -24,6 +24,7 @@ import './components/current-sprint/card/card-child.component.scss';
 import './components/hystory/hystory.component.scss';
 import '../font/flaticon.css';
 import './components/progress-bar/progress-bar.component.scss';//alex-progress
+import './components/window-profile/window-profile.component.scss';//alex-window-profile
 
 angular.module('app', [
     angFire,

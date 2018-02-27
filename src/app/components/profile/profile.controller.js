@@ -13,6 +13,7 @@ export default class profileController {
         this._$rootScope = $rootScope;
         this._spinner = spinnerService;
         this._supportService = supportService;
+        /*this.changedUser = supportService.getChangedUser();*/
     }
 
     emit(){
@@ -29,17 +30,17 @@ export default class profileController {
             avatar: this.user.avatar
         });
         this.changeUserInformation();
-        this.visibleSave = false;
+        //this.visibleSave = false;
     }
 
     cancelUpdateUser(){
         this.user = this._fireBase.getUser(this.userId);
         this.visible = !this.visible;
-        this.visibleSave = false;
+        //this.visibleSave = false;
     }
 
     changeUserInformation() {
-        this.visible = !this.visible;
+        this.visible = !this.visible;        
     }
 
     uploadAvatar(file) {

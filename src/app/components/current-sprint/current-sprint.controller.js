@@ -1,6 +1,6 @@
 export default class sprintController {
     /*@ngInject*/
-    constructor($element, fireBase, $stateParams, $scope, supportService) {
+    constructor($element, fireBase, $stateParams, $scope, supportService, $rootScope, $timeout) {
         this.projectId = $stateParams.project_id;
         this.currentSprint = fireBase.getSprint(this.projectId);
         this.lists = fireBase.getSprintLists(this.projectId);
@@ -12,6 +12,8 @@ export default class sprintController {
         this.supportService = supportService;
         this.element = $element;
         this.isShown = true;
+        this._rootScope = $rootScope;
+        this._$timeout = $timeout;
 
         this.focusElement = null
         this.observableElement;
@@ -30,7 +32,10 @@ export default class sprintController {
             3: 'blue'
         }
 
-
+        this.isShowWind = false;//alex-window-profile
+        this.isShowUser = null;//alex-window-profile
+        this.isShowIndex = null;//alex-window-profile
+        this.isShowTop = null;//alex-window-profile
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
@@ -254,9 +259,10 @@ export default class sprintController {
         }
     }
 
-
+    ondbclick(user, index){  //alex-window-profile
+        this.isShowUser = user;
+        this.isShowIndex = index;
+        this.isShowTop = (65+index*50)+"px";
+        this.isShowWind = true;
+    }
 }
-
-
-
-

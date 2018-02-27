@@ -9,7 +9,8 @@ export default class progressBarComponent{
     }
 
     runProgressBar(){
-        this.overlayWidth = (100-(Math.ceil((Date.now()-this.project.startTimeStamp)/(60*60*24*1000))/this.project.duration)*100)+"%";
+        this.overlayWidth = (100-(Math.round((Date.now()-this.project.startTimeStamp)/(6*6*24*this.project.duration)))/1000)+"%";
+        //чувствительность progress-bar 0.001% от полной его длинны
     }
 }
 

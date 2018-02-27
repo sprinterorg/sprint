@@ -7,7 +7,7 @@ import spinner from '../components/spinner/spinner.component';
 import projectSettingsComponent from '../components/project-settings/project-settings.component';
 import projectsComponent from '../components/projects/projects.component';
 import progressBarComponent from '../components/progress-bar/progress-bar.component';//alex-progress
-
+import windowProfileComponent from '../components/window-profile/window-profile.component';//alex-window-profile
 
 const ComponentsModule = angular.module('app-components',[])
     .component('myProjects', myProjectsComponent)
@@ -18,6 +18,7 @@ const ComponentsModule = angular.module('app-components',[])
     .component('spinner', spinner)
     .component('projectSettings', projectSettingsComponent)
     .component('projects', projectsComponent)
-    .component('progressBar', progressBarComponent);//alex-progress
+    .component('progressBar', progressBarComponent)//alex-progress
+    .component('windowProfile', windowProfileComponent);//alex-window-profile
 
 export default ComponentsModule;
