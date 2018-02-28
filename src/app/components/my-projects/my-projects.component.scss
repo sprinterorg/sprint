@@ -35,11 +35,11 @@
 				margin-top: 20px;
 				position: relative;
 				display: block;
-				height: 150px;
+				height: 140px;
 				background: #D3D3D3;
-				-webkit-box-shadow: 2px 6px 10px -1px rgba(0,0,0,.6);
-				-moz-box-shadow: 2px 6px 10px -1px rgba(0,0,0,.6);
-				box-shadow: 2px 6px 10px -1px rgba(0,0,0,.6);
+				-webkit-box-shadow: 2px 6px 10px -1px rgba(0,0,0,.4);
+				-moz-box-shadow: 2px 6px 10px -1px rgba(0,0,0,.4);
+				box-shadow: 2px 6px 10px -1px rgba(0,0,0,.4);
 			}
 		}	
 	}
@@ -111,7 +111,7 @@
 }
 
 .my-projects__background {
-	height: 150px;
+	height: 140px;
 	overflow: hidden;
 	& img {
 		width: 100%;

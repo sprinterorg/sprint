@@ -1,7 +1,6 @@
 .project-setting__users-section {
-  margin-top: 25px;
-  border-top: 1px solid #D1D1D1;
-  padding-bottom: 10px;
+  border-bottom: 1px solid #D1D1D1;
+  padding-bottom: 40px;
   position: relative;
 }
 
@@ -9,6 +8,9 @@
   .project-setting__users-section {
   border: none;
   margin-top: 10px;
+  .project-setting__users-section {
+    padding-bottom: 10px;
+  }
   .project-settings__text--users {
     display: none;
   }
@@ -27,16 +29,25 @@
 .background__executor {
   position: relative;
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   margin: 5px 6px;
   &__avatar {
     flex-shrink: 0;
     width: 100%;
     border-radius: 50%;
-    height: 40px;
-    &--add:hover {
-      opacity: .5;
+    height: 60px;
+    border: 4px solid #ffffff;
+    -webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+    -moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+    box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+    &--add {
+      -webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,0);
+      -moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,0);
+      box-shadow: -2px 6px 10px -1px rgba(0,0,0,0);
+      &:hover {
+        opacity: .5;
+      }
     }
   }
   &__name {
@@ -48,11 +59,32 @@
   }
   &__delete {
     position: absolute;
-    top: 10px;
-    left: 12px;
+    top: 23px;
+    left: 27px;
     color: #000000;
     display: none;
     font-size: 2rem;
+  }
+}
+
+.task-executors,
+.sprint-project-settings,
+.project-settings__executors-option {
+  .background__executor {
+    width: 40px;
+    height: 40px;
+    margin: 5px 6px;
+    &__avatar {
+      height: 40px;
+      border-width: 0;
+    -webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,0);
+    -moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,0);
+    box-shadow: -2px 6px 10px -1px rgba(0,0,0,0);
+    }
+    &__delete {
+    top: 10px;
+    left: 12px;
+  }
   }
 }
 
@@ -98,7 +130,8 @@
 }
 
 .project-settings__executors-select {
-  width: 100%;
+  width: 268px;
+  z-index: 50;
 }
 
 .project-settings__executors-option {
@@ -118,7 +151,7 @@
 .project-settings__search-section {
   width: 270px;
   position: absolute;
-  bottom: -22px;
+  bottom: 10px;
 }
 
 .project-settings__executors-select {
@@ -127,4 +160,11 @@
   -webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
   -moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
   box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+}
+
+.task-executors,
+.sprint-project-settings {
+  .project-settings__executors-select {
+    width: 100%;
+  }
 }

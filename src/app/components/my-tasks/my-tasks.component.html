@@ -1,5 +1,24 @@
-<ul class="my-tasks">
-	<li ng-repeat="(key, value) in MyTasksCtrl.tasks">
-		<a ui-sref="card-child-component({project_id: MyTasksCtrl.projectId, task_id: key})">{{value.title}}</a>
+<ul class="cards-list__wrapper card-list__wrapper--profile">
+	<!-- <li ng-repeat="(key, value) in MyTasksCtrl.tasks">
+		<a ">{{value.title}}</a>
+	</li> -->
+	<li ui-sref="card-child-component({project_id: MyTasksCtrl.projectId, task_id: key})"
+		ng-repeat="(key, card) in MyTasksCtrl.tasks"
+		class="card card--profile">
+		<div class="card_content-card">
+			<div class="card_content-card__top">
+				<div class="card_content-card__top-title">
+					<h4>{{ card.title }}</h4>
+				</div>
+				<div class="card_content-card__top-info">
+					<p>{{MyTasksCtrl.cardCreatedDate(card)}}</p>
+					<p>{{MyTasksCtrl.cardCreatedTime(card)}}</p>
+				</div>
+			</div>
+			<div class="card_content-card__bottom"></div>
+		</div>
+		<div class="card-priority card-priority--profile"
+			 ng-style="{'background-color': MyTasksCtrl.cardPrioriry(card)}">
+		</div>
 	</li>
 </ul>

@@ -140,6 +140,7 @@
 										 class="card_content-card__bottom-executors__avatar"
 										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
 									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
+									<!--need to disable because of a bug-->
 									<img ng-if="SprintCtrl.isExecutors(card)"
 											class="card_content-card__bottom-executors__avatar"
 											ng-src="{{'../../../plus.png'}}">
