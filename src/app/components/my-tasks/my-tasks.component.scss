@@ -1,8 +1,30 @@
 .my-tasks {
+	margin-top: 20px;
+	width: 99%;
+	height: 100px;
+	overflow: hidden;
+}
+
+.card-list__wrapper--profile {
+	padding-top: 10px;
+	width: 100%;
 	display: flex;
-	justify-content: space-between;
-	& li {
-		width: 125px;
-		text-align: center;
+	flex-direction: row;
+}
+
+.card.card--profile {
+	flex-shrink: 0;
+	width: 150px;
+	height: 100px;
+	-webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,.6);
+	-moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,.6);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,.6);
+	transition: transform .3s;
+	&:hover {
+		transform: translateY(-10px);
 	}
+}
+
+.card-priority.card-priority--profile {
+	width: 4px;
 }

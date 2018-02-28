@@ -1,3 +1,7 @@
+.profile {
+  padding-bottom: 50px;
+}
+
 .profile__inform{
   background-color: #f3f3f3;
   padding: 2%;
@@ -78,13 +82,6 @@
   opacity: .7;
 }
 
-
-.inform__block__username__visible_username{
-  font-size: 2.6rem;
-  font-weight: bold;
-
-}
-
 .inform__block__username__visible_email{
   color: #b1b1b1;
   font-size: 1.6rem;    
@@ -93,8 +90,15 @@
 .inform__block__username__visible_username,
 .inform__block__username__visible_email{
   width: 200px;
-  margin: 5px 0 10px 0;
+  margin: 5px 0 10px 5px;
   overflow: hidden;
+}
+
+.inform__block__username__visible_username{
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+
 }
 
 .inform__block__username__visible,
@@ -110,11 +114,11 @@
   width: 200px;
   border: none; 
   outline: none;
-  padding: 3px;
-  margin: 3px 0 10px 0;
-  font-size: 1.6rem;
+  padding: 5px;
+  margin: 0 0 5px 0;
+  font-size: 2.6rem;
   font-family: 'Open Sans', sans-serif;
-  line-height: 1.4;//my initiative
+  font-weight: bold;
 }
 
 .buttonPR {
@@ -127,6 +131,7 @@
   border: 2px solid transparent;
   border-radius: 5px;
   cursor: pointer;
+  transition: color .2s, background .2s;
 
   &:hover {
     background: #000000;
@@ -166,4 +171,10 @@
     .inform__block__username__invisible{
       text-align: center;
     }
+  }
+
+  .button.button--add-project {
+    margin-left: 30px;
+    padding: 7px;
+    font-size: 1.7rem;
   }
