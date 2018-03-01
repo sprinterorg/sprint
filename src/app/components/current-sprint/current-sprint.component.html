@@ -5,6 +5,9 @@
 	<!--<div class="lists-container__project-name_wrapper">-->
 		<!--{{SprintCtrl.currentSprint.projectName}} #{{SprintCtrl.currentSprint.sprintNumber}}-->
 	<!--</div>-->
+	
+
+
 	<a ng-if="SprintCtrl.isProjectManager && SprintCtrl.isProjectHasHistory"
 	   class="link-button_project-history"
 	   ui-sref="hystory({project_id: SprintCtrl.projectId})"></a>
@@ -12,7 +15,6 @@
 		 class="link-button_project-setting"
 		 ng-click="SprintCtrl.toShowProjectSettings()"></div>
 	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
-
 	<div class="lists-container__project-users"
 	ng-if="SprintCtrl.projectLoad">
 		<div class="lists-container__project-users__icons"

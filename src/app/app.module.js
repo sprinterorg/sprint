@@ -26,6 +26,8 @@ import './components/hystory/hystory.component.scss';
 import '../font/flaticon.css';
 import './components/progress-bar/progress-bar.component.scss';
 import './components/user-adding/user-adding.component.scss';
+import './components/pop-up/pop-up.component.scss';//pop-up by Alex
+
 
 angular.module('app', [
     angFire,

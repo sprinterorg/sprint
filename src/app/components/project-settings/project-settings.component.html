@@ -11,8 +11,19 @@
             <i class="fas fa-check"></i>
           </div>
           <div class="project-settings__management-buttons">
-            <button class="link-button link-button--close-sprint" ng-click="ProjectSettingsCtrl.closeSprint()">Close sprint</button>
+            <button class="link-button link-button--close-sprint" ng-click="ProjectSettingsCtrl.callPopUpCloseSprint()">Close sprint</button>
             <button class="link-button link-button--delete" ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
+            <!-- <pop-up pop-up-visible-status=true
+                    pop-up-answer="SprintCtrl.popUpAnswer"
+                    pop-up-delete="SprintCtrl.popUpDelete"
+                    >
+            </pop-up>
+             -->
+             <pop-up pop-up-visible-status=false
+                    pop-up-answer="SprintCtrl.popUpAnswer"
+                    pop-up-delete="SprintCtrl.popUpDelete"
+                    >
+            </pop-up>
           </div>
         </div>
         <div class="project-settings__project-duration">

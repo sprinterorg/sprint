@@ -1,0 +1,45 @@
+<div 	class = "pop__up__window" 
+		ng-if = "PopUpCtrl.popUpVisibleStatus">
+	
+	<div class = "pop__up__overlay">
+		<div 	class = "pop__up__overlay__form"> 
+			<form 	class = "pop__up__form" 
+					ng-submit = "PopUpCtrl.clickHanler()" 
+					name = "login_form" 
+					novalidate>
+				<div 	class="pop__up__form__header">
+					<div>
+					</div>
+					<div 	class="pop__up__form__header__close" 
+							ng-click="loginController.hideFunc()">
+						<i class="flaticon-cancel"></i>
+					</div>
+				</div>
+
+				<div 	ng-if = "PopUpCtrl.popUpAnswer"
+						class = "pop__up__form__text">
+					{{PopUpCtrl.act[0].answer}}
+				</div>
+				<div 	ng-if = "!PopUpCtrl.popUpAnswer"
+						class = "pop__up__form__text">
+					{{PopUpCtrl.act[1].answer}}
+				</div>
+				<div 	class="pop__up__form__button">
+					<button ng-if = "PopUpCtrl.popUpAnswer"
+							ng-click = "PopUpCtrl.popUpDeletefunc()"
+							class = "button_delete button_delete--signup">
+						{{PopUpCtrl.act[0].btn}}
+					</button>
+					<button ng-if = "!PopUpCtrl.popUpAnswer"
+							class = "button_close button_close--signup">
+						{{PopUpCtrl.act[1].btn}}
+					</button>
+					<button class = "button_canceleee"
+							ng-click = "PopUpCtrl.clickCancelBtn()">
+						{{PopUpCtrl.act[2].btn}}
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

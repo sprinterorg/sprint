@@ -13,6 +13,10 @@ export default class projectSettingsController {
         this.backgroundEdit = false;
         this.backgrounds = supportService.getBackgrounds();
         this._$state = $state;
+
+        this.popUpVisible=false;
+        this.popUpAnswer;
+        
     }
 
     updateProject() {
@@ -26,10 +30,12 @@ export default class projectSettingsController {
     }
 	
     deleteProject() {
-        let ids = [];
+        this.popUpVisible=!this.popUpVisible;
+        console.log("popUpVisible= "+this.popUpVisible)
+        /*let ids = [];
         this.projectUsers.map( user => ids.push(user.$id));
         this._fireBase.deleteProject(ids, this.projectId);
-        this._$state.go('profile');
+        this._$state.go('profile');*/
     }
 
     isManager(userId) {
@@ -58,7 +64,7 @@ export default class projectSettingsController {
     }
 
     closeSprint() {
-        let usersOfClosedTasks = [this.project.managerId];
+       /* let usersOfClosedTasks = [this.project.managerId];
         let closedTasks = [];
         let allTasks = {};
         
@@ -93,7 +99,7 @@ export default class projectSettingsController {
 
         this._fireBase.addClosedToHistory(this.projectId, this.project.sprintNumber, allTasks);
         this._fireBase.deleteClosedTasks(this.projectId, closedTasks, usersOfClosedTasks);
-        this._fireBase.updateSprintData(this.projectId, this.project.sprintNumber, closedSprintData);
+        this._fireBase.updateSprintData(this.projectId, this.project.sprintNumber, closedSprintData);*/
     }
 }
 
