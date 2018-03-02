@@ -38,6 +38,9 @@ export default class sprintController {
         this.isShowUser = null;//alex-window-profile
         this.isShowIndex = null;//alex-window-profile
         this.isShowTop = null;//alex-window-profile
+        this.isShowLeft = null;//alex-window-profile
+        this.nextState = false;
+        this.isShowManager = false;
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
@@ -374,32 +377,51 @@ export default class sprintController {
 
     mouseEnterWindowProfileManager(user){ //alex-window-profile
         let self = this;
-        this.isShowTop = (128)+"px";
+        this.isShowIndex = 0;
+        this.isShowManager = true;
+        let el = document.getElementsByClassName('lists-container__project-users__icons');
+        let heightElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientHeight;
+        let widthElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientWidth;
+        let pointInitialHeight = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].offsetTop;
+        let pointInitialLeft = document.getElementsByClassName("lists-container__project-users")[0].offsetLeft;
+        this.isShowTop = (-25+heightElement+pointInitialHeight)+"px";
+        this.isShowLeft = (-270+pointInitialLeft)+"px";
         this.isShowUser = user;
+        this.nextState = true;
         this._$timeout(()=>{
-            if (self.isShowUser !== null){
+            if (self.nextState !== false){
                 self.isShowWind = true;                
             }
-        }, 2000);
+        }, 1000);
     }
 
     mouseEnterWindowProfileUser(user, index){  //alex-window-profile
         let self = this;
-        this.isShowIndex = index;
-        this.isShowTop = (183+self.isShowIndex*55)+"px";
+        this.isShowIndex = index+1;
+        let el = document.getElementsByClassName('lists-container__project-users__icons');
+        let heightElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientHeight;
+        let widthElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientWidth;
+        let pointInitialHeight = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].offsetTop;
+        let pointInitialLeft = document.getElementsByClassName("lists-container__project-users")[0].offsetLeft;
+        this.isShowTop = (-25+heightElement+pointInitialHeight)+"px";
+        this.isShowLeft = (-270+pointInitialLeft)+"px";
         this.isShowUser = user;
+        this.nextState = true;
         this._$timeout(()=>{
-            if (self.isShowUser !== null){
+            if (self.nextState !== false){
                 self.isShowWind = true;                
             }
-        }, 2000);
+        }, 1000);
+
     }
 
-    mouseLeaveOrDownWindowProfile(){ //alex-window-profile
+    mouseLeaveOrDownWindowProfile(user, index){ //alex-window-profile
         this.isShowWind = false;
-        this.isShowUser = null;
-        this.isShowIndex = null;
-        this.isShowTop = null;
+        this.nextState = false;
+        this.isShowManager = false;
+        //this.isShowIndex = index;
+        //this.isShowTop = null;
+        //this.isShowLeft = null;
     }
 
 }

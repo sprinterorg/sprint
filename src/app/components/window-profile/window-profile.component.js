@@ -6,7 +6,9 @@ let windowProfileComponent = {
   bindings: {
       userInfo: '<',
       userTop: '<',
-      userIsShow: '='
+      userLeft: '<',
+      userIsShow: '<',
+      managerIsShow: '<'
   },
   template,
   controller,

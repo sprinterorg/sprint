@@ -1,7 +1,10 @@
 <center class = "window__profile"
-		ng-if = "WindowProfileCtrl.userIsShow"
-		ng-style = "{'top': WindowProfileCtrl.userTop}"
-		>
+		ng-style = "{'left': WindowProfileCtrl.userLeft,'top': WindowProfileCtrl.userTop}"
+		ng-class="WindowProfileCtrl.classNameFunc()">
+	<div ng-show="WindowProfileCtrl.managerIsShow">
+		<section class = "window__profile__manager">Project manager:</section>
+	</div>
+
 	<div 	class = "window__profile__avatar" 
 			type = "file">
 			<img    src = {{WindowProfileCtrl.userInfo.avatar}}
