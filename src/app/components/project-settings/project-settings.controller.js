@@ -37,18 +37,16 @@ export default class projectSettingsController {
     }
 
     editProjectName($event, save) {
-        let el = $event.target.parentNode.parentNode.querySelector('input');
         this.projectEdit = !this.projectEdit;
+        let el = $event.target.parentNode.parentNode.parentNode.querySelector('.project-settings__input--name');
         if(save) this.updateProject();
         if($event) setTimeout( () => el.focus(), 10);
 
     }
 
     editProjectDuration($event, save) {
-        console.log($event.target.parentNode.parentNode)
-        console.log($event.target.parentNode.parentNode.querySelector('input'))
-        let el = $event.target.parentNode.parentNode.querySelector('input');
         this.durationEdit = !this.durationEdit;
+        let el = $event.target.parentNode.parentNode.parentNode.querySelector('.project-settings__input--duration');
         if(save) this.updateProject();
         else setTimeout( () => el.focus(), 10);
     }

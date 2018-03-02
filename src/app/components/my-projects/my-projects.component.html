@@ -13,6 +13,9 @@
 			<p class="my-projects__text">{{myProject.projectName }}</p>
 			<my-tasks class="my-tasks" tasks="myProject.myTasks" project-id="myProject.$id"></my-tasks>
 			<a class="config" ng-if="MyProjectsCtrl.isManager(myProject.managerId)" ui-sref="project-settings({project_id: myProject.$id})">go to settings </a>
+			
+			<!-- <button ng-if="MyProjectsCtrl.showButton()" class="my-projects__button my-projects__button--prew" ng-click="MyProjectsCtrl.prew($event)">prew</button>
+		    <button class="my-projects__button my-projects__button--next"ng-click="MyProjectsCtrl.next($event)">next</button> -->
 		</li>
 	</ul>
 </div>

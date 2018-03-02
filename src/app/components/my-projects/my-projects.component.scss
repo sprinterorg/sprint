@@ -32,6 +32,7 @@
 			list-style: none;
 
 			& .my-projects__item {
+				overflow: hidden;
 				margin-top: 20px;
 				position: relative;
 				display: block;
@@ -57,6 +58,7 @@
 		width: 320px;
 		padding: 10px 5px;
 		& .my-tasks,
+		/*& .my-projects__button,*/
 		& .config {
 			display: none;
 		}
@@ -123,3 +125,17 @@
 	height: 40px;
 	
 }
+/*
+.my-projects__button {
+	position: absolute;
+	top: 20px;
+	height: 30px;
+}
+
+.my-projects__button--prew{
+	left: 20px;
+}
+
+.my-projects__button--next{
+	right: 20px;
+}*/

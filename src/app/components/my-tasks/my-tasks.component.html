@@ -1,7 +1,4 @@
-<ul class="cards-list__wrapper card-list__wrapper--profile">
-	<!-- <li ng-repeat="(key, value) in MyTasksCtrl.tasks">
-		<a ">{{value.title}}</a>
-	</li> -->
+<ul class="cards-list__wrapper card-list__wrapper-profile">
 	<li ui-sref="card-child-component({project_id: MyTasksCtrl.projectId, task_id: key})"
 		ng-repeat="(key, card) in MyTasksCtrl.tasks"
 		class="card card--profile">
