@@ -1,6 +1,6 @@
 export default class sprintController {
     /*@ngInject*/
-    constructor($element, fireBase, $stateParams, $scope, supportService) {
+    constructor($element, fireBase, $stateParams, $scope, supportService, $timeout) {
         this._scope = $scope;
         this.element = $element;
 
@@ -32,6 +32,12 @@ export default class sprintController {
             2: 'green',
             3: 'blue'
         }
+
+        this._$timeout = $timeout;
+        this.isShowWind = false;//alex-window-profile
+        this.isShowUser = null;//alex-window-profile
+        this.isShowIndex = null;//alex-window-profile
+        this.isShowTop = null;//alex-window-profile
 
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
@@ -366,6 +372,35 @@ export default class sprintController {
         el.scrollBy(0,98);
     }
 
+    mouseEnterWindowProfileManager(user){ //alex-window-profile
+        let self = this;
+        this.isShowTop = (128)+"px";
+        this.isShowUser = user;
+        this._$timeout(()=>{
+            if (self.isShowUser !== null){
+                self.isShowWind = true;                
+            }
+        }, 2000);
+    }
+
+    mouseEnterWindowProfileUser(user, index){  //alex-window-profile
+        let self = this;
+        this.isShowIndex = index;
+        this.isShowTop = (183+self.isShowIndex*55)+"px";
+        this.isShowUser = user;
+        this._$timeout(()=>{
+            if (self.isShowUser !== null){
+                self.isShowWind = true;                
+            }
+        }, 2000);
+    }
+
+    mouseLeaveOrDownWindowProfile(){ //alex-window-profile
+        this.isShowWind = false;
+        this.isShowUser = null;
+        this.isShowIndex = null;
+        this.isShowTop = null;
+    }
 
 }
 

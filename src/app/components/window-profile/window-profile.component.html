@@ -1,0 +1,14 @@
+<center class = "window__profile"
+		ng-if = "WindowProfileCtrl.userIsShow"
+		ng-style = "{'top': WindowProfileCtrl.userTop}"
+		>
+	<div 	class = "window__profile__avatar" 
+			type = "file">
+			<img    src = {{WindowProfileCtrl.userInfo.avatar}}
+					class = "window__profile__avatar_img"/>
+	</div>
+	<div 	class = "window__profile__inform">
+		<section class = "window__profile__username">{{WindowProfileCtrl.userInfo.username}}</section>
+		<section class = "window__profile__email">{{WindowProfileCtrl.userInfo.email}}</section>
+	</div>
+</center>
