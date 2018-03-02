@@ -142,7 +142,7 @@
 		</div>
 	</section>
 	<section class="comments-section">
-	<div ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" 
+	<div ng-if="TaskCtrl.getUser(comment.userId).avatar" ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" 
 		 class="comments user-comment">
 		<img ng-src="{{TaskCtrl.getUser(comment.userId).avatar}}" 
 			 alt="" 
