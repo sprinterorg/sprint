@@ -1,19 +1,21 @@
 .my-tasks {
 	margin-top: 20px;
-	width: 99%;
+	width: 100%;
 	height: 100px;
 	overflow: hidden;
 }
 
-.card-list__wrapper--profile {
+.card-list__wrapper-profile {
+	position: relative;
 	padding-top: 10px;
-	width: 100%;
 	display: flex;
 	flex-direction: row;
+	left: 5px;
 }
 
 .card.card--profile {
 	flex-shrink: 0;
+	flex-grow: 0;
 	width: 150px;
 	height: 100px;
 	-webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,.6);

@@ -3,7 +3,7 @@
     <div class="project-settings__wrapper"> 
        <div class="project-settings__project-name">
           <p class="project-settings__text" ng-if="!ProjectSettingsCtrl.projectEdit">{{ProjectSettingsCtrl.project.projectName}} #{{ProjectSettingsCtrl.project.sprintNumber}}</p>
-          <input class="project-settings__input" ng-show="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName"/>
+          <input class="project-settings__input project-settings__input--name" ng-show="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName"/>
           <div ng-if="!ProjectSettingsCtrl.projectEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName($event, false)">
             <i class="fas fa-edit"></i>
           </div>
@@ -19,7 +19,7 @@
         <div class="project-settings__project-duration">
           <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
           <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
-          <input ng-show="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="text" ng-model="ProjectSettingsCtrl.project.duration"/>
+          <input ng-show="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="number" ng-model="ProjectSettingsCtrl.project.duration"/>
           <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration($event, false)">
               <i class="fas fa-edit"></i>
           </div>
