@@ -221,7 +221,16 @@
 	.content__project {
 		width: 100%;
 		background: #ffffff;
-		height: 400px;
 		opacity: .95;
+		padding: 0 10vw;
+	}
+
+	.content__img {
+		width: 80vw;
+		height: 400px;
+	}
+
+	.content__img img{
+		width: 100%;
 	}
 }
