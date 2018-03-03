@@ -10,7 +10,7 @@
     "angular-1.5-cli": "^1.6.0",
     "angular-animate": "1.5.7",
     "angular-drag-and-drop-lists": "^2.1.0",
-    "angular-emoji-filter-hd": "0.0.9",
+    "angular-emoji-filter-hd": "https://github.com/sprinterorg/angular-emoji-filter-hd",
     "angular-emoji-picker": "^0.2.0",
     "angular-mocks": "1.5.7",
     "angular-moment": "^1.2.0",
