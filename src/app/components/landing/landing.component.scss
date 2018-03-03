@@ -16,7 +16,7 @@
 		width: 100vw;
 		height: 100%;
 		object-fit: cover;
-		opacity: .8;
+		opacity: 1;
 }
 }
 .about__main {
@@ -29,8 +29,8 @@
 	}
 	h1 {
 		text-align: left;
-		font-size: 6vw;
-		font-weight: normal;
+		font-size: 7vw;
+		font-weight: bold;
 		text-transform: uppercase;
 	}
 	p {
@@ -38,34 +38,69 @@
 		font-size: 3vw;
 	}
 
-	.content {
-		background: linear-gradient(to bottom, transparent, transparent 30%, black, black 50%, black 70%, transparent 70%, transparent);;
+	.content-adv {
+		background: linear-gradient(to bottom, transparent,  rgb(20,20,20) 70%);
+		padding-bottom: 5px;
 	}
 
 	.about__block {
 		margin: 0 auto 100px;
-		width: 90vw;
+		width: 80vw;
 		background: #ffffff;
-		height: 40vh;
 	}
 	.about__block--first {
-		background-image: url('../../../1.jpg');
-		background-position: right;
-		background-size: contain;
+		filter: brightness(0.9);
+		height: 400px;
+		background: url(../../../looking1.png);
 		background-repeat: no-repeat;
-		-webkit-box-shadow: 0px 200px 50px 100px #000000;
+		background-size: cover;
+		background-color: #ffffff;
+		/*-webkit-box-shadow: 0px 200px 50px 100px #000000;
 		-moz-box-shadow: 0px 100px 50px 100px #000000;
-		box-shadow: 0px 300px 200px 200px #000000;
+		box-shadow: 0px 300px 200px 200px #000000;*/
+		transition: filter .3s;
+		&:hover {
+			filter: brightness(1);
+		}
 
 		h2 {
-			font-size: 7vh;
+			z-index: 10;
+			position: absolute;
+			top: 80px;
+			left: 20px;
+			font-size: 1.7vw;
 			font-weight: bold;
 			text-transform: uppercase;
 		}
-		p {
-			font-size: 3vh;
+		.text-block__text {
+			position: absolute;
+			top: 40px;
+			margin: 0;
+			left: 20px;
+			z-index: 10;
+			font-size: 1.4vw;
 		}
+
+		.text-block__bottom {
+			position: absolute;
+			background: #ffffff;
+			top: 180px;
+			height: 300px;
+			width: 100%;
+			opacity: .8;
+			transition: top 1s, opacity .3s;
+		}
+
+		.bottom--hovered {
+			top: 400px;
+			opacity: 1;
+		}
+
 		.button--start {
+			z-index: 10;
+			left: 20px;
+			position: absolute;
+			top: -360px;
 			width: 10vw;
 			font-size: 2vh;
 			padding: 20px;
@@ -73,6 +108,120 @@
 			color: #ffffff;
 			border-radius: 0;
 			text-align:center;
+			transition: top 1s, background .3s, color .3s;
+			&:hover {
+				background: #ffffff;
+				color: #000000;
+			}
 		}
+
+		.button--hovered {
+			top: 40px;
+		}
+			
+		.text-block {
+			width: 25vw;
+			height: 400px;
+			position: relative;
+			overflow: hidden;
+			margin-left: 20vw;
+			.text-block__texts {
+				position: relative;
+				top: 0px;
+				transition: top 1s;
+			}
+
+			.text-block__texts--hovered {
+				top: 160px;
+			}
+
+			.text-overlay {
+				z-index: 0;
+				position: absolute;
+				background: #ffffff;
+				width: 100%;
+				height: 100%;
+				top: -370px;
+				opacity: .8;
+				transition: top 1s, opacity .3s;
+			}
+
+			.text-overlay--hovered {
+				top: 0;
+				opacity: 1;
+			}
+			
+		}
+	}
+	
+	.timer-animation:after {
+		position: absolute;
+		top: 157px;
+		left: 122px;
+		font-size: 4rem;
+		content: "00:00";
+		font-family: Digital;
+		animation-iteration-count: infinite;
+		animation-duration: 10s;
+		animation-name: timer;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in-out;
+	}
+
+	@keyframes timer {
+    0% { content: "00:00"; }
+    10% { content: "00:01"; }
+    20% { content: "00:02"; }
+    30% { content: "00:03"; }
+    40% { content: "00:04"; }
+    50% { content: "00:05"; }
+    60% { content: "00:06"; }
+    70% { content: "00:07"; }
+    80% { content: "00:08"; }
+    90% { content: "00:09"; }
+    100% { content: "00:00"; }
+}
+
+	.img-overlay {
+		z-index: 20;
+		width: 400px;
+		height: 490px;
+		overflow: hidden;
+		img {
+			width: 100%;
+			padding-top: 490px;
+		}
+	}
+	
+	.about__block__overlay {
+		position: relative;
+	}
+	.animated-clock {
+		position: absolute;
+		top: -90px;
+		right: 0px;
+		.img-appearing {
+			animation-name: hand-appearing;
+			animation-duration: 2s;
+			animation-delay: .5s;
+			animation-fill-mode: forwards;
+		}
+	}
+	
+@keyframes hand-appearing {
+    0% { padding-top: 490px; }
+    70% { padding-top: 16px; }
+    75% { padding-top: 16px; }
+    100% { padding-top: 25px; }
+}
+
+}
+
+.content {
+	.content__project {
+		width: 100%;
+		background: #ffffff;
+		height: 400px;
+		opacity: .95;
 	}
 }

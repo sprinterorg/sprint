@@ -40,6 +40,8 @@ export default class appController {
                 this.isLoaded = true;
             });
         }
+
+        $scope.$on('registrate', (event) => this.toShowModalWindow('signUp'));
     }
     
     toShowModalWindow(mode) {
@@ -61,4 +63,5 @@ export default class appController {
     toHideSearch() {
         this.showSearch = false;
     }
+
 }

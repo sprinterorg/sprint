@@ -5,22 +5,33 @@
 	</section>
 	<section class="about__main">
 		<div class="about__main-message">
-			<h1>Do you want to add<br> a bit of sport to<br> your business?</h1>
+			<h1>Do you want to add<br> some sport to<br> your business?</h1>
 			<p>Sprinter task manager will help you to organize and prioritize your work in a fun, flexible and rewarding way.
 			</p>
 		</div>
+		<section class="content-adv">
+		<div class="about__block about__block--first" ng-mouseenter="LandingCtrl.showProposition(true)" ng-mouseleave="LandingCtrl.showProposition(false)">
+			<div class="about__block__overlay">
+			<div class="text-block">
+				<div class="button button--start" ng-class="{'button--hovered': LandingCtrl.proposition}" ng-click="LandingCtrl.getStart()">Get start</div>
+				<div ng-class="{'text-overlay--hovered': LandingCtrl.proposition}" class="text-overlay"></div>
+				<div class="text-block__texts" ng-class="{'text-block__texts--hovered': LandingCtrl.proposition}">
+					<p class="text-block__text">have a lot of work and</p>
+					<h2>looking for solution <br> to manage with your time?</h2>
+					<div class="text-block__bottom" ng-class="{'bottom--hovered': LandingCtrl.proposition}"></div>
+				</div>
+			</div>
+			<div class="animated-clock">
+				<div class="img-overlay">
+					<img ng-class="{'img-appearing': LandingCtrl.animateHand}" src="stopwatch.png">
+				</div>
+				<p class="timer" ng-class="{'timer-animation': LandingCtrl.animateTime}"></p>
+			</div>
+		</div>
+		</div>
+		</section>
 		<section class="content">
-		<div class="about__block about__block--first">
-			<h2>It will fit you</h2>
-			<p>Our time management solution</p>
-			<div class="button button--start">Get start</div>
-		</div>
-		<div class="about__block">
-			sdfsdf
-		</div>
-		<div class="about__block">
-			sdfsdf
-		</div>
+			<section class="content__project">.</section>
 		</section>
 	</section>
 </section>

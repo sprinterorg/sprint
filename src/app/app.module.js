@@ -27,6 +27,7 @@ import './components/hystory/hystory.component.scss';
 import '../font/flaticon.css';
 import './components/progress-bar/progress-bar.component.scss';
 import './components/user-adding/user-adding.component.scss';
+import './components/window-profile/window-profile.component.scss';
 
 
 angular.module('app', [
