@@ -48,33 +48,38 @@
     }
   }
 
-  a{
-    color:#3498DB;
-    cursor:pointer;
+  .form-text{
+    font-size:2rem;
+    box-sizing:border-box;
+    padding:20px 30px;
+    text-align:center;
+    width:100%;
   }
 
-  .server-error-message{
+  .button_pannel{
     display:flex;
-    padding:0 5px;
-    box-sizing:border-box;
-    flex-direction:column;
-    justify-content:center;
+    flex-direction:row;
     align-items:center;
-    background: rgba(255, 0, 0, 0.1)!important;
-    color: red!important;
-    margin:10px 0; 
-    border-radius:3px;
-    max-width:450px;
-    font-size:1.6rem;
-    width:380px;
+    justify-content:space-around;
+    width:100%;
+    padding:0 20px;
+    box-sizing:border-box;
+    .button{
+      width:200px;
+      height:40px;
+      font-size:2rem;
+    }
   }
 }
 @media screen and (max-width:450px){
-  .projects-form {
+  .confirmation-form {
     width:320px;
-    .server-error-message{
-      font-size:1.6rem;
-      width:260px
+    .button_pannel{
+      .button{
+        width:100px;
+        height:40px;
+        font-size:2rem;
+      }
     }
   }
 }
