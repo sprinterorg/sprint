@@ -1,15 +1,9 @@
 <form class="login_form" ng-submit="loginController.clickHanler()" name="login_form" novalidate>
-    <!--
-    loginController.FormIsValid:{{loginController.FormIsValid}}<br>
-    loginController.entryEmailValid:{{loginController.entryEmailValid}}<br>
-    loginController.entryPasswordValid:{{loginController.entryPasswordValid}}<br>
-    loginController.entryRepeatPasswordValid:{{loginController.entryRepeatPasswordValid}}<br>
-    -->
     <div class="form-header">
         <div>
             {{loginController.showButtonName()}}
         </div>
-        <div class="close" ng-click="loginController.hideFunc()"">
+        <div class="close" ng-click="loginController.hideFunc()">
             <i class="flaticon-cancel"></i>
         </div>
     </div>

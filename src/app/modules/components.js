@@ -10,7 +10,7 @@ import progressBarComponent from '../components/progress-bar/progress-bar.compon
 import userAddingComponent from '../components/user-adding/user-adding.component';
 import sprintHeaderComponent from '../components/current-sprint/sprint-header/sprint-header.component';
 import windowProfileComponent from '../components/window-profile/window-profile.component';
-
+import confirmationComponent from '../components/confirmation-form/confirmation.component';
 
 const ComponentsModule = angular.module('app-components',[])
     .component('myProjects', myProjectsComponent)
@@ -24,6 +24,7 @@ const ComponentsModule = angular.module('app-components',[])
     .component('progressBar', progressBarComponent)
     .component('sprintHeader', sprintHeaderComponent)
     .component('userAdding', userAddingComponent)
-    .component('windowProfile', windowProfileComponent);
+    .component('windowProfile', windowProfileComponent)
+    .component('confirmationForm',confirmationComponent);
 
 export default ComponentsModule;

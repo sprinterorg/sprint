@@ -33,8 +33,7 @@ import './components/user-adding/user-adding.component.scss';
 import 'angular-emoji-picker/dist/css/emoji-picker.css';
 import 'angular-emoji-filter-hd/dist/emoji.scss';
 import './components/window-profile/window-profile.component.scss';
-
-
+import './components/confirmation-form/confirmation.component.scss';
 
 angular.module('app', [
     angFire,
