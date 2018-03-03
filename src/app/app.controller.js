@@ -22,15 +22,13 @@ export default class appController {
         this._$rootScope.$on('hideApp', () => {
             this.isLoaded = false;
         });
-
-        this._scope.$on('showProjectDeleteConfirmation', (event, data)=>{
-            this.toShowProjectDeleteComfirmation();
+        $scope.$on('showProjectDeleteConfirmation', (event, bool)=>{
+            this.toShowProjectDeleteComfirmation(bool);
         });
-        this._scope.$on('showCloseSprintConfirmation', (event, data)=>{
-            this.toShowCloseSprintConfirmition();
+        this._$rootScope.$on('showCloseSprintConfirmation', (event, bool)=>{
+            this.toShowCloseSprintConfirmition(bool);
         });
-
-        this._scope.$on('createProjectEvent', function(event, data){
+        this._scope.$on('createProjectEvent', (event, data)=>{
             this.toShowModalWindow("projects");
         });
 
@@ -65,22 +63,15 @@ export default class appController {
     toShowSearch() {
         this.showSearch = !this.showSearch;
     }
-
     toHideSearch() {
         this.showSearch = false;
     }
 
-    toShowProjectDeleteComfirmation(){
-        this.showProjectDeleteComfirmation = !this.showProjectDeleteComfirmation;
+    toShowProjectDeleteComfirmation(a){
+        this.showProjectDeleteComfirmation = a;
     }
-    toHideProjectDeleteComfirmation(){
-        this.showProjectDeleteComfirmation = false;
-    }
-    toShowCloseSprintConfirmition(){
-        this.showCloseSprintConfirmation = !this.showCloseSprintConfirmation;
-    }
-    toHideCloseSprintConfirmition(){
-        this.showCloseSprintConfirmation = false;
+    toShowCloseSprintConfirmition(a){
+        this.showCloseSprintConfirmation = a;
     }
 
     onProjectDeleteConfirm(){

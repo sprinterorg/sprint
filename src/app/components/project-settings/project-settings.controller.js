@@ -14,13 +14,13 @@ export default class projectSettingsController {
         this.backgroundEdit = false;
         this.backgrounds = supportService.getBackgrounds();
         this._$state = $state;
-
+        this._$scope=$scope;
         $scope.$on('confirmProjectDelete', ()=> {
-            this._$rootScope.$broadcast('showProjectDeleteConfirmation');
+            this._$rootScope.$broadcast('showProjectDeleteConfirmation', false);
             this.deleteProject();
         });
         $scope.$on('confirmSprintClose', ()=> {
-            this._$rootScope.$broadcast('showCloseSprintConfirmation');
+            this._$rootScope.$broadcast('showCloseSprintConfirmation', false);
             this.closeSprint();
         });
     }
@@ -36,7 +36,7 @@ export default class projectSettingsController {
     }
 	
     showProjectDeleteConfirmation(){
-        this._$rootScope.$broadcast('showProjectDeleteConfirmation');
+        this._$scope.$emit('showProjectDeleteConfirmation',true);
     }
 
     deleteProject() {
@@ -82,7 +82,7 @@ export default class projectSettingsController {
 
 
     showCloseSprintConfirmation(){
-        this._$rootScope.$broadcast('showCloseSprintConfirmation');
+        this._$scope.$emit('showCloseSprintConfirmation',true);
     }
     closeSprint() {
         let usersOfClosedTasks = [this.project.managerId];

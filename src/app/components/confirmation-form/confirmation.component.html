@@ -4,14 +4,14 @@
 	        <div>
 	            {{comfirmationController.formName}}
 	        </div>
-	        <div class="close" ng-click="comfirmationController.hideFunc()">
+	        <div class="close" ng-click="comfirmationController.hideFunc({a:false})">
 	            <i class="flaticon-cancel"></i>
 	        </div>
 	    </div>
 	    <div class="form-text">
 	      	{{comfirmationController.formText}}
 	    </div>
-	   	<button class="button  button--signup" ng-click="comfirmationController.hideFunc()">Cancel</button>
+	   	<button class="button  button--signup" ng-click="comfirmationController.hideFunc({a:false})">Cancel</button>
 	    <button class="button" ng-click="comfirmationController.onConfirm()">Confirm</button>
     </form>
 </modal-window>
