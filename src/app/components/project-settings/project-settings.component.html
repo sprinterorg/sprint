@@ -1,13 +1,13 @@
 <section class="project-settings">
     <div class="project-settings__close" ng-click="ProjectSettingsCtrl.hideFunc()">+</div>
-    <form ng-submit="ProjectSettingsCtrl.updateProject()">
+    <div class="project-settings__wrapper"> 
        <div class="project-settings__project-name">
-          <p class="project-settings__text" ng-if="!ProjectSettingsCtrl.projectEdit">{{ProjectSettingsCtrl.project.projectName}}</p>
-          <input class="project-settings__input" ng-if="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName"/>
-          <div ng-if="!ProjectSettingsCtrl.projectEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName(false)">
+          <p class="project-settings__text" ng-if="!ProjectSettingsCtrl.projectEdit">{{ProjectSettingsCtrl.project.projectName}} #{{ProjectSettingsCtrl.project.sprintNumber}}</p>
+          <input class="project-settings__input project-settings__input--name" ng-show="ProjectSettingsCtrl.projectEdit" type="text" ng-model="ProjectSettingsCtrl.project.projectName"/>
+          <div ng-if="!ProjectSettingsCtrl.projectEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName($event, false)">
             <i class="fas fa-edit"></i>
           </div>
-          <div ng-if="ProjectSettingsCtrl.projectEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName(true)">
+          <div ng-if="ProjectSettingsCtrl.projectEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectName($event, true)">
             <i class="fas fa-check"></i>
           </div>
           <div class="project-settings__management-buttons">
@@ -15,21 +15,28 @@
             <button class="link-button link-button--delete" ng-click="ProjectSettingsCtrl.deleteProject()">Delete project</button>
           </div>
         </div>
+      </div>
         <div class="project-settings__project-duration">
-        <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
-        <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
-        <input ng-if="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="text" ng-model="ProjectSettingsCtrl.project.duration"/>
-        <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(false)">
-            <i class="fas fa-edit"></i>
+          <span class="project-settings__text project-settings__text--duration">sprint duration, days:</span>
+          <span class="project-settings__text project-settings__text--duration" ng-if="!ProjectSettingsCtrl.durationEdit">{{ProjectSettingsCtrl.project.duration}}</span>
+          <input ng-show="ProjectSettingsCtrl.durationEdit" class="project-settings__input project-settings__input--duration" type="number" ng-model="ProjectSettingsCtrl.project.duration"/>
+          <div ng-if="!ProjectSettingsCtrl.durationEdit" class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration($event, false)">
+              <i class="fas fa-edit"></i>
           </div>
-          <div ng-if="ProjectSettingsCtrl.durationEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration(true)">
-            <i class="fas fa-check"></i>
+          <div ng-if="ProjectSettingsCtrl.durationEdit"  class="project-settings__button edit" ng-click="ProjectSettingsCtrl.editProjectDuration($event, true)">
+              <i class="fas fa-check"></i>
           </div>
         </div>
+        <user-adding all-users="ProjectSettingsCtrl.users"
+                     users="ProjectSettingsCtrl.projectUsers" 
+                     project="ProjectSettingsCtrl.project"
+                     project-id="ProjectSettingsCtrl.projectId"
+                     boolean-project="true">
+        </user-adding>
         <div class="project-settings__project-background">
           <p class="project-settings__background-text">project background</p>
-          <div class="background-item">
-            <img src="{{ProjectSettingsCtrl.project.background}}">
+          <div class="background-item background-item--selected">
+            <img ng-src="{{ProjectSettingsCtrl.project.background}}">
              <div ng-if="!ProjectSettingsCtrl.backgroundEdit" class="project-settings__button edit edit--background" ng-click="ProjectSettingsCtrl.editProjectBackground()">
             <i class="fas fa-edit"></i>
           </div>
@@ -41,16 +48,23 @@
           <ul class="background-items" ng-show="ProjectSettingsCtrl.backgroundEdit">
             <li ng-repeat="srcImg in ProjectSettingsCtrl.backgrounds | filter:'!'+ProjectSettingsCtrl.project.background">
               <div class="background-item" ng-click="ProjectSettingsCtrl.selectBackground(srcImg)">
-                <img src="{{srcImg}}">
+                <img ng-src="{{srcImg}}">
               </div>
             </li>
           </ul>
+
+          <div class="background-fullscreen">
+            <div class="background-fullscreen__item" ng-repeat="srcImg in ProjectSettingsCtrl.backgrounds" ng-class="{'background-fullscreen__item--current': ProjectSettingsCtrl.project.background === srcImg}">
+              <div class="background-item" ng-click="ProjectSettingsCtrl.selectBackgroundFullscreen(srcImg)">
+                <img ng-src="{{srcImg}}">
+              </div>
+            </div>
+          </div>
         </div>
-  </form>
-  <user-adding all-users="ProjectSettingsCtrl.users"
-               users="ProjectSettingsCtrl.projectUsers" 
-               project="ProjectSettingsCtrl.project"
-               project-id="ProjectSettingsCtrl.projectId"
-               boolean-project="true">
-  </user-adding>
+       <!--  <user-adding all-users="ProjectSettingsCtrl.users"
+                     users="ProjectSettingsCtrl.projectUsers" 
+                     project="ProjectSettingsCtrl.project"
+                     project-id="ProjectSettingsCtrl.projectId"
+                     boolean-project="true">
+        </user-adding> -->
 </section>

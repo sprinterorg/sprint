@@ -22,6 +22,11 @@
 	 }
 }
 
+  @font-face {
+    font-family: Digital;
+    src: url(../digital.ttf);
+   }
+
 html {
 	font-size: 10px;
 }
@@ -165,7 +170,7 @@ table {
 	border: 2px solid transparent;
 	border-radius: 5px;
 	cursor: pointer;
-
+	transition: background .2s, color .2s;
 	&--signup {
 		background: #000000;
 		color: #ffffff;

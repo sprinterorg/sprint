@@ -1,6 +1,6 @@
 export default class sprintController {
     /*@ngInject*/
-    constructor($element, fireBase, $stateParams, $scope, supportService) {
+    constructor($element, fireBase, $stateParams, $scope, supportService, $timeout) {
         this._scope = $scope;
         this.element = $element;
 
@@ -33,6 +33,15 @@ export default class sprintController {
             3: 'blue'
         }
 
+        this._$timeout = $timeout;
+        this.isShowWind = false;
+        this.isShowUser = null;
+        this.isShowIndex = null;
+        this.isShowTop = null;
+        this.isShowLeft = null;
+        this.nextState = false;
+        this.isShowManager = false;
+
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
             if(!card.sprintStart && list!==1){
@@ -41,8 +50,9 @@ export default class sprintController {
                     list_id: card.list_id,
                     id: card.id,
                     priority: card.priority,
-                    sprintStart: this.currentSprint.sprintNumber
+                    sprintStart: Number(this.currentSprint.sprintNumber)
                 };
+                this._fireBase.updateSprintStart(this.projectId, Number(this.currentSprint.sprintNumber), card.$id)
                 this._fireBase.addToHistory(this.projectId, this.currentSprint.sprintNumber, card.$id, cardData);
             }
             if (list === 1) {
@@ -54,7 +64,8 @@ export default class sprintController {
         $scope.onUserDrop = (item, card)=>{
             this._fireBase.addExecutorsToTask(this.projectId, card.$id, item.$id, {
                 priority: card.priority,
-                title: card.title
+                title: card.title,
+                createdAt: card.createdAt
             });
             return false;
         };
@@ -148,6 +159,25 @@ export default class sprintController {
         return this.users.filter(item => item.$id === userId);
     }
 
+    cardExecutors(card){
+        let arr = [];
+        for (let key in card.executors){
+            arr.push(card.executors[key])
+        }
+        return arr.slice(0,2);
+    }
+
+    cardExecutorsFull(card){
+        let arr = [];
+        for (let key in card.executors){
+            arr.push(card.executors[key])
+        }
+        if (arr.length > 2){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     showBacklog() {
         this.isShown = false;
@@ -190,27 +220,30 @@ export default class sprintController {
 
 
     addCard(listId, list) {
-        let self = this;
-        let createdDate = new Date().toString();
-        var temp = this.cardName[listId];
-        this.cardName[listId] = '';
-        let cardData = {
-            title: temp, 
-            list_id: listId,
-            id: Math.random()*1000000^0,
-            priority: 2,
-            createdAt: createdDate
-        };
-        if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber; 
-        this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then( rootRef  => {
-            if (listId !== 1)
-                self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
-        });
+        if(this.cardName[listId]) {
+            let self = this;
+            let createdDate = Date.parse(new Date());
+            var temp = this.cardName[listId];
+            this.cardName[listId] = '';
+            if (temp == '') return;
+            let cardData = {
+                title: temp,
+                list_id: listId,
+                id: Math.random() * 1000000 ^ 0,
+                priority: 2,
+                createdAt: createdDate
+            };
+            if (listId !== 1) cardData.sprintStart = this.currentSprint.sprintNumber;
+            this._fireBase.addCard(this.cards, cardData, this.currentSprint.managerId, this.projectId).then(rootRef => {
+                if (listId !== 1)
+                    self._fireBase.addToHistory(self.projectId, this.currentSprint.sprintNumber, rootRef.key, cardData);
+            });
+        }
     }
 
 
     showFullCard(card){
-        // console.log(card);
+        // console.log(card, this.cards);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -221,6 +254,9 @@ export default class sprintController {
 
     toShowProjectSettings() {
         this.showProjectSettings = !this.showProjectSettings;
+    }
+    toHideProjectSettings() {
+        this.showProjectSettings = false;
     }
 
     showListMenu(list, elemId) {
@@ -274,12 +310,7 @@ export default class sprintController {
         }
     }
     cardCreatedDate(card) {
-        let date = new Date(card.createdAt);
-        date = date.toLocaleDateString();
-        let x = this.supportService.getFormattedDate(Date.parse(card.createdAt))
-        // x = x.replace('.','/')
-        // x = x.replace('.','/')
-        // return date.substring(0, date.length-4) + date.substring(date.length-2);
+        let x = this.supportService.getFormattedDate(card.createdAt)
         return x;
 
     }
@@ -345,14 +376,53 @@ export default class sprintController {
         el.scrollBy(0,98);
     }
 
-    isNeedScroll(elId) {
-        let el = document.getElementById(elId);
-        if (el.clientHeight < el.scrollHeight) {
-            return true;
-        } else {
-            return false;
-        }
+    mouseEnterWindowProfileManager(user){
+        let self = this;
+        this.isShowIndex = 0;
+        this.isShowManager = true;
+        let el = document.getElementsByClassName('lists-container__project-users__icons');
+        let heightElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientHeight;
+        let widthElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientWidth;        
+        let pointInitialHeight = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].offsetTop;
+        let pointInitialLeft = document.getElementsByClassName("lists-container__project-users")[0].offsetLeft;
+        this.isShowTop = (-25+heightElement+pointInitialHeight)+"px";
+        this.isShowLeft = (-270+pointInitialLeft)+"px";
+        this.isShowUser = user;
+        this.nextState = true;
+        this._$timeout(()=>{
+            if (self.nextState !== false){
+                self.isShowWind = true;                
+            }
+        }, 1000);
     }
+
+    mouseEnterWindowProfileUser(user, index){ 
+        let self = this;
+        this.isShowIndex = index+1;
+        let el = document.getElementsByClassName('lists-container__project-users__icons');
+        let heightElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientHeight;
+        let widthElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientWidth;
+        let pointInitialHeight = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].offsetTop;
+        let pointInitialLeft = document.getElementsByClassName("lists-container__project-users")[0].offsetLeft;
+        this.isShowTop = (-25+heightElement+pointInitialHeight)+"px";
+        this.isShowLeft = (-270+pointInitialLeft)+"px";
+        this.isShowUser = user;
+        this.nextState = true;
+        this._$timeout(()=>{
+            if (self.nextState !== false){
+                self.isShowWind = true;                
+            }
+        }, 1000);
+
+    }
+
+    mouseLeaveOrDownWindowProfile(user, index){ 
+        this.isShowWind = false;
+        this.nextState = false;
+        this.isShowManager = false;
+    }
+
+
 }
 
 

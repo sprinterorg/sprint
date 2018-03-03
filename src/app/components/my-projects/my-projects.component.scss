@@ -32,11 +32,15 @@
 			list-style: none;
 
 			& .my-projects__item {
+				overflow: hidden;
 				margin-top: 20px;
 				position: relative;
 				display: block;
-				height: 150px;
+				height: 140px;
 				background: #D3D3D3;
+				-webkit-box-shadow: 2px 6px 10px -1px rgba(0,0,0,.4);
+				-moz-box-shadow: 2px 6px 10px -1px rgba(0,0,0,.4);
+				box-shadow: 2px 6px 10px -1px rgba(0,0,0,.4);
 			}
 		}	
 	}
@@ -54,6 +58,7 @@
 		width: 320px;
 		padding: 10px 5px;
 		& .my-tasks,
+		/*& .my-projects__button,*/
 		& .config {
 			display: none;
 		}
@@ -69,6 +74,9 @@
 			position: relative;
 			height: 40px;
 			cursor: pointer;
+			-webkit-box-shadow: 2px 6px 10px -1px rgba(0,0,0,0);
+			-moz-box-shadow: 2px 6px 10px -1px rgba(0,0,0,0);
+			box-shadow: 2px 6px 10px -1px rgba(0,0,0,0);
 		}
 	}	
 }
@@ -105,7 +113,7 @@
 }
 
 .my-projects__background {
-	height: 150px;
+	height: 140px;
 	overflow: hidden;
 	& img {
 		width: 100%;
@@ -117,3 +125,17 @@
 	height: 40px;
 	
 }
+/*
+.my-projects__button {
+	position: absolute;
+	top: 20px;
+	height: 30px;
+}
+
+.my-projects__button--prew{
+	left: 20px;
+}
+
+.my-projects__button--next{
+	right: 20px;
+}*/

@@ -5,8 +5,7 @@
 <section  class="task task-layer">
 	<div class="task-header">
         <div class="task-title">
-            <!--{{TaskCtrl.task.title}}-->
-			Card description
+			Task description
         </div>
         <div class="close"
         	 ng-click="loginController.hideFunc()">
@@ -19,36 +18,41 @@
 
     <section class='task__wrapper'>
 		<div class="task__title">
-			<p ng-if="!TaskCtrl.isTitleEdit"
-			   ng-click="TaskCtrl.isTitleEdit = true">
-			   {{TaskCtrl.task.title}}
-			</p>
-			<form ng-if="TaskCtrl.isTitleEdit"
-					class="task__title_form"
-					ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
+			<div class="task__title-text" ng-if="!TaskCtrl.isTitleEdit">
+				<p
+			   	   ng-click="TaskCtrl.toEditTitle($event)">
+			   	{{TaskCtrl.task.title}}
+				</p>
+				<div class="edit-mode">
+					<i class="fas fa-edit"></i>
+				</div>
+			</div>
+			<form ng-show="TaskCtrl.isTitleEdit"
+				  class="task__title_form"
+				  ng-class="{'list_list-container_footer list_list-container_footer__form-wrapper__open': list.openAddCard}"
 				  ng-submit="TaskCtrl.editTitle()">
-				<input id="editTaskTitle"
-					   ng-blur="TaskCtrl.onTitleBlur()"
-						type="text" ng-model="TaskCtrl.taskTitle"
+				<input ng-blur="TaskCtrl.onTitleBlur()"
+					   type="text" 
+					   ng-model="TaskCtrl.taskTitle"
 					   value="{{TaskCtrl.taskTitle}}"/>
 			</form>
 		</div>
 
 		<div class='task-content'>
 			<section class="task-content__left-section">
-
+			<div>
 			<div class="task__description">
-				<p class="task__description-title">Task description:</p>
+				<p class="task__description-title">Description:</p>
 				<p ng-if="!TaskCtrl.editDescription"
-				   class="task__description-text">{{TaskCtrl.task.description || "no description yet"}}</p>
-				<textarea ng-if="TaskCtrl.editDescription"
+				   class="task__description-text">{{TaskCtrl.task.description || 'no description yet'}}</p>
+				<textarea ng-show="TaskCtrl.editDescription"
 						  class="textarea textarea--description"
 						  ng-model="TaskCtrl.task.description"
 						  name="description">
 				</textarea>
 				<button ng-if="!TaskCtrl.editDescription"
-					 class="button button--change-description"
-					 ng-click="TaskCtrl.changeDescription()">Change</button>
+					 class="button button--change-cancel"
+					 ng-click="TaskCtrl.changeDescription($event)">Change</button>
 
 				<div class="edit-buttons" ng-if="TaskCtrl.editDescription">
 					<button
@@ -58,81 +62,145 @@
 					 class="button button--change-cancel"
 					 ng-click="TaskCtrl.cancelSavingDescription()">Cancel</button>
 				</div>
+			</div>
+			<div class="task__attachment">
+				<p class="task__attachment-title">Attachments:</p>
+				<span class="link-button link-button--attachment" 
+					  type="file" 
+					  ngf-select="TaskCtrl.uploadFile($file, {addToComment: false})">
+					  <span class="file-add"> </span>add attachment</span>
 
-				<span class="file-add" type="file" ngf-select="TaskCtrl.uploadFile($file, {addToComment: false})"></span>
+				<div class="attachment__list">
+				<div class="attachment__list-item" 
+					 ng-repeat="task in TaskCtrl.taskFiles"
+					  class="file-editor" ng-class="{'load-file': $index === TaskCtrl.loadFileIndex}">
+					<a ng-href="{{task.fileLink}}"
+					   download="task.fileName">{{task.fileName}}</a>
+					<span ng-click="TaskCtrl.deleteFile(task.fileLocation, task.$id, $index)"
+					      class="cross"></span>
+				</div>
+			</div>
+			</div>
+			</div>
+			<div class="add-comment">
+				<textarea class="textarea textarea--add-comment"
+					 contentEditable="true"
+					 ng-model="TaskCtrl.comment"
+						  name="comment"
+						  placeholder="Your comment"
+						  ng-bind-html="TaskCtrl.comment | emoji">
 
-				<div ng-repeat="task in TaskCtrl.taskFiles" class="file-editor">
-					<a ng-href="{{task.fileLink}}" download="task.fileName">{{task.fileName}}</a>
-					<span ng-click="TaskCtrl.deleteFile(task.fileLocation, task.$id)" class="close"></span>
+				</textarea>
+				<span emoji-picker="TaskCtrl.comment"
+					  title="Emoji"
+					  placement="right"
+					  recent-limit="10"
+					  output-format="unicode"
+					  class="emoji-add-comment">
+				</span>
+
+
+				<button class="button button--send"
+						ng-click="TaskCtrl.addComment()">Add comment</button>
+				<span class="file-add file-add--comment" 
+					  type="file"
+					  ngf-select="TaskCtrl.uploadFile($file, {addToComment: true})"></span>
+				<div class="add-comment__attachment-wrapper">
+				<span class="add-comment__attachment" 
+					  ng-repeat="file in TaskCtrl.fileLinks">{{file.fileName}}</span>
 				</div>
 			</div>
 			</section>
 			<section class="task-content__right-section">
 				<div class="task-priority">
-					<div class="priority-label">priority:</div>
-					<table class="priority-priorities">
-						<tr ng-repeat="priority in TaskCtrl.priorities">
-							<td ng-class="TaskCtrl.taskPrioriry(priority)"
-								ng-click="TaskCtrl.setPriority(priority)">BV{{priority}}</td>
-						</tr>
-					</table>
+					<div class="priority-list">
+					<div class="priority-list__title">Priority</div>
+						<div class="priority-list__items">
+						<div ng-repeat="priority in TaskCtrl.priorities"
+							 ng-click="TaskCtrl.setPriority(priority)"
+						     ng-class="TaskCtrl.taskPrioriry(priority)">	
+								 BV{{priority}}
+						</div>
+						</div>
+					</div>
 				</div>
 				<div class="task-lists">
-					<div class="lists-label">is in list:</div>
-					<table class="lists-lists">
-						<tr ng-repeat="list in TaskCtrl.lists">
-							<td
-								ng-if="TaskCtrl.displayList(list.listId)" ng-click="TaskCtrl.moveToList(list.listId)" ng-class="TaskCtrl.taskList(list.listId)">{{list.listName}}</td>
-						</tr>
-					</table>
+					<div class="lists-list">
+						<div class="lists-list__title">List location</div>
+						<div class="lists-list__items">
+						<div ng-repeat="list in TaskCtrl.lists"
+							 ng-if="TaskCtrl.displayList(list.listId)" 
+							 ng-click="TaskCtrl.moveToList(list.listId)"
+						     ng-class="TaskCtrl.taskList(list.listId)">	
+								 {{list.listName}}
+						</div>
+						</div>
+					</div>
 				</div>
-
-				{{console.log(TaskCtrl.executors)}}
-				<user-adding class="task-executors"
-							 all-users="TaskCtrl.projectUsers"
-               				 users="TaskCtrl.executors"
-               				 project="TaskCtrl.project"
-               				 project-id="TaskCtrl.projectId"
-               				 task="TaskCtrl.task"
-               				 task-id="TaskCtrl.taskId">
-  				</user-adding>
-		</section>
+				<div class="executors">
+					<div class="executors-list">
+						<div class="executors-list__title">Executors</div>
+						<user-adding class="task-executors"
+									 all-users="TaskCtrl.projectUsers"
+		               				 users="TaskCtrl.executors"
+		               				 project="TaskCtrl.project"
+		               				 project-id="TaskCtrl.projectId"
+		               				 task="TaskCtrl.task"
+		               				 task-id="TaskCtrl.taskId">
+		  				</user-adding>
+	  			    </div>
+	  			</div>
+			</section>
 		</div>
 	</section>
 	<section class="comments-section">
-	<div class="add-comment">
-		<textarea class="textarea textarea--add-comment" ng-model="TaskCtrl.comment" name="comment" placeholder="Your comment">
-		</textarea>
-	<button class="button button--send" ng-click="TaskCtrl.addComment()">Add comment</button>
-	<span class="file-add" type="file"
-			ngf-select="TaskCtrl.uploadFile($file, {addToComment: true})"></span>
-		<span ng-repeat="file in TaskCtrl.fileLinks">{{file.fileName}}</span>
-	</div>
-
-	<div ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" class="comments user-comment">
-		<img ng-src="{{TaskCtrl.getUser(comment.userId).avatar}}" alt="" class="comment-avatar">
+	<div ng-if="TaskCtrl.getUser(comment.userId).avatar" ng-repeat="comment in TaskCtrl.comments | orderBy:'$index':true" 
+		 class="comments user-comment">
+		<img ng-src="{{TaskCtrl.getUser(comment.userId).avatar}}" 
+			 alt="" 
+			 class="comment-avatar">
 		<div class="comment-body">
 			<div class="comment-in">
 				<div class="user-info">
-					<span class="user-name">by {{TaskCtrl.getUser(comment.userId).username}}</span>
-					<span ng-if="comment.date" class="user-name" am-time-ago="comment.date"></span>
+					<span class="user-name">@{{TaskCtrl.getUser(comment.userId).username}}</span>
+					<span ng-if="comment.date" 
+					 	  class="user-date" 
+					 	  am-time-ago="comment.date"></span>
 				</div>
 
-				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  class="comment-text">{{comment.comment}}</span>
+				<span ng-hide="TaskCtrl.editCommentId === comment.$id"
+					  ng-bind-html="comment.comment | emoji" class="comment-text"></span>
 
-				<textarea ng-if="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id" ng-model="TaskCtrl.commentText"></textarea>
+				<textarea class="textarea textarea--comment" ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id"
+						  ng-bind-html="TaskCtrl.commentText | emoji"  ng-model="TaskCtrl.commentText">
+				</textarea>
 
-				<span ng-show="comment.userId === TaskCtrl.userId" ng-click="TaskCtrl.deleteComment(comment.$id)" class="close"></span>
+				<span emoji-picker="TaskCtrl.commentText" class="emoji-edit-comment"
+					  title="Emoji"
+					  placement="right"
+					  recent-limit="10"
+					  output-format="unicode"
+					  ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id">
+				</span>
 
-				<span ng-show="comment.userId === TaskCtrl.userId && !TaskCtrl.editMode &&
-				!(TaskCtrl.editCommentId === comment.$id)" ng-click="TaskCtrl.editComment(comment)" class="edit-comment">edit</span>
-
+				<div class="comment-buttons">
+					<span ng-show="comment.userId === TaskCtrl.userId && !TaskCtrl.editMode &&
+					!(TaskCtrl.editCommentId === comment.$id)" 
+						  ng-click="TaskCtrl.editComment($event,comment)" 
+						  class="edit-comment">edit</span>
+					<span ng-show="comment.userId === TaskCtrl.userId" 
+						  ng-click="TaskCtrl.deleteComment(comment.$id)"
+						  class="edit-comment">delete</span>
+				</div>
 				<span ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id"
-					  ng-click="TaskCtrl.saveEditedComment(comment.$id)" class="edit-comment">save</span>
-
+					  ng-click="TaskCtrl.saveEditedComment(comment.$id)" 
+					  class="button button--send-comment">save</span>
+				<div class="edit-comment__attachment-wrapper">
 				<div ng-repeat="file in comment.files">
-					<a ng-href="{{file.fileLink}}" download="file.fileName">{{file.fileName}}</a>
+					<a ng-href="{{file.fileLink}}" 
+					   download="file.fileName">{{file.fileName}}</a>
 				</div>
+			   </div>
 			</div>
 		</div>
 	</div>

@@ -11,24 +11,35 @@
 	<div ng-if="SprintCtrl.isProjectManager"
 		 class="link-button_project-setting"
 		 ng-click="SprintCtrl.toShowProjectSettings()"></div>
-	<project-settings ng-if="SprintCtrl.showProjectSettings" class="sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
-
+	<project-settings click-outside="SprintCtrl.toHideProjectSettings()" outside-if-not="edit" ng-if="SprintCtrl.showProjectSettings" class="menu sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
+	
 	<div class="lists-container__project-users"
 	ng-if="SprintCtrl.projectLoad">
 		<div class="lists-container__project-users__icons"
 			 ng-repeat="user in SprintCtrl.usersManager"
 			 dnd-type="'user'"
-			 dnd-draggable="user">
+			 dnd-draggable="user"
+			 ng-mousedown="SprintCtrl.mouseLeaveOrDownWindowProfile()"
+			 ng-mouseenter="SprintCtrl.mouseEnterWindowProfileManager(user, $index)"
+			 ng-mouseleave = "SprintCtrl.mouseLeaveOrDownWindowProfile()">
 			<img ng-src="{{user.avatar}}">
 		</div>
 		<div class="lists-container__project-users__icons"
 		ng-repeat="user in SprintCtrl.usersWithoutManager"
 		dnd-type="'user'"
-		dnd-draggable="user">
+		dnd-draggable="user"
+		ng-mousedown="SprintCtrl.mouseLeaveOrDownWindowProfile()"
+		ng-mouseenter="SprintCtrl.mouseEnterWindowProfileUser(user, $index)"
+		ng-mouseleave = "SprintCtrl.mouseLeaveOrDownWindowProfile()">
 			<img ng-src="{{user.avatar}}">
 		</div>
 	</div>
-
+	<window-profile user-info = "SprintCtrl.isShowUser"
+					user-is-show = "SprintCtrl.isShowWind"
+					user-top = "SprintCtrl.isShowTop"
+					user-left = "SprintCtrl.isShowLeft"
+					manager-is-show = "SprintCtrl.isShowManager">
+	</window-profile> 
 	<progress-bar
 			class="lists-container__progress-bar_wrapper">
 	</progress-bar>
@@ -55,7 +66,7 @@
 			 dnd-draggable='list'
 			 class="list"
 			 ng-style="{'transition' : SprintCtrl.transitionProtertyBacklog}"
-			 ng-class="{'backlog' : list.listId == 1}">
+			 ng-class="{'backlog' : list.listId == 1, 'lists-container__wrapper__closed' : list.listId == 3}">
 
 
 
@@ -137,12 +148,14 @@
 								<div class="card_content-card__bottom-executors"
 									 dnd-list dnd-drop="onUserDrop(item, card)"
 									 dnd-allowed-types="['user']">
-									<img ng-repeat="executor in card.executors"
+									<img ng-if="SprintCtrl.getUser(executor)[0].avatar" ng-repeat="executor in SprintCtrl.cardExecutors(card)"
 										 class="card_content-card__bottom-executors__avatar"
 										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
+									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
+									<!--need to disable because of a bug-->
 									<img ng-if="SprintCtrl.isExecutors(card)"
 											class="card_content-card__bottom-executors__avatar"
-											src="{{'../../../plus.png'}}">
+											ng-src="{{'../../../plus.png'}}">
 								</div>
 							</div>
 						</div>
@@ -154,12 +167,14 @@
 
 				<div class="list_list-container_footer">
 
-					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
-						class="list_list-container_footer__top"
-						 ng-click="SprintCtrl.scrollListTop(list.listId +200)"></div>
-					<div ng-class="{'list_list-container_footer__scroll': SprintCtrl.isNeedScroll(list.listId +200)}"
-						 class="list_list-container_footer__down"
-					ng-click="SprintCtrl.scrollListDown(list.listId +200)"></div>
+					<!--<div ng-class="{'list_list-container_footer__scroll': false}"-->
+						<!--class="list_list-container_footer__top"-->
+						 <!--ng-click="SprintCtrl.scrollListTop(list.listId +200)">-->
+						<!--{{ SprintCtrl.isNeedScroll(list.listId +200) }}-->
+					<!--</div>-->
+					<!--<div ng-class="{'list_list-container_footer__scroll': true }"-->
+						 <!--class="list_list-container_footer__down"-->
+					<!--ng-click="SprintCtrl.scrollListDown(list.listId +200)"></div>-->
 					<div class="list_list-container_footer__add-card"
 						 ng-click="SprintCtrl.openAddCardToList(list, list.listId)">
 					</div>

@@ -11,7 +11,7 @@
             ng-src="{{ user.avatar }}">
       <div class="background__executor__delete" ng-click="UserAddingCtrl.deleteUserFromProject(user.$id)"><i class="fas fa-times"></i></div>
     </div>
-      <div ng-if="!UserAddingCtrl.booleanProject" class="background__executor" ng-repeat="user in UserAddingCtrl.users" title="{{UserAddingCtrl.getUser(user.$id).username}}">
+      <div ng-if="!UserAddingCtrl.booleanProject && UserAddingCtrl.getUser(user.$id).avatar" class="background__executor" ng-repeat="user in UserAddingCtrl.users" title="{{UserAddingCtrl.getUser(user.$id).username}}">
 
       <img  class="background__executor__avatar"
             ng-src="{{ UserAddingCtrl.getUser(user.$id).avatar }}">
@@ -20,7 +20,7 @@
 
     <div class="background__executor" ng-click="UserAddingCtrl.showAddUser()">
     <img class="background__executor__avatar background__executor__avatar--add"
-            src="plus.png">
+            ng-src="plus.png">
     </div>
     <div ng-if="UserAddingCtrl.addUserSelect" class="project-settings__search-section">
     <div class="project-setting__search">

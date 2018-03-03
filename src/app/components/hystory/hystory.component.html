@@ -11,7 +11,12 @@
 	        	<thead class="table__head">
 	        		<tr class="table__row">
 	        			<td class="table__cell table__cell--head table__cell--task"></td>
-	        			<td class="table__cell table__cell--head" ng-repeat="sprint in hystoryCtrl.hystory"><p>{{sprint.$id}}</p>
+	        			<td class="table__cell table__cell--head"
+							ng-repeat="sprint in hystoryCtrl.hystory">
+							<p ng-mouseenter="hystoryCtrl.isShowCircle = true"
+							   ng-mouseleave="hystoryCtrl.isShowCircle = false">
+							   {{sprint.$id}}
+							</p>
 	        			<div class="table__cell-data">
 	        				<h3>Srpint #{{sprint.$id}}</h3>
 	        				<div class="full-data" ng-if="sprint.sprintData">
@@ -23,11 +28,14 @@
 		        						<td>to:</td>
 		        						<td class="grey">{{hystoryCtrl.getDate(sprint.sprintData.sprintActualFinish)}}</td>
 		        				</table>
-		        				<div class="digramm-data">
+		        				<div class="digramm-data" >
 									<div class="hystory-diagramm">
 		    							<svg viewBox="0 0 100 100">
-		        							<circle r="25" cx="50" cy="50" class="hystory-diagramm__cirle" style="stroke-dasharray:{{hystoryCtrl.strokeDasharray(hystoryCtrl.getPersantage(sprint.sprintData))}}"/>
+		        							<circle r="25" cx="50" cy="50" class="hystory-diagramm__cirle"
+		        							ng-class="{'hystory-diagramm__cirle-active': !hystoryCtrl.isShowCircle }"
+											ng-style="{'stroke-dasharray': hystoryCtrl.createPromise(sprint.sprintData) }" />
 		    							</svg>
+
 		    							<p>{{hystoryCtrl.getPersantage(sprint.sprintData)}}%</p>
 									</div>
 									<div class="hystory-completion">

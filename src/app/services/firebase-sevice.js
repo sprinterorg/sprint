@@ -58,13 +58,16 @@ class FireService {
     }
 
     deleteFile(file, projectId, taskId, $id){
-       console.log($id);
         let desertRef = this.storageRef.child(file);
-        desertRef.delete().then(() => {
-            this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles').child($id).remove();
-            console.log('File deleted successfully');
-        }).catch(error => {
-            console.log(error);
+        return new Promise((resolve, reject )=> {
+            desertRef.delete().then(() => {
+                this.rootRef.child('projects/'+projectId+'/cards/'+taskId + '/descfiles').child($id).remove();
+                console.log('File deleted successfully');
+                resolve(true)
+            }).catch(error => {
+                console.log(error);
+                reject(false);
+            });
         });
     }
 
@@ -204,6 +207,7 @@ class FireService {
 			self.rootRef.child('users').update({
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/title']: data.title,
             [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/priority']: data.priority,
+            [managerId+'/my-projects/'+projectId+'/myTasks/'+rootRef.key+'/createdAt']: data.createdAt
     		});
             return rootRef;
 		});
@@ -273,15 +277,23 @@ class FireService {
        });
     }
 
-    updateTitle(projectId, taskId, newTitle) {
+    updateTitle(projectId, taskId, newTitle, users) {
         return this.rootRef.child('projects/'+projectId+'/cards/'+taskId).update({
             title: newTitle
         });
+
+        let temp = {
+            ['projects/'+projectId+'/cards/'+taskId+'/title']: newTitle
+        };
+        users.map( item => {
+            temp['users/'+item+'/my-projects/'+projectId+'/getMyProjects/'+taskId+'/title'] = newTitle;
+        });
+        this.rootRef.update(temp);
     }
 
     updatePriority(projectId, taskId, newPriority, users) {
         let temp = {
-            ['projects/'+projectId+'/cards/'+taskId+'/priority']: newPriority,
+            ['projects/'+projectId+'/cards/'+taskId+'/priority']: newPriority
         };
         users.map( item => {
             temp['users/'+item+'/my-projects/'+projectId+'/getMyProjects/'+taskId+'/priority'] = newPriority;
@@ -289,11 +301,20 @@ class FireService {
         this.rootRef.update(temp);
     }
 
-    addToHistory(projectId, sprintNum, taskId, taskData, sprintData) {
+    addToHistory(projectId, sprintNum, taskId, taskData) {
         this.rootRef.child('projects/'+projectId+'/history/'+sprintNum).update({
             ['tasks/'+taskId] : taskData
         })
+        
+
     }
+
+    updateSprintStart(projectId, sprintNum, taskId) {
+        this.rootRef.child('projects/'+projectId+'/cards').update({
+            [taskId+'/sprintStart'] : sprintNum
+        })
+    }
+
     removeFromHistory(projectId, sprintNum, taskId) {
         this.rootRef.child('projects/'+projectId+'/history/'+sprintNum+'/tasks').child(taskId).remove();
     }

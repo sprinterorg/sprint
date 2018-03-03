@@ -109,6 +109,11 @@
 		margin-left: 30px;
 		margin-top: 0px;
 		padding-top: 100px;
+		&__closed{
+			.card {
+				background: #e0e0e0 !important;
+			}
+		}
 		.list {
 			position: relative;
 			flex-shrink: 0;
@@ -228,7 +233,7 @@
 				}
 				&_footer{
 					width: 100%;
-					min-height: 36px;
+					min-height: 46px;
 					display: flex;
 					flex-direction: row;
 					justify-content: center;
@@ -236,6 +241,7 @@
 					padding-top: 10px;
 					&__scroll{
 						cursor: pointer;
+						background: red !important;
 					}
 					&__down{
 						width: 34px;
@@ -258,6 +264,7 @@
 						}
 					}
 					&__add-card{
+						margin: 0 10px;
 						position: absolute;
 						right: 0;
 						//z-index: 10;
@@ -268,6 +275,7 @@
 						}
 					}
 					&__form-wrapper {
+
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -279,6 +287,7 @@
 						transition: all 0.5s;
 						right: 0;
 						transform-origin: right;
+						margin-top: 20px;
 						input{
 							width: 0;
 							opacity: 0;
@@ -286,6 +295,7 @@
 							border: none;
 							border-radius: 3px 0 0 3px;
 							padding: 0;
+							margin-top: 20px;
 							font-size: 16px;
 							margin-bottom: 2px;
 							transition: all 0.7s;
@@ -296,8 +306,10 @@
 							z-index: 5;
 							transition: all 0.5s;
 							opacity: 1;
+							margin-top: 20px;
 							input{
 								width: 100%;
+								margin-top: 20px;
 								opacity: 1;
 								padding: 0 42px 0 10px;
 								box-shadow: 2px 6px 5px rgba(0,0,0,0.2);
@@ -384,8 +396,29 @@
 	min-height: 98px;
 	max-height: 61vh;
 	padding: 0;
-	overflow-y: hidden;
+	//overflow-y: hidden;
 	overflow-x: hidden;
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+		border-radius: 3px;
+		//background-color: rgba(255,255,255, 1);
+		background: #fff !important;
+	}
+
+	&::-webkit-scrollbar
+	{
+		width: 3px;
+		//background-color: rgba(255,255,255, 1);
+		background: #fff !important;
+	}
+
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 3px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: rgba(187,187,187, 0.9);
+	}
 	.card {
 		position: relative;
 		background: #ffffff;
@@ -481,6 +514,13 @@
 					height: 33px;
 					min-width: 33px;
 					align-items: center;
+
+					&>p{
+						font-size: 25px;
+						margin: 10px -3px 0 -3px;
+						padding: 0;
+						color: #a9a9a9;
+					}
 
 					&>.dndPlaceholder{
 						display: block;

@@ -5,13 +5,13 @@
     </div>
 </modal-window>
 
-<my-projects class="search-projects" ng-if="appController.showSearch && appController._supportService.userId" hide-func="appController.hideSearch"></my-projects>
+<my-projects click-outside="appController.toHideSearch()" class="search-projects menu" ng-if="appController.showSearch && appController._supportService.userId" hide-func="appController.hideSearch"></my-projects>
 
 <div ng-show="appController.isLoaded" class="page-content">
 <header  class="header">
 <div class="header__wrapper">
 	<div class="header__search" >
-		<div class="search-icon" ng-click="appController.toShowSearch()" ng-if="appController._supportService.userId">
+		<div class="search-icon menu" ng-click="appController.toShowSearch()" ng-if="appController._supportService.userId">
 			<i class="flaticon-two-columns-layout"></i>
 		</div>
 	</div>

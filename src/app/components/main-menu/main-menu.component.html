@@ -3,8 +3,8 @@
 	<div class="main-menu__avatar" ng-click="MainMenuCtrl.toShowMenu()">
 		<img ng-src="{{MainMenuCtrl.user.avatar}}">
 	</div>
-	<div class="main-menu__menu" ng-if="MainMenuCtrl.showMenu">
-		<div class="main-manu__menu-close" ng-click="MainMenuCtrl.toShowMenu()">+</div>
+	<div class="main-menu__menu menu" ng-if="MainMenuCtrl.showMenu" click-outside="MainMenuCtrl.toHideMenu()">
+		<div class="main-manu__menu-close" ng-click="MainMenuCtrl.toHideMenu()">+</div>
 		<p>{{MainMenuCtrl.user.username}}</p>
 		<ul>
 			<li ng-click="MainMenuCtrl.goToProfile()">Profile</li>
