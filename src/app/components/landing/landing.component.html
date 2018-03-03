@@ -1,6 +1,6 @@
 <section class="about">
 	<section class="about__video">
-		<video autoplay loop><source src="1280_720.mp4"></video>
+		<video autoplay loop><source src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/1280_720.mp4?alt=media&token=0efcc0bb-d17f-4cfb-9ccd-75c36882af20"></video>
 		<div class="about__video-overlay"></div>
 	</section>
 	<section class="about__main">
@@ -23,7 +23,7 @@
 			</div>
 			<div class="animated-clock">
 				<div class="img-overlay">
-					<img ng-class="{'img-appearing': LandingCtrl.animateHand}" src="stopwatch.png">
+					<img ng-class="{'img-appearing': LandingCtrl.animateHand}" ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/stopwatch.png?alt=media&token=17ecdfda-0d25-40a0-a807-6e34a1fa0d34">
 				</div>
 				<p class="timer" ng-class="{'timer-animation': LandingCtrl.animateTime}"></p>
 			</div>
@@ -31,7 +31,20 @@
 		</div>
 		</section>
 		<section class="content">
-			<section class="content__project">.</section>
+			<section class="content__project">
+				<div class="content__img content__img--lists-shadow">
+					<img scr="list_shadow.png">
+				</div>
+				<div class="content__img content__img--lists">
+					<img scr="list_shadow.png">
+				</div>
+				<div class="content__img content__img--task-shadow">
+					<img scr="task_shadow.png">
+				</div>
+				<div class="content__img content__img--tasks">
+					<img scr="tasks.png">
+				</div>
+			</section>
 		</section>
 	</section>
 </section>
