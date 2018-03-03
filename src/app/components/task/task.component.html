@@ -83,12 +83,24 @@
 			</div>
 			</div>
 			<div class="add-comment">
-				<textarea class="textarea textarea--add-comment" 
-						  ng-model="TaskCtrl.comment" 
-						  name="comment" 
-						  placeholder="Your comment">
+				<textarea class="textarea textarea--add-comment"
+					 contentEditable="true"
+					 ng-model="TaskCtrl.comment"
+						  name="comment"
+						  placeholder="Your comment"
+						  ng-bind-html="TaskCtrl.comment | emoji">
+
 				</textarea>
-				<button class="button button--send" 
+				<span emoji-picker="TaskCtrl.comment"
+					  title="Emoji"
+					  placement="right"
+					  recent-limit="10"
+					  output-format="unicode"
+					  class="emoji-add-comment">
+				</span>
+
+
+				<button class="button button--send"
 						ng-click="TaskCtrl.addComment()">Add comment</button>
 				<span class="file-add file-add--comment" 
 					  type="file"
@@ -156,11 +168,21 @@
 					 	  am-time-ago="comment.date"></span>
 				</div>
 
-				<span ng-hide="TaskCtrl.editCommentId === comment.$id"  
-				   	  class="comment-text">{{comment.comment}}</span>
+				<span ng-hide="TaskCtrl.editCommentId === comment.$id"
+					  ng-bind-html="comment.comment | emoji" class="comment-text"></span>
 
-				<textarea class="textarea textarea--comment" ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id" 
-						  ng-model="TaskCtrl.commentText"></textarea>
+				<textarea class="textarea textarea--comment" ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id"
+						  ng-bind-html="TaskCtrl.commentText | emoji"  ng-model="TaskCtrl.commentText">
+				</textarea>
+
+				<span emoji-picker="TaskCtrl.commentText" class="emoji-edit-comment"
+					  title="Emoji"
+					  placement="right"
+					  recent-limit="10"
+					  output-format="unicode"
+					  ng-show="TaskCtrl.editMode && TaskCtrl.editCommentId === comment.$id">
+				</span>
+
 				<div class="comment-buttons">
 					<span ng-show="comment.userId === TaskCtrl.userId && !TaskCtrl.editMode &&
 					!(TaskCtrl.editCommentId === comment.$id)" 

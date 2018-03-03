@@ -50,8 +50,9 @@ export default class sprintController {
                     list_id: card.list_id,
                     id: card.id,
                     priority: card.priority,
-                    sprintStart: this.currentSprint.sprintNumber
+                    sprintStart: Number(this.currentSprint.sprintNumber)
                 };
+                this._fireBase.updateSprintStart(this.projectId, Number(this.currentSprint.sprintNumber), card.$id)
                 this._fireBase.addToHistory(this.projectId, this.currentSprint.sprintNumber, card.$id, cardData);
             }
             if (list === 1) {
