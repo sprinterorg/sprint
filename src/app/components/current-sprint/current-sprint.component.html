@@ -18,16 +18,28 @@
 		<div class="lists-container__project-users__icons"
 			 ng-repeat="user in SprintCtrl.usersManager"
 			 dnd-type="'user'"
-			 dnd-draggable="user">
+			 dnd-draggable="user"
+			 ng-mousedown="SprintCtrl.mouseLeaveOrDownWindowProfile()"
+			 ng-mouseenter="SprintCtrl.mouseEnterWindowProfileManager(user, $index)"
+			 ng-mouseleave = "SprintCtrl.mouseLeaveOrDownWindowProfile()">
 			<img ng-src="{{user.avatar}}">
 		</div>
 		<div class="lists-container__project-users__icons"
 		ng-repeat="user in SprintCtrl.usersWithoutManager"
 		dnd-type="'user'"
-		dnd-draggable="user">
+		dnd-draggable="user"
+		ng-mousedown="SprintCtrl.mouseLeaveOrDownWindowProfile()"
+		ng-mouseenter="SprintCtrl.mouseEnterWindowProfileUser(user, $index)"
+		ng-mouseleave = "SprintCtrl.mouseLeaveOrDownWindowProfile()">
 			<img ng-src="{{user.avatar}}">
 		</div>
 	</div>
+	<window-profile user-info = "SprintCtrl.isShowUser"
+					user-is-show = "SprintCtrl.isShowWind"
+					user-top = "SprintCtrl.isShowTop"
+					user-left = "SprintCtrl.isShowLeft"
+					manager-is-show = "SprintCtrl.isShowManager">
+	</window-profile> 
 	<progress-bar
 			class="lists-container__progress-bar_wrapper">
 	</progress-bar>
@@ -140,6 +152,7 @@
 										 class="card_content-card__bottom-executors__avatar"
 										 ng-src="{{ SprintCtrl.getUser(executor)[0].avatar }}">
 									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
+									<!--need to disable because of a bug-->
 									<img ng-if="SprintCtrl.isExecutors(card)"
 											class="card_content-card__bottom-executors__avatar"
 											ng-src="{{'../../../plus.png'}}">

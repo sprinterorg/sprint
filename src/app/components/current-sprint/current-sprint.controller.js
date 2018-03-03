@@ -1,6 +1,6 @@
 export default class sprintController {
     /*@ngInject*/
-    constructor($element, fireBase, $stateParams, $scope, supportService) {
+    constructor($element, fireBase, $stateParams, $scope, supportService, $timeout) {
         this._scope = $scope;
         this.element = $element;
 
@@ -33,6 +33,15 @@ export default class sprintController {
             3: 'blue'
         }
 
+        this._$timeout = $timeout;
+        this.isShowWind = false;
+        this.isShowUser = null;
+        this.isShowIndex = null;
+        this.isShowTop = null;
+        this.isShowLeft = null;
+        this.nextState = false;
+        this.isShowManager = false;
+
         $scope.onDrop = (list, card)=>{
             this._fireBase.moveToList(card.$id, Number(list) || 1, this.projectId);
             if(!card.sprintStart && list!==1){
@@ -41,8 +50,9 @@ export default class sprintController {
                     list_id: card.list_id,
                     id: card.id,
                     priority: card.priority,
-                    sprintStart: this.currentSprint.sprintNumber
+                    sprintStart: Number(this.currentSprint.sprintNumber)
                 };
+                this._fireBase.updateSprintStart(this.projectId, Number(this.currentSprint.sprintNumber), card.$id)
                 this._fireBase.addToHistory(this.projectId, this.currentSprint.sprintNumber, card.$id, cardData);
             }
             if (list === 1) {
@@ -364,6 +374,52 @@ export default class sprintController {
     scrollListDown(elId) {
         let el = document.getElementById(elId)
         el.scrollBy(0,98);
+    }
+
+    mouseEnterWindowProfileManager(user){
+        let self = this;
+        this.isShowIndex = 0;
+        this.isShowManager = true;
+        let el = document.getElementsByClassName('lists-container__project-users__icons');
+        let heightElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientHeight;
+        let widthElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientWidth;        
+        let pointInitialHeight = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].offsetTop;
+        let pointInitialLeft = document.getElementsByClassName("lists-container__project-users")[0].offsetLeft;
+        this.isShowTop = (-25+heightElement+pointInitialHeight)+"px";
+        this.isShowLeft = (-270+pointInitialLeft)+"px";
+        this.isShowUser = user;
+        this.nextState = true;
+        this._$timeout(()=>{
+            if (self.nextState !== false){
+                self.isShowWind = true;                
+            }
+        }, 1000);
+    }
+
+    mouseEnterWindowProfileUser(user, index){ 
+        let self = this;
+        this.isShowIndex = index+1;
+        let el = document.getElementsByClassName('lists-container__project-users__icons');
+        let heightElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientHeight;
+        let widthElement = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].clientWidth;
+        let pointInitialHeight = document.getElementsByClassName('lists-container__project-users__icons')[this.isShowIndex].offsetTop;
+        let pointInitialLeft = document.getElementsByClassName("lists-container__project-users")[0].offsetLeft;
+        this.isShowTop = (-25+heightElement+pointInitialHeight)+"px";
+        this.isShowLeft = (-270+pointInitialLeft)+"px";
+        this.isShowUser = user;
+        this.nextState = true;
+        this._$timeout(()=>{
+            if (self.nextState !== false){
+                self.isShowWind = true;                
+            }
+        }, 1000);
+
+    }
+
+    mouseLeaveOrDownWindowProfile(user, index){ 
+        this.isShowWind = false;
+        this.nextState = false;
+        this.isShowManager = false;
     }
 
 

@@ -31,8 +31,10 @@ import '../font/flaticon.css';
 import './components/progress-bar/progress-bar.component.scss';
 import './components/user-adding/user-adding.component.scss';
 import 'angular-emoji-picker/dist/css/emoji-picker.css';
-import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-emoji-filter-hd/dist/emoji.scss';
+import './components/window-profile/window-profile.component.scss';
+
+
 
 angular.module('app', [
     angFire,

@@ -16,7 +16,6 @@
 
 .project-settings__project-name {
 	height: 60px;
-
 }
 
 .project-settings__project-name,
@@ -30,7 +29,6 @@
 	height: 40px;
 	padding-bottom: 30px;
 	border-bottom: 1px solid #D1D1D1;
-	margin-bottom: 10px;
 }
 
 .project-settings__button.edit {
@@ -61,7 +59,6 @@
 
 
 .project-settings__text {
-
 	&--duration,
 	&--users {
 		margin-top: 25px;
@@ -92,7 +89,7 @@
 		font-family: 'Open Sans', sans-serif;
 		margin-left: -3px;
 		padding-left: 7px;
-		width: 35px;
+		width: 60px;
 		height: 25px;
 		font-size: 2rem;
 		text-transform: lowercase;
@@ -107,6 +104,7 @@
 
 .project-settings__project-background {
 	position: relative;
+	margin-top: 20px;
 }
 
 .project-settings__background-text {
@@ -127,14 +125,20 @@
 	-webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
 	-moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
 	box-shadow: -2px 6px 10px -1px rgba(0,0,0,.3);
+	&:hover {
+		border-color: #ffffff;
+		-webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.6);
+		-moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.6);
+		box-shadow: -2px 6px 10px -1px rgba(0,0,0,.6);
+	}
 }
 
 .background-fullscreen__item--current {
 	transform: scale(1.2);
 	border-color: #ffffff;
-	-webkit-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.6);
-	-moz-box-shadow: -2px 6px 10px -1px rgba(0,0,0,.6);
-	box-shadow: -2px 6px 10px -1px rgba(0,0,0,.6);
+	-webkit-box-shadow: -2px 6px 14px -1px rgba(0,0,0,.6);
+	-moz-box-shadow: -2px 6px 14px -1px rgba(0,0,0,.6);
+	box-shadow: -2px 6px 14px -1px rgba(0,0,0,.6);
 }
 
 .background-item {
@@ -177,6 +181,7 @@
 	text-transform: lowercase;
 	border: 2px solid #000000;
 	border-radius: 5px;
+	transition: color .2s, background .2s;
 	&:hover {
 		text-decoration: none;
 	}
@@ -202,17 +207,6 @@
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .project-settings__close {
 	display: none;
 	position: absolute;
@@ -236,7 +230,7 @@
 	z-index: 35;
 	& .project-settings {
 		box-sizing: border-box;
-		padding: 20px 20px 35px 20px;
+		padding: 20px 20px 20px 20px;
 		z-index: 49;
 		position: absolute;
 		top: 0px;
@@ -250,19 +244,12 @@
 		display: block;
 	}
 	.project-settings__project-name,
-.project-settings__project-duration {
+	.project-settings__project-duration {
 	position: relative;
-}
-
-.project-settings__project-name {
-	border-bottom: 1px solid #D1D1D1;
-	height: 60px;
-
 }
 
 .project-settings__project-duration {
 	height: 55px;
-	margin-bottom: 25px;
 }
 
 .project-settings__button.edit {
@@ -290,7 +277,6 @@
 	&--duration,
 	&--users{
 		margin-top: 20px;
-		margin-bottom: 10px;
 		display: inline-block;
 		padding: 0 5px 0 5px;
 		font-size: 1.5rem;
@@ -315,7 +301,7 @@
 		font-family: 'Open Sans', sans-serif;
 		margin-left: -3px;
 		padding-left: 7px;
-		width: 35px;
+		width: 60px;
 		height: 25px;
 		font-size: 1.5rem;
 		text-transform: lowercase;
@@ -399,6 +385,10 @@
 	
 	.project-settings__wrapper {
 		border: none;
+	}
+
+	.project-settings__project-name {
+		border-bottom: 1px solid #D1D1D1;
 	}
 
 	.project-settings__project-name,

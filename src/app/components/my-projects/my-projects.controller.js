@@ -25,4 +25,20 @@ export default class myProjectsComponent{
         this.projectToShow =  projectId;
         this.showModalWindow = true;
     }
+/*
+    prew($event) {
+        $event.stopPropagation();
+        console.log($event.target.parentNode)
+    }
+
+    next($event) {
+        $event.stopPropagation();
+        console.log($event.target.parentNode.offsetWidth)
+        console.log(window.getComputedStyle($event.target.parentNode.querySelector('.card-list__wrapper-profile')).left)
+        console.log($event.target.parentNode.querySelector('.card--profile:last-child').getBoundingClientRect().right)
+    }
+
+    showButton(item) {
+        console.log(item)
+    }*/
 }

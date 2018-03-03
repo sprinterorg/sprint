@@ -301,11 +301,20 @@ class FireService {
         this.rootRef.update(temp);
     }
 
-    addToHistory(projectId, sprintNum, taskId, taskData, sprintData) {
+    addToHistory(projectId, sprintNum, taskId, taskData) {
         this.rootRef.child('projects/'+projectId+'/history/'+sprintNum).update({
             ['tasks/'+taskId] : taskData
         })
+        
+
     }
+
+    updateSprintStart(projectId, sprintNum, taskId) {
+        this.rootRef.child('projects/'+projectId+'/cards').update({
+            [taskId+'/sprintStart'] : sprintNum
+        })
+    }
+
     removeFromHistory(projectId, sprintNum, taskId) {
         this.rootRef.child('projects/'+projectId+'/history/'+sprintNum+'/tasks').child(taskId).remove();
     }
