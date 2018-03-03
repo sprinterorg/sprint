@@ -9,7 +9,7 @@ import projectsComponent from '../components/projects/projects.component';
 import progressBarComponent from '../components/progress-bar/progress-bar.component';
 import userAddingComponent from '../components/user-adding/user-adding.component';
 import sprintHeaderComponent from '../components/current-sprint/sprint-header/sprint-header.component';
-
+import confirmationComponent from '../components/confirmation-form/confirmation.component';
 
 const ComponentsModule = angular.module('app-components',[])
     .component('myProjects', myProjectsComponent)
@@ -22,6 +22,7 @@ const ComponentsModule = angular.module('app-components',[])
     .component('projects', projectsComponent)
     .component('progressBar', progressBarComponent)
     .component('sprintHeader', sprintHeaderComponent)
-    .component('userAdding', userAddingComponent);
+    .component('userAdding', userAddingComponent)
+    .component('confirmationForm',confirmationComponent);
 
 export default ComponentsModule;

@@ -37,7 +37,6 @@ export default class projectsController {
     }
 
     validateDuration(){
-        console.log(this.duration);
         if(this.duration === undefined){
             this.duration = 0;
             this.durationIsValid = true;

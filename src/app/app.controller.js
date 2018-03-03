@@ -1,6 +1,6 @@
 export default class appController {
     /*@ngInject*/
-    constructor($location,  supportService, $scope, $rootScope, $state, spinnerService, fireBase) {
+    constructor($location, supportService, $scope, $rootScope, $state, spinnerService, fireBase) {
         this._supportService = supportService;
         this._fireBase = fireBase;
         this._spinnerService = spinnerService;
@@ -22,8 +22,6 @@ export default class appController {
         
         const self = this;
         this._scope.$on('createProjectEvent', function (event, data) {
-          console.log(data);
-          console.log(event); // Данные, которые нам прислали
           self.toShowModalWindow("projects");
         });
 
@@ -50,8 +48,9 @@ export default class appController {
     toHideModalWindow(booleanReload) {
         this._spinnerService.deactivate();
         this.showModalWindow = false;
-        if(booleanReload)
+        if(booleanReload){
         	this._$rootScope.$apply();
+        }
     }
 
     toShowSearch() {
@@ -60,5 +59,13 @@ export default class appController {
 
     toHideSearch() {
         this.showSearch = false;
+    }
+
+    onProjectDeleteConfirm(){
+        this._$rootScope.$broadcast('confirmProjectDelete');
+    }
+
+    onProjectDeleteCancel(){
+        this._$rootScope.$broadcast('hideProjectDelete');
     }
 }

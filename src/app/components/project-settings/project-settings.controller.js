@@ -1,6 +1,7 @@
 export default class projectSettingsController {
     /*@ngInject*/
-    constructor(fireBase, supportService, $stateParams, $state) {
+    constructor(fireBase, supportService, $stateParams, $state, $rootScope, $scope) {
+        this._$rootScope = $rootScope;
 		this.userId = supportService.getUserId();
         this.projectId = this.projectHash || $stateParams.project_id;
         this._fireBase = fireBase;
@@ -13,6 +14,11 @@ export default class projectSettingsController {
         this.backgroundEdit = false;
         this.backgrounds = supportService.getBackgrounds();
         this._$state = $state;
+
+        $scope.$on('confirmProjectDelete', ()=> {
+            this.deleteProject();
+            this._$rootScope.$broadcast('hideProjectDelete');
+        });
     }
 
     updateProject() {
@@ -25,6 +31,10 @@ export default class projectSettingsController {
         });
     }
 	
+    showDeleteConfirmation(){
+        this._$rootScope.$broadcast('showProjectDeleteConfirmation','');
+    }
+
     deleteProject() {
         let ids = [];
         this.projectUsers.map( user => ids.push(user.$id));

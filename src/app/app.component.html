@@ -5,6 +5,8 @@
     </div>
 </modal-window>
 
+<confirmation-form form-name="Delete project" form-text="Are you shure?" on-confirm="appController.onProjectDeleteConfirm" on-cancel="appController.onProjectDeleteCancel"></confirmation-form>
+
 <my-projects click-outside="appController.toHideSearch()" class="search-projects menu" ng-if="appController.showSearch && appController._supportService.userId" hide-func="appController.hideSearch"></my-projects>
 
 <div ng-show="appController.isLoaded" class="page-content">
