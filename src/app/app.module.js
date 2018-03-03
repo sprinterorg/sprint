@@ -7,6 +7,9 @@ import dndLists from 'angular-drag-and-drop-lists';
 import fileUpload from 'ng-file-upload';
 import timeAgo from 'angular-moment';
 
+import 'angular-sanitize'
+import 'angular-emoji-picker/dist/js/emoji-picker.js'
+import 'angular-emoji-filter-hd';
 import ComponentsModule from './modules/components';
 import ServicesModule from './modules/services';
 import '@iamadamjowett/angular-click-outside';
@@ -27,7 +30,9 @@ import './components/hystory/hystory.component.scss';
 import '../font/flaticon.css';
 import './components/progress-bar/progress-bar.component.scss';
 import './components/user-adding/user-adding.component.scss';
-
+import 'angular-emoji-picker/dist/css/emoji-picker.css';
+import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
+import 'angular-emoji-filter-hd/dist/emoji.scss';
 
 angular.module('app', [
     angFire,
@@ -36,6 +41,8 @@ angular.module('app', [
     fileUpload,
     timeAgo,
     'angular-click-outside',
+    'vkEmojiPicker',
+    'dbaq.emoji',
     ComponentsModule.name,
     ServicesModule.name
 
