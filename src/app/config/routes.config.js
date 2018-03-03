@@ -28,6 +28,7 @@ import landingTemplate from '../components/landing/landing.component.html';
 import hystoryCtrl from '../components/hystory/hystory.controller';
 import hystoryTemplate from '../components/hystory/hystory.component.html';
 
+
 export default /*@ngInject*/ function($locationProvider, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
