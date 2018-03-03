@@ -11,7 +11,7 @@
     "angular-animate": "1.5.7",
     "angular-drag-and-drop-lists": "^2.1.0",
     "angular-emoji-filter-hd": "https://github.com/sprinterorg/angular-emoji-filter-hd",
-    "angular-emoji-picker": "^0.2.0",
+    "angular-emoji-picker": "git@github.com:sprinterorg/angular-emoji-picker.git",
     "angular-mocks": "1.5.7",
     "angular-moment": "^1.2.0",
     "angular-sanitize": "^1.6.9",
