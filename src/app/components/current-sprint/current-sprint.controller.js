@@ -250,7 +250,7 @@ export default class sprintController {
 
 
     showFullCard(card){
-        // console.log(card, this.cards);
+        // console.log(card, this.project);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -358,7 +358,14 @@ export default class sprintController {
     }
 
     isExecutors(card) {
-        if ('executors' in card) return false;
+        for (let key in card.executors) {
+            if (!(key in this.project.users)){
+                delete card.executors[key];
+            }
+        }
+        if ('executors' in card && Object.keys(card.executors).length) {
+            return false;
+        }
         else return true;
     }
 
