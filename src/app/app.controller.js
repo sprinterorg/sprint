@@ -16,13 +16,22 @@ export default class appController {
         this.mode = 'logIn';
         this.isLoaded = false;
 
+        this.showProjectDeleteComfirmation = false;
+        this.showCloseSprintConfirmation = false;
+
         this._$rootScope.$on('hideApp', () => {
             this.isLoaded = false;
         });
-        
-        const self = this;
-        this._scope.$on('createProjectEvent', function (event, data) {
-          self.toShowModalWindow("projects");
+
+        this._scope.$on('showProjectDeleteConfirmation', (event, data)=>{
+            this.toShowProjectDeleteComfirmation();
+        });
+        this._scope.$on('showCloseSprintConfirmation', (event, data)=>{
+            this.toShowCloseSprintConfirmition();
+        });
+
+        this._scope.$on('createProjectEvent', function(event, data){
+            this.toShowModalWindow("projects");
         });
 
         if (!supportService.userId) {
@@ -61,11 +70,24 @@ export default class appController {
         this.showSearch = false;
     }
 
+    toShowProjectDeleteComfirmation(){
+        this.showProjectDeleteComfirmation = !this.showProjectDeleteComfirmation;
+    }
+    toHideProjectDeleteComfirmation(){
+        this.showProjectDeleteComfirmation = false;
+    }
+    toShowCloseSprintConfirmition(){
+        this.showCloseSprintConfirmation = !this.showCloseSprintConfirmation;
+    }
+    toHideCloseSprintConfirmition(){
+        this.showCloseSprintConfirmation = false;
+    }
+
     onProjectDeleteConfirm(){
         this._$rootScope.$broadcast('confirmProjectDelete');
     }
 
-    onProjectDeleteCancel(){
-        this._$rootScope.$broadcast('hideProjectDelete');
+    onSprintCloseConfirm(){
+        this._$rootScope.$broadcast('confirmSprintClose');
     }
 }

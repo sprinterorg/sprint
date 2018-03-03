@@ -16,8 +16,12 @@ export default class projectSettingsController {
         this._$state = $state;
 
         $scope.$on('confirmProjectDelete', ()=> {
+            this._$rootScope.$broadcast('showProjectDeleteConfirmation');
             this.deleteProject();
-            this._$rootScope.$broadcast('hideProjectDelete');
+        });
+        $scope.$on('confirmSprintClose', ()=> {
+            this._$rootScope.$broadcast('showCloseSprintConfirmation');
+            this.closeSprint();
         });
     }
 
@@ -31,8 +35,8 @@ export default class projectSettingsController {
         });
     }
 	
-    showDeleteConfirmation(){
-        this._$rootScope.$broadcast('showProjectDeleteConfirmation','');
+    showProjectDeleteConfirmation(){
+        this._$rootScope.$broadcast('showProjectDeleteConfirmation');
     }
 
     deleteProject() {
@@ -76,6 +80,10 @@ export default class projectSettingsController {
         this.updateProject();
     }
 
+
+    showCloseSprintConfirmation(){
+        this._$rootScope.$broadcast('showCloseSprintConfirmation');
+    }
     closeSprint() {
         let usersOfClosedTasks = [this.project.managerId];
         let closedTasks = [];

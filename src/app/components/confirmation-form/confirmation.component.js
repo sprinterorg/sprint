@@ -7,7 +7,7 @@ let confirmationComponent = {
     	formName:"@",
     	formText:"@",
     	onConfirm:"<",
-    	onCancel:"<"
+    	hideFunc:"<"
     },
     template,
     controller,

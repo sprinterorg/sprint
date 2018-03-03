@@ -16,7 +16,7 @@ export default class profileController {
     }
 
     emit(){
-        this.scope.$emit('createProjectEvent','');
+        this.scope.$emit('createProjectEvent');
     }
 
     updateUser() {
