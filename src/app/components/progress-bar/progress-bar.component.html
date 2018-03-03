@@ -1,10 +1,12 @@
 <div class="progress-bar__wrapper">
 	<div class="progress-bar__wrapper-wrapper">
-		<p class="progress-bar__date progress-bar__date-start">
+		<p class="progress-bar__date progress-bar__date-start"
+		ng-class="{'progress-bar__date progress-bar__date-start--zero' : ProgressBarCtrl.project.duration == 0 }">
 			{{ ProgressBarCtrl.startDate}}
 		</p>
 		{{ ProgressBarCtrl.runProgressBar()}}
-		<div    class="progress-bar">
+		<div    class="progress-bar"
+		ng-if="ProgressBarCtrl.project.duration">
 			<div    id="progress-bar-container">
 				<div    class="progress-bar-child progress"></div>
 				<div    class="progress-bar-child shrinker timelapse"></div>
@@ -13,7 +15,8 @@
 				</div>
 			</div>
 		</div>
-		<p class="progress-bar__date progress-bar__date-finish">
+		<p ng-if="ProgressBarCtrl.project.duration"
+				class="progress-bar__date progress-bar__date-finish">
 			{{ ProgressBarCtrl.finishDate}}
 		</p>
 	</div>

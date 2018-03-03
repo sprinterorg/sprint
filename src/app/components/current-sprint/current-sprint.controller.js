@@ -62,17 +62,25 @@ export default class sprintController {
 
         $scope.listDrop = (list, index, lists)=> {
             index -=2 ;
-            if(index < 2 || index > 99) return;
 
-            for(let i=2; i<=lists.length-2; i++) {
-                if(i <= index) {
-                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, i)
+            if (index <= 1) {
+                for (let i = 2; i <= lists.length - 2; i++) {
+                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index + i+5)
                 }
-                else if(i > index) {
-                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index+i+10)
+                this._fireBase.changeListPosition(this.projectId, list.$id, 3);
+            } else {
+                if (index < 2 || index > 99) return;
+
+                for (let i = 2; i <= lists.length - 2; i++) {
+                    if (i <= index) {
+                        this._fireBase.changeListPosition(this.projectId, lists[i].$id, i)
+                    }
+                    else if (i > index) {
+                        this._fireBase.changeListPosition(this.projectId, lists[i].$id, index + i + 10)
+                    }
                 }
+                this._fireBase.changeListPosition(this.projectId, list.$id, index + 5);
             }
-            this._fireBase.changeListPosition(this.projectId, list.$id, index+5);
             return false;
         };
 

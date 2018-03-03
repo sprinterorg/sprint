@@ -120,7 +120,7 @@
 							<div class="card_content-card__top">
 								<div class="card_content-card__top-title">
 									<h4>{{ card.title }}</h4>
-									<p>{{ SprintCtrl.cardDescription(card) }}</p>
+									<!--<p>{{ SprintCtrl.cardDescription(card) }}</p>-->
 								</div>
 								<div class="card_content-card__top-info">
 									<p>{{SprintCtrl.cardCreatedDate(card)}}</p>
@@ -142,8 +142,9 @@
 									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
 									<!--need to disable because of a bug-->
 									<img ng-if="SprintCtrl.isExecutors(card)"
-											class="card_content-card__bottom-executors__avatar"
-											ng-src="{{'../../../plus.png'}}">
+											class="card_content-card__bottom-executors__avatar
+													card_content-card__bottom-executors__avatar--icon"
+											ng-src="{{'../../../add-user.png'}}">
 								</div>
 							</div>
 						</div>

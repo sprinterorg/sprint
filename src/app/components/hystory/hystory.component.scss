@@ -183,7 +183,8 @@
 	}
 }
 
-.table__cell--head:hover .table__cell-data {
+.table__cell--head:hover
+.table__cell-data {
 		text-align: left;
 		opacity: 1;
 		z-index: 10;
