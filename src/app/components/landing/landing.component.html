@@ -32,17 +32,35 @@
 		</section>
 		<section class="content">
 			<section class="content__project">
-				<div class="content__img content__img--lists-shadow">
-					<img scr="list_shadow.png">
+				<div class="content__overlay" ng-class="{'lists-blur': LandingCtrl.moveAllTexts}">
+				<div class="content__img content__img--lists-shadow" ng-class="{'move-list-shadow': LandingCtrl.moveLists}">
+					<img src="list_shadow.png">
 				</div>
-				<div class="content__img content__img--lists">
-					<img scr="list_shadow.png">
+				<div class="content__img content__img--lists"  ng-class="{'move-lists': LandingCtrl.moveLists}">
+					<img src="lists.png">
 				</div>
-				<div class="content__img content__img--task-shadow">
-					<img scr="task_shadow.png">
+				<div class="content__img content__img--task-shadow" ng-class="{'move-task-shadow': LandingCtrl.moveLists}">
+					<img src="task_shadow.png">
 				</div>
-				<div class="content__img content__img--tasks">
-					<img scr="tasks.png">
+				<div class="content__img content__img--tasks" ng-class="{'move-tasks': LandingCtrl.moveLists}" ng-mouseenter="LandingCtrl.toMoveLists(true)" ng-mouseleave="LandingCtrl.toMoveLists(false)">
+					<img src="tasks.png">
+				</div>
+			</div>
+			<div class="content__text-block" ng-class="{'move-text-block': LandingCtrl.amimateText}" ng-mouseenter="LandingCtrl.toMoveAllTexts()">
+			</div>
+			<div class="content__text-block content__text-block--top" ng-class="{'move-text-block-top': LandingCtrl.moveAllTexts}">
+			</div>
+				<div class="content__text content__text--title" ng-class="{'move-text-title': LandingCtrl.amimateText}">
+					<p>Create 'To do' list<br> of your dream!</p>
+				</div>
+				<div class="content__text content__text--first" ng-class="{'move-text-first': LandingCtrl.moveAllTexts}">
+					<p>Use default task lists<br> or create your own</p>
+				</div>
+				<div class="content__text content__text--second" ng-class="{'move-text-second': LandingCtrl.moveAllTexts}">
+					<p>Create tasks and move them<br> between lists</p>
+				</div>
+				<div class="content__text content__text--third" ng-class="{'move-text-third': LandingCtrl.moveAllTexts}">
+					<p>Add comment, attachments <br>do whatever you need!</p>
 				</div>
 			</section>
 		</section>
