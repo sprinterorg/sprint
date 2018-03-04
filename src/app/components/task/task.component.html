@@ -84,13 +84,15 @@
 			</div>
 			<div class="add-comment">
 				<textarea class="textarea textarea--add-comment"
-					 contentEditable="true"
-					 ng-model="TaskCtrl.comment"
+						  ng-class="{'empty-comment': TaskCtrl.emptyComment}"
+					 	ng-model="TaskCtrl.comment"
+						  ng-change="TaskCtrl.changeCommentField()"
 						  name="comment"
-						  placeholder="Your comment"
-						  ng-bind-html="TaskCtrl.comment | emoji">
+						  placeholder="Your comment">
+					</textarea>
 
-				</textarea>
+
+
 				<span emoji-picker="TaskCtrl.comment"
 					  title="Emoji"
 					  placement="right"

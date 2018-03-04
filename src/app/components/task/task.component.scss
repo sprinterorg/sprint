@@ -342,12 +342,18 @@
 .add-comment {
   padding-bottom: 20px;
   position: relative;
+
+  .empty-comment {
+    border: 1px solid #ff3417;
+    opacity: 0.7;
+  }
 }
 
 .emoji-add-comment {
     position: absolute;
-    top: 35px;
-    right: 0;
+    top: 43px;
+    right: -3px;
+    z-index: 1;
     .emoji-popover {
       top: 25px !important;
       left: 0 !important;

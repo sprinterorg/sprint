@@ -23,6 +23,7 @@ export default class ticketController {
 
         this.comment = '';
         this.commentText = '';
+        this.emptyComment = false;
         this.fileLinks = [];
 
 
@@ -82,7 +83,15 @@ export default class ticketController {
         return this.projectUsers.filter(item => item.$id === userId)[0];
     }
 
+    changeCommentField(){
+        if(this.comment) {
+            return this.emptyComment = false;
+        }
+    }
     addComment(){
+        if(!this.comment && !this.fileLinks.length) {
+            return this.emptyComment = true;
+        }
         this._fireBase.addComment(this.comments, {comment: this.comment, userId: this.userId, files: this.fileLinks, date: Date.parse(new Date())});
         this.comment = '';
         this.fileLinks.splice(0,  this.fileLinks.length);
@@ -165,6 +174,7 @@ export default class ticketController {
                             fileObj.fileName = file.name;
                             fileObj.fileLink = fileLink.downloadURL;
                             self.fileLinks.push(fileObj);
+                            this.emptyComment = false;
                             self.scope.$apply();
                             } else if(!add.addToComment) {
                                 fileObj.fileName = file.name;
