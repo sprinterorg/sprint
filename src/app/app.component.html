@@ -5,9 +5,9 @@
     </div>
 </modal-window>
 
-<confirmation-form ng-show="appController.showProjectDeleteComfirmation" form-name="Delete project" form-text="Are you shure you want to delete the project?" on-confirm="appController.onProjectDeleteConfirm" hide-func="appController.toShowProjectDeleteComfirmation(a)"></confirmation-form>
+<confirmation-form ng-show="appController.showProjectDeleteComfirmation" form-name="Delete project" form-text="Are you sure you want to delete the project?" on-confirm="appController.onProjectDeleteConfirm" hide-func="appController.toShowProjectDeleteComfirmation(a)"></confirmation-form>
 
-<confirmation-form ng-show="appController.showCloseSprintConfirmation" form-name="Close sprint" form-text="Are you shure you want to close the sprint?" on-confirm="appController.onSprintCloseConfirm" hide-func="appController.toShowCloseSprintConfirmition(a)"></confirmation-form>
+<confirmation-form ng-show="appController.showCloseSprintConfirmation" form-name="Close sprint" form-text="Are you sure you want to close the sprint?" on-confirm="appController.onSprintCloseConfirm" hide-func="appController.toShowCloseSprintConfirmition(a)"></confirmation-form>
 
 <my-projects click-outside="appController.toHideSearch()" class="search-projects menu" ng-if="appController.showSearch && appController._supportService.userId" hide-func="appController.hideSearch"></my-projects>
 
