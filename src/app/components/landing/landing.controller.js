@@ -12,6 +12,9 @@ export default class landingController {
         this.amimateText = false;
         this.moveAllTexts = false;
     	this._$window = $window;
+        this.showBacklog = false;
+        this.showPreloader = false;
+        this.showBackground = false;
     }
 
     runAnimation() {
@@ -31,7 +34,11 @@ export default class landingController {
     }
 
     getStart() {
-    	this._$scope.$emit("registrate");
+    	this._$scope.$emit('registrate');
+    }
+
+    login() {
+        this._$scope.$emit('login');
     }
 
     toMoveLists(move) {
@@ -40,6 +47,16 @@ export default class landingController {
 
     toMoveAllTexts() {
         this.moveAllTexts = true;
+    }
+
+    toShowBackground(shown) {
+        this.showBackground = shown;
+    }
+    toShowPreloader(shown) {
+        this.showPreloader = shown;
+    }
+    toShowBacklog(shown) {
+        this.showBacklog = shown;
     }
 }
 

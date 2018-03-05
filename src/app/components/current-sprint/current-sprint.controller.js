@@ -212,6 +212,7 @@ export default class sprintController {
             window.scrollBy(260,0);
         }, 50);
     }
+
     deleteList(list) {
         this._fireBase.deleteList(this.cards.filter(item => item.list_id === list.listId), this.projectId, list.$id);
     }
