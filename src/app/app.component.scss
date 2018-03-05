@@ -207,7 +207,21 @@ table {
   font-size: 1.6rem;
 }
 
-
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
+}
+
+@media screen and (max-width: 470px) {
+	.header__search {
+		width: 10%;
+	}
+	.header__login-nav {
+		width: 50%;
+	}
+	.header__logo {
+		width: 20%;
+	}
+	.main-menu__create-project span{
+		display: none;
+	}
 }

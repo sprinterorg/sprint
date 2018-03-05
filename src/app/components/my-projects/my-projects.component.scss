@@ -125,17 +125,8 @@
 	height: 40px;
 	
 }
-/*
-.my-projects__button {
-	position: absolute;
-	top: 20px;
-	height: 30px;
+@media screen and (max-width: 450px){
+	.search-projects .my-projects {
+		padding: 10px 0;
+	}
 }
-
-.my-projects__button--prew{
-	left: 20px;
-}
-
-.my-projects__button--next{
-	right: 20px;
-}*/
