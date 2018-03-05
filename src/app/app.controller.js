@@ -47,6 +47,7 @@ export default class appController {
         }
 
         $scope.$on('registrate', (event) => this.toShowModalWindow('signUp'));
+        $scope.$on('login', (event) => this.toShowModalWindow('logIn'));
     }
     
     toShowModalWindow(mode) {
