@@ -535,3 +535,39 @@
   }
 
 }
+
+@media screen and (max-width: 800px){
+  .task-wrap .task-content {
+    flex-direction: column;
+  }
+  .add-comment {
+    display: none;
+  }
+  .comments-section {
+    display: none;
+  }
+  .task-header {
+    width: 470px;
+  }
+  .task-wrap .task-layer {
+    width: 470px;
+  }
+  .task-wrap .task-content__left-section {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 470px){
+  .task-header {
+    width: 320px;
+  }
+  .task-wrap .task-layer {
+    width: 320px;
+  }
+  .task-wrap .task__wrapper {
+    padding: 25px;
+  }
+  .task-wrap .task-content__left-section {
+    padding-right: 0;
+  }
+}

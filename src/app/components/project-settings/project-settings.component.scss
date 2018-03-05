@@ -407,6 +407,48 @@
 }
 }
 
+@media screen and (max-width: 800px) {
+	.project-settings {
+		padding: 20px;
+	}
+	.project-settings__project-name,
+	.project-settings__project-duration,
+	.project-settings__project-background,
+	.project-setting__users-section {
+		width: 470px;
+	}
+	.project-settings__management-buttons {
+		display: none;
+	}
+	.project-settings__button.edit {
+		right: 10px;
+	}
+}
+
+@media screen and (max-width: 470px) {
+	.project-settings {
+		padding: 0;
+	}
+	.project-settings__project-name,
+	.project-settings__project-duration,
+	.project-settings__project-background,
+	.project-setting__users-section {
+		width: 320px;
+	}
+	.project-settings__management-buttons {
+		display: none;
+	}
+	.project-settings__button.edit {
+		right: 10px;
+	}
+	.background-fullscreen {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+
+
 
 
 
