@@ -68,6 +68,23 @@
       width:180px;
       height:40px;
       font-size:2rem;
+      background:#FFFFFF;
+      border:2px solid #000000;
+      &:hover{
+        border:none;
+        background:#000000;
+        color:#FFFFFF;
+      }
+    }
+    .button--signup{
+      border:none;
+      background:#000000;
+      color:#FFFFFF;
+      &:hover{
+        background:#FFFFFF;
+        border:2px solid #000000;
+        color:#000000;
+      }
     }
   }
 }
