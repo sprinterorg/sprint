@@ -212,6 +212,10 @@ table {
 }
 
 @media screen and (max-width: 470px) {
+	.header {
+		width: 100vw;
+	}
+
 	.header__search {
 		width: 10%;
 	}
