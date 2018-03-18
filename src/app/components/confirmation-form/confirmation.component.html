@@ -1,0 +1,19 @@
+<modal-window>
+    <form class="confirmation-form">
+    	<div class="form-header">
+	        <div>
+	            {{comfirmationController.formName}}
+	        </div>
+	        <div class="close" ng-click="comfirmationController.hideFunc({a:false})">
+	            <i class="flaticon-cancel"></i>
+	        </div>
+	    </div>
+	    <div class="form-text">
+	      	{{comfirmationController.formText}}
+	    </div>
+	    <div class="button_pannel">
+		   	<button class="button  button--signup" ng-click="comfirmationController.hideFunc({a:false})">Cancel</button>
+		    <button class="button" ng-click="comfirmationController.onConfirm()">Confirm</button>
+		</div>
+    </form>
+</modal-window>

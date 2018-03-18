@@ -1,6 +1,6 @@
 export default class appController {
     /*@ngInject*/
-    constructor($location,  supportService, $scope, $rootScope, $state, spinnerService, fireBase) {
+    constructor($location, supportService, $scope, $rootScope, $state, spinnerService, fireBase) {
         this._supportService = supportService;
         this._fireBase = fireBase;
         this._spinnerService = spinnerService;
@@ -16,15 +16,20 @@ export default class appController {
         this.mode = 'logIn';
         this.isLoaded = false;
 
+        this.showProjectDeleteComfirmation = false;
+        this.showCloseSprintConfirmation = false;
+
         this._$rootScope.$on('hideApp', () => {
             this.isLoaded = false;
         });
-        
-        const self = this;
-        this._scope.$on('createProjectEvent', function (event, data) {
-          console.log(data);
-          console.log(event); // Данные, которые нам прислали
-          self.toShowModalWindow("projects");
+        $scope.$on('showProjectDeleteConfirmation', (event, bool)=>{
+            this.toShowProjectDeleteComfirmation(bool);
+        });
+        this._$rootScope.$on('showCloseSprintConfirmation', (event, bool)=>{
+            this.toShowCloseSprintConfirmition(bool);
+        });
+        this._scope.$on('createProjectEvent', (event, data)=>{
+            this.toShowModalWindow("projects");
         });
 
         if (!supportService.userId) {
@@ -42,6 +47,7 @@ export default class appController {
         }
 
         $scope.$on('registrate', (event) => this.toShowModalWindow('signUp'));
+        $scope.$on('login', (event) => this.toShowModalWindow('logIn'));
     }
     
     toShowModalWindow(mode) {
@@ -52,16 +58,29 @@ export default class appController {
     toHideModalWindow(booleanReload) {
         this._spinnerService.deactivate();
         this.showModalWindow = false;
-        if(booleanReload)
+        if(booleanReload){
         	this._$rootScope.$apply();
+        }
     }
 
     toShowSearch() {
         this.showSearch = !this.showSearch;
     }
-
     toHideSearch() {
         this.showSearch = false;
     }
+    toShowProjectDeleteComfirmation(a){
+        this.showProjectDeleteComfirmation = a;
+    }
+    toShowCloseSprintConfirmition(a){
+        this.showCloseSprintConfirmation = a;
+    }
 
+    onProjectDeleteConfirm(){
+        this._$rootScope.$broadcast('confirmProjectDelete');
+    }
+
+    onSprintCloseConfirm(){
+        this._$rootScope.$broadcast('confirmSprintClose');
+    }
 }

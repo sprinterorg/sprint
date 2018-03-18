@@ -24,7 +24,10 @@
 
   @font-face {
     font-family: Digital;
-    src: url(../digital.ttf);
+    src: url('../font/digital-webfont.woff2') format('woff2'),
+         url('../font/digital-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
    }
 
 html {
@@ -204,7 +207,25 @@ table {
   font-size: 1.6rem;
 }
 
-
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
+}
+
+@media screen and (max-width: 470px) {
+	.header {
+		width: 100vw;
+	}
+
+	.header__search {
+		width: 10%;
+	}
+	.header__login-nav {
+		width: 50%;
+	}
+	.header__logo {
+		width: 20%;
+	}
+	.main-menu__create-project span{
+		display: none;
+	}
 }

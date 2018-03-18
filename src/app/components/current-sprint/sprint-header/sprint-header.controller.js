@@ -19,8 +19,8 @@ export default class sprintHeaderController {
 
     cardsPriority(priority) {
         let arr1 = this.cards.filter( el => el.list_id !== 1 );
-        let arr2 = arr1.filter( el => el.list_id !== 3 );
-        let arr3 = arr2.filter( (el) => el.priority === priority);
+        // let arr2 = arr1.filter( el => el.list_id !== 3 );
+        let arr3 = arr1.filter( (el) => el.priority === priority);
         return arr3.length;
     }
 

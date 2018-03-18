@@ -171,6 +171,11 @@
     .inform__block__username__invisible{
       text-align: center;
     }
+    div.my-projects {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
   }
 
   .button.button--add-project {
@@ -178,3 +183,4 @@
     padding: 7px;
     font-size: 1.7rem;
   }
+

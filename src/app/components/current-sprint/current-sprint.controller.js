@@ -72,17 +72,25 @@ export default class sprintController {
 
         $scope.listDrop = (list, index, lists)=> {
             index -=2 ;
-            if(index < 2 || index > 99) return;
 
-            for(let i=2; i<=lists.length-2; i++) {
-                if(i <= index) {
-                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, i)
+            if (index <= 1) {
+                for (let i = 2; i <= lists.length - 2; i++) {
+                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index + i+5)
                 }
-                else if(i > index) {
-                    this._fireBase.changeListPosition(this.projectId, lists[i].$id, index+i+10)
+                this._fireBase.changeListPosition(this.projectId, list.$id, 3);
+            } else {
+                if (index < 2 || index > 99) return;
+
+                for (let i = 2; i <= lists.length - 2; i++) {
+                    if (i <= index) {
+                        this._fireBase.changeListPosition(this.projectId, lists[i].$id, i)
+                    }
+                    else if (i > index) {
+                        this._fireBase.changeListPosition(this.projectId, lists[i].$id, index + i + 10)
+                    }
                 }
+                this._fireBase.changeListPosition(this.projectId, list.$id, index + 5);
             }
-            this._fireBase.changeListPosition(this.projectId, list.$id, index+5);
             return false;
         };
 
@@ -204,6 +212,7 @@ export default class sprintController {
             window.scrollBy(260,0);
         }, 50);
     }
+
     deleteList(list) {
         this._fireBase.deleteList(this.cards.filter(item => item.list_id === list.listId), this.projectId, list.$id);
     }
@@ -243,7 +252,7 @@ export default class sprintController {
 
 
     showFullCard(card){
-        // console.log(card, this.cards);
+        // console.log(card, this.project);
         this.supportService.isCardOpen = true;
         this.supportService.openCard = card;
     }
@@ -351,7 +360,14 @@ export default class sprintController {
     }
 
     isExecutors(card) {
-        if ('executors' in card) return false;
+        for (let key in card.executors) {
+            if (!(key in this.project.users)){
+                delete card.executors[key];
+            }
+        }
+        if ('executors' in card && Object.keys(card.executors).length) {
+            return false;
+        }
         else return true;
     }
 

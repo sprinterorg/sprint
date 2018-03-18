@@ -11,7 +11,7 @@
 	<div ng-if="SprintCtrl.isProjectManager"
 		 class="link-button_project-setting"
 		 ng-click="SprintCtrl.toShowProjectSettings()"></div>
-	<project-settings click-outside="SprintCtrl.toHideProjectSettings()" outside-if-not="edit" ng-if="SprintCtrl.showProjectSettings" class="menu sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
+	<project-settings click-outside="SprintCtrl.toHideProjectSettings()" outside-if-not="not-to-close-settings" ng-if="SprintCtrl.showProjectSettings" class="menu sprint-project-settings" project-hash="SprintCtrl.projectId" hide-func="SprintCtrl.hide"></project-settings>
 	
 	<div class="lists-container__project-users"
 	ng-if="SprintCtrl.projectLoad">
@@ -132,7 +132,7 @@
 							<div class="card_content-card__top">
 								<div class="card_content-card__top-title">
 									<h4>{{ card.title }}</h4>
-									<p>{{ SprintCtrl.cardDescription(card) }}</p>
+									<!--<p>{{ SprintCtrl.cardDescription(card) }}</p>-->
 								</div>
 								<div class="card_content-card__top-info">
 									<p>{{SprintCtrl.cardCreatedDate(card)}}</p>
@@ -154,8 +154,9 @@
 									<p ng-if="SprintCtrl.cardExecutorsFull(card)">...</p>
 									<!--need to disable because of a bug-->
 									<img ng-if="SprintCtrl.isExecutors(card)"
-											class="card_content-card__bottom-executors__avatar"
-											ng-src="{{'../../../plus.png'}}">
+											class="card_content-card__bottom-executors__avatar
+													card_content-card__bottom-executors__avatar--icon"
+											ng-src="{{'https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/add-user.png?alt=media&token=dc20209f-9d5f-465b-91c2-a4e875a2381c'}}">
 								</div>
 							</div>
 						</div>

@@ -1,12 +1,12 @@
 <section class="about">
 	<section class="about__video">
-		<video autoplay loop><source src="1280_720.mp4"></video>
+		<video autoplay loop><source src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/1280_720.mp4?alt=media&token=0efcc0bb-d17f-4cfb-9ccd-75c36882af20"></video>
 		<div class="about__video-overlay"></div>
 	</section>
 	<section class="about__main">
 		<div class="about__main-message">
 			<h1>Do you want to add<br> some sport to<br> your business?</h1>
-			<p>Sprinter task manager will help you to organize and prioritize your work in a fun, flexible and rewarding way.
+			<p class="about__main-text">Sprinter task manager will help you to organize and prioritize your work in a fun, flexible and rewarding way.
 			</p>
 		</div>
 		<section class="content-adv">
@@ -17,13 +17,13 @@
 				<div ng-class="{'text-overlay--hovered': LandingCtrl.proposition}" class="text-overlay"></div>
 				<div class="text-block__texts" ng-class="{'text-block__texts--hovered': LandingCtrl.proposition}">
 					<p class="text-block__text">have a lot of work and</p>
-					<h2>looking for solution <br> to manage with your time?</h2>
+					<h2>looking for solution <br> to manage your time?</h2>
 					<div class="text-block__bottom" ng-class="{'bottom--hovered': LandingCtrl.proposition}"></div>
 				</div>
 			</div>
 			<div class="animated-clock">
 				<div class="img-overlay">
-					<img ng-class="{'img-appearing': LandingCtrl.animateHand}" src="stopwatch.png">
+					<img ng-class="{'img-appearing': LandingCtrl.animateHand}" ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/stopwatch.png?alt=media&token=17ecdfda-0d25-40a0-a807-6e34a1fa0d34">
 				</div>
 				<p class="timer" ng-class="{'timer-animation': LandingCtrl.animateTime}"></p>
 			</div>
@@ -31,7 +31,79 @@
 		</div>
 		</section>
 		<section class="content">
-			<section class="content__project">.</section>
+			<section class="content__project">
+				<div class="content__overlay" ng-class="{'lists-blur': LandingCtrl.moveAllTexts}">
+				<div class="content__img content__img--lists-shadow" ng-class="{'move-list-shadow': LandingCtrl.moveLists}">
+					<img ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/list_shadow.png?alt=media&token=90703d6a-d1f7-4ded-bb29-2f22caeb20e0">
+				</div>
+				<div class="content__img content__img--lists"  ng-class="{'move-lists': LandingCtrl.moveLists}">
+					<img ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/lists.png?alt=media&token=8f7495ac-4b6b-4715-b97d-58fa0ebbe8ed">
+				</div>
+				<div class="content__img content__img--task-shadow" ng-class="{'move-task-shadow': LandingCtrl.moveLists}">
+					<img ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/task_shadow.png?alt=media&token=f84d2f4c-6387-401f-8fa1-48557005e2c6">
+				</div>
+				<div class="content__img content__img--tasks" ng-class="{'move-tasks': LandingCtrl.moveLists}" ng-mouseenter="LandingCtrl.toMoveLists(true)" ng-mouseleave="LandingCtrl.toMoveLists(false)">
+					<img src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/tasks.png?alt=media&token=1f2ff7db-7b88-4e8e-83f8-489a82764178">
+				</div>
+			</div>
+			<div class="content__text-block" ng-class="{'move-text-block': LandingCtrl.amimateText}" ng-mouseenter="LandingCtrl.toMoveAllTexts()">
+			</div>
+			<div class="content__text-block content__text-block--top" ng-class="{'move-text-block-top': LandingCtrl.moveAllTexts}">
+			</div>
+				<div class="content__text content__text--title {{LandingCtrl.moveAllTexts && 'move-text-title-finish'}}" ng-class="{'move-text-title': LandingCtrl.amimateText}">
+					<p>Create 'To do' list<br> of your dream!</p>
+				</div>
+				<div class="content__text content__text--first" ng-class="{'move-text-first': LandingCtrl.moveAllTexts}">
+					<p>Use default task lists<br> or create your own</p>
+				</div>
+				<div class="content__text content__text--second" ng-class="{'move-text-second': LandingCtrl.moveAllTexts}">
+					<p>Create tasks and move them<br> between lists</p>
+				</div>
+				<div class="content__text content__text--third" ng-class="{'move-text-third': LandingCtrl.moveAllTexts}">
+					<p>Add comment, attachments <br>do whatever you need!</p>
+				</div>
+			</section>
+		</section>
+		<section class="features">
+			<div class="features__overlay">
+				<img class="features__all {{LandingCtrl.showBackground && 'img-blur'}}" ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/all-back.png?alt=media&token=0ad32968-a9ad-4dd7-9947-1e4defa00042" ng-class="{'img-blur': LandingCtrl.showBacklog}">
+				<div class="features__part features__part--back" ng-mouseenter="LandingCtrl.toShowBackground(true)" ng-mouseleave="LandingCtrl.toShowBackground(false)">
+					<img ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/red-back.png?alt=media&token=bb222893-86d1-459f-a593-b9dab59b0633">
+				</div>
+				<div class="feature-overlay back-overlay" ng-class="{'move-back-overlay': LandingCtrl.showBackground}">
+					<h2>Change background</h2>
+					<p>Choose background you like<br>from our collection.</p>
+				</div>
+				<div class="features__part features__part--preloader" ng-mouseenter="LandingCtrl.toShowPreloader(true)" ng-mouseleave="LandingCtrl.toShowPreloader(false)">
+					<img ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/preloader-back.png?alt=media&token=9c2df547-304b-41f1-92f4-2e89b5bbcfac">
+				</div>
+				<div class="feature-overlay preloader-overlay" ng-class="{'move-preloader-overlay': LandingCtrl.showPreloader}">
+					<h2>Manage deadlines</h2>
+					<p>Sprint time is visualized.<br>You will always meet deadlines with us!</p>
+				</div>
+				<div class="features__part features__part--backlog" ng-mouseenter="LandingCtrl.toShowBacklog(true)" ng-mouseleave="LandingCtrl.toShowBacklog(false)">
+					<img ng-src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/backlog-back.png?alt=media&token=2ef1f844-b5ab-4839-8732-a9780e1030c1">
+				</div>
+				<div class="feature-overlay back-backlog" ng-class="{'move-backlog-overlay': LandingCtrl.showBacklog}">
+					<h2>Make some plans</h2>
+					<p>Planning is so simple!<br>Use backlog to create tasks<br>for the future time</p>
+				</div>
+			</div>
 		</section>
 	</section>
+	<footer class="footer">
+		<div class="footer__overlay">
+			<p>Interested?</p>
+			<p><span>Sign up for free</span> and become real business sprinter!</p>
+			<div class="button button--start button--footer" ng-click="LandingCtrl.getStart()">Sign Up now!</div>
+			<div class="footer__login">
+			<p>Already use Sprinter?</p><div class="button button--start button--footer-link" ng-click="LandingCtrl.login()">Log in</div></div>
+			<div class="copyright">
+			<div class="header__logo header__logo--footer">
+    			<p>Sprinter</p>
+    		</div>
+			<p> © Copyright 2018. All rights reserved. </p>
+		</div>
+		</div>
+	</footer>
 </section>

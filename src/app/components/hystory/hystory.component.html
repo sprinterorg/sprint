@@ -12,9 +12,10 @@
 	        		<tr class="table__row">
 	        			<td class="table__cell table__cell--head table__cell--task"></td>
 	        			<td class="table__cell table__cell--head"
+							ng-mouseenter="hystoryCtrl.isShowCircle = true"
+							ng-mouseleave="hystoryCtrl.isShowCircle = false"
 							ng-repeat="sprint in hystoryCtrl.hystory">
-							<p ng-mouseenter="hystoryCtrl.isShowCircle = true"
-							   ng-mouseleave="hystoryCtrl.isShowCircle = false">
+							<p>
 							   {{sprint.$id}}
 							</p>
 	        			<div class="table__cell-data">
@@ -66,10 +67,10 @@
 	        				ng-repeat="sprint in hystoryCtrl.hystory">
 	        				<img class="task-start" 
 	        				ng-if="hystoryCtrl.arrowStart(value.sprintStart,value.sprintEnd,sprint.$id)" 
-	        				src="arrow.png">
+	        				src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/arrow.png?alt=media&token=74ce91d8-1c6b-474a-b20d-c7384d3a9300">
 	        				<img class="task-end" 
 	        					 ng-if="hystoryCtrl.arrowEnd(value.sprintStart,value.sprintEnd,sprint.$id)" 
-	        					 src="arrow.png">{{hystoryCtrl.cellContent(value.sprintStart,value.sprintEnd,sprint.$id)}}</td>
+	        					 src="https://firebasestorage.googleapis.com/v0/b/portfolio-5e570.appspot.com/o/arrow.png?alt=media&token=74ce91d8-1c6b-474a-b20d-c7384d3a9300">{{hystoryCtrl.cellContent(value.sprintStart,value.sprintEnd,sprint.$id)}}</td>
 	        			<td class="table__cell table__cell--last"></td>
 	        		</tr>
 	        	</tbody>
